@@ -1,6 +1,6 @@
 --- 
-title: "A Minimal Book Example"
-author: "John Doe"
+title: "Bayesian Models for Pest Detection"
+author: "Chris Malone"
 date: "`r Sys.Date()`"
 site: bookdown::bookdown_site
 documentclass: book
@@ -15,46 +15,33 @@ link-citations: yes
 github-repo: rstudio/bookdown-demo
 ---
 
-# About
+# Draft Outline {-}
 
-This is a _sample_ book written in **Markdown**. You can use anything that Pandoc's Markdown supports; for example, a math equation $a^2 + b^2 = c^2$.
+The thesis will be composed of the following sections:
 
-## Usage 
-
-Each **bookdown** chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter *must* start with a first-level heading: `# A good chapter`, and can contain one (and only one) first-level heading.
-
-Use second-level and higher headings within chapters like: `## A short section` or `### An even shorter section`.
-
-The `index.Rmd` file is required, and is also your first book chapter. It will be the homepage when you render the book.
-
-## Render book
-
-You can render the HTML version of this example book without changing anything:
-
-1. Find the **Build** pane in the RStudio IDE, and
-
-1. Click on **Build Book**, then select your output format, or select "All formats" if you'd like to use multiple formats from the same book source files.
-
-Or build the book from the R console:
-
-```{r, eval=FALSE}
-bookdown::render_book()
-```
-
-To render this example to PDF as a `bookdown::pdf_book`, you'll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <https://yihui.org/tinytex/>.
-
-## Preview book
-
-As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in "Preview book", or from the R console:
-
-```{r eval=FALSE}
-bookdown::serve_book()
-```
-
-
-```{r include=FALSE}
-# automatically create a bib database for R packages
-knitr::write_bib(c(
-  .packages(), 'bookdown', 'knitr', 'rmarkdown'
-), 'packages.bib')
-```
+* Abstract (120-200 words; write last)
+  - Motivation
+  - Research problem
+  - Proposed solution
+  - Application   
+* Table of Contents
+  - Main sections should be numbered, but references and appendices should not be.
+* Introduction
+  - Establish broad background (real world motivation)
+  - Establish need for further work
+  - Discuss the contribution of the thesis
+* Literature review
+  - Covering theoretical background, including
+    - Nature of the pest detection problem
+    - Attempts to solve the problem
+      - Frequentist method
+      - Barnes et al.'s model
+* Extended model
+  - Discussion of the extended model, broken into major components, i.e.
+    - Probabilistic graphical model
+    - Priors
+    - Sampling
+* Case study
+  - Background
+  - Model setup
+  - Results

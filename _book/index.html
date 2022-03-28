@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>A Minimal Book Example</title>
+  <title>Bayesian Models for Pest Detection</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="A Minimal Book Example" />
+  <meta property="og:title" content="Bayesian Models for Pest Detection" />
   <meta property="og:type" content="book" />
   
   
@@ -20,17 +20,17 @@ set in the _output.yml file.</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="A Minimal Book Example" />
+  <meta name="twitter:title" content="Bayesian Models for Pest Detection" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
   
 
-<meta name="author" content="John Doe" />
+<meta name="author" content="Chris Malone" />
 
 
-<meta name="date" content="2022-03-18" />
+<meta name="date" content="2022-03-25" />
 
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <meta name="apple-mobile-web-app-capable" content="yes" />
@@ -38,7 +38,7 @@ set in the _output.yml file.</p>" />
   
   
 
-<link rel="next" href="hello-bookdown.html"/>
+<link rel="next" href="introduction.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -165,29 +165,37 @@ div.csl-indent {
 <li><a href="./">A Minimal Book Example</a></li>
 
 <li class="divider"></li>
-<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> About</a>
+<li class="chapter" data-level="1" data-path="index.html"><a href="index.html"><i class="fa fa-check"></i><b>1</b> Draft Outline</a></li>
+<li class="chapter" data-level="2" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>2</b> Introduction</a>
 <ul>
-<li class="chapter" data-level="1.1" data-path="index.html"><a href="index.html#usage"><i class="fa fa-check"></i><b>1.1</b> Usage</a></li>
-<li class="chapter" data-level="1.2" data-path="index.html"><a href="index.html#render-book"><i class="fa fa-check"></i><b>1.2</b> Render book</a></li>
-<li class="chapter" data-level="1.3" data-path="index.html"><a href="index.html#preview-book"><i class="fa fa-check"></i><b>1.3</b> Preview book</a></li>
+<li class="chapter" data-level="" data-path="introduction.html"><a href="introduction.html#an-unnumbered-section"><i class="fa fa-check"></i>An unnumbered section</a></li>
 </ul></li>
-<li class="chapter" data-level="2" data-path="hello-bookdown.html"><a href="hello-bookdown.html"><i class="fa fa-check"></i><b>2</b> Hello bookdown</a>
+<li class="chapter" data-level="3" data-path="lit-review.html"><a href="lit-review.html"><i class="fa fa-check"></i><b>3</b> Literature review</a>
 <ul>
-<li class="chapter" data-level="2.1" data-path="hello-bookdown.html"><a href="hello-bookdown.html#a-section"><i class="fa fa-check"></i><b>2.1</b> A section</a>
+<li class="chapter" data-level="3.1" data-path="lit-review.html"><a href="lit-review.html#inferring-absence-of-cryptic-pests"><i class="fa fa-check"></i><b>3.1</b> Inferring absence of cryptic pests</a></li>
+<li class="chapter" data-level="3.2" data-path="lit-review.html"><a href="lit-review.html#the-standard-approach-to-inferring-absence-of-a-cryptic-species"><i class="fa fa-check"></i><b>3.2</b> The standard approach to inferring absence of a cryptic species</a></li>
+<li class="chapter" data-level="3.3" data-path="lit-review.html"><a href="lit-review.html#probability-models"><i class="fa fa-check"></i><b>3.3</b> Probability models</a></li>
+<li class="chapter" data-level="3.4" data-path="lit-review.html"><a href="lit-review.html#barnes-et-al."><i class="fa fa-check"></i><b>3.4</b> Barnes et al.</a></li>
+<li class="chapter" data-level="3.5" data-path="lit-review.html"><a href="lit-review.html#intro-to-medfly"><i class="fa fa-check"></i><b>3.5</b> Intro to Medfly</a>
 <ul>
-<li class="chapter" data-level="" data-path="hello-bookdown.html"><a href="hello-bookdown.html#an-unnumbered-section"><i class="fa fa-check"></i>An unnumbered section</a></li>
+<li class="chapter" data-level="3.5.1" data-path="lit-review.html"><a href="lit-review.html#economic-importance-of-the-fruit-fly"><i class="fa fa-check"></i><b>3.5.1</b> Economic importance of the fruit fly</a></li>
+<li class="chapter" data-level="3.5.2" data-path="lit-review.html"><a href="lit-review.html#medfly-detection-problems"><i class="fa fa-check"></i><b>3.5.2</b> Medfly detection problems</a></li>
+<li class="chapter" data-level="3.5.3" data-path="lit-review.html"><a href="lit-review.html#problems-posed-by-medfly-for-the-barnes-model"><i class="fa fa-check"></i><b>3.5.3</b> Problems posed by Medfly for the Barnes model</a></li>
+<li class="chapter" data-level="3.5.4" data-path="lit-review.html"><a href="lit-review.html#section"><i class="fa fa-check"></i><b>3.5.4</b> </a></li>
 </ul></li>
 </ul></li>
-<li class="chapter" data-level="3" data-path="cross.html"><a href="cross.html"><i class="fa fa-check"></i><b>3</b> Cross-references</a>
+<li class="chapter" data-level="4" data-path="a-generalised-model-of-pest-species-detection.html"><a href="a-generalised-model-of-pest-species-detection.html"><i class="fa fa-check"></i><b>4</b> A generalised model of pest species detection</a>
 <ul>
-<li class="chapter" data-level="3.1" data-path="cross.html"><a href="cross.html#chapters-and-sub-chapters"><i class="fa fa-check"></i><b>3.1</b> Chapters and sub-chapters</a></li>
-<li class="chapter" data-level="3.2" data-path="cross.html"><a href="cross.html#captioned-figures-and-tables"><i class="fa fa-check"></i><b>3.2</b> Captioned figures and tables</a></li>
+<li class="chapter" data-level="4.1" data-path="a-generalised-model-of-pest-species-detection.html"><a href="a-generalised-model-of-pest-species-detection.html#introduction-1"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="a-generalised-model-of-pest-species-detection.html"><a href="a-generalised-model-of-pest-species-detection.html#model-specification"><i class="fa fa-check"></i><b>4.2</b> Model specification</a></li>
+<li class="chapter" data-level="4.3" data-path="a-generalised-model-of-pest-species-detection.html"><a href="a-generalised-model-of-pest-species-detection.html#sampling"><i class="fa fa-check"></i><b>4.3</b> Sampling</a></li>
 </ul></li>
-<li class="chapter" data-level="4" data-path="parts.html"><a href="parts.html"><i class="fa fa-check"></i><b>4</b> Parts</a></li>
-<li class="chapter" data-level="5" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html"><i class="fa fa-check"></i><b>5</b> Footnotes and citations</a>
+<li class="chapter" data-level="5" data-path="case-study-ceratatis-capitata.html"><a href="case-study-ceratatis-capitata.html"><i class="fa fa-check"></i><b>5</b> Case study: Ceratatis capitata</a>
 <ul>
-<li class="chapter" data-level="5.1" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#footnotes"><i class="fa fa-check"></i><b>5.1</b> Footnotes</a></li>
-<li class="chapter" data-level="5.2" data-path="footnotes-and-citations.html"><a href="footnotes-and-citations.html#citations"><i class="fa fa-check"></i><b>5.2</b> Citations</a></li>
+<li class="chapter" data-level="5.0.1" data-path="case-study-ceratatis-capitata.html"><a href="case-study-ceratatis-capitata.html#intro-version-1"><i class="fa fa-check"></i><b>5.0.1</b> Intro: Version 1</a></li>
+<li class="chapter" data-level="5.0.2" data-path="case-study-ceratatis-capitata.html"><a href="case-study-ceratatis-capitata.html#intro-version-2"><i class="fa fa-check"></i><b>5.0.2</b> Intro: Version 2</a></li>
+<li class="chapter" data-level="5.1" data-path="case-study-ceratatis-capitata.html"><a href="case-study-ceratatis-capitata.html#full-model-specification"><i class="fa fa-check"></i><b>5.1</b> Full model specification</a></li>
+<li class="chapter" data-level="5.2" data-path="case-study-ceratatis-capitata.html"><a href="case-study-ceratatis-capitata.html#citations"><i class="fa fa-check"></i><b>5.2</b> Citations</a></li>
 </ul></li>
 <li class="chapter" data-level="6" data-path="blocks.html"><a href="blocks.html"><i class="fa fa-check"></i><b>6</b> Blocks</a>
 <ul>
@@ -214,7 +222,7 @@ div.csl-indent {
       <div class="body-inner">
         <div class="book-header" role="navigation">
           <h1>
-            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">A Minimal Book Example</a>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian Models for Pest Detection</a>
           </h1>
         </div>
 
@@ -223,36 +231,61 @@ div.csl-indent {
 
             <section class="normal" id="section-">
 <div id="header">
-<h1 class="title">A Minimal Book Example</h1>
-<p class="author"><em>John Doe</em></p>
-<p class="date"><em>2022-03-18</em></p>
+<h1 class="title">Bayesian Models for Pest Detection</h1>
+<p class="author"><em>Chris Malone</em></p>
+<p class="date"><em>2022-03-25</em></p>
 </div>
-<div id="about" class="section level1" number="1">
-<h1><span class="header-section-number">Chapter 1</span> About</h1>
-<p>This is a <em>sample</em> book written in <strong>Markdown</strong>. You can use anything that Pandoc’s Markdown supports; for example, a math equation <span class="math inline">\(a^2 + b^2 = c^2\)</span>.</p>
-<div id="usage" class="section level2" number="1.1">
-<h2><span class="header-section-number">1.1</span> Usage</h2>
-<p>Each <strong>bookdown</strong> chapter is an .Rmd file, and each .Rmd file can contain one (and only one) chapter. A chapter <em>must</em> start with a first-level heading: <code># A good chapter</code>, and can contain one (and only one) first-level heading.</p>
-<p>Use second-level and higher headings within chapters like: <code>## A short section</code> or <code>### An even shorter section</code>.</p>
-<p>The <code>index.Rmd</code> file is required, and is also your first book chapter. It will be the homepage when you render the book.</p>
-</div>
-<div id="render-book" class="section level2" number="1.2">
-<h2><span class="header-section-number">1.2</span> Render book</h2>
-<p>You can render the HTML version of this example book without changing anything:</p>
-<ol style="list-style-type: decimal">
-<li><p>Find the <strong>Build</strong> pane in the RStudio IDE, and</p></li>
-<li><p>Click on <strong>Build Book</strong>, then select your output format, or select “All formats” if you’d like to use multiple formats from the same book source files.</p></li>
-</ol>
-<p>Or build the book from the R console:</p>
-<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="index.html#cb1-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">render_book</span>()</span></code></pre></div>
-<p>To render this example to PDF as a <code>bookdown::pdf_book</code>, you’ll need to install XeLaTeX. You are recommended to install TinyTeX (which includes XeLaTeX): <a href="https://yihui.org/tinytex/" class="uri">https://yihui.org/tinytex/</a>.</p>
-</div>
-<div id="preview-book" class="section level2" number="1.3">
-<h2><span class="header-section-number">1.3</span> Preview book</h2>
-<p>As you work, you may start a local server to live preview this HTML book. This preview will update as you edit the book when you save individual .Rmd files. You can start the server in a work session by using the RStudio add-in “Preview book,” or from the R console:</p>
-<div class="sourceCode" id="cb2"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb2-1"><a href="index.html#cb2-1" aria-hidden="true" tabindex="-1"></a>bookdown<span class="sc">::</span><span class="fu">serve_book</span>()</span></code></pre></div>
+<div id="draft-outline" class="section level1" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Draft Outline</h1>
+<p>The thesis will be composed of the following sections:</p>
+<ul>
+<li>Abstract (120-200 words; write last)
+<ul>
+<li>Motivation</li>
+<li>Research problem</li>
+<li>Proposed solution</li>
+<li>Application<br />
+</li>
+</ul></li>
+<li>Table of Contents
+<ul>
+<li>Main sections should be numbered, but references and appendices should not be.</li>
+</ul></li>
+<li>Introduction
+<ul>
+<li>Establish broad background (real world motivation)</li>
+<li>Establish need for further work</li>
+<li>Discuss the contribution of the thesis</li>
+</ul></li>
+<li>Literature review
+<ul>
+<li>Covering theoretical background, including
+<ul>
+<li>Nature of the pest detection problem</li>
+<li>Attempts to solve the problem
+<ul>
+<li>Frequentist method</li>
+<li>Barnes et al.’s model</li>
+</ul></li>
+</ul></li>
+</ul></li>
+<li>Extended model
+<ul>
+<li>Discussion of the extended model, broken into major components, i.e.
+<ul>
+<li>Probabilistic graphical model</li>
+<li>Priors</li>
+<li>Sampling</li>
+</ul></li>
+</ul></li>
+<li>Case study
+<ul>
+<li>Background</li>
+<li>Model setup</li>
+<li>Results</li>
+</ul></li>
+</ul>
 
-</div>
 </div>
             </section>
 
@@ -260,7 +293,7 @@ div.csl-indent {
         </div>
       </div>
 
-<a href="hello-bookdown.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+<a href="introduction.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>

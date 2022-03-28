@@ -1,0 +1,41 @@
+# Case study: Ceratatis capitata
+
+### Intro: Version 1
+
+In the previous section, a general model for inferring absence/presence of a cryptic, incipient pest species population was introduced. In this chapter, I apply the model to a specific case study. 
+
+
+## Example case: Medfly
+
+An example case of the kind described above can be seen in Mediterranean fruit fly (C. Capitata). 
+
+### Economic importance of the fruit fly
+
+### Medfly detection problems
+
+Medfly have low dispersal. This means that flies may go undetected across generations. 
+https://onlinelibrary-wiley-com.virtual.anu.edu.au/doi/pdfdirect/10.1111/j.1570-7458.2006.00415.x
+
+## [Motivating the model extension] Problems posed by Medfly for the Barnes model
+
+The reader may recall that the model introduced in chapter 3 was motivated by consideration of three restrictive assumptions, listed in chapter 2. These assumptions were...
+
+I will briefly describe why these assumptions do not satisfy.
+
+* Problem 1: Flies live across generations.
+* Problem 2: It is hard to estimate a distribution for $p$.
+  - Source for supplementary trapping: https://nre.tas.gov.au/Documents/Review_of_IR_for_FruitFly.pdf
+* Problem 3: Growth rate is assumed constant.   
+
+The benefit of the model
+
+
+
+## Full model specification
+
+As the reader will recall from chapter 3, 
+
+
+## Citations
+
+[@xie2015] in the .bib file.

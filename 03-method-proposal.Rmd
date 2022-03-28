@@ -1,0 +1,43 @@
+# A generalised model of pest species detection
+
+## Introduction
+
+In the previous chapter, I reviewed recent work by Barnes et al. on inferring absence of a cryptic pest species. I concluded the chapter by discussing some of the model's restricting assumptions, and how they affect the reliability of the model. In the present chapter, I propose to develop a method that relaxes the assumptions listed above, and may work for a relatively broad class of cases. The general proposal is to combine agent based simulation (ABS) with approximate Bayesian computation (ABC) to infer probability of absence when the processes governing population dynamics are arbitrarily complex. I first start by outlining the method, before giving a simple example of the method in action. I finish by discussing some theoretical and practical limitations of the method. 
+
+## Agent based simulation (ABS)
+
+## Approximate Bayesian computation (ABC)
+
+## Priors
+
+At the minimum, 
+
+The priors are determined by a stochastic model of the population dynamics for the species. Such a model may or may not be "agent based". For the purpose of this work, I take the term "agent based" to mean that the model takes into account differential individual properties of members of the species. (In this work, I consider differential locations). We model the population dynamics flexibly as a stochastic process. Simulation allows for the incorporation of an arbitrary degree of biological and ecological complexity into the model. Using an agent based model allows us to define a prior on each individual population member 
+
+## Model specification
+
+Under the most general description, the 
+
+The basic model is composed of (a) a growth model and (b) a surveillance model. The model may be spatial or non-spatial, depending on. When the model is spatial, it is assumed When the model is spatial, it is assumed that that we have a stochastic or deterministic function that relates the distance between an individual and a surveillance unit, and that surveillance unit detecting that individual. I.e., we know 
+
+### The growth model
+
+There are no a priori assumptions on the population dynamics for the growth model. For example, we might apply stochastic or deterministic models of logistic, exponential, or linear growth. The only thing that matters is that we get a distribution over the size of the population at any given time point where surveillance will be conducted.
+
+A natural way to set a prior on the population size at each time point $t$ is to set a prior on the population size at the initial time point, and then assume that the population sizes at other time points are given by some (deterministic or stochastic) function of the population size at $t-1$, and the value of a covariate vector $X_t$, which includes variables relevant to population growth. 
+
+$$
+N_t = f(N_{t-1}, X_t)
+$$
+
+### The surveillance (detection) model
+
+It is assumed that surveillances occur at regular time intervals $t \in \{1, \cdots, T\}$. 
+
+## Sampling
+
+
+## A simple example
+
+
+

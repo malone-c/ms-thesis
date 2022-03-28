@@ -4,13 +4,13 @@
 
   <meta charset="utf-8" />
   <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-  <title>References | Bayesian Models for Pest Detection</title>
+  <title>Chapter 3 Literature review | Bayesian Models for Pest Detection</title>
   <meta name="description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
 set in the _output.yml file.</p>" />
   <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
 
-  <meta property="og:title" content="References | Bayesian Models for Pest Detection" />
+  <meta property="og:title" content="Chapter 3 Literature review | Bayesian Models for Pest Detection" />
   <meta property="og:type" content="book" />
   
   
@@ -20,7 +20,7 @@ set in the _output.yml file.</p>" />
   <meta name="github-repo" content="rstudio/bookdown-demo" />
 
   <meta name="twitter:card" content="summary" />
-  <meta name="twitter:title" content="References | Bayesian Models for Pest Detection" />
+  <meta name="twitter:title" content="Chapter 3 Literature review | Bayesian Models for Pest Detection" />
   
   <meta name="twitter:description" content="<p>This is a minimal example of using the bookdown package to write a book.
 The HTML output format for this example is bookdown::gitbook,
@@ -37,8 +37,8 @@ set in the _output.yml file.</p>" />
   <meta name="apple-mobile-web-app-status-bar-style" content="black" />
   
   
-<link rel="prev" href="sharing-your-book.html"/>
-
+<link rel="prev" href="introduction.html"/>
+<link rel="next" href="a-generalised-model-of-pest-species-detection.html"/>
 <script src="libs/header-attrs-2.11/header-attrs.js"></script>
 <script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
@@ -230,12 +230,57 @@ div.csl-indent {
           <div class="page-inner">
 
             <section class="normal" id="section-">
-<div id="references" class="section level1 unnumbered">
-<h1>References</h1>
+<div id="lit-review" class="section level1" number="3">
+<h1><span class="header-section-number">Chapter 3</span> Literature review</h1>
+<p>In this chapter, I review some literature relating to the core problem that I am concerned with in this thesis. I begin by discussing the general problem of inferring absence of a cryptic, incipient pest species population. In particular, I emphasise that the problem requires the marriage of separate mathematical modelling cultures; (a) mathematical/ecological modelling, and (b) statistical inference.</p>
+<div id="inferring-absence-of-cryptic-pests" class="section level2" number="3.1">
+<h2><span class="header-section-number">3.1</span> Inferring absence of cryptic pests</h2>
+<p>The primary problem this work is concerned with is to infer the absence of a cryptic pest species. A cryptic species is any species which is hard to detect. One example is snakes, which are small, immobile, camouflaged, and located in inaccessible habitats (Inferring the Absence of a Species: A Case Study of Snakes, Kery 2002).</p>
+</div>
+<div id="the-standard-approach-to-inferring-absence-of-a-cryptic-species" class="section level2" number="3.2">
+<h2><span class="header-section-number">3.2</span> The standard approach to inferring absence of a cryptic species</h2>
+<p>The standard approach to this problem is given by McArdle (1990).
+In this section, I outline the standard existing approach to inferring pest absence.</p>
+<p>Let <span class="math inline">\(N \in \mathbb N\)</span> be the size of the population.</p>
+<p>Let <span class="math inline">\(p \in [0, 1]\)</span> be the probability that a species is detected in any given sampling unit.</p>
+<p>Then, the probability of detecting the species is
+<span class="math display">\[
+\alpha = \Pr(X = 0) = 1 - (1 - p)^T.
+\]</span></p>
+<p>McArdle suggests 3 types of question that could be answered with such a model.
+1.</p>
+</div>
+<div id="probability-models" class="section level2" number="3.3">
+<h2><span class="header-section-number">3.3</span> Probability models</h2>
+</div>
+<div id="barnes-et-al." class="section level2" number="3.4">
+<h2><span class="header-section-number">3.4</span> Barnes et al.</h2>
+</div>
+<div id="intro-to-medfly" class="section level2" number="3.5">
+<h2><span class="header-section-number">3.5</span> Intro to Medfly</h2>
+<p>In this section, I motivate further study by introducing the example of the Mediterranean fruit fly (Ceratitis capitata).</p>
+<div id="economic-importance-of-the-fruit-fly" class="section level3" number="3.5.1">
+<h3><span class="header-section-number">3.5.1</span> Economic importance of the fruit fly</h3>
+</div>
+<div id="medfly-detection-problems" class="section level3" number="3.5.2">
+<h3><span class="header-section-number">3.5.2</span> Medfly detection problems</h3>
+<p>Medfly have low dispersal. This means that flies may go undetected across generations.
+<a href="https://onlinelibrary-wiley-com.virtual.anu.edu.au/doi/pdfdirect/10.1111/j.1570-7458.2006.00415.x" class="uri">https://onlinelibrary-wiley-com.virtual.anu.edu.au/doi/pdfdirect/10.1111/j.1570-7458.2006.00415.x</a></p>
+</div>
+<div id="problems-posed-by-medfly-for-the-barnes-model" class="section level3" number="3.5.3">
+<h3><span class="header-section-number">3.5.3</span> Problems posed by Medfly for the Barnes model</h3>
+<ul>
+<li>Problem 1: Flies don’t die.</li>
+<li>Problem 2: It is not possible to determine location.
+<ul>
+<li>Source for supplementary trapping: <a href="https://nre.tas.gov.au/Documents/Review_of_IR_for_FruitFly.pdf" class="uri">https://nre.tas.gov.au/Documents/Review_of_IR_for_FruitFly.pdf</a></li>
+</ul></li>
+<li>Problem 3: Growth rate is assumed constant.</li>
+</ul>
+</div>
+<div id="section" class="section level3" number="3.5.4">
+<h3><span class="header-section-number">3.5.4</span> </h3>
 
-<div id="refs" class="references csl-bib-body hanging-indent">
-<div class="csl-entry">
-Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd ed. Boca Raton, Florida: Chapman; Hall/CRC. <a href="http://yihui.org/knitr/">http://yihui.org/knitr/</a>.
 </div>
 </div>
 </div>
@@ -244,8 +289,8 @@ Xie, Yihui. 2015. <em>Dynamic Documents with <span>R</span> and Knitr</em>. 2nd 
           </div>
         </div>
       </div>
-<a href="sharing-your-book.html" class="navigation navigation-prev navigation-unique" aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
-
+<a href="introduction.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="a-generalised-model-of-pest-species-detection.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
     </div>
   </div>
 <script src="libs/gitbook-2.6.7/js/app.min.js"></script>
@@ -276,7 +321,7 @@ gitbook.start({
 "size": 2
 },
 "edit": {
-"link": "https://github.com/USERNAME/REPO/edit/BRANCH/07-references.Rmd",
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/02-cross-refs.Rmd",
 "text": "Edit"
 },
 "history": {
