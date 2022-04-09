@@ -2,29 +2,51 @@
 
 ## Introduction
 
-In the previous chapter, I reviewed recent work by Barnes et al. on inferring absence of a cryptic pest species. I concluded the chapter by discussing some of the model's restricting assumptions, and how they affect the reliability of the model. In the present chapter, I propose to develop a method that relaxes the assumptions listed above, and may work for a relatively broad class of cases. The general proposal is to combine agent based simulation (ABS) with approximate Bayesian computation (ABC) to infer probability of absence when the processes governing population dynamics are arbitrarily complex. I first start by outlining the method, before giving a simple example of the method in action. I finish by discussing some theoretical and practical limitations of the method. 
+In the previous chapter, I reviewed recent work by Barnes et al. on inferring absence of a cryptic pest species. I concluded the chapter by discussing some of the model's restricting assumptions, and how they affect the reliability of the model. In the present chapter, I propose to develop a method that relaxes the assumptions listed above, and may work for a relatively broad class of cases. The general proposal is to combine agent based simulation (ABS) with approximate Bayesian computation (ABC) to infer probability of absence when the processes governing population dynamics are arbitrarily complex. I first start by outlining the method, before giving a simple example of the method in action. I finish by discussing some theoretical and practical limitations of the method.
 
-## Agent based simulation (ABS)
+I propose a general methodology, rather than a specific mathematical model. In chapter 4, I focus on a specific implementation of the method, for a particular mathematical model.
 
-## Approximate Bayesian computation (ABC)
+## General outline
 
-## Priors
+### Spatial or non-spatial?
 
-At the minimum, 
+The model may be spatial or non-spatial, depending on whether spatial information is available, whether the spatial location of the population is considered important for determining probability of capture, and how realistic the modeller wants to make the model. When the model is spatial, it is assumed that that we have a stochastic or deterministic function that relates the distance between an individual, and a surveillance unit, and that surveillance unit detecting that individual. In other words, we have some idea of how distance between detector and individual relates to the probability that the detector finds that individual.
 
-The priors are determined by a stochastic model of the population dynamics for the species. Such a model may or may not be "agent based". For the purpose of this work, I take the term "agent based" to mean that the model takes into account differential individual properties of members of the species. (In this work, I consider differential locations). We model the population dynamics flexibly as a stochastic process. Simulation allows for the incorporation of an arbitrary degree of biological and ecological complexity into the model. Using an agent based model allows us to define a prior on each individual population member 
+For example, let $L_i \in \mathbb R^2$ be the location of individual $i$, and let $L_k \in \mathbb R^2$ be the location of survey unit or detector $k$. Then we might specify the probability of detector $k$ finding individual $i$ as a function of a linear transformation of the distance $d = \lVert L_k - L_i \rVert$, i.e. $$
+p_d = \sigma(a+bd) = \frac{1}{1+e^{-(a + bd)}}
+$$ for some scalar tuple $(a, b) \in \mathbb R^2$.
+
+### General outline
+
+The basic model is Bayesian. The basic components of the model are the population size $N_t$ at time points $t \in \{1, 2, \ldots, T\}$, location of the incipient population $L$, and the number of individuals detected $y_t$, $t \in \{1, 2, \ldots, T\}$. It is assumed that $\mathbf y = (y_1, \cdots, y_T)$ is our data vector. In the typical case, we will assume that $\mathbf y = \mathbf 0_T$, where $0_T$ is the zero vector in $\mathbb R^T$. In other words, we consider the hypothetical case where we do not detect any species members at any time across $T$ consecutive (discrete) time points.
+
+Finally, we assume that there are a fixed number of spatially located survey units $K \in \mathbb N$, at locations $L_k$, each of which is a two dimensional random variable. These locations may be considered random, or fixed (known to the environmental manager). Thus, our parameter vector can be written as $$
+\theta = (N_1, \ldots, N_T, L, L_1, \ldots, L_T).
+$$ For the inference problem we are concerned with in this work, we wish to perform inference only on the $N_t$ terms; $L$ and the $L_t$ terms are considered "nuisance" parameters (Gelman, BDA3, p. 63).
+
+I note a couple of changes one could make, briefly. One could also model the density of the population rather than the location and size. I do not consider that here. Such a model may be useful when we have data on densities rather than population sizes.
+
+I focus on the parameterisation described above, because it is intuitive for this problem, where we are concerned with a small, spatially delimited, incipient population.
+
+Under this framework, the problem is to learn the distribution of $N_T \mid \mathbf y = \mathbf 0_T$ for any $T \in \mathbb N$. This is the *posterior distribution* of $N_T$. More precisely, we want to compute the function of the distribution $\Pr(N_T = 0 \mid \mathbf y = \mathbf 0_T)$ - in other words, the probability that the pest population has been eradicated, given that we have failed to detect the population at any point in time.
+
+## Prior distributions
+
+Deriving the posterior distribution for $N_T$ requires that we define a joint prior distribution over the joint parameter vector $\theta$.
+
+The priors are determined by a stochastic model of the population dynamics for the species. Such a model may or may not be "agent based". For the purpose of this work, I take the term "agent based" to mean that the model takes into account differential individual properties of members of the species. (In this work, I consider differential locations). We model the population dynamics flexibly as a stochastic process. Simulation allows for the incorporation of an arbitrary degree of biological and ecological complexity into the model. Using an agent based model allows us to define a prior on each individual population member.
 
 ## Model specification
 
-Under the most general description, the 
-
-The basic model is composed of (a) a growth model and (b) a surveillance model. The model may be spatial or non-spatial, depending on. When the model is spatial, it is assumed When the model is spatial, it is assumed that that we have a stochastic or deterministic function that relates the distance between an individual and a surveillance unit, and that surveillance unit detecting that individual. I.e., we know 
+Under the most general description, the basic model is composed of (a) a growth model and (b) a model of surveillance, or detection. The growth model describes our subjective beliefs about the size of the population initially, as well as how it is likely to change over time. The detection model describes our subjective beliefs about the size of the population.
 
 ### The growth model
 
-There are no a priori assumptions on the population dynamics for the growth model. For example, we might apply stochastic or deterministic models of logistic, exponential, or linear growth. The only thing that matters is that we get a distribution over the size of the population at any given time point where surveillance will be conducted.
+There are no a priori assumptions on the population dynamics for the growth model. For example, we might apply stochastic or deterministic models of logistic, exponential, or linear growth. The only thing that matters is that we specify a joint prior distribution over the population size across time points and locations.
 
-A natural way to set a prior on the population size at each time point $t$ is to set a prior on the population size at the initial time point, and then assume that the population sizes at other time points are given by some (deterministic or stochastic) function of the population size at $t-1$, and the value of a covariate vector $X_t$, which includes variables relevant to population growth. 
+For the present work, I focus on the case where there exists a single incipient population of unknown size.
+
+A natural way to set a prior on the population size at each time point $t$ is to set a prior on the population size at the initial time point, and then assume that the population sizes at other time points are given by some (deterministic or stochastic) function of the population size at $t-1$, and the value of a covariate vector $X_t$, which includes variables relevant to population growth.
 
 $$
 N_t = f(N_{t-1}, X_t)
@@ -32,12 +54,46 @@ $$
 
 ### The surveillance (detection) model
 
-It is assumed that surveillances occur at regular time intervals $t \in \{1, \cdots, T\}$. 
+It is assumed that surveillances occur at regular time intervals $t \in \{1, \cdots, T\}$.
 
-## Sampling
+## Computing the posterior distribution
 
+In this section, I discuss the problem of computing the posterior distribution, given a survey record. Above, I stated that the model could be defined flexibly. Without restrictions on the form of the growth and detection models, the posterior may be analytically intractable. In other words, we will not be able to write out the posterior density or mass as a function of the data and prior distributions. Such situations are common in the Bayesian framework, because of the tendency for the posterior density or mass to depend, implicitly or explicitly, on analytically intractable integrals.
+
+In section 2, the model I outlined, given by Barnes et al., had a known analytic solution. In other words, the posterior probability of eradication could be computed as a relatively simple function of the number of negative surveys recorded (i.e., the data), and prior distributions on the population size at each time point and location.
+
+So far, we have talked about situations when sampling is required for inference. Further problems arise when the model is *agent-based*. In other words, when we include uncertainty about individual-level features in the model. In this case, the detection probability is random, even when the location and population size is known. In other words, the probability of detecting at least one individual is a function of the number of individuals, and also their individual (random) properties. This is a situation in which "the number of things you do not know is one of the things you do not know" (Richardson and Green, 1997).
+
+### Analogy with mixed models
+
+### Sampling algorithms when the number of unknowns is unknown
+
+As mentioned above, standard MCMC algorithms for Bayesian inference will not work when the number of parameters is random. In this subsection, I discuss strategies for sampling from the posterior when this is the case. Firstly, there exist extensions to classical MCMC algorithms for the case where the number of parameters is random. Green (1995) outlines a method he calls "reversible jump MCMC". This involves adding a step to the Metropolis Hastings algorithm, where . A second approach is to use approximate Bayesian computation (ABC). In this work, I focus on this method, as it has some nice properties for the issues we are concerned with here.
+
+A sampler needs to move between points in different dimensional spaces.
+
+### What is ABC?
+
+ABC refers to a family of 
+
+### Motivation for ABC
+
+ABC is relatively recent technique for sampling in cases where traditional sampling techniques fail. 
+
+Standard techniques for MCMC, such as Metropolis-Hastings and Gibbs sampling, assume that the likelihood function is known and can be easily computed. 
+
+We may wish to model uncertainty about the individual properties of agents in the system. In these cases, 
+
+Interestingly, the standard justifications for and against ABC do not apply to the case under consideration. Firstly, the standard justification for ABC is that it allows for inference when the likelihood function is "intractable" - i.e., unknown, uncomputable or otherwise difficult to work with. Standard techniques for MCMC, such as Metropolis-Hastings and Gibbs sampling, assume that the likelihood function is known and can be easily computed. 
+
+Secondly, the standard drawback for ABC is that it ensures that we can typically only draw from the posterior approximately. Under standard conditions, we must define a criteria for similarity between simulated and observed data. This is typically done by specifying a summary statistic $S(\mathbb y)$, and a similarity measure $\rho(S(\mathbb y), S(\mathbb y'))$ defined over the space spanning our data $\mathbb y$. We reject a sample if we observe $\rho(\mathbb y_{\text{observed}}, \mathbb y_{\text{simulated}} ) >  \epsilon_0$, where $\epsilon_0$ 
+
+### Online sampling
+
+The method under consideration allows for **online** sampling. To update the process, we simply take our existing posterior draws, and then draw the next time step from those draws. The result is a set of posterior draws of the entire process up to that point.
+
+#### Intractable likelihood
 
 ## A simple example
 
-
-
+In the following chapter, I give a detailed example of the method described above. However, for the purposes of explaining the method in simple terms, I will also give a simple example here.

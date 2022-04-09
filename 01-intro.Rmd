@@ -1,4 +1,13 @@
 # Introduction
 
-## An unnumbered section {-}
+## Introducing the research
+
+### Establish background area (biosecurity, monitoring)
+
+### Establish specific problem (identify gap explicitly)
+
+### State the research question
+
+## Outline of the thesis
+
 

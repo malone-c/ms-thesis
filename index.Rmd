@@ -12,36 +12,20 @@ description: |
   The HTML output format for this example is bookdown::gitbook,
   set in the _output.yml file.
 link-citations: yes
+linestretch: 1
+output:
+  bookdown::pdf_book:
+    toc: FALSE 
 github-repo: rstudio/bookdown-demo
+header-includes:
+  - \usepackage{setspace}
+nocite: '@*'
+csl: elsevier-harvard.csl
 ---
 
-# Draft Outline {-}
-
-The thesis will be composed of the following sections:
-
-* Abstract (120-200 words; write last)
-  - Motivation
-  - Research problem
-  - Proposed solution
-  - Application   
-* Table of Contents
-  - Main sections should be numbered, but references and appendices should not be.
-* Introduction
-  - Establish broad background (real world motivation)
-  - Establish need for further work
-  - Discuss the contribution of the thesis
-* Literature review
-  - Covering theoretical background, including
-    - Nature of the pest detection problem
-    - Attempts to solve the problem
-      - Frequentist method
-      - Barnes et al.'s model
-* Extended model
-  - Discussion of the extended model, broken into major components, i.e.
-    - Probabilistic graphical model
-    - Priors
-    - Sampling
-* Case study
-  - Background
-  - Model setup
-  - Results
+```{=latex}
+% Trigger ToC creation in LaTeX
+\renewcommand{\baselinestretch}{1}\normalsize
+\tableofcontents
+\renewcommand{\baselinestretch}{2}\normalsize
+```

@@ -1,41 +1,130 @@
 # Case study: Ceratatis capitata
 
-### Intro: Version 1
-
-In the previous section, a general model for inferring absence/presence of a cryptic, incipient pest species population was introduced. In this chapter, I apply the model to a specific case study. 
-
+In the previous section, a general model for inferring absence/presence of a cryptic, incipient pest species population was introduced. In this chapter, I apply the model to a specific case study. The case study is for the outbreak of Mediterranean fruit fly (Ceratitis Capitata). Prior distributions are set and justified, and posterior inference is performed using approximate Bayesian computation.
 
 ## Example case: Medfly
 
-An example case of the kind described above can be seen in Mediterranean fruit fly (C. Capitata). 
+In chapter 2, I introduced a simple Bayesian model for inferring absence of a small population of a cryptic pest species, due to Barnes et al. (2021). I argued that there existed a class of cases, where the assumptions of that simple model were not fully realistic. In chapter 3, I then introduced a method for relaxing the assumptions of this simple model. In the current section, I will introduce the reader to the problem of inferring absence of Medfly. I will then argue that the Medfly outbreak case belongs to the category of cases for which the Barnes model is not fully realistic. 
 
-### Economic importance of the fruit fly
+In this chapter, I introduce a mock (illustrative) model of medfly dynamics. However, detailed models exist. A benefit of the proposed method is that it can easily incorporate most plausible models of medfly dynamics, so long as the population density does not ...
 
-### Medfly detection problems
+### Background info on Medfly
 
-Medfly have low dispersal. This means that flies may go undetected across generations. 
-https://onlinelibrary-wiley-com.virtual.anu.edu.au/doi/pdfdirect/10.1111/j.1570-7458.2006.00415.x
+### Medfly are economically important
 
-## [Motivating the model extension] Problems posed by Medfly for the Barnes model
+Mediterranean fruit fly (*Ceratitis Capitata*) or *medfly* is a fly species native to  sub-Saharan Africa. It is considered to be of high economic importance, due to its potential for destruction of fruit production (Sciarette et al. 2018). Medfly has high invasive potential, as it can adapt to a relatively large range of climates and environments, and is known to have the capability to infest the fruits of over 300 species of plants (Ibid.). 
 
-The reader may recall that the model introduced in chapter 3 was motivated by consideration of three restrictive assumptions, listed in chapter 2. These assumptions were...
+### Medfly are cryptic
 
-I will briefly describe why these assumptions do not satisfy.
+I have mentioned above that Medfly are of high economic importance. However, they are also cryptic, insofar as they are very hard to detect at low levels. Monitoring for medfly is typically performed with the aid of lured traps (namely so-called Lynfield or Jackson traps). These traps are relatively ineffective for detecting medfly. For example, one study from the Adelaide metro area trapping grid found that only 0.02% of flies were recaptured from a release of 38.8 million flies. Further, medfly are known to have low dispersals across space.
 
-* Problem 1: Flies live across generations.
-* Problem 2: It is hard to estimate a distribution for $p$.
-  - Source for supplementary trapping: https://nre.tas.gov.au/Documents/Review_of_IR_for_FruitFly.pdf
-* Problem 3: Growth rate is assumed constant.   
+#### Medfly detection problems
 
-The benefit of the model
+Medfly have low dispersal. This means that flies may go undetected across generations. <https://onlinelibrary-wiley-com.virtual.anu.edu.au/doi/pdfdirect/10.1111/j.1570-7458.2006.00415.x>
+
+### Medfly belong to class of cases described in chapter 2
+
+The reader may recall that the model introduced in chapter 3 was motivated by consideration of three restrictive assumptions, listed in chapter 2. These assumptions were that (a) population growth is a Poisson-offspring process, (b) detection probability does not depend on fly location, and (c) the growth rate is constant as a function of $t$. 
+
+I will briefly describe why these assumptions are difficult to justify in the case of medfly.
+
+The first key assumption was that the pest population follows a Poisson-Offspring model. This is not a natural choice for the case of Medfly. Medfly increase rates are typically estimated in terms of a continuous exponential growth model. Secondly, the continuous exponential model is more common in ecology; therefore, it may be easier to understand to experts, from whom we may need to elicit priors. It may be objected that the Poisson-Offspring model has similarly interpretable parameters. The parameter is simply the number of offspring that each adult gives birth to on average. However, this is only the case if the only trappable members of the population have been born in the current time interval. In the case of Medfly, however, this is not realistic. For example, adults give birth multiple times in their adult lifestage, and may be captured at any point. Secondly, 
+
+The second key assumption is that we can estimate the probability of capturing a randomly selected fly from data. This is difficult in the case of Medfly. For fruit flies, capture probability is typically estimated from data taken from release-recapture studies. In these studies, the researcher obtains a large collection of sterilised specimens, and releases them at a single point in space. Then, the 
+
+These experimental data can be useful when the trapping setup is similar to the setup we want to draw inference about. However, this will often not be the case. For example, studies vary in the number and type of traps used (SEE NOTE). Further, we may wish to infer eradication of pest populations in trapping systems that are highly unlike those in studies. For example, after an outbreak has occurred, and eradication measures have been stopped, it is common to set up supplementary trapping units to intensify monitoring and increase the likelihood of detecting flies, conditional on their presence in the area. (CITATION). 
 
 
+The third and final assumption was that the growth rate for the pest is roughly constant. This is not the case for Medfly, who reproduce in seasonal fruits. Reproduction rates are highly dependent on temperature and seasonal availability of hosts. Therefore, growth varies systematically to a large degree across the year, in ways that are somewhat well understood. Most likely, the environmental manager should use information about the weather and time of year in setting priors on the growth rate for the species.  
 
-## Full model specification
+    - Source for supplementary trapping: <https://nre.tas.gov.au/Documents/Review_of_IR_for_FruitFly.pdf>
 
-As the reader will recall from chapter 3, 
+-   Problem 3: Growth rate is assumed constant.
+
+In this section, I argued that the case of Medfly belongs to the class of cases, described in chapter 2, that do not fit the assumptions of the Barnes model. This justifies relaxing the assumptions of the model of Barnes et al., and using a more flexible model to infer pest absence, in the case of Medfly. I turn now to specifying a full model for this case.
+
+## The data
+
+In this section, I do not use real data to estimate parameters. Instead, I model a hypothetical situation in which we observe $\mathbf y = \mathbf 0_T$ (see above). The situation is as follows: We assume that at least one fly has been detected; eradication measures have since begun and then ceased; and we now proceed with intensified monitoring, while whatever population that may exist is free to grow relatively unhindered. By intensified monitoring, I mean that **supplementary** monitoring traps have been placed alongside the previously existing grid of **general** monitoring traps. More precisely, it is assumed that **general** exist year round in a 400 $\times$ 400 metre grid (DPIPWE, 2011, p. 50). The **supplementary** surveillance system consists of a set of 16 traps in a circular area, centred at the site of the first fly detection.^[It is typical to wait until at least 2 flies have been detected near each other for an outbreak to be declared. To illustrate the method in a simplified setting, I suppose that one fly detection is sufficient.] The goal of the analysis is to infer the probability of eradication for the incipient population, given no flies detected at any point in this period. 
+
+I assume that traps are checked weekly.
+
+## Model specification
+
+As is typical of Bayesian models, prior distributions must be specified over each of the parameters. I do not consider uninformative priors, as in practical cases, information will exist about the parameters, and should be used.
+
+I break the model into the following three components:
+
+1. Population size,
+2. Fly locations, and
+3. Detections.
+
+### Population size
+
+I assume that our beliefs about the initial population size $N_1$ are described by a Poisson with random mean $\lambda$. I assume that $\lambda$ follows an exponential distribution. This distribution for $N_1$ is chosen as it is a discrete distribution with right skew, and a relatively large amount of mass $f_{N_1}(x)$ at $x = 0$, corresponding to the situation where flies are already eradicated. 
+
+As for prior distributions on $N_t$, for $t \in \{1, \ldots, T\}$, a growth model is used to structure the prior. Namely, an exponential growth model is assumed, so that $N_t = \mathrm{round}[N_{t-1} \exp\{R_t\}]$, where $R_t$ is the growth rate at time $t$. The exponential growth model is chosen for its ubiquity in ecological science in general, and in studies of fruit fly dynamics in particular. Rounding is introduced to give $N_t$ discrete support. The growth parameter $R_t$ is uncertain, and based on temperature.^[Alternatively, we could leave the rounding step out, and interpret $N_t$ as the expected number of flies at each step. I do not consider this possibility in any further depth.]
+
+### Fly locations
+
+I first discuss the option of setting a uniform prior. Setting an uninformative prior is fairly straightforward for this problem. In particular, we might assume that, beyond a certain distance from the outbreak centre (say, 1km) any existing population of Medfly is distinct from the population of interest. Therefore, we might set the prior distribution for the population location to be uniform on the surface of a disk with 1km radius around the outbreak centre. 
+
+Despite the fact that an uninformative prior is relatively straightforward to set, it is most likely not advisable in specific applications. It will typically be the case that prior information is available to the decision maker. In particular, fruit flies are heavily dependent on the availability of suitable fruit trees for survival and reproduction. Therefore, someone with local area knowledge will be able to determine the most likely locations for an existing population. Also, the supplementary zone is not chosen arbitrarily. The choice of supplementary zone will typically reflect the beliefs of the decision maker about the location of the fly population. 
+
+When prior information exists, setting the prior distribution to be uninformative may cause us to underestimate the likelihood of observing captures in the supplementary surveillance zone. The overall effect will be to inflate $\Pr(N_T = 0 \mid \mathbf y = \mathbf 0_T)$.
+
+To update on detection location when the first fly is detected at a trap (say trap k) we can use a trick. The trick is to model the probability of the first detection being at trap k as the probability that a fly is detected at k in one period conditional on exactly one fly total being detected in that period. The benefit of this model is that it does not depend on how many weeks it took to get the first detection (which would require information about how long flies have been around before the first detection). See appendix for more details.
+
+A mathematical trick can be used to derive a prior in some cases. Suppose we have $K$ traps indexed by $k \in \{1, \ldots, L\}$. Suppose also that we have a prior distribution over the population size $N$, given by $N \sim \mathrm{Poisson} (\lambda)$, with $\lambda \sim \mathrm{Exponential(1/20)}$. Here we assume no change in population size over time. Now, we suppose that each trap $k$ is "competing" to catch the first trap each week. We suppose that the trap at the centre of the grid was the first to catch a fly, and we want to use this information. Define the random variable
+$$
+C_k = \begin{cases}1 & \text{a fly is caught in trap } k \text{ before any other trap} \\ 0 & \text{otherwise}. \end{cases}
+$$
+Under these assumptions, $L \mid C_k = 1$ is the distribution of $L$, given that a fly was caught in trap $k$ before any other trap.
+
+Whether or not we can analytically derive the posterior density depends on the probability of capture function $p(x)$. In the case we consider here, the function cannot be integrated, and so I resort to sampling. Under the above assumptions, the posterior resembles the convolution of a normal and a uniform distribution (see figure). See appendix for more details.
+
+#### Dispersals
+
+I assume that flies in the population are dispersed in space around the central location $L$. Let $D_{i, t}$ denote the location of fly $i$ at time $t$, relative to the population centroid $L$. It is assumed that the population centroid does not change over time (i.e. $L$ is independent of $t$, and everything else in the model). However, $D_{i, t}$ is independent of $D_{i', t'}$, for any $(i', t') \neq (i, t)$. Thus, our belief is essentially that flies are shuffled around at each time point, so that a fly's location at $t-1$ tells us nothing about its location at $t$, except through the information both reveal about $L$. This assumption justifies not tracking individual flies across time -- whether a fly lives across time periods, or instead dies and is replaced, are equivalent scenarios under this model.
+
+### Detection model
+
+Finally, I discuss the model for detecting individuals. Conditional on $N_t$, $L$, and $D_{i, t}$.
+
+$$
+\begin{aligned}
+&\textbf{Population size} \\
+&\text{Initial no. of flies:} && N_1 \mid \lambda \sim \mathrm{Pois}(\lambda) \text{, where} \\
+&&& \lambda \sim \mathrm{Exponential}(1/20) \\
+& \text{Rate of increase:}~ && R_t \sim \mathrm{Normal}(\mu_t, \sigma^2_t), & t \in \{2, \ldots, T \} \\
+& \text{No. of flies:}~ && N_t := \mathrm{round} \{ N_{t-1} \exp(R_t) \}    & t \in \{2, \ldots, T\} \\
+\\
+&\textbf{Fly locations} \\
+& \text{Popn. loc.:}~ && L^{(U)} \sim \mathrm{Uniform}^2(200, 600) \\
+&&& L^{(N)} \sim \mathrm{Normal}^2(0, \sigma) \\
+&&& L := L^{(U)} + L^{(N)} \\
+& \text{Fly dispersals:}~ && D_{i,t} \sim \mathrm{Normal}(0, 20) & i \in \{1, \ldots, N_t\}, \\
+  &&&& t \in \{1, \ldots, T\}\\
+& \text{Fly locations:}~ && L_{i,t}^\text{fly} := L + D_{i,t} & i \in \{1, \ldots, N_t\}, \\
+  &&&& t \in \{1, \ldots, T\}\\
+\\
+&\textbf{Detection model} \\
+& \text{No. traps:}~ && K \in \mathbb N_+ \\
+& \text{Trap locations:}~ && L_k^\text{trap} & k \in \{1, \ldots, K\} \\
+& \text{Dist. btw. fly } i \text{ and trap } k \text{ at time } t \text{:} && \delta_{i,k,t} := \lVert L_k^\text{trap} - L_{i,t}^\text{fly} \rVert & i \in \{1, \ldots, N_t\}, \\
+  &&&& k \in \{1, \ldots, K\}, \\
+  &&&& t \in \{1, \ldots, T\}\\
+& \text{Individ. cap. prob.:} && p_{i, t} = 1 - \prod_{k=1}^K (1 - p(\delta_{i,k,t})), & i \in \{1, \ldots, N_t\}, \\
+  &&&& k \in \{1, \ldots, K\}, \\
+  &&&& t \in \{1, \ldots, T\}\\
+&  && \mathbf p_t := [p_{i,t}]_{i=1}^{N_t}  & t \in \{1, \ldots, T\} \\
+&\text{No. of captures:}~ && y_t \mid \theta \sim \text{Poisson-binomial}(N_t, \mathbf p_t), & t \in \{1, \ldots, T\} \\
+  &&& \mathbf y := [y_t]_{t=1}^T
+\end{aligned}
+$$
+
+## Sampling
+
+## Results
 
 
-## Citations
-
-[@xie2015] in the .bib file.
