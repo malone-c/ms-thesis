@@ -1,0 +1,76 @@
+---
+title: "Thesis scratch/offcuts"
+author: "Christopher Malone"
+date: "18/04/2022"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+### Barnes
+
+There exists a category of cases under which the assumptions of basic model above are not plausible. In this section, I describe this category of cases, and outline why these cases cause problems for the Barnes model. Three assumptions of the above model are as follows:
+
+  1. The growth of an incipient population can be described by a Poisson-offspring model.
+  2. The probability of detecting a randomly drawn member of the population $p$ is known, or can be reasonably estimated from data.
+  3.The population grows exponentially at a constant rate. I.e. the growth rate of the population is not random and does not change over time.
+
+When these assumptions are not met, the model may not be a realistic representation of the processes being modelled. Firstly, the Poisson-offspring distribution is most natural when all detectable individuals at time $t$ are offspring of the individuals that were detected at time $t-1$. However, this will not be the case if members of the population continue to be detectable after giving birth.
+
+It is not always possible to estimate a "rarity" parameter $p$ from data. Recall that the rarity of a population is the probability of detecting a randomly drawn member of the population in a single survey. Thus, it depends fundamentally on the design and intensity of the survey employed. However, survey designs may vary significantly between regions, so that we cannot generalise estimates of $p$. For example, suppose an environmental manager has estimated $p$, under a standard, general surveillance program. However, they later suspect an outbreak has occured, and therefore wish to implement an intensified surveillance program. A concrete example of this can be seen in the case of Mediterranean fruit fly, surveillance is performed using a spatial network of surveillance units (i.e. traps) which are inspected at regular intervals. When an outbreak has occurred, or is suspected, the manager may wish to deploy additional, *supplementary* survey units.
+
+It may be objected that it should be possible to derive the an estimate of the rarity $p$ using the probability-given-distance function $p_d$. For example, we could simulate
+
+In applied contexts, the probability of capture must be estimated from data. In the case of small insect species, such as Mediterranean fruit fly, probability of capture is estimated with the aid of release-recapture experiments. Sterilised flies are released, in an area containing a standardised grid of surveillance units (traps). Then, after some time has passed, flies are counted. The resulting recapture data lends itself to two natural estimands. Firstly, there is the probability of a randomly selected fly being captured at all, given some trapping grid setup (e.g. a square grid with 400m spacing). This is essentially the "rarity" parameter discussed above. Secondly, there is the probability of a randomly selected fly being captured in a given trap, given the distance between the trap and the release location of the flies.
+
+As mentioned above the third assumption is that the population grows exponentially at a constant rate. This assumption will be unreasonable in cases where population growth is seasonally dependent, or and/or when we are uncertain about the growth rate.
+
+### Gaps
+
+Modelling probability of eradication when capture probability cannot be estimated or elicited.
+
+4.  Not suitable for arbitrarily small $p_0$.
+  - There may be no $p_0 > 0$ that we would consider acceptable. Then, the goal is to reject $\mathbb H_0: p \leq p_0 = 0$. The problem is that the model is that non-detections have probability $1$ under the null hypothesis that $p_0 \leq 0$. I.e. the probability of detecting a member of the species is at most $0$ under this setting. In other words, $\alpha_n = 0$, for any number of surveys $n$. To get around this, we might choose $p_0$ to be arbitrarily small. However, such a choice would be arbitrary and not motivated by scientific theory or value-judgment considerations. Also, setting $p_0$ to be arbitrarily small may force us to be overly conservative. The smaller that we set $p_0$, the larger the number of surveys $n$ required to reject $\mathbb H_0: p \geq p_0$.
+5.  No prior information.
+  - This is related to the previous point. The above does not allow us to incorporate prior information about the rarity of the species. If we have reason to believe that the species is nearly extinct, then the above methodology may give overly conservative results. I.e. it might recommend surveying for longer than is required.
+  
+  
+  ## Medfly belong to class of cases described in chapter 2
+
+The reader may recall that the model introduced in chapter 3 was motivated by consideration of three restrictive assumptions, listed in chapter 2. These assumptions were that (a) population growth is a Poisson-offspring process, (b) detection probability does not depend on fly location, and (c) the growth rate is constant as a function of $t$. 
+
+I will briefly describe why these assumptions are difficult to justify in the case of medfly.
+
+The first key assumption was that the pest population follows a Poisson-Offspring model. This is not a natural choice for the case of Medfly. Medfly increase rates are typically estimated in terms of a continuous exponential growth model. Secondly, the continuous exponential model is more common in ecology; therefore, it may be easier to understand to experts, from whom we may need to elicit priors. It may be objected that the Poisson-Offspring model has similarly interpretable parameters. The parameter is simply the number of offspring that each adult gives birth to on average. However, this is only the case if the only trappable members of the population have been born in the current time interval. In the case of Medfly, however, this is not realistic. For example, adults give birth multiple times in their adult lifestage, and may be captured at any point. Secondly, 
+
+# Chapter 2 final parts removed
+
+# A generalised model of pest species detection
+
+## Introduction
+
+The general proposal is to combine agent based simulation (ABS) with approximate Bayesian computation (ABC) to infer probability of absence when the processes governing population dynamics are arbitrarily complex. I first start by outlining the method, before giving a simple example of the method in action. I finish by discussing some theoretical and practical limitations of the method.
+
+I propose a general methodology, rather than a specific mathematical model. In chapter 4, I focus on a more specific implementation of the method.
+
+I focus on the case where the probability of capture can be elicited as a function of distance to an individual, and where a systematic surveillance system is in place (so that chance sightings are not considered).
+
+### General outline
+
+The basic model is Bayesian. The basic components of the model are the population size $N_t$ at time points $t \in \{1, 2, \ldots, T\}$, location of the incipient population $L$, and the number of individuals detected $y_t$, $t \in \{1, 2, \ldots, T\}$. It is assumed that $\mathbf y = (y_1, \cdots, y_T)$ is our data vector. In the typical case, we will assume that $\mathbf y = \mathbf 0_T$, where $0_T$ is the zero vector in $\mathbb R^T$. In other words, we consider the hypothetical case where we do not detect any species members at any time across $T$ consecutive (discrete) time points.
+
+Finally, we assume that there are a fixed number of spatially located survey units $K \in \mathbb N$, at locations $L_k$, each of which is a two dimensional random variable. These locations may be considered random, or fixed (known to the environmental manager). Thus, our parameter vector can be written as $$
+\theta = (N_1, \ldots, N_T, L, L_1, \ldots, L_T).
+$$ For the inference problem we are concerned with in this work, we wish to perform inference only on the $N_t$ terms; $L$ and the $L_t$ terms are considered "nuisance" parameters (Gelman, BDA3, p. 63).
+
+I note a couple of changes one could make, briefly. One could also model the density of the population rather than the location and size. I do not consider that here. Such a model may be useful when we have data on densities rather than population sizes.
+
+I focus on the parameterisation described above, because it is intuitive for this problem, where we are concerned with a small, spatially delimited, incipient population.
+
+Under this framework, the problem is to learn the distribution of $N_T \mid \mathbf y = \mathbf 0_T$ for any $T \in \mathbb N$. This is the *posterior distribution* of $N_T$. More precisely, we want to compute the function of the distribution $\Pr(N_T = 0 \mid \mathbf y = \mathbf 0_T)$ - in other words, the probability that the pest population has been eradicated, given that we have failed to detect the population at any point in time.
+
+
+

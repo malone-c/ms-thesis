@@ -1,0 +1,25 @@
+# A generalised model of pest species detection
+
+## Introduction
+
+The general proposal is to combine agent based simulation (ABS) with approximate Bayesian computation (ABC) to infer probability of absence when the processes governing population dynamics are arbitrarily complex. I first start by outlining the method, before giving a simple example of the method in action. I finish by discussing some theoretical and practical limitations of the method.
+
+I propose a general methodology, rather than a specific mathematical model. In chapter 4, I focus on a more specific implementation of the method.
+
+I focus on the case where the probability of capture can be elicited as a function of distance to an individual, and where a systematic surveillance system is in place (so that chance sightings are not considered).
+
+### General outline
+
+The basic model is Bayesian. The basic components of the model are the population size $N_t$ at time points $t \in \{1, 2, \ldots, T\}$, location of the incipient population $L$, and the number of individuals detected $y_t$, $t \in \{1, 2, \ldots, T\}$. It is assumed that $\mathbf y = (y_1, \cdots, y_T)$ is our data vector. In the typical case, we will assume that $\mathbf y = \mathbf 0_T$, where $0_T$ is the zero vector in $\mathbb R^T$. In other words, we consider the hypothetical case where we do not detect any species members at any time across $T$ consecutive (discrete) time points.
+
+Finally, we assume that there are a fixed number of spatially located survey units $K \in \mathbb N$, at locations $L_k$, each of which is a two dimensional random variable. These locations may be considered random, or fixed (known to the environmental manager). Thus, our parameter vector can be written as $$
+\theta = (N_1, \ldots, N_T, L, L_1, \ldots, L_T).
+$$ For the inference problem we are concerned with in this work, we wish to perform inference only on the $N_t$ terms; $L$ and the $L_t$ terms are considered "nuisance" parameters (Gelman, BDA3, p. 63).
+
+I note a couple of changes one could make, briefly. One could also model the density of the population rather than the location and size. I do not consider that here. Such a model may be useful when we have data on densities rather than population sizes.
+
+I focus on the parameterisation described above, because it is intuitive for this problem, where we are concerned with a small, spatially delimited, incipient population.
+
+Under this framework, the problem is to learn the distribution of $N_T \mid \mathbf y = \mathbf 0_T$ for any $T \in \mathbb N$. This is the *posterior distribution* of $N_T$. More precisely, we want to compute the function of the distribution $\Pr(N_T = 0 \mid \mathbf y = \mathbf 0_T)$ - in other words, the probability that the pest population has been eradicated, given that we have failed to detect the population at any point in time.
+
+

@@ -7,10 +7,6 @@ documentclass: book
 bibliography: [book.bib, packages.bib]
 # url: your book url like https://bookdown.org/yihui/bookdown
 # cover-image: path to the social sharing image like images/cover.jpg
-description: |
-  This is a minimal example of using the bookdown package to write a book.
-  The HTML output format for this example is bookdown::gitbook,
-  set in the _output.yml file.
 link-citations: yes
 linestretch: 1
 output:
@@ -19,6 +15,9 @@ output:
 github-repo: rstudio/bookdown-demo
 header-includes:
   - \usepackage{setspace}
+  - \usepackage{amsmath}  
+  - \usepackage[algo2e,linesnumbered,ruled]{algorithm2e}
+  - \usepackage{algorithm}
 nocite: '@*'
 csl: elsevier-harvard.csl
 ---

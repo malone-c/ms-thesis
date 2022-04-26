@@ -71,6 +71,9 @@
 \setcounter{secnumdepth}{5}
 \usepackage{booktabs}
 \usepackage{setspace}
+\usepackage{amsmath}
+\usepackage[algo2e,linesnumbered,ruled]{algorithm2e}
+\usepackage{algorithm}
 \ifluatex
   \usepackage{selnolig}  % disable illegal ligatures
 \fi
@@ -79,7 +82,7 @@
 
 \title{Bayesian Models for Pest Detection}
 \author{Chris Malone}
-\date{2022-04-09}
+\date{2022-04-26}
 
 \begin{document}
 \maketitle
@@ -92,6 +95,27 @@
 
 \hypertarget{introduction}{%
 \chapter{Introduction}\label{introduction}}
+
+\hypertarget{checklist}{%
+\section{CHECKLIST}\label{checklist}}
+
+\begin{itemize}
+\tightlist
+\item
+  Description of the problem
+\item
+  Review what is known
+\item
+  Identify gaps
+\item
+  What I plan to do to address gaps
+\item
+  How I plan to carry out investigation
+\item
+  Explanation of contribution
+\item
+  Outline of content
+\end{itemize}
 
 \hypertarget{introducing-the-research}{%
 \section{Introducing the research}\label{introducing-the-research}}
@@ -111,193 +135,249 @@
 \hypertarget{lit-review}{%
 \chapter{Literature review}\label{lit-review}}
 
-In this chapter, I review some literature relating to the core problem that I am concerned with in this thesis. I begin by discussing the general problem of inferring absence of a cryptic, incipient pest species population. In particular, I emphasise that the problem requires the marriage of separate mathematical modelling cultures; (a) mathematical/ecological modelling, and (b) statistical inference.
+\hypertarget{introduction-1}{%
+\section{Introduction}\label{introduction-1}}
 
-\hypertarget{inferring-absence-of-cryptic-pests}{%
-\section{Inferring absence of cryptic pests}\label{inferring-absence-of-cryptic-pests}}
+\hypertarget{description-of-what-this-chapter-is-about}{%
+\subsection{Description of what this chapter is about}\label{description-of-what-this-chapter-is-about}}
 
-The primary problem this work is concerned with is to infer the absence of a cryptic pest species. A cryptic species is any species which is hard to detect. One example is snakes, which are small, immobile, camouflaged, and located in inaccessible habitats (Inferring the Absence of a Species: A Case Study of Snakes, Kery 2002). A problem that environmental managers and governors face is to determine the minimal length of time required for. I will refer to this problem as the \textbf{problem of post-outbreak surveillance program design}, or, alternatively, as the problem of program design.
+\hypertarget{outline-of-the-chapter}{%
+\subsection{Outline of the chapter}\label{outline-of-the-chapter}}
 
-\hypertarget{standard-approaches-to-inferring-absence-of-a-cryptic-species}{%
-\section{Standard approaches to inferring absence of a cryptic species}\label{standard-approaches-to-inferring-absence-of-a-cryptic-species}}
+\hypertarget{non-literature-background}{%
+\section{Non-literature background}\label{non-literature-background}}
 
-In this section, I outline the standard existing approach to inferring pest absence. The simplest approach to this problem is given by McArdle (1990). Let the \emph{rarity} of the species \(p \in [0, 1]\) be the probability that a species is detected in any given sampling unit. (Sampling units can be arranged spatially or temporally; e.g.~a survey that involves checking \(w\) weeks at \(k\) locations would have \(wk\) sampling units.) Then, the number of surveys in which the species is detected is given by \(X \sim \mathrm{Binomial}(T, p)\). Accordingly, the probability of \emph{not} detecting the species in \(T\) surveys is given by
+\hypertarget{eradicating-tropical-fruit-flies}{%
+\subsection{Eradicating tropical fruit flies}\label{eradicating-tropical-fruit-flies}}
+
+Costs associated with invasive and pest species can be varied and significant. Invasive species pose economic, social and environmental costs. Fruit flies are an example of an economically costly pest. Fruit flies lay eggs in ripening fruits and vegetables. Produce that has been infested with fruit fly larvae is not fit for sale, domestically or abroad. Further, even if produce has not been infested, local suppliers can charge a premium for supplying pest-free produce to international markets.
+
+Governments have a responsibility monitor and eradicate potential biological invasions. In particular, the Australian government is bound by the Biosecurity act () to ensure a very low level of risk for animal and plant invasions. Effectively and efficiently controlling biological invasions requires a principled and rigorous approach to monitoring. However, monitoring biological species is difficult and costly. In particular, the cost of increasing monitoring intensity must be traded off against the cost of failing to detect an incipient invasion.
+
+The manager's role is made more difficult when a pest population is \emph{subdetectable}. Populations may be subdetectable because they can persist at low rates; because they are \emph{taxonomically cryptic} (i.e.~hard to distinguish from well known native species); because they are \emph{behaviourally cryptic} (i.e.~behave in ways that help them avoid detection by predators; see \citet{kery2002}); or because the population is suppressed by efforts to eradicate them. Matters are made worse when tests to detect the presence of a population have extremely low sensitivity for other reasons. For example, monitoring traps for fruit flies have very low attractiveness. One study of Mediterannean fruit fly found that only 0.02\% of 38.8 million flies were recaptured after release, in a standard surveillance setup in Adelaide (\citet{ms2007}).
+
+Suppose an outbreak of an invasive pest has occurred. Monitoring for the pest must then be intensified and localised to the area of suspicion. If the pest has since been eradicated, governments are incentivised to declare eradication quickly. This is because
+
+On the other hand, if eradication has \emph{not} occured,
+
+A necessary prerequisite for minimising the probability of failing to detect an existing invasion is to understand what can be inferred about the state of the population from what has been observed in surveillance. In particular, it is desirable to understand the likelihood that extinction has occurred, given that the species has not been detected over a certain period of time.
+
+In Australia, Pest Free Area status is awarded to a number of . However, outbreaks of these pests are periodic. It is typical for PFA status to be suspended following an outbreak.
+
+PFA status is economically valuable to producers in the relevant region. Firstly, there may be offshore markets which require that produce is supplied from a PFA for a given pest. Secondly, in some markets, PFA status may allow the supplier to receive a price premium for goods sold. In other words, PFA status increases the value of local produce on international markets.
+
+\begin{itemize}
+\tightlist
+\item
+  Current codes of practice suggest a lower catch rate required for an outbreak to be declared when supplementary traps are set, but probabilities have not been estimated rigorously.
+\end{itemize}
+
+\hypertarget{the-problem-of-concern-in-this-work}{%
+\subsection{The problem of concern in this work}\label{the-problem-of-concern-in-this-work}}
+
+As mentioned above, the manager seeks to minimise resources spent on surveillance, while minimising the chance that an eradication is declared when none has occurred. The general problem this thesis is concerned with is to infer whether or not an invasive species has been extinguished based on survey records.
+
+\hypertarget{literature-background}{%
+\section{Literature background}\label{literature-background}}
+
+In this subsection, I will describe a number of models that have been applied to the problem of inferring species absence. Existing methods can be categorised as frequentist and Bayesian. The core difference between frequentist and Bayesian methods is in their treatment of the variables that describe the presence or absence of the species. Frequentist methods assume that the species is either absent or present with probability one. In this framework, surveillance activities are considered to be random experiments with fixed parameters. On the other hand, Bayesian methods assume that species absence is uncertain (i.e.~random).
+
+\hypertarget{simple-models}{%
+\subsection{Simple models}\label{simple-models}}
+
+*** Note: Should I delete this entire subsection? I wrote it before I knew about the papers I discuss in the ``Elaborate models'' section.
+
+\hypertarget{mcardle-1990}{%
+\subsubsection{McArdle 1990}\label{mcardle-1990}}
+
+I start by discussing the most basic approach to program design. This is the frequentist approach described by \citet{mcardle1990}. I emphasise this method because (a) it is conceptually simple and therefore easy to describe, and (b) it is emblematic of other methods in the literature, which are similarly general and simple. First, let the \emph{rarity} of the species \(p \in [0, 1]\) be the probability that a species is detected in any given sampling unit. (Sampling units can be arranged spatially or temporally; e.g.~a survey that involves checking \(w\) weeks at \(k\) locations would have \(wk\) sampling units.) Then, the number of surveys in which the species is detected is given by \(X \sim \mathrm{Binomial}(T, p)\). Accordingly, the probability of \emph{not} detecting the species in \(T\) surveys is given by
 \[
 \alpha = \Pr(X = 0) = 1 - (1 - p)^T.
 \]
 
 The last formula allows us to compute any of the 3 quantities \(\alpha\), \(p\), and \(t\), assuming the other two are given.
 
-Given this framework, the problem of planning program becomes the following. We decide \emph{a priori} what the smallest ``rarity'' \(p\) worth detecting is. McArdle supposes that if a species if sufficiently difficult to detect (while, nonetheless, \(p > 0\)) then it cannot be considered a member of an ecological community, and therefore not worthy of being deemed ``present''. Write the smallest rarity worth detecting as \(p_0\). Then, we choose a minimum detection probability \(\alpha\) that we are willing to accept. For example, we might wish to have a chance of \(\alpha > 0.95\) of detecting a species, given that it is present. Then, with the above formula, we can rearrange to get the smallest number of survey units \(T\) such that detection probability \(\alpha\) is achieved.
+Given this framework, the problem of program design becomes the following. We decide \emph{a priori} what the smallest ``rarity'' \(p\) worth detecting is. McArdle supposes that if a species if sufficiently difficult to detect (while, nonetheless, \(p > 0\)) then it cannot be considered a member of an ecological community, and therefore not worthy of being deemed ``present''. Write the smallest rarity worth detecting as \(p_0\). Then, we choose a minimum detection probability \(\alpha\) that we are willing to accept. For example, we might wish to have chance \(\alpha > 0.95\) of detecting a species, given that it is present. Then, with the above formula, we can rearrange to get the smallest number of survey units \(T\) such that detection probability \(\alpha\) is achieved.
 
 Statisticians will recognise that the above is essentially power analysis for data modelled as identically and independently distributed Bernoulli trials. This analogy can be made more concrete. For any fixed rarity \(p\), we can derive the probability of observing \(n\) or more negative surveys. This is the p-value. We can then reject the hypothesis that there is the rarity is greater than \(p_0\), the rarity worth detecting.
 
-McArdle's method is popular in the literature, most likely due to its conceptual simplicity.
+\hypertarget{limitations-of-mcardles-method}{%
+\subsubsection{Limitations of McArdle's method}\label{limitations-of-mcardles-method}}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1995}
-\tightlist
-\item
-  Using statistical probability to increase confidence of inferring species
-\end{enumerate}
+Applying the above model to the problem of program design is not straightforward. Firstly, the model is fairly restrictive. It assumes that the probability of detecting the pest population is constant over time. Secondly, in the case of pest populations, it may be difficult to determine the smallest value of \(p\) that is ``worth'' detecting. When a pest species is cryptic, the detectability (\(p\) in this model) can be extremely small even when the population is relatively large. Further, invasive potential of the pest may be large, so that even small populations bear a large cost to the decision maker.
 
-\hypertarget{limitations-of-the-standard-approach}{%
-\subsection{Limitations of the standard approach}\label{limitations-of-the-standard-approach}}
+\hypertarget{similar-models}{%
+\subsubsection{Similar models}\label{similar-models}}
 
-So far, I have discussed a general model, first proposed by McArdle (1990), for surveillance of a species in general. This model works well for a range of cases. However, for pest surveillance, this model has several limitations. Firstly, for monitoring of cryptic pest populations the minimal permissible rarity \(p_0\) may be arbitrarily small. For example, this may be the case if (a) a pest is extremely hard to detect, so that even moderate sized populations have low detection probability, and/or (b) pests have high invasive potential, so that even extremely small populations pose an invasive threat. However, when \(p_0 = 0\), the probability of non-detection is 1 at each timestep.
+There are several other models in the literature, mirroring McArdle's method in their conceptual simplicity and generality. (See \citet{boakes2015} for a relatively complete review.) Bayesian models are given by \ldots{} and Barnes et al.~These methods have the advantage that the posterior distribution is derived analytically. This means that posterior probabilities can be computed extremely efficiently. However, each model assumes a constant growth rate. However, in real contexts, growth rates are highly variable and uncertain (\citet{caley2014}).
 
-The model extracts information from the
+\hypertarget{elaborate-models}{%
+\subsection{Elaborate models}\label{elaborate-models}}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  No probabilities
-\end{enumerate}
+\hypertarget{justification-for-elaborate-models}{%
+\subsubsection{Justification for elaborate models}\label{justification-for-elaborate-models}}
 
-\begin{itemize}
-\tightlist
-\item
-  Probabilities help decision makers
-\end{itemize}
+Recently, more elaborate models have appeared in the literature for specific eradication inference problems. Here, I discuss the motivation and justification for these models.
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{1}
-\tightlist
-\item
-  No estimation for \(p\).
-\end{enumerate}
+\hypertarget{motivation}{%
+\paragraph{Motivation}\label{motivation}}
+
+As discussed above, simple models, such as McArdle's method, are attractive for their simplicity, generality, and efficiency of computation. However, these virtues may come at the cost of biological plausibility. This is particularly the case when we have a significant degree of prior information about the species and region in question. For high stakes problems, we would like to be able to leverage existing domain knowledge about the location and species. This might mean using process models that are fine grained, scientifically plausible, and based on multiple sources of scientific knowledge and evidence. We would also like to be able to incorporate our uncertainty about the processes in question.
+
+List of problems to discuss\ldots{}
 
 \begin{itemize}
 \tightlist
 \item
-  For cryptic pest species, the model is even for dangerous levels of \(p\).
+  They make strong assumptions about priors which are not defensible in general.
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Assumption of a fixed, and either constant or declining population size (\citet{caley2015}, p.~2).
+  \item
+    For example, McArdle's model assumes that there is a value of \(p\) small enough to be not worth detecting.
+  \end{itemize}
+\item
+  They assume that we can estimate a sighting rate, which is constant as a function of the locations of the individuals.
 \end{itemize}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{2}
-\tightlist
-\item
-  No model of growth.
-\item
-  Not suitable for arbitrarily small \(p_0\).
-\end{enumerate}
+Another issue with simpler models is their relative inflexibility with respect to the structure of the model. For example, the method of Barnes et al assumes that we know the probability of detecting a specimen drawn randomly from the population. However, in the case of fruit flies, this number is difficult to estimate, because the capture probability is highly dependent on the trapping layout, which in turn is highly dependent on location and time. For example, countries (and states within countries) differ in the types of traps used and the spatial density of traps.
+
+\hypertarget{plausibility}{%
+\paragraph{Plausibility}\label{plausibility}}
+
+As (\citet{caley2014}) points out, most models in the literature on the program design problem are simple and general. Their simplicity means that they are parsimonious, analytically tractable, and easy to interpret. However, these properties are bought at the cost of plausibility of the model as a description of real ecological processes, which are complex and uncertain. In general, the plausibility of a model will depend on the system that is under investigation. For a given model, the analyst may have information that will allow them to specify relatively more plausible and realistic models of the processes that govern the system.
+
+\hypertarget{paper-1-keith-et-al}{%
+\subsubsection{Paper 1: Keith et al}\label{paper-1-keith-et-al}}
+
+The first instance of an elaborate Bayesian model for inferring pest eradication is given by \citet{keith2013}. The authors use an agent-based Bayesian model to infer the distribution of fire ant nests in Brisbane. They obtained data on the locations and month of discovery for \(n = 7{,}068\) nests. They also observed whether data were passively or actively discovered (e.g.~by members of the public or through a targeted search).
+
+Generalised Gibbs sampling is used to sample\ldots{}
+
+\hypertarget{sampling}{%
+\subsubsection{Sampling}\label{sampling}}
+
+It should be noted that both of the models above are agent based. The model of Keith et al explicitly models the location of each agent (ant nest). In each case, this leads to a difficulty in sampling algorithms. Typically, when a Bayesian model is agent based, this means that there is an unknown number of parameters in the model (and unbounded, as the size of the population typically does not have a finite bound, e.g.~when it is Poisson distributed). The upshot of this is that typical Markov Chain Monte Carlo (MCMC) methods, such as the Metropolis Hastings sampler, fail. This is because they do not allow us the dimension of the parameter vector to vary between draws.
+
+The papers discussed above deal with this in two different ways. Keith et al use a generalisation of the Gibbs sampler, inspired by reversible jump MCMC. This gets around the problem by adding a step to the Gibbs sampler in which we move between coordinate spaces . On the other hand, Caley et al use approximate Bayesian computation (ABC).
+
+\hypertarget{paper-2-caley-et-al}{%
+\subsubsection{Paper 2: Caley et al}\label{paper-2-caley-et-al}}
+
+The second instance of an elaborate Bayesian model for inferring eradication is given by \citet{caley2015}. Caley and co-authors develop a Bayesian model of fox sightings in Tasmania. Their goal is to infer the posterior probability that foxes had been eradicated in Tasmania, given a record of fox carcass sightings. They obtained data on fox carcass sightings from hunter kills and road kills. These observation processes were modelled separately, so that posterior detection rates differed between the sighting types. Detection rates were assumed to be constant across time and location for each type of sighting. Notably, uninformative priors were set for detection rates (i.e.~the probability of detecting a fox was set to be uniform on \([0, 1]\)). Data consisted of a single sighting count for each location (with Tasmania divided geographically into grid cells) and each year between 2001 and 2013. Data were all zeroes with the exception of exactly four unit observations (sightings of exactly one fox).
+
+The authors use a simple rejection algorithm to sample from the posterior. I will refer to this algorithm as exact Bayesian computation (EBC), to be distinguished from approximate Bayesian computation (ABC). ABC works by first drawing samples of the parameter vector \(\theta\) from the prior distribution \(\pi(\theta)\), then second, drawing simulated data \(y_{\text{sim}}\) from the likelihood, then keeping the proposed \(\theta\) if and only if \(y_{\text{sim}}\) is an approximate match with the observed data. EBC is the same, except that samples are only kept if \(y_{\text{sim}}\) is an \emph{exact} match with the observed data. Notably, EBC is only practical in cases where the data consists entirely of discrete variables (i.e.~variables with countable or finite ranges of possible values).
+
+The authors point to the complexity of the likelihood to justify the use of ABC over more standard Monte Carlo methods such as Metropolis Hastings or Gibbs sampling. Based on their description of the model, however, it is not clear that Metropolis Hastings would not suffice.
+
+\hypertarget{gaps}{%
+\section{Gaps}\label{gaps}}
+
+Above, I have discussed the two elaborate computational models in the literature for inferring eradication of an incipient biological invasion. The current work seeks to address two gaps in the literature. Firstly, elaborate Bayesian models have not been explored for inferring eradication of Tephritid fruit flies. Fruit flies pose an interesting case study, because the regulator has fine grained information about the detection system. In particular, the regulator knows the locations of each of the traps. Further, prior research investigating the efficacy of these traps exists. If used carefully, this information can be leveraged through the model's priors to learn from the zero-sighting record efficiently.
+
+Fruit flies are interesting for a few reasons:
 
 \begin{itemize}
 \tightlist
 \item
-  There may be no \(p_0 > 0\) that we would consider acceptable. Then, the goal is to reject \(\mathbb H_0: p \leq p_0 = 0\). The problem is that the model is that non-detections have probability \(1\) under the null hypothesis that \(p_0 \leq 0\). I.e. the probability of detecting a member of the species is at most \(0\) under this setting. In other words, \(\alpha_n = 0\), for any number of surveys \(n\). To get around this, we might choose \(p_0\) to be arbitrarily small. However, such a choice would be arbitrary and not motivated by scientific theory or value-judgment considerations. Also, setting \(p_0\) to be arbitrarily small may force us to be overly conservative. The smaller that we set \(p_0\), the larger the number of surveys \(n\) required to reject \(\mathbb H_0: p \geq p_0\).
+  A body of research exists to understand trap efficacy.
+\item
+  The surveillance program is predictably structured
+\item
+  The intensity of the surveillance program changes in a predictable way.
 \end{itemize}
 
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\setcounter{enumi}{4}
-\tightlist
-\item
-  No prior information.
-\end{enumerate}
+Second, no such model has addressed the question of PFA status reinstatement. Instead, they discuss inferring eradication from an actually observed record.
+
+\hypertarget{case-study-ceratatis-capitata}{%
+\chapter{Case study: Ceratatis capitata}\label{case-study-ceratatis-capitata}}
+
+\hypertarget{introduction-2}{%
+\section{Introduction}\label{introduction-2}}
+
+In the previous section, a general model for inferring absence/presence of a cryptic, incipient pest species population was introduced. In this chapter, I apply the model to a specific case study. The case study is for the outbreak of Mediterranean fruit fly (Ceratitis Capitata). Prior distributions are set and justified, and posterior inference is performed using approximate Bayesian computation.
 
 \begin{itemize}
-\tightlist
 \item
-  This is related to the previous point. The above does not allow us to incorporate prior information about the rarity of the species. If we have reason to believe that the species is nearly extinct, then the above methodology may give overly conservative results. I.e. it might recommend surveying for longer than is required.
+  Note that this is a mock analysis intended to improve understanding of the surveillance system.
+\item
+  Note that the method can be used for a real scenario - we only need to change the priors, data and locations of the traps.
+\item
+  Note that I use a simplified model of Medfly dynamics for illustrative purposes - but the method can easily incorporate more complex ABS models, and cite those models.
+\item
+  Recap previous chapters
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Explain how this chapter ties in
+  \end{itemize}
+\item
+  Explain what this chapter is about
+\item
+  OUtline this chapter
 \end{itemize}
 
-\hypertarget{introduce-most-recent-work-incorporating-population-growth-and-bayesian-posterior-inference}{%
-\section{{[}Introduce most recent work{]} Incorporating population growth and Bayesian posterior inference}\label{introduce-most-recent-work-incorporating-population-growth-and-bayesian-posterior-inference}}
+In this chapter, I present an illustrative model of medfly surveillance after an hypothetical invasion. I use a simplified model of Medfly population dynamics. However, for various species of Tephritid fruit fly (medfly included) detailed models exist. A benefit of the proposed method is that it can easily incorporate almost any model of medfly dynamics, so long as the population density.\footnote{Note, though that the sampling method I use may not be appropriate in all cases. When the model predicts that the population size ``explodes'', then the rejection rate for the sampling algorithm may become very high, causing the algorithm to be highly inefficient.}
 
-A Bayesian approach to the planning program problem is proposed by (\citet{barnes2022analytical}). Barnes extend the model in two basic ways. Firstly, Barnes et al.~supplement the detection model with a model of the population dynamics for the species.
+\hypertarget{background}{%
+\section{Background}\label{background}}
 
-\hypertarget{model-specification}{%
-\subsection{Model specification}\label{model-specification}}
+\hypertarget{medfly-are-economically-important}{%
+\subsection{Medfly are economically important}\label{medfly-are-economically-important}}
 
-As mentioned above, the Barnes model consists of (a) a growth model and (b) a detection model. The model for population growth gives us priors for the size of the population at each time and/or location where a survey is completed. In particular, a Poisson-offspring model is assumed for the population size. The Poisson-offspring model is a type of branching process, initially developed by (???). A Poisson-offspring process is a process \({X_t}_{t=1}^T\) such that \(X_0 \sim \mathrm{Poisson}(\lambda)\), \(\lambda \in [0, \infty)\), and \(X_t \mid X_{t-1} \sim \mathrm{Poisson}(X_{t-1} \delta)\). The typical situation that fits this process is the case where the number of individuals at time \(t=0\) is Poisson distributed with mean \(\lambda\), and each individual born at time \(t\) has identically and independently Poisson distributed offspring with mean \(\delta\).
+Mediterranean fruit fly (\emph{Ceratitis Capitata}) or \emph{medfly} is a fly species native to sub-Saharan Africa. It is considered to be of high economic importance, due to its potential for destruction of fruit production (Sciarette et al.~2018). Medfly has high invasive potential, as it can adapt to a relatively large range of climates and environments, and is known to have the capability to infest the fruits of over 300 species of plants (Ibid.).
 
-\hypertarget{motivate-my-extension-limitations-of-the-basic-bayesian-model}{%
-\section{{[}Motivate my extension{]} Limitations of the basic Bayesian model}\label{motivate-my-extension-limitations-of-the-basic-bayesian-model}}
+\hypertarget{medfly-are-cryptic}{%
+\subsection{Medfly are cryptic}\label{medfly-are-cryptic}}
 
-There exists a category of cases under which the assumptions of basic model above are not plausible. In this section, I describe this category of cases, and outline why these cases cause problems for the Barnes model. Three assumptions of the above model are as follows:
+Medfly are very hard to detect at low levels. Monitoring for medfly is typically performed with the aid of lured traps (namely so-called Lynfield or Jackson traps). These traps are relatively ineffective for detecting medfly. For example, one study from the Adelaide metro area trapping grid found that only 0.02\% of flies were recaptured from a release of 38.8 million flies. Further, medfly are known to have low dispersals across space. This means that low-lying populatons of flies may go undetected across generations. \url{https://onlinelibrary-wiley-com.virtual.anu.edu.au/doi/pdfdirect/10.1111/j.1570-7458.2006.00415.x}
+
+\hypertarget{data}{%
+\section{Data}\label{data}}
+
+\hypertarget{zero-sighting-surveillance-data}{%
+\subsection{Zero sighting surveillance data}\label{zero-sighting-surveillance-data}}
+
+In this section, I do not use real data to estimate parameters. Instead, I model a hypothetical situation in which we observe \(\mathbf y = \mathbf 0_T\) (see above). The situation is as follows: We assume that at least one fly has been detected; eradication measures have since begun and then ceased; and we now proceed with intensified monitoring, while whatever population that may exist is free to grow relatively unhindered. By intensified monitoring, I mean that \textbf{supplementary} monitoring traps have been placed alongside the previously existing grid of \textbf{general} monitoring traps. More precisely, it is assumed that \textbf{general} exist year round in a 400 \(\times\) 400 metre grid (DPIPWE, 2011, p.~50). The \textbf{supplementary} surveillance system consists of a set of 16 traps in a circular area, centred at the site of the first fly detection.\footnote{It is typical to wait until at least 2 flies have been detected near each other for an outbreak to be declared. To illustrate the method in a simplified setting, I suppose that one fly detection is sufficient.} The goal of the analysis is to infer the probability of eradication for the incipient population, given no flies detected at any point in this period.
+
+The data is an hypothetical survey record. We assume a fairly realistic scenario. We observe the outcomes of a surveillance process. The surveillance process is generated by weekly checks of traps that are deployed uniformly in a given area (more about the trapping arrangement below). It is assumed that no specimens are detected at any point in the survey period. In other words, the sum of all detected counts in the period is zero.
+
+\hypertarget{prior-information-about-capture-probability}{%
+\subsection{Prior information about capture probability}\label{prior-information-about-capture-probability}}
+
+I focus on the case where the probability of capture can be elicited as a function of distance to an individual, and where a systematic surveillance system is in place (so that chance sightings are not considered).
+
+\hypertarget{model}{%
+\section{Model}\label{model}}
+
+As is typical of Bayesian models, prior distributions must be specified over each of the parameters. I do not consider uninformative priors, as in practical cases, information will exist about the parameters, and should be used.
+
+I break the model into the following three components:
 
 \begin{enumerate}
 \def\labelenumi{\arabic{enumi}.}
 \tightlist
 \item
-  The growth of an incipient population can be described by a Poisson-offspring model.
+  The growth model,
 \item
-  The probability of detecting a randomly drawn member of the population \(p\) is known, or can be reasonably estimated from data.
+  Fly and trap locations, and
 \item
-  The population grows exponentially at a constant rate. I.e. the growth rate of the population is not random and does not change over time.
+  Detections.
 \end{enumerate}
-
-When these assumptions are not met, the model may not be a realistic representation of the processes being modelled. Firstly, the Poisson-offspring distribution is most natural when all detectable individuals at time \(t\) are offspring of the individuals that were detected at time \(t-1\). However, this will not be the case if members of the population continue to be detectable after giving birth.
-
-It is not always possible to estimate a ``rarity'' parameter \(p\) from data. Recall that the rarity of a population is the probability of detecting a randomly drawn member of the population in a single survey. Thus, it depends fundamentally on the design and intensity of the survey employed. However, survey designs may vary significantly between regions, so that we cannot generalise estimates of \(p\). For example, suppose an environmental manager has estimated \(p\), under a standard, general surveillance program. However, they later suspect an outbreak has occured, and therefore wish to implement an intensified surveillance program. A concrete example of this can be seen in the case of Mediterranean fruit fly, surveillance is performed using a spatial network of surveillance units (i.e.~traps) which are inspected at regular intervals. When an outbreak has occurred, or is suspected, the manager may wish to deploy additional, \emph{supplementary} survey units.
-
-It may be objected that it should be possible to derive the an estimate of the rarity \(p\) using the probability-given-distance function \(p_d\). For example, we could simulate
-
-In applied contexts, the probability of capture must be estimated from data. In the case of small insect species, such as Mediterranean fruit fly, probability of capture is estimated with the aid of release-recapture experiments. Sterilised flies are released, in an area containing a standardised grid of surveillance units (traps). Then, after some time has passed, flies are counted. The resulting recapture data lends itself to two natural estimands. Firstly, there is the probability of a randomly selected fly being captured at all, given some trapping grid setup (e.g.~a square grid with 400m spacing). This is essentially the ``rarity'' parameter discussed above. Secondly, there is the probability of a randomly selected fly being captured in a given trap, given the distance between the trap and the release location of the flies.
-
-As mentioned above the third assumption is that the population grows exponentially at a constant rate. This assumption will be unreasonable in cases where population growth is seasonally dependent, or and/or when we are uncertain about the growth rate.
-
-\hypertarget{summarise}{%
-\subsection{Summarise}\label{summarise}}
-
-In effect, in cases where the three assumptions listed above do not hold, it will not be \ldots{}
-
-\hypertarget{a-generalised-model-of-pest-species-detection}{%
-\chapter{A generalised model of pest species detection}\label{a-generalised-model-of-pest-species-detection}}
-
-\hypertarget{introduction-1}{%
-\section{Introduction}\label{introduction-1}}
-
-In the previous chapter, I reviewed recent work by Barnes et al.~on inferring absence of a cryptic pest species. I concluded the chapter by discussing some of the model's restricting assumptions, and how they affect the reliability of the model. In the present chapter, I propose to develop a method that relaxes the assumptions listed above, and may work for a relatively broad class of cases. The general proposal is to combine agent based simulation (ABS) with approximate Bayesian computation (ABC) to infer probability of absence when the processes governing population dynamics are arbitrarily complex. I first start by outlining the method, before giving a simple example of the method in action. I finish by discussing some theoretical and practical limitations of the method.
-
-I propose a general methodology, rather than a specific mathematical model. In chapter 4, I focus on a specific implementation of the method, for a particular mathematical model.
-
-\hypertarget{general-outline}{%
-\section{General outline}\label{general-outline}}
-
-\hypertarget{spatial-or-non-spatial}{%
-\subsection{Spatial or non-spatial?}\label{spatial-or-non-spatial}}
-
-The model may be spatial or non-spatial, depending on whether spatial information is available, whether the spatial location of the population is considered important for determining probability of capture, and how realistic the modeller wants to make the model. When the model is spatial, it is assumed that that we have a stochastic or deterministic function that relates the distance between an individual, and a surveillance unit, and that surveillance unit detecting that individual. In other words, we have some idea of how distance between detector and individual relates to the probability that the detector finds that individual.
-
-For example, let \(L_i \in \mathbb R^2\) be the location of individual \(i\), and let \(L_k \in \mathbb R^2\) be the location of survey unit or detector \(k\). Then we might specify the probability of detector \(k\) finding individual \(i\) as a function of a linear transformation of the distance \(d = \lVert L_k - L_i \rVert\), i.e.~\[
-p_d = \sigma(a+bd) = \frac{1}{1+e^{-(a + bd)}}
-\] for some scalar tuple \((a, b) \in \mathbb R^2\).
-
-\hypertarget{general-outline-1}{%
-\subsection{General outline}\label{general-outline-1}}
-
-The basic model is Bayesian. The basic components of the model are the population size \(N_t\) at time points \(t \in \{1, 2, \ldots, T\}\), location of the incipient population \(L\), and the number of individuals detected \(y_t\), \(t \in \{1, 2, \ldots, T\}\). It is assumed that \(\mathbf y = (y_1, \cdots, y_T)\) is our data vector. In the typical case, we will assume that \(\mathbf y = \mathbf 0_T\), where \(0_T\) is the zero vector in \(\mathbb R^T\). In other words, we consider the hypothetical case where we do not detect any species members at any time across \(T\) consecutive (discrete) time points.
-
-Finally, we assume that there are a fixed number of spatially located survey units \(K \in \mathbb N\), at locations \(L_k\), each of which is a two dimensional random variable. These locations may be considered random, or fixed (known to the environmental manager). Thus, our parameter vector can be written as \[
-\theta = (N_1, \ldots, N_T, L, L_1, \ldots, L_T).
-\] For the inference problem we are concerned with in this work, we wish to perform inference only on the \(N_t\) terms; \(L\) and the \(L_t\) terms are considered ``nuisance'' parameters (Gelman, BDA3, p.~63).
-
-I note a couple of changes one could make, briefly. One could also model the density of the population rather than the location and size. I do not consider that here. Such a model may be useful when we have data on densities rather than population sizes.
-
-I focus on the parameterisation described above, because it is intuitive for this problem, where we are concerned with a small, spatially delimited, incipient population.
-
-Under this framework, the problem is to learn the distribution of \(N_T \mid \mathbf y = \mathbf 0_T\) for any \(T \in \mathbb N\). This is the \emph{posterior distribution} of \(N_T\). More precisely, we want to compute the function of the distribution \(\Pr(N_T = 0 \mid \mathbf y = \mathbf 0_T)\) - in other words, the probability that the pest population has been eradicated, given that we have failed to detect the population at any point in time.
-
-\hypertarget{prior-distributions}{%
-\section{Prior distributions}\label{prior-distributions}}
-
-Deriving the posterior distribution for \(N_T\) requires that we define a joint prior distribution over the joint parameter vector \(\theta\).
-
-The priors are determined by a stochastic model of the population dynamics for the species. Such a model may or may not be ``agent based''. For the purpose of this work, I take the term ``agent based'' to mean that the model takes into account differential individual properties of members of the species. (In this work, I consider differential locations). We model the population dynamics flexibly as a stochastic process. Simulation allows for the incorporation of an arbitrary degree of biological and ecological complexity into the model. Using an agent based model allows us to define a prior on each individual population member.
-
-\hypertarget{model-specification-1}{%
-\section{Model specification}\label{model-specification-1}}
-
-Under the most general description, the basic model is composed of (a) a growth model and (b) a model of surveillance, or detection. The growth model describes our subjective beliefs about the size of the population initially, as well as how it is likely to change over time. The detection model describes our subjective beliefs about the size of the population.
 
 \hypertarget{the-growth-model}{%
 \subsection{The growth model}\label{the-growth-model}}
+
+The third and final assumption was that the growth rate for the pest is roughly constant. This is not the case for Medfly, who reproduce in seasonal fruits. Reproduction rates are highly dependent on temperature and seasonal availability of hosts. Therefore, growth varies systematically to a large degree across the year, in ways that are somewhat well understood. Most likely, the environmental manager should use information about the weather and time of year in setting priors on the growth rate for the species.
+
+\hypertarget{population-size}{%
+\subsection{Population size}\label{population-size}}
+
+\hypertarget{the-growth-model-1}{%
+\subsection{The growth model}\label{the-growth-model-1}}
 
 There are no a priori assumptions on the population dynamics for the growth model. For example, we might apply stochastic or deterministic models of logistic, exponential, or linear growth. The only thing that matters is that we specify a joint prior distribution over the population size across time points and locations.
 
@@ -309,127 +389,18 @@ A natural way to set a prior on the population size at each time point \(t\) is 
 N_t = f(N_{t-1}, X_t)
 \]
 
-\hypertarget{the-surveillance-detection-model}{%
-\subsection{The surveillance (detection) model}\label{the-surveillance-detection-model}}
-
-It is assumed that surveillances occur at regular time intervals \(t \in \{1, \cdots, T\}\).
-
-\hypertarget{computing-the-posterior-distribution}{%
-\section{Computing the posterior distribution}\label{computing-the-posterior-distribution}}
-
-In this section, I discuss the problem of computing the posterior distribution, given a survey record. Above, I stated that the model could be defined flexibly. Without restrictions on the form of the growth and detection models, the posterior may be analytically intractable. In other words, we will not be able to write out the posterior density or mass as a function of the data and prior distributions. Such situations are common in the Bayesian framework, because of the tendency for the posterior density or mass to depend, implicitly or explicitly, on analytically intractable integrals.
-
-In section 2, the model I outlined, given by Barnes et al., had a known analytic solution. In other words, the posterior probability of eradication could be computed as a relatively simple function of the number of negative surveys recorded (i.e., the data), and prior distributions on the population size at each time point and location.
-
-So far, we have talked about situations when sampling is required for inference. Further problems arise when the model is \emph{agent-based}. In other words, when we include uncertainty about individual-level features in the model. In this case, the detection probability is random, even when the location and population size is known. In other words, the probability of detecting at least one individual is a function of the number of individuals, and also their individual (random) properties. This is a situation in which ``the number of things you do not know is one of the things you do not know'' (Richardson and Green, 1997).
-
-\hypertarget{analogy-with-mixed-models}{%
-\subsection{Analogy with mixed models}\label{analogy-with-mixed-models}}
-
-\hypertarget{sampling-algorithms-when-the-number-of-unknowns-is-unknown}{%
-\subsection{Sampling algorithms when the number of unknowns is unknown}\label{sampling-algorithms-when-the-number-of-unknowns-is-unknown}}
-
-As mentioned above, standard MCMC algorithms for Bayesian inference will not work when the number of parameters is random. In this subsection, I discuss strategies for sampling from the posterior when this is the case. Firstly, there exist extensions to classical MCMC algorithms for the case where the number of parameters is random. Green (1995) outlines a method he calls ``reversible jump MCMC''. This involves adding a step to the Metropolis Hastings algorithm, where . A second approach is to use approximate Bayesian computation (ABC). In this work, I focus on this method, as it has some nice properties for the issues we are concerned with here.
-
-A sampler needs to move between points in different dimensional spaces.
-
-\hypertarget{what-is-abc}{%
-\subsection{What is ABC?}\label{what-is-abc}}
-
-\hypertarget{a-simple-example}{%
-\section{A simple example}\label{a-simple-example}}
-
-In the following chapter, I give a detailed example of the method described above. However, for the purposes of explaining the method in simple terms, I will also give a simple example here.
-
-\hypertarget{case-study-ceratatis-capitata}{%
-\chapter{Case study: Ceratatis capitata}\label{case-study-ceratatis-capitata}}
-
-In the previous section, a general model for inferring absence/presence of a cryptic, incipient pest species population was introduced. In this chapter, I apply the model to a specific case study. The case study is for the outbreak of Mediterranean fruit fly (Ceratitis Capitata). Prior distributions are set and justified, and posterior inference is performed using approximate Bayesian computation.
-
-\hypertarget{example-case-medfly}{%
-\section{Example case: Medfly}\label{example-case-medfly}}
-
-In chapter 2, I introduced a simple Bayesian model for inferring absence of a small population of a cryptic pest species, due to Barnes et al.~(2021). I argued that there existed a class of cases, where the assumptions of that simple model were not fully realistic. In chapter 3, I then introduced a method for relaxing the assumptions of this simple model. In the current section, I will introduce the reader to the problem of inferring absence of Medfly. I will then argue that the Medfly outbreak case belongs to the category of cases for which the Barnes model is not fully realistic.
-
-\hypertarget{background-info-on-medfly}{%
-\subsection{Background info on Medfly}\label{background-info-on-medfly}}
-
-\hypertarget{medfly-are-economically-important}{%
-\subsection{Medfly are economically important}\label{medfly-are-economically-important}}
-
-Mediterranean fruit fly (\emph{Ceratitis Capitata}) or \emph{medfly} is a fly species native to sub-Saharan Africa. It is considered to be of high economic importance, due to its potential for destruction of fruit production (Sciarette et al.~2018). Medfly has high invasive potential, as it can adapt to a relatively large range of climates and environments, and is known to have the capability to infest the fruits of over 300 species of plants (Ibid.).
-
-\hypertarget{medfly-are-cryptic}{%
-\subsection{Medfly are cryptic}\label{medfly-are-cryptic}}
-
-I have mentioned above that Medfly are of high economic importance. However, they are also cryptic, insofar as they are very hard to detect at low levels. Monitoring for medfly is typically performed with the aid of lured traps (namely so-called Lynfield or Jackson traps). These traps are relatively ineffective for detecting medfly. For example, one study from the Adelaide metro area trapping grid found that only 0.02\% of flies were recaptured from a release of 38.8 million flies. Further, medfly are known to have low dispersals across space.
-
-\hypertarget{medfly-detection-problems}{%
-\subsubsection{Medfly detection problems}\label{medfly-detection-problems}}
-
-Medfly have low dispersal. This means that flies may go undetected across generations. \url{https://onlinelibrary-wiley-com.virtual.anu.edu.au/doi/pdfdirect/10.1111/j.1570-7458.2006.00415.x}
-
-\hypertarget{medfly-belong-to-class-of-cases-described-in-chapter-2}{%
-\subsection{Medfly belong to class of cases described in chapter 2}\label{medfly-belong-to-class-of-cases-described-in-chapter-2}}
-
-The reader may recall that the model introduced in chapter 3 was motivated by consideration of three restrictive assumptions, listed in chapter 2. These assumptions were that (a) population growth is a Poisson-offspring process, (b) detection probability does not depend on fly location, and (c) the growth rate is constant as a function of \(t\).
-
-I will briefly describe why these assumptions are difficult to justify in the case of medfly.
-
-The first key assumption was that the pest population follows a Poisson-Offspring model. This is not a natural choice for the case of Medfly. Medfly increase rates are typically estimated in terms of a continuous exponential growth model. Secondly, the continuous exponential model is more common in ecology; therefore, it may be easier to understand to experts, from whom we may need to elicit priors. It may be objected that the Poisson-Offspring model has similarly interpretable parameters. The parameter is simply the number of offspring that each adult gives birth to on average. However, this is only the case if the only trappable members of the population have been born in the current time interval. In the case of Medfly, however, this is not realistic. For example, adults give birth multiple times in their adult lifestage, and may be captured at any point. Secondly,
-
-The second key assumption is that we can estimate the probability of capturing a randomly selected fly from data. This is difficult in the case of Medfly. For fruit flies, capture probability is typically estimated from data taken from release-recapture studies. In these studies, the researcher obtains a large collection of sterilised specimens, and releases them at a single point in space. Then, the
-
-These experimental data can be useful when the trapping setup is similar to the setup we want to draw inference about. However, this will often not be the case. For example, studies vary in the number and type of traps used (SEE NOTE). Further, we may wish to infer eradication of pest populations in trapping systems that are highly unlike those in studies. For example, after an outbreak has occurred, and eradication measures have been stopped, it is common to set up supplementary trapping units to intensify monitoring and increase the likelihood of detecting flies, conditional on their presence in the area. (CITATION).
-
-The third and final assumption was that the growth rate for the pest is roughly constant. This is not the case for Medfly, who reproduce in seasonal fruits. Reproduction rates are highly dependent on temperature and seasonal availability of hosts. Therefore, growth varies systematically to a large degree across the year, in ways that are somewhat well understood. Most likely, the environmental manager should use information about the weather and time of year in setting priors on the growth rate for the species.
-
-\begin{verbatim}
-- Source for supplementary trapping: <https://nre.tas.gov.au/Documents/Review_of_IR_for_FruitFly.pdf>
-\end{verbatim}
-
-\begin{itemize}
-\tightlist
-\item
-  Problem 3: Growth rate is assumed constant.
-\end{itemize}
-
-In this section, I argued that the case of Medfly belongs to the class of cases, described in chapter 2, that do not fit the assumptions of the Barnes model. This justifies relaxing the assumptions of the model of Barnes et al., and using a more flexible model to infer pest absence, in the case of Medfly. I turn now to specifying a full model for this case.
-
-\hypertarget{the-data}{%
-\section{The data}\label{the-data}}
-
-In this section, I do not use real data to estimate parameters. Instead, I model a hypothetical situation in which we observe \(\mathbf y = \mathbf 0_T\) (see above). The situation is as follows: We assume that at least one fly has been detected; eradication measures have since begun and then ceased; and we now proceed with intensified monitoring, while whatever population that may exist is free to grow relatively unhindered. By intensified monitoring, I mean that \textbf{supplementary} monitoring traps have been placed alongside the previously existing grid of \textbf{general} monitoring traps. More precisely, it is assumed that \textbf{general} exist year round in a 400 \(\times\) 400 metre grid (DPIPWE, 2011, p.~50). The \textbf{supplementary} surveillance system consists of a set of 16 traps in a circular area, centred at the site of the first fly detection.\footnote{It is typical to wait until at least 2 flies have been detected near each other for an outbreak to be declared. To illustrate the method in a simplified setting, I suppose that one fly detection is sufficient.} The goal of the analysis is to infer the probability of eradication for the incipient population, given no flies detected at any point in this period.
-
-I assume that traps are checked weekly.
-
-\hypertarget{model-specification-2}{%
-\section{Model specification}\label{model-specification-2}}
-
-As is typical of Bayesian models, prior distributions must be specified over each of the parameters. I do not consider uninformative priors, as in practical cases, information will exist about the parameters, and should be used.
-
-I break the model into the following three components:
-
-\begin{enumerate}
-\def\labelenumi{\arabic{enumi}.}
-\tightlist
-\item
-  Population size,
-\item
-  Fly locations, and
-\item
-  Detections.
-\end{enumerate}
-
-\hypertarget{population-size}{%
-\subsection{Population size}\label{population-size}}
-
 I assume that our beliefs about the initial population size \(N_1\) are described by a Poisson with random mean \(\lambda\). I assume that \(\lambda\) follows an exponential distribution. This distribution for \(N_1\) is chosen as it is a discrete distribution with right skew, and a relatively large amount of mass \(f_{N_1}(x)\) at \(x = 0\), corresponding to the situation where flies are already eradicated.
 
 As for prior distributions on \(N_t\), for \(t \in \{1, \ldots, T\}\), a growth model is used to structure the prior. Namely, an exponential growth model is assumed, so that \(N_t = \mathrm{round}[N_{t-1} \exp\{R_t\}]\), where \(R_t\) is the growth rate at time \(t\). The exponential growth model is chosen for its ubiquity in ecological science in general, and in studies of fruit fly dynamics in particular. Rounding is introduced to give \(N_t\) discrete support. The growth parameter \(R_t\) is uncertain, and based on temperature.\footnote{Alternatively, we could leave the rounding step out, and interpret \(N_t\) as the expected number of flies at each step. I do not consider this possibility in any further depth.}
 
+\hypertarget{locations}{%
+\subsection{Locations}\label{locations}}
+
 \hypertarget{fly-locations}{%
-\subsection{Fly locations}\label{fly-locations}}
+\subsubsection{Fly locations}\label{fly-locations}}
+
+\hypertarget{central-location}{%
+\paragraph{Central location}\label{central-location}}
 
 I first discuss the option of setting a uniform prior. Setting an uninformative prior is fairly straightforward for this problem. In particular, we might assume that, beyond a certain distance from the outbreak centre (say, 1km) any existing population of Medfly is distinct from the population of interest. Therefore, we might set the prior distribution for the population location to be uniform on the surface of a disk with 1km radius around the outbreak centre.
 
@@ -443,21 +414,58 @@ A mathematical trick can be used to derive a prior in some cases. Suppose we hav
 \[
 C_k = \begin{cases}1 & \text{a fly is caught in trap } k \text{ before any other trap} \\ 0 & \text{otherwise}. \end{cases}
 \]
+
 Under these assumptions, \(L \mid C_k = 1\) is the distribution of \(L\), given that a fly was caught in trap \(k\) before any other trap.
 
 Whether or not we can analytically derive the posterior density depends on the probability of capture function \(p(x)\). In the case we consider here, the function cannot be integrated, and so I resort to sampling. Under the above assumptions, the posterior resembles the convolution of a normal and a uniform distribution (see figure). See appendix for more details.
 
 \hypertarget{dispersals}{%
-\subsubsection{Dispersals}\label{dispersals}}
+\paragraph{Dispersals}\label{dispersals}}
 
 I assume that flies in the population are dispersed in space around the central location \(L\). Let \(D_{i, t}\) denote the location of fly \(i\) at time \(t\), relative to the population centroid \(L\). It is assumed that the population centroid does not change over time (i.e.~\(L\) is independent of \(t\), and everything else in the model). However, \(D_{i, t}\) is independent of \(D_{i', t'}\), for any \((i', t') \neq (i, t)\). Thus, our belief is essentially that flies are shuffled around at each time point, so that a fly's location at \(t-1\) tells us nothing about its location at \(t\), except through the information both reveal about \(L\). This assumption justifies not tracking individual flies across time -- whether a fly lives across time periods, or instead dies and is replaced, are equivalent scenarios under this model.
 
-\hypertarget{detection-model}{%
-\subsection{Detection model}\label{detection-model}}
+\hypertarget{trap-locations}{%
+\subsubsection{Trap locations}\label{trap-locations}}
+
+\hypertarget{the-detection-model}{%
+\subsection{The detection model}\label{the-detection-model}}
+
+The second key assumption is that we can estimate the probability of capturing a randomly selected fly from data. This is difficult in the case of Medfly. For fruit flies, capture probability is typically estimated from data taken from release-recapture studies. In these studies, the researcher obtains a large collection of sterilised specimens, and releases them at a single point in space. Then, the
+
+These experimental data can be useful when the trapping setup is similar to the setup we want to draw inference about. However, this will often not be the case. For example, studies vary in the number and type of traps used (SEE NOTE). Further, we may wish to infer eradication of pest populations in trapping systems that are highly unlike those in studies. For example, after an outbreak has occurred, and eradication measures have been stopped, it is common to set up supplementary trapping units to intensify monitoring and increase the likelihood of detecting flies, conditional on their presence in the area. (CITATION).
+
+\begin{verbatim}
+- Source for supplementary trapping: <https://nre.tas.gov.au/Documents/Review_of_IR_for_FruitFly.pdf>
+\end{verbatim}
+
+\hypertarget{the-surveillance-detection-model}{%
+\subsubsection{The surveillance (detection) model}\label{the-surveillance-detection-model}}
+
+It is assumed that surveillance events occur at regular time intervals \(t \in \{1, \cdots, T\}\).
+
+\hypertarget{the-trapping-arrangement}{%
+\subsubsection{The trapping arrangement}\label{the-trapping-arrangement}}
+
+\begin{itemize}
+\tightlist
+\item
+  Show plot of the trapping grid.
+\item
+  Note that the number of traps is assumed fixed as it would be in a real scenario.
+\item
+  Note that the trap locations would be used in a real analysis.
+\end{itemize}
+
+\hypertarget{maths}{%
+\subsubsection{Maths}\label{maths}}
 
 Finally, I discuss the model for detecting individuals. Conditional on \(N_t\), \(L\), and \(D_{i, t}\).
 
+\hypertarget{appendix-full-model-statement}{%
+\chapter{(Appendix) Full model statement}\label{appendix-full-model-statement}}
+
 \[
+\renewcommand{\baselinestretch}{1}\normalsize
 \begin{aligned}
 &\textbf{Population size} \\
 &\text{Initial no. of flies:} && N_1 \mid \lambda \sim \mathrm{Pois}(\lambda) \text{, where} \\
@@ -487,16 +495,123 @@ Finally, I discuss the model for detecting individuals. Conditional on \(N_t\), 
 &\text{No. of captures:}~ && y_t \mid \theta \sim \text{Poisson-binomial}(N_t, \mathbf p_t), & t \in \{1, \ldots, T\} \\
   &&& \mathbf y := [y_t]_{t=1}^T
 \end{aligned}
+\renewcommand{\baselinestretch}{1}\normalsize
 \]
 
-\hypertarget{sampling}{%
-\section{Sampling}\label{sampling}}
+\hypertarget{computing-the-posterior-distribution}{%
+\section{Computing the posterior distribution}\label{computing-the-posterior-distribution}}
+
+In this section, I discuss the problem of computing the posterior distribution, given a survey record. Above, I stated that the model could be defined flexibly. Without restrictions on the form of the growth and detection models, the posterior may be analytically intractable. In other words, we will not be able to write out the posterior density or mass as a function of the data and prior distributions. Such situations are common in the Bayesian framework, because of the tendency for the posterior density or mass to depend, implicitly or explicitly, on analytically intractable integrals.
+
+In section 2, the model I outlined, given by Barnes et al., had a known analytic solution. In other words, the posterior probability of eradication could be computed as a relatively simple function of the number of negative surveys recorded (i.e., the data), and prior distributions on the population size at each time point and location.
+
+So far, we have talked about situations when sampling is required for inference. Further problems arise when the model is \emph{agent-based}. In other words, when we include uncertainty about individual-level features in the model. In this case, the detection probability is random, even when the location and population size is known. In other words, the probability of detecting at least one individual is a function of the number of individuals, and also their individual (random) properties. This is a situation in which ``the number of things you do not know is one of the things you do not know'' (Richardson and Green, 1997).
+
+\hypertarget{analogy-with-mixed-models}{%
+\subsection{Analogy with mixed models}\label{analogy-with-mixed-models}}
+
+\hypertarget{sampling-algorithms-when-the-number-of-unknowns-is-unknown}{%
+\subsection{Sampling algorithms when the number of unknowns is unknown}\label{sampling-algorithms-when-the-number-of-unknowns-is-unknown}}
+
+As mentioned above, standard MCMC algorithms for Bayesian inference will not work when the number of parameters is random. In this subsection, I discuss strategies for sampling from the posterior when this is the case. Firstly, there exist extensions to classical MCMC algorithms for the case where the number of parameters is random. Green (1995) outlines a method he calls ``reversible jump MCMC''. This involves adding a step to the Metropolis Hastings algorithm, where . A second approach is to use approximate Bayesian computation (ABC). In this work, I focus on this method, as it has some nice properties for the issues we are concerned with here.
+
+\hypertarget{explanation-of-abc}{%
+\subsection{Explanation of ABC}\label{explanation-of-abc}}
+
+\hypertarget{abc-models}{%
+\subsection{ABC models}\label{abc-models}}
+
+ABC methods, as exemplified by Caley's model, are a promising approach. Here, I will give a brief description of the family of sampling algorithms known collectively as Approximate Bayesian Computation (ABC). In its simplest form, ABC is a form of rejection sampling.
+
+\begin{itemize}
+\tightlist
+\item
+  Intro to sampling algorithms
+\item
+  Origin of ABC
+\item
+  Motivation for ABC
+\item
+  Extensions of ABC
+\item
+  Benefits of ABC
+
+  \begin{itemize}
+  \tightlist
+  \item
+    Can incorporate ABS
+  \end{itemize}
+\end{itemize}
+
+\hypertarget{motivation-for-abc}{%
+\subsection{Motivation for ABC}\label{motivation-for-abc}}
+
+There are two reasons for sampling with ABC. Firstly, the likelihood may be unattractive to work with due to its complexity. Secondly, when our model incorporates uncertainty about the individual members of a population, whose size is itself uncertain, standard sampling techniques do not work.
+
+Two things should be noted before moving on. Firstly, the reader may note that the justification given for ABC is unusual. ABC is relatively recent technique for sampling in cases where traditional sampling techniques fail. Standard techniques for MCMC, such as Metropolis-Hastings and Gibbs sampling, assume that the likelihood function is known and can be easily computed. This may not be the case if, for example, computing the likelihood requires us to integrate out a latent variable, but the likelihood is not integrable with respect to that variable.
+
+Secondly, the reader may note that there exist other methods for sampling from the posterior.
+
+\hypertarget{abs-models}{%
+\subsection{ABS models}\label{abs-models}}
+
+Agent based simulation (sometimes referred to as individual based simulation) is an approach to quantitative modelling. A key motivation for using ABS is that
+
+A sampler needs to move between points in different dimensional spaces.
+
+Interestingly, the standard justifications for and against ABC do not apply to the case under consideration. Firstly, the standard justification for ABC is that it allows for inference when the likelihood function is ``intractable'' - i.e., unknown, uncomputable or otherwise difficult to work with. Standard techniques for MCMC, such as Metropolis-Hastings and Gibbs sampling, assume that the likelihood function is known and can be easily computed.
+
+Secondly, the standard drawback for ABC is that it ensures that we can typically only draw from the posterior approximately. Under standard conditions, we must define a criteria for similarity between simulated and observed data. This is typically done by specifying a summary statistic \(S(\mathbb y)\), and a similarity measure \(\rho(S(\mathbb y), S(\mathbb y'))\) defined over the space spanning our data \(\mathbb y\). We reject a sample if we observe \(\rho(\mathbb y_{\text{observed}}, \mathbb y_{\text{simulated}} ) > \epsilon_0\), where \(\epsilon_0\)
+
+\hypertarget{online-sampling}{%
+\subsection{Online sampling}\label{online-sampling}}
+
+The method under consideration allows for \textbf{online} sampling. To update the process, we simply take our existing posterior draws, and then draw the next time step from those draws. The result is a set of posterior draws of the entire process up to that point.
+
+\hypertarget{extensions-of-abc}{%
+\subsection{Extensions of ABC}\label{extensions-of-abc}}
 
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
+\hypertarget{probability-of-extinction-after-12-weeks}{%
+\subsection{Probability of extinction after 12 weeks}\label{probability-of-extinction-after-12-weeks}}
+
+\hypertarget{discussion}{%
+\section{Discussion}\label{discussion}}
+
+Here I discuss limitations and objections.
+
+\hypertarget{limitations}{%
+\subsection{Limitations}\label{limitations}}
+
+\hypertarget{slow-sampling}{%
+\subsubsection{Slow sampling}\label{slow-sampling}}
+
+\hypertarget{objections}{%
+\subsection{Objections}\label{objections}}
+
+\hypertarget{bayesian-models-are-too-subjective}{%
+\subsubsection{Bayesian models are too subjective}\label{bayesian-models-are-too-subjective}}
+
+\hypertarget{bayesian-models-are-too-sensitive-to-priors}{%
+\subsubsection{Bayesian models are too sensitive to priors}\label{bayesian-models-are-too-sensitive-to-priors}}
+
+\begin{itemize}
+\tightlist
+\item
+  Defence in Caley 2015
+\end{itemize}
+
 % Trigger ToC creation in LaTeX
 \renewcommand{\baselinestretch}{1}\normalsize
+
+\hypertarget{appendix-proof-of-abc-procedure}{%
+\chapter{Appendix: Proof of ABC procedure}\label{appendix-proof-of-abc-procedure}}
+
+Here, I give a proof that the simple ABC rejection algorithm yields independent draws from the posterior distribution. Recall that the algorithm works by drawing samples of \(\theta\) from the prior distribution with density \(\pi (\theta)\). Then, for each draw of \(\theta\), we draw a data vector \(y_{\text {sim}}\) from the likelihood \(l(\theta \mid y_{\text{sim}})\). Finally, we keep the sample if we observe that \(y_{\text{sim}} = y_{\text{obs}}\) (where \(y_{\text{obs}}\) is the data vector we actually observed) and reject it otherwise. Then, the draws that we keep have distribution \(f_{\text{ABC}}(\theta) = \pi(\theta) \cdot l(\theta \mid y_{\text{obs}})\), since our draws from the prior and likelihood are independent.
+
+\footnote{Credit is due to (this StackExchange post){[}\url{https://stats.stackexchange.com/questions/380076/proof-of-approximate-exact-bayesian-computation}.{]}.}
 
   \bibliography{book.bib,packages.bib}
 

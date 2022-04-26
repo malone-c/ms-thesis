@@ -1,5 +1,15 @@
 # Introduction
 
+## CHECKLIST
+
+* Description of the problem
+* Review what is known
+* Identify gaps
+* What I plan to do to address gaps
+* How I plan to carry out investigation
+* Explanation of contribution
+* Outline of content
+
 ## Introducing the research
 
 ### Establish background area (biosecurity, monitoring)

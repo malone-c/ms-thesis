@@ -1,0 +1,5 @@
+# Appendix: Proof of ABC procedure
+
+Here, I give a proof that the simple ABC rejection algorithm yields independent draws from the posterior distribution. Recall that the algorithm works by drawing samples of $\theta$ from the prior distribution with density $\pi (\theta)$. Then, for each draw of $\theta$, we draw a data vector $y_{\text {sim}}$ from the likelihood $l(\theta \mid y_{\text{sim}})$. Finally, we keep the sample if we observe that $y_{\text{sim}} = y_{\text{obs}}$ (where $y_{\text{obs}}$ is the data vector we actually observed) and reject it otherwise. Then, the draws that we keep have distribution $f_{\text{ABC}}(\theta) = \pi(\theta) \cdot l(\theta \mid y_{\text{obs}})$, since our draws from the prior and likelihood are independent.
+
+^[Credit is due to (this StackExchange post)[https://stats.stackexchange.com/questions/380076/proof-of-approximate-exact-bayesian-computation.].]
