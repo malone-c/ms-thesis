@@ -1,0 +1,385 @@
+---
+title: "Monthly medfly models"
+output:
+  word_document: default
+  html_document: default
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Calculating the degree day stopping point for Medfly
+
+The rule is that we stop at $\min(12, g)$ weeks, where $g$ is the number of weeks a "generation" takes, plus 4. the draft medfly CoP uses a degree day formula with average temperatures over 10 years (presumably 1997-2007 or 1998-2008). I have used the table for Adelaide Metro in the back of the draft medfly code of practice. 
+
+I assume we are interested in the probability of eradication for last trap check **before** the CoP says we can reinstate PFA status. The reason for this is that we don't get any new information between then and the PFA reinstatement date (discounting the potential for larval sightings). This means that our informational state is the same on PFA reinstatement day as on the last trap inspection day before PFA reinstatement.
+
+
+```{r echo=F, include=F}
+library(lubridate)
+```
+
+
+```{r}
+timelines = read.csv('degree_day_timelines.csv')
+
+knitr::kable(timelines, caption = 'Full table of timelines from the draft medfly CoP')
+```
+
+I have manually selected 12 of these to run the simulation for (see below).
+
+# Changes
+Changes: Fixed trap locations; larger grid; normally distributed population location.
+
+## Fixed trap locations
+```{r}
+grid_size = 1
+general_grid_1d = seq(-grid_size, grid_size) * 400
+general_grid = expand.grid(general_grid_1d, general_grid_1d)
+general_traps = as.matrix(general_grid)
+
+par(pty='s')
+plot(general_traps)
+par(pty='m')
+
+plotrix::draw.circle(0, 0, radius=200, border = 'red' )
+
+d = 200 / sqrt(2)
+supp_grid_1d = seq(-d, d, length.out = 4)
+supp_grid = expand.grid(supp_grid_1d, supp_grid_1d)
+points(supp_grid)
+```
+
+
+
+```{r}
+r = c(0.33, 0.66, 1) * 200
+n_traps = c(2, 6, 8)
+supp_grid = NULL
+for (i in 1:length(r)) {
+  rotator = ifelse(i == 1, pi/2, 0)
+  
+  # Don't bother rotating
+  theta = seq(0, 2 * pi, by = 2 * pi / n_traps[i]) 
+  new_points = r[i] * cbind(cos(theta), sin(theta))
+  supp_grid = rbind(supp_grid, new_points)
+}
+points(supp_grid)
+```
+
+```{r echo=F}
+# Set of coordinates for trap locations
+
+# General surveillance
+grid_size = 4
+general_grid_1d = seq(0, grid_size) * 400
+general_grid = expand.grid(general_grid_1d, general_grid_1d)
+general_traps = as.matrix(general_grid)
+
+# Supplementary surveillance
+grid = expand.grid(seq(-200, 200, 10), seq(-200, 200, 10))
+candidates = apply(grid, 1, function(x) if (sum(x^2) < 200^2) x + 400 else NA)
+candidates = matrix(na.omit(unlist(candidates)), ncol=2, byrow=T)
+
+# Plot the trap locations
+par(pty='s')
+plot(c(0, 800), c(0, 800), type = 'n')
+points(general_traps, pch=20, col='red', cex=0.1)
+points(candidates, pch = 20, cex = 0.1)
+
+N = 1e4
+supp_draws = matrix(nrow=N, ncol=4)
+n_candidates = nrow(candidates)
+for (i in 1:N) {
+  supp_draws[i, ] = sort(candidates[sample(1:nrow(candidates), 4, replace = T), 1])
+}
+means = colMeans(supp_draws)
+
+points(expand.grid(means, means), col = 'red', pch=20)
+```
+
+# Simulation code
+```{r echo=F}
+# Set of coordinates for trap locations
+# Specify the indices for the dates we want to check
+time_index = c(3, 7, 11, 16, 20, 25, 29, 33, 38, 42, 46, 51)
+
+# Convert to date format
+monthly_timelines_list = lapply(timelines[time_index,], as_date)
+
+# Round the end weeks down relative to the start weeks
+start = monthly_timelines_list$start
+end = monthly_timelines_list$end
+
+# Get number of weeks between start and end, rounded down
+difftime_days = ((end - start) - as.numeric(end - start) %% 7)
+difftime_weeks = as.difftime(as.numeric(difftime_days) / 7, units='weeks')
+
+MONTHLY_TIMELINES = data.frame(start, end = start + difftime_weeks)
+
+# General surveillance
+grid_size = 4
+general_grid_1d = seq(-grid_size / 2, grid_size / 2) * 400
+general_grid = expand.grid(general_grid_1d, general_grid_1d)
+general_traps = as.matrix(general_grid)
+
+d = 200 / sqrt(2)
+supp_grid_1d = seq(-d, d, length.out = 4)
+supp_traps = expand.grid(supp_grid_1d, supp_grid_1d)
+all_traps = rbind(general_traps, supp_traps)
+
+# Plot traps as a check
+par(pty = 's')
+plot(all_traps)
+plotrix::draw.circle(0, 0, radius=200)
+par(pty = 'm')
+
+norm = function(x) sqrt(sum(x^2))
+
+pr_fn_ms = function(d) 0.4702111 * d ^(-1.37)
+pr_fn_lg = function(d) exp(-2.66076 - 0.01109 * d) / 2
+
+# Get probability of capture as a function of distance
+# Inputs
+#   d (float): distance btw fly and trap
+#   pr_fn (function): one of pr_fn_ms or pr_fn_lg
+#   threshold (float): lowest distance for which we will compute the pr_fn function.
+pr_cap = function(d, pr_fn, threshold=1) {
+  # Probability a single fly IS captured at 1 trap in 1 time period
+  # We divide distance by 1000 to rescale to metre scale
+  prob = function(distance) 1 - (1 - pr_fn(distance))^(1/4)
+
+  ifelse(d <= threshold, prob(threshold), prob(d))
+}
+
+# Function to simulate Medfly population dynamics
+# Inputs
+#   n_periods (int): number of weeks
+#   growth_params (list(mu=numeric(n_periods), sd=numeric(n_periods))): 
+#     weekly growth mean and sd
+draw_N = function(n_periods, growth_params, type='all') {
+  N = growth_rates = numeric(n_periods)
+  
+  # Draw growth rates
+  growth_rates[2:n_periods] = rnorm(n_periods-1, growth_params$mu, growth_params$sd)
+  
+  # Draw number of flies at t_1
+  lambda = rexp(1, 1/20)
+  N[1] = rpois(1, lambda) 
+  
+  # Draw the no. of flies at t_2, t_3, ...
+  for (t in 2:n_periods) {
+    N[t] = round(N[t-1] * exp(growth_rates[t]))
+  }
+  
+  if (type == 'all') {
+    return(N)
+  } else {
+    return(N[n_periods])
+  }
+}
+
+# Function to draw a single simulation of a typical scenario
+# Inputs
+#   n_periods (int): number of weeks
+#   growth_params (list(mu=numeric(n_periods), sd=numeric(n_periods))): 
+#     weekly growth mean and sd
+# Output
+#   N (numeric(n_periods)): population size at each (weekly) time point
+
+sim_erad = function(n_periods, growth_params) {
+  # Initialise capture data
+  y = numeric(n_periods)
+  
+  # Draw the population size fore each time point
+  N = draw_N(n_periods, growth_params)
+  
+  # Exit early if N[1] == 0 because we already know there will be zero
+  # detections.
+  if (N[1] == 0) return(0)
+  
+  # Draw location and individual dispersals/deviations
+  L = rnorm(2, sd = 160)
+  
+  # Capture probabilities
+  for (t in 1:n_periods) {
+    # Check whether we're in a supplementary or general period
+    n_traps = ifelse(t < 7, nrow(all_traps), nrow(supp_traps))
+  
+    # Draw dispersals
+    dispersals = matrix(rnorm(2*N[t], sd=12.5), ncol=2)
+    
+    # Probability of no captures at t (log scale)
+    pr_no_caps_ln = 0
+    for (k in 1:n_traps) {
+      # Distance between trap k and each fly
+      distances = apply(dispersals, 1, function(x) norm(L + x - all_traps[k,]))
+      
+      # Update probability of no captures
+      pr_no_caps_ln = pr_no_caps_ln + sum(log(1-pr_cap(distances, pr_fn_ms)))
+    }
+    
+    #y_t = 1 iff no flies are captured
+    y[t] = rbinom(1, 1, exp(pr_no_caps_ln))
+    
+    if (!y[t]) return(NA)
+  }
+  
+  # Return population sizes and an indicator for acceptance
+  # We only accept a sample if y[t] = 1 for all t
+  return(tail(N, 1))
+}
+```
+
+
+```{r echo=F}
+profvis::profvis({
+  y = rep(1, n_periods)
+  
+  # Draw the population size fore each time point
+  N = draw_N(n_periods, growth_params)
+  
+  # Draw location and individual dispersals/deviations
+  L = rnorm(2, sd = 160)
+  
+  # Capture probabilities
+  for (t in 1:n_periods) {
+    if (N[t] == 0) break
+    
+    # Check whether we're in a supplementary or general period
+    n_traps = ifelse(t < 7, nrow(all_traps), nrow(supp_traps))
+  
+    # Draw dispersals
+    fly_locs = L + matrix(rnorm(2*N[t], sd=12.5), nrow=2)
+    
+    # Probability of no captures at t (log scale)
+    pr_no_caps_ln = 0
+    for (k in 1:n_traps) {
+      # Distance between trap k and each fly
+      distances = sqrt(colSums((fly_locs - all_traps[k,])^2))
+      
+      # Update probability of no captures
+      pr_no_caps_ln = pr_no_caps_ln + sum(log(1-pr_cap(distances, pr_fn_ms)))
+    }
+    
+    #y_t = 1 iff no flies are captured
+    y[t] = rbinom(1, 1, exp(pr_no_caps_ln))
+  
+})
+```
+
+
+```{r echo=F}
+```
+
+
+```{r echo = F}
+
+# Draw 1e4 posterior samples
+sim_post = function(n_iter, n_periods, growth_params) {
+  posterior_N = numeric(n_iter)
+  count_success = count_all = 1
+  
+  pb = progress::progress_bar$new(total=n_iter)
+  
+  while (count_success < n_iter) {
+    new = sim_erad(n_periods, growth_params)
+    
+    if (!is.na(new)) {
+      posterior_N[count_success] = new
+      pb$tick()
+      count_success = count_success + 1
+    }
+    
+    count_all = count_all + 1
+  }
+  
+  print(paste('Success rate:', count_success / count_all))
+  
+  return(posterior_N)
+}
+
+# Draw from the prior
+sim_prior = function(n_iter, n_periods, growth_params) {
+  # Init N
+  prior_N = numeric(n_iter)
+  
+  for (i in 1:n_iter) {
+    prior_N[i] = draw_N(n_periods, growth_params, 'last')
+  }
+  
+  return(prior_N)
+}
+```
+
+```{r echo=F}
+MU_R = c(-0.067, -0.015, 0.028, -0.001, -0.009, 0.011, 
+          -0.014, -0.008, 0.008, 0.015, 0.009, -0.005)
+
+SD_R = sqrt(c(0.028, 0.022, 0.028, 0.02, 0.02, 0.018, 
+            0.016, 0.016, 0.012, 0.013, 0.033, 0.019))
+
+sim_all_months = function(n_iter) {
+  post_prob = numeric(12)
+  prior_prob = numeric(12)
+  
+  for (i in 1:nrow(MONTHLY_TIMELINES)) {
+    dd_weeks = diff(unlist(MONTHLY_TIMELINES[i,])) / 7
+    n_periods = max(dd_weeks, 12)
+    
+    start_date = MONTHLY_TIMELINES[i, 1]
+    end_date = start_date + 7 * n_periods - 1
+    
+    print(paste('Start date:', start_date))
+    print(paste('End date:  ', end_date))
+    
+    # Get prior growth parameters
+    # Get the month of each day in the observation period
+    months = month(seq(start_date, end_date, 1))
+    
+    
+    # Get the parameters corresponding to the months
+    mu = matrix(MU_R[months], nrow=7)
+    sd = matrix(SD_R[months], nrow=7)
+
+    growth_params = list(mu_r = colSums(mu),
+                         sd_r = colSums(sd))
+    
+    # Draw priors
+    prior_draws = sim_prior(n_iter, n_periods, growth_params)
+    prior_prob[i] = mean(prior_draws == 0)
+    
+    
+    # Draw posteriors
+    post_draws = sim_post(n_iter, n_periods, growth_params)
+    post_prob[i] = mean(post_draws == 0)
+  }
+  
+  return(list(post=post_prob, prior=prior_prob))
+}
+```
+
+```{r echo = F}
+if (FALSE) {
+  results = sim_all_months(1e4)
+  saveRDS(results, 'monthly_results.RDS') 
+}
+
+results = readRDS('monthly_results.RDS')
+# print(results)
+```
+
+```{r echo = F}
+output = data.frame(MONTHLY_TIMELINES, results)
+colnames(output) = c("Start date",
+                     "Final inspection before PFA reinstatement",
+                     "Posterior prob. of erad.",
+                     "Prior prob. of erad.")
+
+knitr::kable(output, caption = 'Table of results for all simulations')
+```
+

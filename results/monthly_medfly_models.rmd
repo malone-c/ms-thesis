@@ -1,0 +1,251 @@
+---
+title: "Monthly medfly models"
+output:
+  word_document: default
+  html_document: default
+editor_options:
+  chunk_output_type: console
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+
+# Simulation code
+```{r echo=F}
+
+# General surveillance
+grid_size = 4
+general_grid_1d = seq(-grid_size / 2, grid_size / 2) * 400
+general_grid = expand.grid(general_grid_1d, general_grid_1d)
+general_traps = as.matrix(general_grid)
+
+d = 200 / sqrt(2)
+supp_grid_1d = seq(-d, d, length.out = 4)
+supp_traps = expand.grid(supp_grid_1d, supp_grid_1d)
+all_traps = rbind(general_traps, supp_traps)
+
+supp_indicator = rep(c('General', 'Supplementary'), c(nrow(general_traps), nrow(supp_traps)))
+traps_df = data.frame(all_traps, factor(supp_indicator, c('Yes', 'No')))
+
+  
+
+# Plot traps as a check
+par(pty = 's')
+plot(all_traps)
+plotrix::draw.circle(0, 0, radius=200)
+par(pty = 'm')
+
+norm = function(x) sqrt(sum(x^2))
+
+pr_fn_ms = function(d) 0.4702111 * d ^(-1.37)
+pr_fn_lg = function(d) exp(-2.66076 - 0.01109 * d) / 2
+
+
+# Get probability of capture as a function of distance
+# Inputs
+#   d (float): distance btw fly and trap
+#   pr_fn (function): one of pr_fn_ms or pr_fn_lg
+#   threshold (float): lowest distance for which we will compute the pr_fn function.
+pr_cap = function(d, pr_fn, threshold=1) {
+  # Probability a single fly IS captured at 1 trap in 1 time period
+  # We divide distance by 1000 to rescale to metre scale
+  prob = function(distance) 1 - (1 - pr_fn(distance))^(1/4)
+
+  ifelse(d <= threshold, prob(threshold), prob(d))
+}
+
+# Function to simulate Medfly population dynamics
+# Inputs
+#   n_periods (int): number of weeks
+#   growth_params (list(mu=numeric(n_periods), sd=numeric(n_periods))): 
+#     weekly growth mean and sd
+draw_N = function(n_periods, growth_params, type='all') {
+  N = growth_rates = numeric(n_periods)
+  
+  # Draw growth rates
+  growth_rate = rnorm(1, growth_params$mu, growth_params$sd)
+  
+  # Draw number of flies at t_1
+  lambda = rexp(1, 1/20)
+  N[1] = rpois(1, lambda) 
+  
+  # Draw the no. of flies at t_2, t_3, ...
+  for (t in 2:n_periods) {
+    N[t] = rpois(1, N[t-1] * exp(growth_rate))
+  }
+  
+  if (type == 'all') {
+    return(list(N=N, R=growth_rate))
+  } else {
+    return(N[n_periods])
+  }
+}
+
+# Function to draw a single simulation of a typical scenario
+# Inputs
+#   n_periods (int): number of weeks
+#   growth_params (list(mu=numeric(n_periods), sd=numeric(n_periods))): 
+#     weekly growth mean and sd
+# Output
+#   N (numeric(n_periods)): population size at each (weekly) time point
+
+sim_erad = function(n_periods, growth_params) {
+  # Initialise capture data
+  y = numeric(n_periods)
+  
+  # Draw the population size fore each time point
+  popn = draw_N(n_periods, growth_params)
+  N = popn$N
+  
+  # Draw location and individual dispersals/deviations
+  L = rnorm(2, sd = 160)
+  
+  # Capture probabilities
+  for (t in 1:n_periods) {
+    # Exit early if we have a zeroes because the population can't recover
+    if (N[t] == 0) break
+    
+    # Check whether we're in a supplementary or general period
+    n_traps = ifelse(t < 7, nrow(all_traps), nrow(general_traps))
+  
+    # Draw dispersals
+    fly_locs = L + matrix(rnorm(2*N[t], sd=12.5), nrow=2)
+    
+    # Initialise probability of no captures at t (log scale)
+    pr_no_caps_ln = 0
+    
+    for (k in 1:n_traps) {
+      # Distance between trap k and each fly
+      distances = sqrt(colSums((fly_locs - unlist(all_traps[k,]))^2))
+      
+      # Update probability of no captures
+      pr_no_caps_ln = pr_no_caps_ln + sum(log(1-pr_cap(distances, pr_fn_ms)))
+    }
+    
+    #y_t = 1 iff no flies are captured
+    y[t] = rbinom(1, 1, exp(pr_no_caps_ln))
+    
+    if (!y[t]) return(NA)
+  }
+  
+  # Return population sizes and an indicator for acceptance
+  # We only accept a sample if y[t] = 1 for all t
+  return(c(tail(N, 2), popn$R))
+}
+
+n_periods = 12
+growth_params = list(mu = 0, sd = 0.2)
+
+# Draw 1e4 posterior samples
+sim_post = function(n_iter, n_periods, growth_params) {
+  posterior_N = matrix(ncol=3, nrow=n_iter)
+  colnames(posterior_N) = c('N_T', 'N_T-1', 'R')
+  count_success = count_all = 0
+  
+  pb = progress::progress_bar$new(total=n_iter)
+  
+  while (count_success < n_iter) {
+    count_all = count_all + 1
+    
+    new = sim_erad(n_periods, growth_params)
+    
+    if (!is.na(new[1])) {
+      count_success = count_success + 1
+      posterior_N[count_success, ] = new
+      pb$tick()
+    }
+  }
+  
+  print(paste('Success rate:', count_success / count_all))
+  
+  return(posterior_N)
+}
+
+# Draw from the prior
+sim_prior = function(n_iter, n_periods, growth_params) {
+  # Init N
+  prior_N = numeric(n_iter)
+  
+  for (i in 1:n_iter) {
+    prior_N[i] = draw_N(n_periods, growth_params, 'last')
+  }
+  
+  return(prior_N)
+}
+
+res = sim_post(1e4, n_periods, growth_params)
+
+mean(sim_prior(1e4, n_periods, growth_params) == 0)
+
+# With LG: success rate is 0.31, PR(N_T = 0) = 0.684
+# With MS: success rate is 0.68, Pr(N_t = 0) = 0.425
+# In each case, prior prob of erad is 0.323.
+
+
+# Distribution of posterior prob
+
+prob = exp(-res[, 2] * exp(res[, 3]))
+hist(res[, 3], probability=T, breaks=10)
+curve(dnorm(x, 0, 0.2), add=T)
+
+hist(prob[prob != 1], breaks=50)
+
+plot(density(prob[prob != 1]))
+
+x = matrix(1:4, nrow=2)
+
+
+mean(res[, 1] == 0)
+```
+
+```{r}
+# Plot of traps
+library(ggforce)
+ggplot(traps_df) +
+  geom_circle(aes(x0=0, y0=0, r=200), colour = 'grey') +
+  geom_point(aes(Var1, Var2, col=supp_indicator)) +
+  coord_fixed() +
+  xlab('X coordinate (metres)') +
+  ylab('Y coordinate (metres)') +
+  labs(col = 'Trap type') +
+  scale_x_continuous(breaks = (-4:4)*200) +
+  scale_y_continuous(breaks = (-4:4)*200) 
+
+# Plot of typical situation
+
+N = 30
+fly_locations = data.frame(x=rnorm(N, sd=12.5), y=rnorm(N, sd=12.5))
+library(ggforce)
+ggplot(traps_df) +
+  geom_circle(aes(x0=0, y0=0, r=200), colour = 'grey') +
+  geom_point(aes(Var1, Var2, col=supp_indicator)) +
+  geom_point(aes(x, y), data=fly_locations) +
+  coord_fixed() +
+  xlab('X coordinate (metres)') +
+  ylab('Y coordinate (metres)') +
+  labs(col = 'Trap type') +
+  scale_x_continuous(breaks = (-4:4)*200) +
+  scale_y_continuous(breaks = (-4:4)*200) 
+
+# Plot of prior location density
+
+x = seq(-1e3, 1e3, 20)
+grid = expand.grid(-1e3:1e3, -1e3:1e3)
+z = dnorm(grid[,1], sd=160) * dnorm(grid[,2], sd=160)
+
+ggplot(data.frame(x=grid[,1], y=grid[,2], z)) +
+  geom_contour_filled(aes(x=x, y=y, z=z)) +
+  geom_point(aes(Var1, Var2, col=supp_indicator), data=traps_df) +
+  theme(legend.position = 'none') +
+  coord_fixed() +
+  xlab('X coordinate (metres)') +
+  ylab('Y coordinate (metres)') +
+  scale_x_continuous(breaks = (-4:4)*200) +
+  scale_y_continuous(breaks = (-4:4)*200) 
+
+```
+
+
+
