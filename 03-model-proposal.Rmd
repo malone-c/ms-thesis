@@ -1,0 +1,57 @@
+# Model development
+
+NOTE: In this section I discuss the model abstractly without setting any priors or doing any inference. I am unsure whether to keep this chapter or to integrate it with the following chapter. On one hand, if I discuss general properties of the model in the next chapter, then that chapter becomes very long and complicated. On the other hand, it may be hard to understand the material in this chapter because of how abstract it is.
+
+TODO: Write introduction to this chapter
+TODO: Write outline of this chapter
+
+### The scenario
+
+TODO: Write a general description of the zero catch scenario
+
+## Structure of the model
+
+At the most basic level, I propose to define a joint distribution over (a) the number of flies in a population, (b) the location of each fly, and (c) the number of flies that are detected (caught in traps). Defining notation, at each time point $t$, we must define a joint distribution over the number of flies $N_t$, the $N_t \times 2$ matrix of fly locations $\mathbf L_t$, and the number of flies detected $y_t$. I.e., the model is a joint distribution $p(\{N_t, \mathbf L_t, y_t\}_{t=1}^T)$. Our goal is, primarily, to infer the posterior distribution of the population size at the last time point $N_T$, conditional on $\mathbf y = \{y_t\}_{t=1}^T = \mathbf 0_T$. To make this possible, we must specify a joint **prior** distribution over $\{N_t, \mathbf L_t\}$, and a likelihood, i.e. a distribution for $\mathbf y \mid \{N_t, \mathbf L_t\}_{t=1}^T$. In the next sections, I discuss general strategies for each of these. I leave the task of illustrating this process for a specific case to the final chapter.
+
+## Why make the model spatially explicit?
+
+The value of including a spatial component in the model may be questioned. This is relatively unusual in standard approaches (see, e.g., @mcardle1990). The answer is that the spatial component allows for the use of a useful source of prior information. There exists a moderately large literature of **release-recapture** studies for various species of fruit fly (@todocite).  
+
+Release recapture studies give us two kinds of data --  namely, data on capture rates as a function of distance, and more general capture rates. Experimental data on marginal capture rates (irrespective of distances) can be useful when the trapping setup is similar to the setup we want to draw inference about. However, this will often not be the case. For example, studies vary in the number and type of traps used. Further, we may wish to infer eradication of pest populations in trapping systems that are unlike those in studies. For example, after an outbreak has occurred, and eradication measures have been stopped, it is common to set up supplementary trapping units to intensify monitoring and increase the likelihood of detecting flies, conditional on their presence in the area (@supp_traps). 
+
+### Population size
+
+A natural way to set a prior on the population size at each time point $t$ is to set a prior on the population size at the initial time point, and then assume that the population sizes at other time points are given by some (deterministic or stochastic) function of the population size at $t-1$, and the value of a covariate vector $X_t$, which includes variables relevant to population growth.
+
+It may be worth noting that there are no a priori assumptions on the population dynamics for the growth model. Thanks to the generality of the sampling algorithm, it is simple to "plug in" elaborate growth models. For example, the models of @lux2018 or @manoukis2014 could be used to generate independent random draws from the population of Medfly. In this way, they can structure our prior over the population size. In this case, inference would proceed simple as in the case I outline here. This highlights a benefit of the modelling approach taken here, which is its generality and modularity.
+
+
+$$
+N_t = f(N_{t-1}, X_t)
+$$
+
+### Population location
+
+I first discuss the option of setting a uniform prior. Setting an uninformative prior is fairly straightforward for this problem. In particular, we might assume that, beyond a certain distance from the outbreak centre (say, 1km) any existing population of Medfly is distinct from the population of interest. Therefore, we might set the prior distribution for the population location to be uniform on the surface of a disc with (e.g.) 1km radius around the outbreak centre. 
+
+Despite the fact that an uninformative prior is relatively straightforward to set, it is most likely not advisable in specific applications. It will typically be the case that prior information is available to the decision maker. In particular, fruit flies are heavily dependent on the availability of suitable fruit trees for survival and reproduction. Therefore, someone with local area knowledge will be able to determine the most likely locations for an existing population. Also, the supplementary zone is not chosen arbitrarily. The choice of supplementary zone will typically reflect the beliefs of the decision maker about the location of the fly population. 
+
+When prior information exists, setting the prior distribution to be uninformative may cause us to underestimate the likelihood of observing captures in the supplementary surveillance zone. The overall effect will be to inflate $\Pr(N_T = 0 \mid \mathbf y = \mathbf 0_T)$.
+
+#### Individual fly dispersals
+
+In release-recapture experiments, it is often the case that flies are released from a single point in the trapping grid (@lg2004, @wong1982). In the simplest model of detection, we might assume that this happens in the real world. In that case, the distance between each trap and each fly would just be the distance between that trap and the population. In other words, flies would all be clustered at a single point. However, this may not be reasonable in practice. Instead, it may be more reasonable to assume that flies are dispersed around a central point.
+
+To incorporate dispersion of flies, I assume the following. Let $L$ denote the central point of the population, as above. Then, let $D_{i, t}$ denote the location of fly $i$ at time $t$, relative to the population centroid $L$. For simplicity, it is assumed that $D_{i, t}$ is independent of $D_{i', t'}$, for any $(i', t') \neq (i, t)$. Thus, our belief is essentially that flies are shuffled around at each time point, so that a fly's location at $t-1$ tells us nothing about its location at $t$ (except through the information both reveal about $L$). This simply means that we do not track the locations of flies across time -- i.e., whether a fly lives across time periods, or instead dies and is replaced, are equivalent scenarios under this model.
+
+### Probability of capture (likelihood)
+
+TODO: Flesh this out.
+
+I assume that surveillance events occur at regular time intervals $t \in \{1, \cdots, T\}$. The probability that a fly $i$ is caught in trap $k$ at time $t$ is given by $p_{i, k, t} = p(d_{i, k, t})$ where $d$ is the distance between fly $i$ and trap $k$ at time $t$, and $p(\cdot)$ gives us the probability of capture as a function of distance.
+
+Probability of capture is based on the distances between each fly and each trap. For the trap locations, I assume that the locations of traps are fixed and known with certainty (i.e. not random). This will be the case in real cases, where the decision making body also decides the locations of the traps.
+
+* No interference.
+
+TODO: Write conclusion of this chapter

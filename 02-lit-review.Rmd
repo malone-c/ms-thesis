@@ -1,39 +1,22 @@
+---
+output: html_document
+editor_options: 
+  chunk_output_type: console
+---
 # Literature review {#lit-review}
 
-## Introduction
-
-* Description of what this chapter is about
-* Outline of the chapter
-
-## Control and monitoring of Tephritid fruit flies
-
-Costs associated with invasive and pest species can be varied and significant. Invasive species pose economic, social and environmental costs. Fruit flies are an example of an economically costly pest. Fruit flies lay eggs in ripening fruits and vegetables. Produce that has been infested with fruit fly larvae is not fit for sale, domestically or abroad. Further, even if produce has not been infested, local suppliers can charge a premium for supplying pest-free produce to international markets. 
-
-Governments have a responsibility monitor and eradicate potential biological invasions. In particular, the Australian government is bound by the Biosecurity act (??) to ensure a very low level of risk for animal and plant invasions. Effectively and efficiently controlling biological invasions requires a principled and rigorous approach to monitoring. However, monitoring biological species is difficult and costly. In particular, the cost of increasing monitoring intensity must be traded off against the cost of failing to detect an incipient invasion.
-
-The manager's role is made more difficult when a pest population is *subdetectable*. Populations may be subdetectable because they can persist at low rates; because they are *taxonomically cryptic* (i.e. hard to distinguish from well known native species); because they are *behaviourally cryptic* (i.e. behave in ways that help them avoid detection by predators; see @kery2002); or because the population is suppressed by efforts to eradicate them. Matters are made worse when tests to detect the presence of a population have extremely low sensitivity for other reasons. For example, monitoring traps for fruit flies have very low attractiveness. One study of Mediterannean fruit fly found that only 0.02% of 38.8 million flies were recaptured after release, in a standard surveillance setup in Adelaide (@ms2007).
-
-Suppose an outbreak of an invasive pest has occurred. Monitoring for the pest must then be intensified and localised to the area of suspicion. If the pest has since been eradicated, governments are incentivised to declare eradication quickly. This is because 
-
-On the other hand, if eradication has *not* occured, 
-
-A necessary prerequisite for minimising the probability of failing to detect an existing invasion is to understand what can be inferred about the state of the population from what has been observed in surveillance. In particular, it is desirable to understand the likelihood that extinction has occurred, given that the species has not been detected over a certain period of time.
-
-In Australia, Pest Free Area status is awarded to a number of . However, outbreaks of these pests are periodic. It is typical for PFA status to be suspended following an outbreak. 
-
-PFA status is economically valuable to producers in the relevant region. Firstly, there may be offshore markets which require that produce is supplied from a PFA for a given pest. Secondly, in some markets, PFA status may allow the supplier to receive a price premium for goods sold. In other words, PFA status increases the value of local produce on international markets.
-
-* Current codes of practice suggest a lower catch rate required for an outbreak to be declared when supplementary traps are set, but probabilities have not been estimated rigorously.
-
-As mentioned above, the manager seeks to minimise resources spent on surveillance, while minimising the chance that an eradication is declared when none has occurred. The general problem this thesis is concerned with is to infer whether or not an invasive species has been extinguished based on survey records.
+TODO: Write introduction to this chapter
 
 ## Literature background
 
-In this subsection, I will describe a number of models that have been applied to the problem of inferring species absence. Existing methods can be categorised as frequentist and Bayesian. The core difference between frequentist and Bayesian methods is in their treatment of the variables that describe the presence or absence of the species. Frequentist methods assume that the species is either absent or present with probability one. In this framework, surveillance activities are considered to be random experiments with fixed parameters. On the other hand, Bayesian methods assume that species absence is uncertain (i.e. random). 
+In this subsection, I will describe a number of models that have been applied to the problem of inferring species absence. I group these models into less and more elaborate models. The core difference between frequentist and Bayesian methods is in their treatment of the variables that describe the presence or absence of the species. Frequentist methods assume that the species is either absent or present with probability one. In this framework, surveillance activities are considered to be random experiments with fixed parameters. On the other hand, Bayesian methods assume that species absence is uncertain (i.e. random). 
+
+TODO: Write a section on the fruit fly literature (namely Meats 2005, and the debate between Carey et al and others in the 1990s) and relevant gaps.
 
 ### Simple models
 
-*** Note: Should I delete this entire subsection? I wrote it before I knew about the papers I discuss in the "Elaborate models" section.
+TODO: Consider deleting or reducing this section on simple models. Elaborate models are the focus of the thesis. 
+TODO: If keeping, write an introduction for this section.
 
 #### McArdle 1990
 
@@ -54,7 +37,9 @@ Applying the above model to the problem of program design is not straightforward
 
 #### Similar models
 
-There are several other models in the literature, mirroring McArdle's method in their conceptual simplicity and generality. (See @boakes2015 for a relatively complete review.) Bayesian models are given by ... and Barnes et al. These methods have the advantage that the posterior distribution is derived analytically. This means that posterior probabilities can be computed extremely efficiently. However, each model assumes a constant growth rate. However, in real contexts, growth rates are highly variable and uncertain (@caley2014).
+There are several other models in the literature, mirroring McArdle's method in their conceptual simplicity and generality. (See @boakes2015 for a relatively complete review.) Bayesian models are given by ... and Barnes et al. These methods have the advantage that the posterior distribution is derived analytically. This means that posterior probabilities can be computed extremely efficiently. However, each model assumes a constant growth rate. However, in real contexts, growth rates are highly variable and uncertain (@caley2014). It therefore may be unreasonable to assume that 
+
+TODO: How have simple models been used to address the Tephritid fruit fly problem specifically? Cite Meats and Smallridge (2006) and Lance and gates (1994).
 
 ### Elaborate models
 
@@ -66,40 +51,34 @@ Recently, more elaborate models have appeared in the literature for specific era
 
 As discussed above, simple models, such as McArdle's method, are attractive for their simplicity, generality, and efficiency of computation. However, these virtues may come at the cost of biological plausibility. This is particularly the case when we have a significant degree of prior information about the species and region in question. For high stakes problems, we would like to be able to leverage existing domain knowledge about the location and species. This might mean using process models that are fine grained, scientifically plausible, and based on multiple sources of scientific knowledge and evidence. We would also like to be able to incorporate our uncertainty about the processes in question.
 
-List of problems to discuss...
+TODO: Flesh out the following list into paragraphs.
 
 * They make strong assumptions about priors which are not defensible in general.
   - Assumption of a fixed, and either constant or declining population size (@caley2015, p. 2).
   - For example, McArdle's model assumes that there is a value of $p$ small enough to be not worth detecting. 
 * They assume that we can estimate a sighting rate, which is constant as a function of the locations of the individuals.
 
-Another issue with simpler models is their relative inflexibility with respect to the structure of the model. For example, the method of Barnes et al assumes that we know the probability of detecting a specimen drawn randomly from the population. However, in the case of fruit flies, this number is difficult to estimate, because the capture probability is highly dependent on the trapping layout, which in turn is highly dependent on location and time. For example, countries (and states within countries) differ in the types of traps used and the spatial density of traps. 
+Another issue with simpler models is their relative inflexibility with respect to the structure of the model. For example, the method of Barnes et al assumes that we know the probability of detecting a specimen drawn randomly from the population. However, in the case of fruit flies, this quantity is difficult to study empirically. This is because the capture probability is highly dependent on the spatial layout and types of monitoring traps. In turn, the layout and type of trap are highly dependent on time and place in which the monitoring is taking place. For example, countries (and states within countries) differ in the types of traps used and the spatial density of traps. Also, spatial layouts of trapping networks vary from place to place, but it is usually the case that the precise locations of the traps are known to the decision maker who is responsible for monitoring.
 
-##### Plausibility
-
-As (@caley2014) points out, most models in the literature on the program design problem are simple and general. Their simplicity means that they are parsimonious, analytically tractable, and easy to interpret. However, these properties are bought at the cost of plausibility of the model as a description of real ecological processes, which are complex and uncertain. In general, the plausibility of a model will depend on the system that is under investigation. For a given model, the analyst may have information that will allow them to specify relatively more plausible and realistic models of the processes that govern the system.
+The literature on elaborate computational models is fairly narrow. I know of only two attempts to biologically realistic models to infer probability of eradication from the survey record. These papers provide inspiration for the model I develop in the following chapter -- although there are also some marked differences, as the reader will see. Here, I will discuss the contributions of each of these papers.
 
 #### Paper 1: Keith et al
 
 The first instance of an elaborate Bayesian model for inferring pest eradication is given by @keith2013. The authors use an agent-based Bayesian model to infer the distribution of fire ant nests in Brisbane. They obtained data on the locations and month of discovery for $n = 7{,}068$ nests. They also observed whether data were passively or actively discovered (e.g. by members of the public or through a targeted search). 
 
-Generalised Gibbs sampling is used to sample...
-
-#### Sampling
-
-It should be noted that both of the models above are agent based. The model of Keith et al explicitly models the location of each agent (ant nest). In each case, this leads to a difficulty in sampling algorithms. Typically, when a Bayesian model is agent based, this means that there is an unknown number of parameters in the model (and unbounded, as the size of the population typically does not have a finite bound, e.g. when it is Poisson distributed). The upshot of this is that typical Markov Chain Monte Carlo (MCMC) methods, such as the Metropolis Hastings sampler, fail. This is because they do not allow us the dimension of the parameter vector to vary between draws. 
-
-The papers discussed above deal with this in two different ways. Keith et al use a generalisation of the Gibbs sampler, inspired by reversible jump MCMC. This gets around the problem by adding a step to the Gibbs sampler in which we move between coordinate spaces . On the other hand, Caley et al use approximate Bayesian computation (ABC). 
+The model explicitly models the location of each agent (ant nest). Typically, when a Bayesian model is agent based, this means that there is an unknown number of parameters in the model. The upshot of this is that typical Markov Chain Monte Carlo (MCMC) methods, such as the Metropolis Hastings sampler, fail. This is because they do not allow the dimension of the parameter vector to vary between draws. To get around this problem, a generalised Gibbs sampling algorithm is used. This gets around the problem by adding a step to the Gibbs sampler in which we move between coordinate spaces.
 
 #### Paper 2: Caley et al
 
-The second instance of an elaborate Bayesian model for inferring eradication is given by @caley2015. Caley and co-authors develop a Bayesian model of fox sightings in Tasmania. Their goal is to infer the posterior probability that foxes had been eradicated in Tasmania, given a record of fox carcass sightings. They obtained data on fox carcass sightings from hunter kills and road kills. These observation processes were modelled separately, so that posterior detection rates differed between the sighting types. Detection rates were assumed to be constant across time and location for each type of sighting. Notably, uninformative priors were set for detection rates (i.e. the probability of detecting a fox was set to be uniform on $[0, 1]$). Data consisted of a single sighting count for each location (with Tasmania divided geographically into grid cells) and each year between 2001 and 2013. Data were all zeroes with the exception of exactly four unit observations (sightings of exactly one fox).
+The second instance of an elaborate Bayesian model for inferring eradication is given by @caley2015. Caley and co-authors develop a Bayesian model of fox sightings in Tasmania. Their goal is to infer the posterior probability that foxes had been eradicated, given a record of fox carcass sightings. They obtained data on fox carcass sightings from two sources, namely hunter kills and road kills. These separate "observation processes" were modelled separately, so that posterior detection rates were allowed to differ between the sighting types. Detection rates were assumed to be constant across time and location for each type of sighting. Notably, uninformative priors were set for detection rates (i.e. the probability of detecting a fox was set to be uniform on $[0, 1]$). This was because the fox sighting mechanism has not been studied empirically (indeed, it is not clear how it could be studied at all). Data consisted of a single sighting count for each location (with Tasmania divided geographically into grid cells) and each year between 2001 and 2013. Data were all zeroes with the exception of exactly four unit observations (sightings of exactly one fox).
 
-The authors use a simple rejection algorithm to sample from the posterior. I will refer to this algorithm as exact Bayesian computation (EBC), to be distinguished from approximate Bayesian computation (ABC). ABC works by first drawing samples of the parameter vector $\theta$ from the prior distribution $\pi(\theta)$, then second, drawing simulated data $y_{\text{sim}}$ from the likelihood, then keeping the proposed $\theta$ if and only if $y_{\text{sim}}$ is an approximate match with the observed data. EBC is the same, except that samples are only kept if $y_{\text{sim}}$ is an *exact* match with the observed data. Notably, EBC is only practical in cases where the data consists entirely of discrete variables (i.e. variables with countable or finite ranges of possible values). 
+The authors use a simple rejection algorithm to sample from the posterior. I will refer to this algorithm as exact Bayesian computation (EBC), to be distinguished from approximate Bayesian computation (ABC). ABC works by first drawing samples of the parameter vector $\theta$ from the prior distribution $\pi(\theta)$, then second, drawing simulated data $y_{\text{sim}}$ from the likelihood, then keeping the proposed $\theta$ if and only if $y_{\text{sim}}$ is an approximate match with the observed data. EBC is the same, except that samples are only kept if $y_{\text{sim}}$ is an *exact* match with the observed data.
 
-The authors point to the complexity of the likelihood to justify the use of ABC over more standard Monte Carlo methods such as Metropolis Hastings or Gibbs sampling. Based on their description of the model, however, it is not clear that Metropolis Hastings would not suffice.
+The authors point to the complexity of the likelihood to justify the use of ABC over more standard Monte Carlo methods such as Metropolis Hastings or Gibbs sampling. Based on their description of the model, however, it is not clear that Metropolis-Hastings would not suffice.
 
 ## Gaps
+
+TODO: Write a paragraph in this section outlining the gaps in the fruit fly literature.
 
 Above, I have discussed the two elaborate computational models in the literature for inferring eradication of an incipient biological invasion. The current work seeks to address two gaps in the literature. Firstly, elaborate Bayesian models have not been explored for inferring eradication of Tephritid fruit flies. Fruit flies pose an interesting case study, because the regulator has fine grained information about the detection system. In particular, the regulator knows the locations of each of the traps. Further, prior research investigating the efficacy of these traps exists. If used carefully, this information can be leveraged through the model's priors to learn from the zero-sighting record efficiently.
 
@@ -111,3 +90,5 @@ Fruit flies are interesting for a few reasons:
 
 
 Second, no such model has addressed the question of PFA status reinstatement. Instead, they discuss inferring eradication from an actually observed record. 
+
+TODO: Write conclusion of this chapter
