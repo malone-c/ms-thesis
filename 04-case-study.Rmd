@@ -97,25 +97,25 @@ TODO: Explain that the centre of the grid is the site of the last detection.
 
 #### Population location
 
-TODO: Restructure this section so that it is primarily about fly locations.
-
-The centre of of the population is assumed to be located at the two dimensional vector $L$. I have set the prior on $L$ to be 
+The centre of of the population is assumed to be located at the two dimensional vector $L_c$. I have set the prior on $L_c$ to be 
 $$
-L \sim \mathrm {Normal}_2 (\mathbf 0_2, 160^2 I_2),
+L_c \sim \mathrm {Normal}_2 (\mathbf 0_2, 160^2 I_2),
 $$
 where $\mathrm{Normal}_2$ is the bivariate normal distribution, $\mathbb 0_2$ is the two-dimensional zero vector and $I_2$ is the $2 \times 2$ identity matrix. This prior reflects a prior belief that the centre of the population is highly likely to be found somewhere on a disc with. E.g., we believe that there is a 95% chance that the centre of the population is within $1.96 \cdot 160 \approx 320$ metres of the centre of the grid.^[For details about how this prior was arrived at, see appendix.] Recall that this makes sense because we believe that the flies are within the distribution.
 
 #### Individual fly dispersals
 
-I assume that, for any given fly, their prior distance from the central location is described by
+Let $L_{i, t}$ denote the location of fly $i$ at time $t$, as in the previous chapter. I assign this quantity the prior distribution
 $$
-D_{i,t} \sim \mathrm {Normal}_2 (\mathbf 0_2, 12.5^2 I_2)
+L_{i, t} \mid L_c \sim \mathrm {Normal}_2 (L_c, 12.5^2 I_2)
 $$
-where the notation is defined as in the previous section above. The variance of this distribution 
+where the notation is defined as in the previous section above. The variance of this distribution is chosen on the basis of prior analysis of dispersal data (see appendix).
 
-The normal distribution is chosen for a few reasons. Firstly, it is conceptually simple and intuitive to parameterise. Secondly, the location of fly $i$ at time $t$, namely $L + D_{i, t}$, has a simple marginal distribution, thanks to the fact that the sum of normal random variables is itself normal. Thirdly, for mean zero normal random variables, distances to the origin have a known distribution. For example, let $$\mathbf X = (X_1, \ldots, X_p)^\top \sim \mathbf N_p(0, \sigma^2 I),$$ where $I$ is the $p \times p$ identity matrix. Then the length of $\mathbf X$, $\lVert \mathbf X \rVert^{1/2} \sim \mathrm{Gamma}(??????)$ @unfinished (see appendix). This allows us to compare and calibrate the distribution against experimental results (see appendix). This, in turn, makes elicitation of priors simpler and more intuitive.
+Note: Do I need to prove the claims in the next paragraph?
 
-It may be worth noting that, in real cases, the assumed prior distribution on dispersals may not be reasonable. For example, dispersals may have non-zero mean (due to strength and direction) or non-spherical covariance matrix (i.e. non-equal variances and/or non-zero covariances).^[This is argued by @baker1986.] In applied cases, it may be possible to use information about wind directions to set more informative priors. This is beyond the scope of this work.
+The normal distribution is chosen for a few reasons. Firstly, it is conceptually simple and intuitive to parameterise. Secondly, the location has a simple marginal distribution, thanks to the fact that a normal random variable with a normal mean is itself normal. Thirdly, the distance between a normal random variable and its mean has a known distribution. In particular, for any fly $i$, the distance between $L_{i,t}$ and $L_c$, conditional on $L_c$, has the gamma distribution with parameters $\alpha = 1$, and $\beta = 12.5^2 / 2$. Similarly, the distance between $L_{i, t}$ and the origin is the same but with $\beta = (12.5^2 + 160^2) / 2$. Knowing this allows us to easily compare and calibrate the distribution against experimental results. This, in turn, makes elicitation of priors simpler and more intuitive. (It allows us to visualise, for example, the distribution of distances to the origin and to the population centre.)
+
+It may be worth noting that, in real cases, the assumed prior distribution on dispersals may not be reasonable. For example, dispersals may have non-zero mean (due to strength and direction) or non-spherical covariance matrix (i.e. non-equal variances and/or non-zero covariances).^[This is argued by @baker1986.] Further, it may not be reasonable to assume that the fly population cannot move across time. Ideally, the importance of these assumptions should be checked based on the case at hand (e.g. properties of the situation or species in question). Extending the model in various ways to meet these problems is beyond the scope of this work, but warrants further investigation.
 
 ### Trap locations
 
@@ -144,15 +144,13 @@ ggplot(traps_df) +
   labs(col = 'Trap type') +
   scale_x_continuous(breaks = (-4:4)*200) +
   scale_y_continuous(breaks = (-4:4)*200) 
-  
 ```
 
-
-By intensified monitoring, I mean that **supplementary** monitoring traps have been placed alongside the previously existing grid of **general** monitoring traps. More precisely, it is assumed that **general** surveillance traps are placed year round in a 400 $\times$ 400 metre grid (DPIPWE, 2011, p. 50). The **supplementary** surveillance system consists of a set of 16 traps in a circular area, centred at the site of the first fly detection.^[It is typical to wait until at least 2 flies have been detected near each other for an outbreak to be declared. To illustrate the method in a simplified setting, I suppose that one fly detection is sufficient.]
+As mentioned previously, it is assumed that trap locations have fixed, known locations. In particular, we assume that monitoring is intensified for the first 6 weeks ($t \in \{1, \ldots, 6\}$). By intensified monitoring, I mean that **supplementary** monitoring traps have been placed alongside the previously existing grid of **general** monitoring traps. More precisely, it is assumed that **general** surveillance traps are placed year round in a 400 $\times$ 400 metre grid (DPIPWE, 2011, p. 50). The **supplementary** surveillance system consists of a set of 16 traps in a circular area, centred at the site of the first fly detection.^[It is typical to wait until at least 2 flies have been detected near each other for an outbreak to be declared. To illustrate the method in a simplified setting, I suppose that one fly detection is sufficient.] See @trap_grid.
 
 #### Probability of capture
 
-I assume that the probability of capture for a given fly in a given trap is 
+I assume that the probability of capture for any given fly in any given trap is 
 $$
 p(x) = \begin{cases}ax^{-b}, & d>1 \\ a & 0 \geq d \geq 1\end{cases}
 $$
@@ -170,19 +168,15 @@ So far, we have talked about situations when sampling is required for inference.
 
 ### ABC models
 
-A simple rejection algorithm is used to draw samples from the posterior distribution. 
+A simple rejection algorithm is used to draw samples from the posterior distribution (see previous chapter). Instead of matching on a statistic, such as the sum of the observations, the rejection rule was set so that data were only kept in cases where the simulated data vector was an exact match with the actual data (the hypothetical zero-catch record).
 
-
-Here, I have used EBC for intuitiveness, ease of implementation, and the fact that it is relatively efficient for this problem. However, other methods exist that may be worth exploring, for analogous problems where the rejection rate of ABC is higher. There are at least two known methods for sampling from the posterior when the dimension of the parameter space is uncertain. These are the reversible jump MCMC sample (@green1995) and the generalised Gibbs sampler (@keith2015). These may be worth exploring for problems where the rejection rate is high for EBC.
+Here, I have used ABC for intuitiveness, ease of implementation, and the fact that it is relatively efficient for this problem. However, other methods exist that may be worth exploring, for analogous problems where the rejection rate of ABC is higher. There are at least two known methods for sampling from the posterior when the dimension of the parameter space is uncertain. These are the reversible jump MCMC sample (@green1995) and the generalised Gibbs sampler (@keith2015). These may be worth exploring for problems where the rejection rate is high for EBC.
 
 Interestingly, the standard justifications for and against ABC do not apply to the case under consideration. Firstly, the standard justification for ABC is that it allows for inference when the likelihood function is "intractable" - i.e., unknown, uncomputable or otherwise difficult to work with. However, for the current model, the likelihood is known, and relatively simple to write out.
 
 On the other hand, the standard drawback for ABC is that it ensures that we can typically only draw from the posterior approximately. Under standard conditions, we must define a criteria for similarity between simulated and observed data. This is typically done by specifying a summary statistic $S(\mathbb y)$, and a similarity measure $\rho(S(\mathbb y), S(\mathbb y'))$ defined over the space spanning our data $\mathbb y$. We reject a sample if we observe $\rho(\mathbb y_{\text{observed}}, \mathbb y_{\text{simulated}} ) >  \epsilon_0$, where $\epsilon_0$.
 
-$10{,}000$ samples were taken. The acceptance rate for sampling was 0.68. This high level of acceptance is due to the low likelihood of captures, across most of the high prior density region of the model space.
-
-* How long did sampling take?
-* What was the rejection rate?
+$10{,}000$ samples were taken. The acceptance rate for sampling was 0.68. This high level of acceptance is due to the low likelihood of captures, across most of the high prior density region of the model space. The acceptance rate can be interpreted as a numerical approximation to the prior probability of observing zero captures.
 
 ## Results
 
