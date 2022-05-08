@@ -20,22 +20,11 @@ TODO: Explain the role of zero-catch criteria in fruit fly trapping. Cite Meats 
 
 ### Elaborate models for inferring pest absence
 
-The problem of inferring the presence or absence of a difficult-to-detect species has a literature of its own. 
-
-TODO: Discuss differences between simple and complex models.
-
-* Problems with simple models
-* Benefits of elaborate models
-
-As discussed above, simple models, such as McArdle's method, are attractive for their simplicity, generality, and efficiency of computation. However, these virtues may come at the cost of biological plausibility. This is particularly the case when we have a significant degree of prior information about the species and region in question. For high stakes problems, we would like to be able to leverage existing domain knowledge about the location and species. This might mean using process models that are fine grained, scientifically plausible, and based on multiple sources of scientific knowledge and evidence. We would also like to be able to incorporate our uncertainty about the processes in question.
-
-There is also a class of simple models that could be useful here. (See @boakes2015 for a review of simple models.) Unfortunately, these models make strong assumptions about priors which are not defensible in general. For example, most assume a fixed, and either constant or declining population size (@caley2015, p. 2). This is not reasonable for the study of invasive species, whose numbers are uncertain, and may be increasing quickly. Many models assume that we can estimate a sighting rate, which is constant as a function of the locations of the individuals.
+The problem of inferring the presence or absence of a difficult-to-detect species has a literature of its own. Models date back to at least the 1990s, using relatively simple and general models to infer pest absence (see @todocite). Such simple methods are attractive for their simplicity, generality, and efficiency of computation. Unfortunately, these models make strong assumptions about priors which are not defensible in general. For example, most assume a fixed, and either constant or declining population size (@caley2015, p. 2). This is not reasonable for the study of invasive species, whose numbers are uncertain, and may be increasing quickly. Many models assume that we can estimate a sighting rate, which is constant as a function of the locations of the individuals.
 
 Another issue with simpler models is their relative inflexibility with respect to the structure of the model. For example, many models (see, e.g., @mcardle, @barnes, @boakes) assume that we know the probability of detecting a specimen drawn randomly from the population. However, in the case of fruit flies, this quantity is difficult to study empirically. This is because the capture probability is highly dependent on the spatial layout and types of monitoring traps. In turn, the layout and type of trap are highly dependent on time and place in which the monitoring is taking place. For example, countries (and states within countries) differ in the types of traps used and the spatial density of traps. As such, while we may be able to learn about the probability of capture **per trap**, it is not possible to learn about the probability that a fly is captured in general.
 
-## Previous studies
-
-The literature on elaborate computational models is fairly narrow. I know of only two attempts to biologically realistic models to infer probability of eradication from the survey record. These papers provide inspiration for the model I develop in the following chapter -- although there are also some marked differences, as the reader will see. Here, I will discuss the contributions of each of these papers.
+In contrast, a class of elaborate models for inferring species extinction have recently emerged. In particular, two attempts have recently been made to develop biologically realistic models to infer probability of eradication from the survey record. These papers provide inspiration for the model I develop in the following chapter -- although there are also some marked differences, as the reader will see. Here, I will discuss the contributions of each of these papers.
 
 ### Red fire ants
 
@@ -43,13 +32,11 @@ The first instance of an elaborate Bayesian model for inferring pest eradication
 
 The model explicitly models the location of each agent (ant nest). Typically, when a Bayesian model is agent based, this means that there is an unknown number of parameters in the model. The upshot of this is that typical Markov Chain Monte Carlo (MCMC) methods, such as the Metropolis Hastings sampler, fail. This is because they do not allow the dimension of the parameter vector to vary between draws. To get around this problem, a generalised Gibbs sampling algorithm is used. This gets around the problem by adding a step to the Gibbs sampler in which we move between coordinate spaces.
 
-### Red fox
+### Red foxes
 
 The second instance of an elaborate Bayesian model for inferring eradication is given by @caley2015. Caley and co-authors develop a Bayesian model of fox sightings in Tasmania. Their goal is to infer the posterior probability that foxes had been eradicated, given a record of fox carcass sightings. They obtained data on fox carcass sightings from two sources, namely hunter kills and road kills. These separate "observation processes" were modelled separately, so that posterior detection rates were allowed to differ between the sighting types. Detection rates were assumed to be constant across time and location for each type of sighting. Notably, uninformative priors were set for detection rates (i.e. the probability of detecting a fox was set to be uniform on $[0, 1]$). This was because the fox sighting mechanism has not been studied empirically (indeed, it is not clear how it could be studied at all). Data consisted of a single sighting count for each location (with Tasmania divided geographically into grid cells) and each year between 2001 and 2013. Data were all zeroes with the exception of exactly four unit observations (sightings of exactly one fox).
 
-The authors use a form of approximate Bayesian computation (ABC) to sample from the posterior. I will refer to this algorithm as exact Bayesian computation (EBC), to be distinguished from approximate Bayesian computation (ABC). ABC works by first drawing samples of the parameter vector $\theta$ from the prior distribution $\pi(\theta)$, then second, drawing simulated data $y_{\text{sim}}$ from the likelihood, then keeping the proposed $\theta$ if and only if $y_{\text{sim}}$ is an approximate match with the observed data. EBC is the same, except that samples are only kept if $y_{\text{sim}}$ is an *exact* match with the observed data.
-
-The authors point to the complexity of the likelihood to justify the use of ABC over more standard Monte Carlo methods such as Metropolis Hastings or Gibbs sampling. Based on their description of the model, however, it is not clear that Metropolis-Hastings would not suffice.
+The authors use a form of approximate Bayesian computation (ABC) to sample from the posterior. ABC works by first drawing samples of the parameter vector $\theta$ from the prior distribution $\pi(\theta)$, then second, drawing simulated data $y_{\text{sim}}$ from the likelihood, then keeping the proposed $\theta$ if and only if $y_{\text{sim}}$ is an approximate match with the observed data. The authors use the sum of the observations over the observation period as the matching statistic. They kept samples only if the $y$ simultations were an exact match with the data. 
 
 ## Gaps
 
