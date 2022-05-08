@@ -1,8 +1,8 @@
 # Introduction
 
-
-
 ## Control and monitoring of Tephritid fruit flies
+
+TODO: Restructure the following paragraphs; focus more on zero-catch criteria
 
 Biological invasions are incursions of incipient populations of plants or animals that are non-native to a given region. In the midst of the ongoing globalisation of trade, the salience of biological invasions is increasing around the world. Biological invasions are salient because they pose severe economic and environmental risks. On the economic side, they threaten "wholesale loss of agricultural, forestry, and fishery resources" (@mack2000). On the environmental side, they threaten to disrupt native ecological processes -- outcompeting potentially endangered natives, and creating globally homogenous, "cosmopolitan" ecological systems.
 
@@ -10,13 +10,15 @@ Tephritid fruit flies (*Diptera Tephritidae*) are of particularly high economic 
 
 Governments have a responsibility monitor and eradicate potential biological invasions. In particular, the Australian government is legally bound by the Biosecurity act 2015 to ensure a very low level of risk for animal and plant invasions. A core element required for controlling this risk is the development of capacities for monitoring and controlling pest outbreaks. Monitoring biological species is difficult and costly. As such,in the public interest, the cost of increasing monitoring intensity must be traded off against the cost of failing to detect an incipient invasion.
 
-The manager's role is made more difficult when a pest population is *subdetectable*. Populations may be subdetectable because they can persist at low rates; because they are *taxonomically cryptic* (i.e. hard to distinguish from well known native species); because they are *behaviourally cryptic* (i.e. behave in ways that help them avoid detection by predators; see @kery2002); or because the population is suppressed by efforts to eradicate them. Matters are made worse when tests to detect the presence of a population have extremely low sensitivity for other reasons. For example, monitoring traps for fruit flies have very low attractiveness. One study of Mediterannean fruit fly found that only 0.02% of 38.8 million flies were recaptured after release, in a standard surveillance setup in Adelaide (@ms2007).
+The manager's role is made more difficult when a pest population is *sub-detectable*. Populations may be subdetectable because they can persist at low rates; because they are *taxonomically cryptic* (i.e. hard to distinguish from well known native species); because they are *behaviourally cryptic* (i.e. behave in ways that help them avoid detection by predators; see @kery2002); or because the population is suppressed by efforts to eradicate them. Matters are made worse when tests to detect the presence of a population have extremely low sensitivity for other reasons. For example, monitoring traps for fruit flies have very low attractiveness. One study of Mediterannean fruit fly found that only 0.02% of 38.8 million flies were recaptured after release, in a standard surveillance setup in Adelaide (@ms2007).
 
 Suppose an outbreak of an invasive pest has occurred. Monitoring for the pest must then be intensified and localised to the area of suspicion. If the pest has since been eradicated, governments are incentivised to declare eradication quickly. This is because suspension of pest free area status is economically costly to local producers. On the other hand, if eradication has *not* occured, declaring eradication prematurely could (a) lower the manager's credibility, and therefore value of local produce, and (b) cause larger costs longer term due to local establishment of the pest.
 
 A necessary prerequisite for minimising the probability of failing to detect an existing invasion is to understand what can be inferred about the state of the population from what has been observed in surveillance. In particular, it is desirable to understand the likelihood that extinction has occurred, given that the species has not been detected over a certain period of time.
 
 PFA status is economically valuable to producers in the relevant region. Firstly, there may be offshore markets which require that produce is supplied from a PFA for a given pest. Secondly, in some markets, PFA status may allow the supplier to receive a price premium for goods sold. In other words, PFA status increases the value of local produce on international markets.
+
+TODO: Discuss ZTC.
 
 ### Problems this work seeks to address
 
@@ -25,3 +27,9 @@ As mentioned above, the manager seeks to minimise resources spent on surveillanc
 The present work attempts to address two gaps related to Tephritid fruit flies. First of all, I attempt to develop a model for understanding the evidential properties of survey records in arbitrary trapping grids. Second of all, I attempt to address the issue of evaluating existing PFA reinstatement dates. These are the date- and location-dependent lengths of time for which a pest must not be observed before eradication can be declared.
 
 I seek to develop a method that can (a) evaluate proposed zero-catch criteria from a statistical point of view; (b) help to formulate new zero-catch criteria based on thresholds for the posterior probability of eradication; and (c) flexibly inform decision making, so that decision makers can weigh the cost of eradication probabilistically against the cost of further eradication attempts.
+
+TODO: Write a paragraph about how the primary goal of the model is to infer the eradication of **spot infestations** -- i.e. small, incipient infestations.
+
+### Outline of this work
+
+TODO: Write outline of the whole thesis

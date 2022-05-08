@@ -74,3 +74,21 @@ Under this framework, the problem is to learn the distribution of $N_T \mid \mat
 
 
 
+
+#### McArdle 1990
+
+I start by discussing the most basic approach to program design. This is the frequentist approach described by @mcardle1990. I emphasise this method because (a) it is conceptually simple and therefore easy to describe, and (b) it is emblematic of other methods in the literature, which are similarly general and simple. First, let the *rarity* of the species $p \in [0, 1]$ be the probability that a species is detected in any given sampling unit. (Sampling units can be arranged spatially or temporally; e.g. a survey that involves checking $w$ weeks at $k$ locations would have $wk$ sampling units.) Then, the number of surveys in which the species is detected is given by $X \sim \mathrm{Binomial}(T, p)$. Accordingly, the probability of *not* detecting the species in $T$ surveys is given by 
+$$
+\alpha = \Pr(X = 0) = 1 - (1 - p)^T.
+$$
+
+The last formula allows us to compute any of the 3 quantities $\alpha$, $p$, and $t$, assuming the other two are given.
+
+Given this framework, the problem of program design becomes the following. We decide *a priori* what the smallest "rarity" $p$ worth detecting is. McArdle supposes that if a species if sufficiently difficult to detect (while, nonetheless, $p > 0$) then it cannot be considered a member of an ecological community, and therefore not worthy of being deemed "present". Write the smallest rarity worth detecting as $p_0$. Then, we choose a minimum detection probability $\alpha$ that we are willing to accept. For example, we might wish to have chance $\alpha > 0.95$ of detecting a species, given that it is present. Then, with the above formula, we can rearrange to get the smallest number of survey units $T$ such that detection probability $\alpha$ is achieved.
+
+Statisticians will recognise that the above is essentially power analysis for data modelled as identically and independently distributed Bernoulli trials. This analogy can be made more concrete. For any fixed rarity $p$, we can derive the probability of observing $n$ or more negative surveys. This is the p-value. We can then reject the hypothesis that there is the rarity is greater than $p_0$, the rarity worth detecting.
+
+#### Limitations of McArdle's method
+
+Applying the above model to the problem of program design is not straightforward. Firstly, the model is fairly restrictive. It assumes that the probability of detecting the pest population is constant over time. Secondly, in the case of pest populations, it may be difficult to determine the smallest value of $p$ that is "worth" detecting. When a pest species is cryptic, the detectability ($p$ in this model) can be extremely small even when the population is relatively large. Further, invasive potential of the pest may be large, so that even small populations bear a large cost to the decision maker. 
+
