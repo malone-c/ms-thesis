@@ -1,23 +1,25 @@
-# Model development
+# General framework proposal
+
+## Introduction
 
 TODO: Write introduction to this chapter
 TODO: Write outline of this chapter
 
-### The scenario
+## The scenario
 
 TODO: Write a general description of the zero catch scenario
 
 In the following, I describe a general probabilistic model of an ecological system. The size, location, and number of captures, for a biological population, are explicitly modelled. It is assumed that the data are a number of captures (or, alternatively, sightings or detections), and that we wish to infer posterior distributions for the parameters governing size and/or locations. 
+
+## Why make the model spatially explicit?
+
+The value of including a spatial component in the model may be questioned. This is relatively unusual in standard approaches (see, e.g., @mcardle1990). However, incorporating the spatial component allows us to leverage a useful source of prior information about trap efficacy. There exists a moderately large literature of **release-recapture** studies for various species of fruit fly (@todocite). Release recapture studies give us two kinds of data -- one one hand, we get the total proportion of flies recaptured; on the other hand, we also get the mean proportion of flies captured **per trap**, given distance between that trap and the release point. The first kind of data can be useful when the experimental setting is similar to the real-world setting for which we want to perform inference. This will be approximately the case when the types of traps, their number, and the spacing between them, are the same. However, this will often not be the case. For example, studies vary significantly in the types and number of traps used. Further, we may wish to infer eradication of pest populations in trapping systems that are genuinely novel or untested. For example, after an outbreak has occurred, and eradication measures have been stopped, it is common to set up supplementary trapping units to intensify monitoring and increase the likelihood of detecting flies, conditional on their presence in the area (@supp_traps). 
 
 ## Structure of the model
 
 At the most basic level, I propose to define a joint distribution over (a) the number of flies in a population, (b) the location of each fly, and (c) the number of flies that are detected (caught in traps). Defining notation, at each time point $t$, we must define a joint distribution over the number of flies $N_t$, the $N_t \times 2$ matrix of fly locations $\mathbf L_t$, and the number of flies detected $y_t$. (It is assumed that the frequency of time points $t$ is determined by the frequency at which surveillance traps are checked.) I.e., the model is a joint distribution $p(\{N_t, \mathbf L_t, y_t\}_{t=1}^T)$. Our goal is, primarily, to infer the posterior distribution of the population size at the last time point $N_T$, conditional on $\mathbf y = \{y_t\}_{t=1}^T = \mathbf 0_T$. To make this possible, we must specify a joint **prior** distribution over $\{N_t, \mathbf L_t\}$, and a likelihood, i.e. a distribution for $\mathbf y \mid \{N_t, \mathbf L_t\}_{t=1}^T$. Instead of defining a joint prior directly on $\mathbf N = \{N_t\}_{t=1}^T$, I define a prior distribution over the parameters that govern the process by which the population grows or decays over time. As such, an assumed stochastic growth model structures the prior over $\mathbf N$.
 
 It is assumed that traps have fixed, known locations. The probability of capture for each fly, conditional on their location, is then computed as a function of the distance between that fly and each trap. 
-
-## Why make the model spatially explicit?
-
-The value of including a spatial component in the model may be questioned. This is relatively unusual in standard approaches (see, e.g., @mcardle1990). However, incorporating the spatial component allows us to leverage a useful source of prior information about trap efficacy. There exists a moderately large literature of **release-recapture** studies for various species of fruit fly (@todocite). Release recapture studies give us two kinds of data -- one one hand, we get the total proportion of flies recaptured; on the other hand, we also get the mean proportion of flies captured **per trap**, given distance between that trap and the release point. The first kind of data can be useful when the experimental setting is similar to the real-world setting for which we want to perform inference. This will be approximately the case when the types of traps, their number, and the spacing between them, are the same. However, this will often not be the case. For example, studies vary significantly in the types and number of traps used. Further, we may wish to infer eradication of pest populations in trapping systems that are genuinely novel or untested. For example, after an outbreak has occurred, and eradication measures have been stopped, it is common to set up supplementary trapping units to intensify monitoring and increase the likelihood of detecting flies, conditional on their presence in the area (@supp_traps). 
 
 ### Population size
 
@@ -29,13 +31,11 @@ where a continuous prior distribution is defined over the $R_t$ terms, which may
 
 It may be worth noting that we could choose to factor in covariate information for the growth process. For example, for a given pest species, we might understand the growth of populations over time as a function of weather or rainfall. I do not discuss this possibility further in this thesis. It may also be worth noting that there are no a priori assumptions on the population dynamics for the growth model. Thanks to the generality of the sampling algorithm, it is simple to "plug in" elaborate growth models. For example, the models of @lux2018 or @manoukis2014 could be used to generate independent random draws from the population of Medfly. In this way, they can structure our prior over the population size. In this case, inference would proceed simple as in the case I outline here. This highlights key benefits of the modelling approach taken here, namely its flexibility and modularity.
 
-### Locations of flies
+### Fly locations
 
 I first discuss the option of setting a uniform prior. Setting an uninformative prior is fairly straightforward for this problem. In particular, we might assume that, beyond a certain distance from the outbreak centre (say, 1km) any existing population of Medfly is distinct from the population of interest. Therefore, we might set the prior distribution for the population location to be uniform on the surface of a disc with (e.g.) 1km radius around the outbreak centre. 
 
 Despite the fact that an uninformative prior is relatively straightforward to set, it is most likely not advisable in specific applications. Firstly, when an outbreak is suspected, it is typical that information about location is available. On one hand, fruit flies are heavily dependent on the availability of suitable fruit trees for survival and reproduction. Therefore, someone with local area knowledge will be able to determine the most likely locations for an existing population. On the other hand, if an outbreak is known or suspected, then flies must have been detected somewhere. Most likely, the locations of these detections will be known to the analyst. When the fly species has low dispersal distances (as e.g. medfly does) these detection locations are highly informative. Therefore, an informative prior, utilising this information, formally or informally, is recommended.
-
-### Fly locations
 
 It is assumed the flies are typically clustered in space. This may be justifiable in practice. For a small, seed population, a population with low density will die out due to the allee effect. However, when this assumption is not realistic, an alternative prior on locations should be considered.
 
@@ -59,5 +59,7 @@ Note that this model of captures takes for granted the common assumption that th
 NOTE: Delete the next paragraph?
 
 If the researcher has cause to believe that interference may be non-negligible, a simple correction can be applied. Without loss of generality, suppose we are interested in a single fly in a single trapping period. Let $q_k$ be the probability that that fly is captured at trap $k$, calculated using the distance function above. Let $q_0$ be the probability that the fly is not captured at all. The set $\{q_k\}_{k=0}^K$ are probabilities of exhaustive and mutually exclusive events. Therefore, we can redefine the probabilities of trap-specific capture (or no capture) as $q'_k = q_k / \sum_{i=0}^K q_i$.
+
+## Conclusion
 
 TODO: Write conclusion of this chapter

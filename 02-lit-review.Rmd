@@ -9,16 +9,11 @@ TODO: Write introduction to this chapter
 
 ## Zero-catch criteria
 
-TODO: Explain the role of zero-catch criteria in fruit fly trapping. Cite Meats and Clift as evidence of this being the case.
+PFA status is economically valuable to producers in the relevant region. Firstly, there may be offshore markets which require that produce is supplied from a PFA for a given pest. Secondly, in some markets, PFA status may allow the supplier to receive a price premium for goods sold. In other words, PFA status increases the value of local produce on international markets.
 
-"eradication of spot pest infestations, such as Medfly, is common to regions normally claiming area freedom (fruit fly exclusion zones)" (Meats 2005, p. 1335).
+Pest eradication is based on rules of thumb, which in turn are based on a combination of theory and experience (i.e. trial and error). Meats and Clift analyse these on the basis that the rules of thumb are correct. I.e., they assume that the implied acceptable rate of fly detection corresponds to the lowest viable population density for the fly species in question. However, it is debatable whether it is possible to learn correct zero-catch criteria by experience. In particular, there is a long-standing debate about whether spot-infestations in California are due to repeated eradications, or instead due to repeated flare-ups of one continuous low-lying population (@cite). As such, it is unclear whether existing zero-catch criteria can be taken at face value.
 
-* Zero-catch scenarios.
-* Rules of thumb.
-
-## Elaborate models
-
-### Elaborate models for inferring pest absence
+## Bayesian models for inferring absence of a pest population
 
 The problem of inferring the presence or absence of a difficult-to-detect species has a literature of its own. Models date back to at least the 1990s, using relatively simple and general models to infer pest absence (see @todocite). Such simple methods are attractive for their simplicity, generality, and efficiency of computation. Unfortunately, these models make strong assumptions about priors which are not defensible in general. For example, most assume a fixed, and either constant or declining population size (@caley2015, p. 2). This is not reasonable for the study of invasive species, whose numbers are uncertain, and may be increasing quickly. Many models assume that we can estimate a sighting rate, which is constant as a function of the locations of the individuals.
 

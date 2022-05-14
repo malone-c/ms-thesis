@@ -95,39 +95,20 @@
 \hypertarget{control-and-monitoring-of-tephritid-fruit-flies}{%
 \section{Control and monitoring of Tephritid fruit flies}\label{control-and-monitoring-of-tephritid-fruit-flies}}
 
-TODO: Restructure the following paragraphs; focus more on zero-catch criteria
+Biological (pest) invasions are incursions of incipient populations of plants or animals that are non-native to a given region. Such invasions can have high economic significance when the invading species is considered a \emph{pest}. In the midst of the ongoing globalisation of trade, the salience of biological invasions is increasing around the world. Invasions are salient because they pose severe economic and environmental risks. On the economic side, they may threaten ``wholesale loss of agricultural, forestry, and fishery resources'' (\citet{mack2000}). On the environmental side, they may threaten to disrupt native ecological processes -- threatening the extinction of endangered natives, and creating globally homogenous, ``cosmopolitan'' ecological systems (Ibid.).
 
-Biological invasions are incursions of incipient populations of plants or animals that are non-native to a given region. In the midst of the ongoing globalisation of trade, the salience of biological invasions is increasing around the world. Biological invasions are salient because they pose severe economic and environmental risks. On the economic side, they threaten ``wholesale loss of agricultural, forestry, and fishery resources'' (\citet{mack2000}). On the environmental side, they threaten to disrupt native ecological processes -- outcompeting potentially endangered natives, and creating globally homogenous, ``cosmopolitan'' ecological systems.
+Tephritid fruit flies (\emph{Diptera Tephritidae}) are a genus of insects of particularly high economic significance. Species in this genus have the potential to destroy a wide variety of horticultural produce, in extremely large amounts. Females lay eggs in plant tissue (often fruits). Eggs develop into larvae, which then feed on surrounding tissue. Economic costs of successful fruit fly invasions in Australia have been estimated to be as high as hundreds of millions of dollars (\citet{suckling2016}, \citet{hancock2000}). Potential costs of Tephritid fruit fly incursions include crop losses; labour and materials associated with eradication and suppression; knock-on effects to agricultural produce as a consequence of pesticide usage (\citet{suckling2016}).
 
-Tephritid fruit flies (\emph{Diptera Tephritidae}) are of particularly high economic significance. Species in this genus have the potential to destroy a wide variety of horticultural produce, in extremely large amounts. Females lay eggs in plant tissue (often fruits). Eggs develop into larvae, which then feed on the plant tissue. Potential costs of Tephritid fruit fly incursions include losses to significant crop losses; materials and labour allocated to their eradication or suppression; knock-on effects to agricultural produce as a consequence of pesticide usage (\citet{suckling2016}). Economic costs of successful fruit fly invasions in Australia have been estimated to be as high as hundreds of millions of dollars (\citet{suckling2016}, \citet{hancock2000}).
+Some locations in Australia and the USA are internationally recognised exclusion zones for some species of fruit fly. In some of these places \emph{spot infestations} of the relevant fly species can be common (\citet{meats2005}). These are small invasions, usually met with relatively small amounts of surveillance and control. Currently, it is widespread practice that inference of absence for such invasions is informal. In particular, pest absence is declared according to rules of thumb (Ibid.). These rules are in the form of \textbf{zero-catch criteria}. The idea is that, if zero flies are detected for some pre-specified length of time (the zero-catch criterion) we may infer with confidence, and therefore declare, that they have been eradicated from the region.
 
-Governments have a responsibility monitor and eradicate potential biological invasions. In particular, the Australian government is legally bound by the Biosecurity act 2015 to ensure a very low level of risk for animal and plant invasions. A core element required for controlling this risk is the development of capacities for monitoring and controlling pest outbreaks. Monitoring biological species is difficult and costly. As such,in the public interest, the cost of increasing monitoring intensity must be traded off against the cost of failing to detect an incipient invasion.
+There are issues with the zero-catch criteria currently used. Firstly, they are only minimally sensitive to variability between situations. For example, outbreaks two locations with the same temperatures will have the same zero-catch criteria, even though they may differ in other significant ways. Secondly, they do not explicitly or transparently take into account the low sensitivity of fruit fly traps. Thirdly, they are based on a simplified model of fruit fly biology which does not account for variation.
 
-The manager's role is made more difficult when a pest population is \emph{sub-detectable}. Populations may be subdetectable because they can persist at low rates; because they are \emph{taxonomically cryptic} (i.e.~hard to distinguish from well known native species); because they are \emph{behaviourally cryptic} (i.e.~behave in ways that help them avoid detection by predators; see \citet{kery2002}); or because the population is suppressed by efforts to eradicate them. Matters are made worse when tests to detect the presence of a population have extremely low sensitivity for other reasons. For example, monitoring traps for fruit flies have very low attractiveness. One study of Mediterannean fruit fly found that only 0.02\% of 38.8 million flies were recaptured after release, in a standard surveillance setup in Adelaide (\citet{ms2007}).
-
-Suppose an outbreak of an invasive pest has occurred. Monitoring for the pest must then be intensified and localised to the area of suspicion. If the pest has since been eradicated, governments are incentivised to declare eradication quickly. This is because suspension of pest free area status is economically costly to local producers. On the other hand, if eradication has \emph{not} occured, declaring eradication prematurely could (a) lower the manager's credibility, and therefore value of local produce, and (b) cause larger costs longer term due to local establishment of the pest.
-
-A necessary prerequisite for minimising the probability of failing to detect an existing invasion is to understand what can be inferred about the state of the population from what has been observed in surveillance. In particular, it is desirable to understand the likelihood that extinction has occurred, given that the species has not been detected over a certain period of time.
-
-PFA status is economically valuable to producers in the relevant region. Firstly, there may be offshore markets which require that produce is supplied from a PFA for a given pest. Secondly, in some markets, PFA status may allow the supplier to receive a price premium for goods sold. In other words, PFA status increases the value of local produce on international markets.
-
-TODO: Discuss ZTC.
-
-\hypertarget{problems-this-work-seeks-to-address}{%
-\subsection{Problems this work seeks to address}\label{problems-this-work-seeks-to-address}}
-
-As mentioned above, the manager seeks to minimise resources spent on surveillance, while minimising the chance that an eradication is declared when none has occurred. The general problem this thesis is concerned with is to infer whether or not an invasive species has been extinguished based on survey records.
-
-The present work attempts to address two gaps related to Tephritid fruit flies. First of all, I attempt to develop a model for understanding the evidential properties of survey records in arbitrary trapping grids. Second of all, I attempt to address the issue of evaluating existing PFA reinstatement dates. These are the date- and location-dependent lengths of time for which a pest must not be observed before eradication can be declared.
-
-I seek to develop a method that can (a) evaluate proposed zero-catch criteria from a statistical point of view; (b) help to formulate new zero-catch criteria based on thresholds for the posterior probability of eradication; and (c) flexibly inform decision making, so that decision makers can weigh the cost of eradication probabilistically against the cost of further eradication attempts.
-
-TODO: Write a paragraph about how the primary goal of the model is to infer the eradication of \textbf{spot infestations} -- i.e.~small, incipient infestations.
+The primary goal of the present work is to develop a rigorous statistical framework for inferring pest absence after a suspected outbreak. The hope is that such a framework can be useful (a) to evaluate existing zero-catch criteria, and (b) to develop improved methods for deriving such criteria. A secondary goal of the framework is to provide situation-specific estimates of the probability of eradication. These may be useful to the regulator, who wishes to weigh the cost of eradication probabilistically against the cost of a successful biological invasion.
 
 \hypertarget{outline-of-this-work}{%
-\subsection{Outline of this work}\label{outline-of-this-work}}
+\section{Outline of this work}\label{outline-of-this-work}}
 
-TODO: Write outline of the whole thesis
+I begin this work in chapter two by reviewing relevant literature. In particular, I discuss two bodies of literature. One is on investigation of fruit flies. The second is on existing Bayesian models for inferring of pest absence. Two example cases from the literature are discussed as inspiration for the model developed in the present work. In chapter three, I develop, and justify, a framework for modelling tephritid fruit fly invasions. Model details are discussed at an abstract level. The focus in this chapter is to give a skeleton of the model, assuming that a few sources of information, common in fruit fly literatures, is available to the researcher. Finally, in chapter four, I apply the methodology to the specific case of Mediterranean fruit fly.
 
 \hypertarget{lit-review}{%
 \chapter{Literature review}\label{lit-review}}
@@ -137,23 +118,12 @@ TODO: Write introduction to this chapter
 \hypertarget{zero-catch-criteria}{%
 \section{Zero-catch criteria}\label{zero-catch-criteria}}
 
-TODO: Explain the role of zero-catch criteria in fruit fly trapping. Cite Meats and Clift as evidence of this being the case.
+PFA status is economically valuable to producers in the relevant region. Firstly, there may be offshore markets which require that produce is supplied from a PFA for a given pest. Secondly, in some markets, PFA status may allow the supplier to receive a price premium for goods sold. In other words, PFA status increases the value of local produce on international markets.
 
-``eradication of spot pest infestations, such as Medfly, is common to regions normally claiming area freedom (fruit fly exclusion zones)'' (Meats 2005, p.~1335).
+Pest eradication is based on rules of thumb, which in turn are based on a combination of theory and experience (i.e.~trial and error). Meats and Clift analyse these on the basis that the rules of thumb are correct. I.e., they assume that the implied acceptable rate of fly detection corresponds to the lowest viable population density for the fly species in question. However, it is debatable whether it is possible to learn correct zero-catch criteria by experience. In particular, there is a long-standing debate about whether spot-infestations in California are due to repeated eradications, or instead due to repeated flare-ups of one continuous low-lying population (\citet{cite}). As such, it is unclear whether existing zero-catch criteria can be taken at face value.
 
-\begin{itemize}
-\tightlist
-\item
-  Zero-catch scenarios.
-\item
-  Rules of thumb.
-\end{itemize}
-
-\hypertarget{elaborate-models}{%
-\section{Elaborate models}\label{elaborate-models}}
-
-\hypertarget{elaborate-models-for-inferring-pest-absence}{%
-\subsection{Elaborate models for inferring pest absence}\label{elaborate-models-for-inferring-pest-absence}}
+\hypertarget{bayesian-models-for-inferring-absence-of-a-pest-population}{%
+\section{Bayesian models for inferring absence of a pest population}\label{bayesian-models-for-inferring-absence-of-a-pest-population}}
 
 The problem of inferring the presence or absence of a difficult-to-detect species has a literature of its own. Models date back to at least the 1990s, using relatively simple and general models to infer pest absence (see \citet{todocite}). Such simple methods are attractive for their simplicity, generality, and efficiency of computation. Unfortunately, these models make strong assumptions about priors which are not defensible in general. For example, most assume a fixed, and either constant or declining population size (\citet{caley2015}, p.~2). This is not reasonable for the study of invasive species, whose numbers are uncertain, and may be increasing quickly. Many models assume that we can estimate a sighting rate, which is constant as a function of the locations of the individuals.
 
@@ -208,18 +178,26 @@ TODO: Note that this work builds on the work of \citet{lg1994}. The authors exam
 
 TODO: Write conclusion of this chapter
 
-\hypertarget{model-development}{%
-\chapter{Model development}\label{model-development}}
+\hypertarget{general-framework-proposal}{%
+\chapter{General framework proposal}\label{general-framework-proposal}}
+
+\hypertarget{introduction-1}{%
+\section{Introduction}\label{introduction-1}}
 
 TODO: Write introduction to this chapter
 TODO: Write outline of this chapter
 
 \hypertarget{the-scenario}{%
-\subsection{The scenario}\label{the-scenario}}
+\section{The scenario}\label{the-scenario}}
 
 TODO: Write a general description of the zero catch scenario
 
 In the following, I describe a general probabilistic model of an ecological system. The size, location, and number of captures, for a biological population, are explicitly modelled. It is assumed that the data are a number of captures (or, alternatively, sightings or detections), and that we wish to infer posterior distributions for the parameters governing size and/or locations.
+
+\hypertarget{why-make-the-model-spatially-explicit}{%
+\section{Why make the model spatially explicit?}\label{why-make-the-model-spatially-explicit}}
+
+The value of including a spatial component in the model may be questioned. This is relatively unusual in standard approaches (see, e.g., \citet{mcardle1990}). However, incorporating the spatial component allows us to leverage a useful source of prior information about trap efficacy. There exists a moderately large literature of \textbf{release-recapture} studies for various species of fruit fly (\citet{todocite}). Release recapture studies give us two kinds of data -- one one hand, we get the total proportion of flies recaptured; on the other hand, we also get the mean proportion of flies captured \textbf{per trap}, given distance between that trap and the release point. The first kind of data can be useful when the experimental setting is similar to the real-world setting for which we want to perform inference. This will be approximately the case when the types of traps, their number, and the spacing between them, are the same. However, this will often not be the case. For example, studies vary significantly in the types and number of traps used. Further, we may wish to infer eradication of pest populations in trapping systems that are genuinely novel or untested. For example, after an outbreak has occurred, and eradication measures have been stopped, it is common to set up supplementary trapping units to intensify monitoring and increase the likelihood of detecting flies, conditional on their presence in the area (\citet{supp_traps}).
 
 \hypertarget{structure-of-the-model}{%
 \section{Structure of the model}\label{structure-of-the-model}}
@@ -227,11 +205,6 @@ In the following, I describe a general probabilistic model of an ecological syst
 At the most basic level, I propose to define a joint distribution over (a) the number of flies in a population, (b) the location of each fly, and (c) the number of flies that are detected (caught in traps). Defining notation, at each time point \(t\), we must define a joint distribution over the number of flies \(N_t\), the \(N_t \times 2\) matrix of fly locations \(\mathbf L_t\), and the number of flies detected \(y_t\). (It is assumed that the frequency of time points \(t\) is determined by the frequency at which surveillance traps are checked.) I.e., the model is a joint distribution \(p(\{N_t, \mathbf L_t, y_t\}_{t=1}^T)\). Our goal is, primarily, to infer the posterior distribution of the population size at the last time point \(N_T\), conditional on \(\mathbf y = \{y_t\}_{t=1}^T = \mathbf 0_T\). To make this possible, we must specify a joint \textbf{prior} distribution over \(\{N_t, \mathbf L_t\}\), and a likelihood, i.e.~a distribution for \(\mathbf y \mid \{N_t, \mathbf L_t\}_{t=1}^T\). Instead of defining a joint prior directly on \(\mathbf N = \{N_t\}_{t=1}^T\), I define a prior distribution over the parameters that govern the process by which the population grows or decays over time. As such, an assumed stochastic growth model structures the prior over \(\mathbf N\).
 
 It is assumed that traps have fixed, known locations. The probability of capture for each fly, conditional on their location, is then computed as a function of the distance between that fly and each trap.
-
-\hypertarget{why-make-the-model-spatially-explicit}{%
-\section{Why make the model spatially explicit?}\label{why-make-the-model-spatially-explicit}}
-
-The value of including a spatial component in the model may be questioned. This is relatively unusual in standard approaches (see, e.g., \citet{mcardle1990}). However, incorporating the spatial component allows us to leverage a useful source of prior information about trap efficacy. There exists a moderately large literature of \textbf{release-recapture} studies for various species of fruit fly (\citet{todocite}). Release recapture studies give us two kinds of data -- one one hand, we get the total proportion of flies recaptured; on the other hand, we also get the mean proportion of flies captured \textbf{per trap}, given distance between that trap and the release point. The first kind of data can be useful when the experimental setting is similar to the real-world setting for which we want to perform inference. This will be approximately the case when the types of traps, their number, and the spacing between them, are the same. However, this will often not be the case. For example, studies vary significantly in the types and number of traps used. Further, we may wish to infer eradication of pest populations in trapping systems that are genuinely novel or untested. For example, after an outbreak has occurred, and eradication measures have been stopped, it is common to set up supplementary trapping units to intensify monitoring and increase the likelihood of detecting flies, conditional on their presence in the area (\citet{supp_traps}).
 
 \hypertarget{population-size}{%
 \subsection{Population size}\label{population-size}}
@@ -244,15 +217,12 @@ where a continuous prior distribution is defined over the \(R_t\) terms, which m
 
 It may be worth noting that we could choose to factor in covariate information for the growth process. For example, for a given pest species, we might understand the growth of populations over time as a function of weather or rainfall. I do not discuss this possibility further in this thesis. It may also be worth noting that there are no a priori assumptions on the population dynamics for the growth model. Thanks to the generality of the sampling algorithm, it is simple to ``plug in'' elaborate growth models. For example, the models of \citet{lux2018} or \citet{manoukis2014} could be used to generate independent random draws from the population of Medfly. In this way, they can structure our prior over the population size. In this case, inference would proceed simple as in the case I outline here. This highlights key benefits of the modelling approach taken here, namely its flexibility and modularity.
 
-\hypertarget{locations-of-flies}{%
-\subsection{Locations of flies}\label{locations-of-flies}}
+\hypertarget{fly-locations}{%
+\subsection{Fly locations}\label{fly-locations}}
 
 I first discuss the option of setting a uniform prior. Setting an uninformative prior is fairly straightforward for this problem. In particular, we might assume that, beyond a certain distance from the outbreak centre (say, 1km) any existing population of Medfly is distinct from the population of interest. Therefore, we might set the prior distribution for the population location to be uniform on the surface of a disc with (e.g.) 1km radius around the outbreak centre.
 
 Despite the fact that an uninformative prior is relatively straightforward to set, it is most likely not advisable in specific applications. Firstly, when an outbreak is suspected, it is typical that information about location is available. On one hand, fruit flies are heavily dependent on the availability of suitable fruit trees for survival and reproduction. Therefore, someone with local area knowledge will be able to determine the most likely locations for an existing population. On the other hand, if an outbreak is known or suspected, then flies must have been detected somewhere. Most likely, the locations of these detections will be known to the analyst. When the fly species has low dispersal distances (as e.g.~medfly does) these detection locations are highly informative. Therefore, an informative prior, utilising this information, formally or informally, is recommended.
-
-\hypertarget{fly-locations}{%
-\subsection{Fly locations}\label{fly-locations}}
 
 It is assumed the flies are typically clustered in space. This may be justifiable in practice. For a small, seed population, a population with low density will die out due to the allee effect. However, when this assumption is not realistic, an alternative prior on locations should be considered.
 
@@ -278,15 +248,18 @@ NOTE: Delete the next paragraph?
 
 If the researcher has cause to believe that interference may be non-negligible, a simple correction can be applied. Without loss of generality, suppose we are interested in a single fly in a single trapping period. Let \(q_k\) be the probability that that fly is captured at trap \(k\), calculated using the distance function above. Let \(q_0\) be the probability that the fly is not captured at all. The set \(\{q_k\}_{k=0}^K\) are probabilities of exhaustive and mutually exclusive events. Therefore, we can redefine the probabilities of trap-specific capture (or no capture) as \(q'_k = q_k / \sum_{i=0}^K q_i\).
 
+\hypertarget{conclusion-1}{%
+\section{Conclusion}\label{conclusion-1}}
+
 TODO: Write conclusion of this chapter
 
-\hypertarget{case-study-mediterranean-fruit-fly}{%
-\chapter{Case study: Mediterranean fruit fly}\label{case-study-mediterranean-fruit-fly}}
+\hypertarget{case-study-mediterranean-fruit-fly-c.-capitata}{%
+\chapter{\texorpdfstring{Case study: Mediterranean fruit fly (\emph{C. Capitata})}{Case study: Mediterranean fruit fly (C. Capitata)}}\label{case-study-mediterranean-fruit-fly-c.-capitata}}
 
 TODO: Probabilistic graphical model of the entire model (with a box to demarcate the ``internal'' components from the components on which a prior distribution is set).
 
-\hypertarget{introduction-1}{%
-\section{Introduction}\label{introduction-1}}
+\hypertarget{introduction-2}{%
+\section{Introduction}\label{introduction-2}}
 
 TODO: Rewrite this intro in light of the model proposal chapter
 
@@ -331,8 +304,8 @@ As mentioned above, I do not use real data to estimate parameters. Instead, I mo
 
 Thus, the data we wish to learn from is hypothetical, or simulated. The idea is to simulate a relatively realistic scenario. We observe the outcomes of a surveillance process. The surveillance process is generated by weekly checks of traps that are deployed uniformly in a given area (more about the trapping arrangement below). It is assumed that no specimens are detected at any point in the survey period. In other words, the sum of all detected counts in the period is zero.
 
-\hypertarget{prior-data-on-capture-probability-release-recapture-studies}{%
-\subsection{Prior data on capture probability: release recapture studies}\label{prior-data-on-capture-probability-release-recapture-studies}}
+\hypertarget{release-recapture-studies}{%
+\subsection{Release recapture studies}\label{release-recapture-studies}}
 
 In the previous chapter, I briefly discussed release-recapture experiments. These are experiments involving the release of large numbers of flies into networks of standard traps. These studies give us a useful source of information about the probability of capturing a fly given distance between a fly and a trap.
 
@@ -419,15 +392,15 @@ TODO: mention that the probability of capture is adjusted, because the study giv
 
 The results of release recapture studies are highly variable, and gaining access to data may be difficult for older studies. In this case, it may be desirable to incorporate uncertainty about the probability function. This could be done, for example, by assigning prior distributions to the coefficients \(a\) and \(b\). I do not explore this any further here, as this model exposition is intended for the purposes of illustration only.
 
-\hypertarget{computing-the-posterior-distribution}{%
-\section{Computing the posterior distribution}\label{computing-the-posterior-distribution}}
+\hypertarget{sampling-procedure}{%
+\section{Sampling procedure}\label{sampling-procedure}}
 
 In this section, I discuss the problem of computing the posterior distribution, given a survey record. Above, I stated that the model could be defined flexibly. Without restrictions on the form of the growth and detection models, the posterior may be analytically intractable. In other words, we will not be able to write out the posterior density or mass as a function of the data and prior distributions. Such situations are common in the Bayesian framework, because of the tendency for the posterior density or mass to depend, implicitly or explicitly, on analytically intractable integrals.
 
 So far, we have talked about situations when sampling is required for inference. Further problems arise when the model is \emph{agent-based}. In other words, when we include uncertainty about individual-level features in the model. In this case, the detection probability is random, even when the location and population size is known. In other words, the probability of detecting at least one individual is a function of the number of individuals, and also their individual (random) properties. This is a situation in which ``the number of things you do not know is one of the things you do not know'' (Richardson and Green, 1997).
 
-\hypertarget{abc-models}{%
-\subsection{ABC models}\label{abc-models}}
+\hypertarget{approximate-bayesian-computation}{%
+\subsection{Approximate Bayesian Computation}\label{approximate-bayesian-computation}}
 
 A simple rejection algorithm is used to draw samples from the posterior distribution (see previous chapter). Instead of matching on a statistic, such as the sum of the observations, the rejection rule was set so that data were only kept in cases where the simulated data vector was an exact match with the actual data (the hypothetical zero-catch record).
 
@@ -455,8 +428,8 @@ The posterior probability of extinction after 12 weeks is approximately 0.684.\f
 
 Here I discuss limitations and objections.
 
-\hypertarget{drawbacks}{%
-\subsection{Drawbacks}\label{drawbacks}}
+\hypertarget{limitations}{%
+\subsection{Limitations}\label{limitations}}
 
 \begin{itemize}
 \tightlist
