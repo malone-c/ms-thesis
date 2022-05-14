@@ -13,8 +13,6 @@ theme_set(theme_bw())
 
 # Case study: Mediterranean fruit fly (*C. Capitata*)
 
-TODO: Probabilistic graphical model of the entire model (with a box to demarcate the "internal" components from the components on which a prior distribution is set).
-
 ## Introduction
 
 TODO: Rewrite this intro in light of the model proposal chapter
