@@ -4,7 +4,7 @@
 \PassOptionsToPackage{dvipsnames,svgnames*,x11names*}{xcolor}
 %
 \documentclass[
-]{book}
+  oneside]{book}
 \usepackage{amsmath,amssymb}
 \usepackage{lmodern}
 \usepackage{setspace}
@@ -24,16 +24,6 @@
   \usepackage[]{microtype}
   \UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
 }{}
-\makeatletter
-\@ifundefined{KOMAClassName}{% if non-KOMA class
-  \IfFileExists{parskip.sty}{%
-    \usepackage{parskip}
-  }{% else
-    \setlength{\parindent}{0pt}
-    \setlength{\parskip}{6pt plus 2pt minus 1pt}}
-}{% if KOMA class
-  \KOMAoptions{parskip=half}}
-\makeatother
 \usepackage{xcolor}
 \IfFileExists{xurl.sty}{\usepackage{xurl}}{} % add URL line breaks if available
 \IfFileExists{bookmark.sty}{\usepackage{bookmark}}{\usepackage{hyperref}}
@@ -47,46 +37,7 @@
   urlcolor=blue,
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
-\usepackage{color}
-\usepackage{fancyvrb}
-\newcommand{\VerbBar}{|}
-\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
-\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
-% Add ',fontsize=\small' for more characters per line
-\usepackage{framed}
-\definecolor{shadecolor}{RGB}{248,248,248}
-\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
-\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
-\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
-\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\BuiltInTok}[1]{#1}
-\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
-\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
-\newcommand{\ExtensionTok}[1]{#1}
-\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
-\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\ImportTok}[1]{#1}
-\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
-\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
-\newcommand{\NormalTok}[1]{#1}
-\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
-\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
-\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
-\newcommand{\RegionMarkerTok}[1]{#1}
-\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
-\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
-\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage[margin=4cm]{geometry}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -127,7 +78,7 @@
 
 \title{Bayesian inference of eradication of incipient Tephritid fruit fly populations, with application to Mediterranean fruit fly}
 \author{Chris Malone}
-\date{2022-05-12}
+\date{2022-05-14}
 
 \begin{document}
 \maketitle
@@ -399,41 +350,19 @@ The likelihood of a given number of captures is a function of latent variables, 
 \hypertarget{population-size-1}{%
 \subsection{Population size}\label{population-size-1}}
 
-In this case, \(N_1\) is the first week after the most recent fly detection. I have chosen to give \(N_1\) the prior distribution \(N_1 \mid \lambda \sim \mathrm{Poisson}(\lambda)\), where \(\lambda \sim \mathrm{Exponential}(0.05)\). This distribution for \(N_1\) is chosen as it is a discrete distribution with right skew, and a relatively large amount of mass \(f_{N_1}(x)\) at \(x = 0\), corresponding to the situation where flies are already eradicated (see \citet{prior_init_size})
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{g }\OtherTok{=} \DecValTok{1}\SpecialCharTok{/}\DecValTok{20}
-\NormalTok{init\_pmf }\OtherTok{=} \ControlFlowTok{function}\NormalTok{(n, g) g }\SpecialCharTok{/}\NormalTok{ (}\DecValTok{1}\SpecialCharTok{+}\NormalTok{g)}\SpecialCharTok{\^{}}\NormalTok{(n}\SpecialCharTok{+}\DecValTok{1}\NormalTok{)}
-
-\NormalTok{x }\OtherTok{=} \DecValTok{0}\SpecialCharTok{:}\DecValTok{100}
-
-\NormalTok{df }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(}\AttributeTok{x =}\NormalTok{ x, }\AttributeTok{y =} \FunctionTok{init\_pmf}\NormalTok{(x, g))}
-
-\FunctionTok{ggplot}\NormalTok{(df) }\SpecialCharTok{+}
-  \FunctionTok{geom\_bar}\NormalTok{(}\AttributeTok{stat =} \StringTok{\textquotesingle{}identity\textquotesingle{}}\NormalTok{, }\FunctionTok{aes}\NormalTok{(x, y)) }\SpecialCharTok{+}
-  \FunctionTok{xlab}\NormalTok{(}\FunctionTok{bquote}\NormalTok{(}\FunctionTok{italic}\NormalTok{(n))) }\SpecialCharTok{+}
-  \FunctionTok{ylab}\NormalTok{(}\FunctionTok{bquote}\NormalTok{(}\StringTok{\textquotesingle{}Pr(\textquotesingle{}}\SpecialCharTok{*}\FunctionTok{italic}\NormalTok{(N)[}\DecValTok{1}\NormalTok{] }\SpecialCharTok{==} \FunctionTok{italic}\NormalTok{(n)}\SpecialCharTok{*}\StringTok{\textquotesingle{})\textquotesingle{}}\NormalTok{))}
-\end{Highlighting}
-\end{Shaded}
+In this case, \(N_1\) is the first week after the most recent fly detection. I have chosen to give \(N_1\) the prior distribution \(N_1 \mid \lambda \sim \mathrm{Poisson}(\lambda)\), where \(\lambda \sim \mathrm{Exponential}(0.05)\). This distribution for \(N_1\) is chosen as it is a discrete distribution with right skew, and a relatively large amount of mass \(f_{N_1}(x)\) at \(x = 0\), corresponding to the situation where flies are already eradicated (see \citet{priorinitsize}).
 
 \begin{figure}
 \centering
-\includegraphics{_main_files/figure-latex/prior_init_size-1.pdf}
-\caption{(\#fig:prior\_init\_size)Prior distribution of initial population size}
+\includegraphics{_main_files/figure-latex/priorinitsize-1.pdf}
+\caption{\label{fig:priorinitsize}Prior distribution of initial population size}
 \end{figure}
-
-\begin{Shaded}
-\begin{Highlighting}[]
-\CommentTok{\# Prior probability that they\textquotesingle{}re already eradicated}
-\end{Highlighting}
-\end{Shaded}
 
 As for the population sizes at later time points, I assume that growth is exponential at an uncertain rate. In particular, it is assumed that, for \(t \in \{2, \ldots, T\}\), \(N_t \mid N_{t-1}, R_t \sim \mathrm{Poisson}(N_{t-1} e^{R_t})\). Here, we can give any continuous distribution for \(R_t\). I have chosen the vaguely informative prior \(R_t \stackrel{\text{iid}} \sim \mathrm N(0, 0.2)\). The symmetry of this prior means that we are indifferent about whether the population is growing or declining.
 
-The growth rate prior has been chosen to place the vast majority of density below their estimated growth rate under optimal conditions. Medfly have been estimated to grow at 8\% per day, in optimal lab conditions (\citet{papadopoulos2002}). Under an exponential growth model this is 56\% per week. This can be taken as an extremely \emph{pessimistic} upper bound on the growth rate. In real cases, flies may fail to establish due to food scarcity, predation, and/or unsustainably low population density.
+The growth rate prior has been chosen to place the vast majority of density below their estimated growth rate under optimal conditions. Medfly have been estimated to grow at 8\% per day, in optimal lab conditions (\citet{papadopoulos2002}). Under an exponential growth model this is 56\% per week. This can be taken as an upper bound on the growth rate. In the wild, flies may fail to establish due to food scarcity, predation, and/or unsustainably low population density.
 
-In real cases, it will be desirable to attempt to estimate \(R_t\) from data. In particular, it is known that fruit fly population growth rates are highly dependent on temperature. Therefore, it would be wise to estimate and draw values of \(R_t\) conditional on weather measurements. Choosing an empirically realistic distribution for \(R_t\) is likely to improve the efficiency of inference from the survey record.
+In practical, applied cases, it will be desirable to attempt to estimate \(R_t\) from data. In particular, it is known that fruit fly population growth rates are highly dependent on temperature. Therefore, if possible, fly population growth rates should be estimated conditional on weather. Choosing an empirically realistic distribution for \(R_t\) is likely to improve the efficiency of inference from the survey record.
 
 \hypertarget{spatial-location}{%
 \subsection{Spatial location}\label{spatial-location}}
@@ -469,41 +398,13 @@ It may be worth noting that, in real cases, the assumed prior distribution on di
 \hypertarget{trap-locations}{%
 \subsection{Trap locations}\label{trap-locations}}
 
-\begin{Shaded}
-\begin{Highlighting}[]
-\NormalTok{grid\_size }\OtherTok{=} \DecValTok{4}
-\NormalTok{general\_grid\_1d }\OtherTok{=} \FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{grid\_size }\SpecialCharTok{/} \DecValTok{2}\NormalTok{, grid\_size }\SpecialCharTok{/} \DecValTok{2}\NormalTok{) }\SpecialCharTok{*} \DecValTok{400}
-\NormalTok{general\_grid }\OtherTok{=} \FunctionTok{expand.grid}\NormalTok{(general\_grid\_1d, general\_grid\_1d)}
-\NormalTok{general\_traps }\OtherTok{=} \FunctionTok{as.matrix}\NormalTok{(general\_grid)}
-
-\NormalTok{d }\OtherTok{=} \DecValTok{200} \SpecialCharTok{/} \FunctionTok{sqrt}\NormalTok{(}\DecValTok{2}\NormalTok{)}
-\NormalTok{supp\_grid\_1d }\OtherTok{=} \FunctionTok{seq}\NormalTok{(}\SpecialCharTok{{-}}\NormalTok{d, d, }\AttributeTok{length.out =} \DecValTok{4}\NormalTok{)}
-\NormalTok{supp\_traps }\OtherTok{=} \FunctionTok{expand.grid}\NormalTok{(supp\_grid\_1d, supp\_grid\_1d)}
-\NormalTok{all\_traps }\OtherTok{=} \FunctionTok{rbind}\NormalTok{(general\_traps, supp\_traps)}
-
-\NormalTok{supp\_indicator }\OtherTok{=} \FunctionTok{rep}\NormalTok{(}\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}General\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}Supplementary\textquotesingle{}}\NormalTok{), }\FunctionTok{c}\NormalTok{(}\FunctionTok{nrow}\NormalTok{(general\_traps), }\FunctionTok{nrow}\NormalTok{(supp\_traps)))}
-\NormalTok{traps\_df }\OtherTok{=} \FunctionTok{data.frame}\NormalTok{(all\_traps, }\FunctionTok{factor}\NormalTok{(supp\_indicator, }\FunctionTok{c}\NormalTok{(}\StringTok{\textquotesingle{}Yes\textquotesingle{}}\NormalTok{, }\StringTok{\textquotesingle{}No\textquotesingle{}}\NormalTok{)))}
-
-\CommentTok{\# Plot of traps}
-\FunctionTok{ggplot}\NormalTok{(traps\_df) }\SpecialCharTok{+}
-  \FunctionTok{geom\_circle}\NormalTok{(}\FunctionTok{aes}\NormalTok{(}\AttributeTok{x0=}\DecValTok{0}\NormalTok{, }\AttributeTok{y0=}\DecValTok{0}\NormalTok{, }\AttributeTok{r=}\DecValTok{200}\NormalTok{), }\AttributeTok{colour =} \StringTok{\textquotesingle{}grey\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{geom\_point}\NormalTok{(}\FunctionTok{aes}\NormalTok{(Var1, Var2, }\AttributeTok{col=}\NormalTok{supp\_indicator)) }\SpecialCharTok{+}
-  \FunctionTok{coord\_fixed}\NormalTok{() }\SpecialCharTok{+}
-  \FunctionTok{xlab}\NormalTok{(}\StringTok{\textquotesingle{}X coordinate (metres)\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{ylab}\NormalTok{(}\StringTok{\textquotesingle{}Y coordinate (metres)\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{labs}\NormalTok{(}\AttributeTok{col =} \StringTok{\textquotesingle{}Trap type\textquotesingle{}}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_x\_continuous}\NormalTok{(}\AttributeTok{breaks =}\NormalTok{ (}\SpecialCharTok{{-}}\DecValTok{4}\SpecialCharTok{:}\DecValTok{4}\NormalTok{)}\SpecialCharTok{*}\DecValTok{200}\NormalTok{) }\SpecialCharTok{+}
-  \FunctionTok{scale\_y\_continuous}\NormalTok{(}\AttributeTok{breaks =}\NormalTok{ (}\SpecialCharTok{{-}}\DecValTok{4}\SpecialCharTok{:}\DecValTok{4}\NormalTok{)}\SpecialCharTok{*}\DecValTok{200}\NormalTok{) }
-\end{Highlighting}
-\end{Shaded}
-
 \begin{figure}
 \centering
-\includegraphics{_main_files/figure-latex/trap_grid-1.pdf}
-\caption{(\#fig:trap\_grid)Illustration of the hypothetical trapping grid. Grey circle represents 200m radius disc surrounding the site of the most most recently detected medfly specimen.}
+\includegraphics{_main_files/figure-latex/trapgrid-1.pdf}
+\caption{\label{fig:trapgrid}Illustration of the hypothetical trapping grid. Grey circle represents 200m radius disc surrounding the site of the most most recently detected medfly specimen.}
 \end{figure}
 
-As mentioned previously, it is assumed that trap locations have fixed, known locations. In particular, we assume that monitoring is intensified for the first 6 weeks (\(t \in \{1, \ldots, 6\}\)). By intensified monitoring, I mean that \textbf{supplementary} monitoring traps have been placed alongside the previously existing grid of \textbf{general} monitoring traps. More precisely, it is assumed that \textbf{general} surveillance traps are placed year round in a 400 \(\times\) 400 metre grid (DPIPWE, 2011, p.~50). The \textbf{supplementary} surveillance system consists of a set of 16 traps in a circular area, centred at the site of the first fly detection.\footnote{It is typical to wait until at least 2 flies have been detected near each other for an outbreak to be declared. To illustrate the method in a simplified setting, I suppose that one fly detection is sufficient.} See \citet{trap_grid}.
+As mentioned previously, it is assumed that trap locations have fixed, known locations. In particular, we assume that monitoring is intensified for the first 6 weeks (\(t \in \{1, \ldots, 6\}\)). By intensified monitoring, I mean that \textbf{supplementary} monitoring traps have been placed alongside the previously existing grid of \textbf{general} monitoring traps. More precisely, it is assumed that \textbf{general} surveillance traps are placed year round in a 400 \(\times\) 400 metre grid (DPIPWE, 2011, p.~50). The \textbf{supplementary} surveillance system consists of a set of 16 traps in a circular area, centred at the site of the first fly detection.\footnote{It is typical to wait until at least 2 flies have been detected near each other for an outbreak to be declared. To illustrate the method in a simplified setting, I suppose that one fly detection is sufficient.} See \citet{trapgrid}.
 
 \hypertarget{probability-of-capture}{%
 \subsubsection{Probability of capture}\label{probability-of-capture}}

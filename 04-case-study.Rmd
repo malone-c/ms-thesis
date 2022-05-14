@@ -65,9 +65,9 @@ The likelihood of a given number of captures is a function of latent variables, 
 
 ### Population size
 
-In this case, $N_1$ is the first week after the most recent fly detection. I have chosen to give $N_1$ the prior distribution $N_1 \mid \lambda \sim \mathrm{Poisson}(\lambda)$, where $\lambda \sim \mathrm{Exponential}(0.05)$. This distribution for $N_1$ is chosen as it is a discrete distribution with right skew, and a relatively large amount of mass $f_{N_1}(x)$ at $x = 0$, corresponding to the situation where flies are already eradicated (see @prior_init_size)
+In this case, $N_1$ is the first week after the most recent fly detection. I have chosen to give $N_1$ the prior distribution $N_1 \mid \lambda \sim \mathrm{Poisson}(\lambda)$, where $\lambda \sim \mathrm{Exponential}(0.05)$. This distribution for $N_1$ is chosen as it is a discrete distribution with right skew, and a relatively large amount of mass $f_{N_1}(x)$ at $x = 0$, corresponding to the situation where flies are already eradicated (see @priorinitsize).
 
-```{r prior_init_size, fig.cap = 'Prior distribution of initial population size'}
+```{r priorinitsize, echo=F, fig.cap = 'Prior distribution of initial population size'}
 g = 1/20
 init_pmf = function(n, g) g / (1+g)^(n+1)
 
@@ -85,9 +85,9 @@ ggplot(df) +
 
 As for the population sizes at later time points, I assume that growth is exponential at an uncertain rate. In particular, it is assumed that, for $t \in \{2, \ldots, T\}$,  $N_t \mid N_{t-1}, R_t \sim \mathrm{Poisson}(N_{t-1} e^{R_t})$. Here, we can give any continuous distribution for $R_t$. I have chosen the vaguely informative prior $R_t \stackrel{\text{iid}} \sim \mathrm N(0, 0.2)$. The symmetry of this prior means that we are indifferent about whether the population is growing or declining. 
 
-The growth rate prior has been chosen to place the vast majority of density below their estimated growth rate under optimal conditions. Medfly have been estimated to grow at 8% per day, in optimal lab conditions (@papadopoulos2002). Under an exponential growth model this is 56% per week. This can be taken as an extremely *pessimistic* upper bound on the growth rate. In real cases, flies may fail to establish due to food scarcity, predation, and/or unsustainably low population density.
+The growth rate prior has been chosen to place the vast majority of density below their estimated growth rate under optimal conditions. Medfly have been estimated to grow at 8% per day, in optimal lab conditions (@papadopoulos2002). Under an exponential growth model this is 56% per week. This can be taken as an upper bound on the growth rate. In the wild, flies may fail to establish due to food scarcity, predation, and/or unsustainably low population density.
 
-In real cases, it will be desirable to attempt to estimate $R_t$ from data. In particular, it is known that fruit fly population growth rates are highly dependent on temperature. Therefore, it would be wise to estimate and draw values of $R_t$ conditional on weather measurements. Choosing an empirically realistic distribution for $R_t$ is likely to improve the efficiency of inference from the survey record. 
+In practical, applied cases, it will be desirable to attempt to estimate $R_t$ from data. In particular, it is known that fruit fly population growth rates are highly dependent on temperature. Therefore, if possible, fly population growth rates should be estimated conditional on weather. Choosing an empirically realistic distribution for $R_t$ is likely to improve the efficiency of inference from the survey record. 
 
 ### Spatial location
 
@@ -119,7 +119,7 @@ It may be worth noting that, in real cases, the assumed prior distribution on di
 
 ### Trap locations
 
-```{r trap_grid, fig.cap = 'Illustration of the hypothetical trapping grid. Grey circle represents 200m radius disc surrounding the site of the most most recently detected medfly specimen.'}
+```{r trapgrid, echo=F, fig.cap = 'Illustration of the hypothetical trapping grid. Grey circle represents 200m radius disc surrounding the site of the most most recently detected medfly specimen.'}
 
 grid_size = 4
 general_grid_1d = seq(-grid_size / 2, grid_size / 2) * 400
@@ -146,7 +146,7 @@ ggplot(traps_df) +
   scale_y_continuous(breaks = (-4:4)*200) 
 ```
 
-As mentioned previously, it is assumed that trap locations have fixed, known locations. In particular, we assume that monitoring is intensified for the first 6 weeks ($t \in \{1, \ldots, 6\}$). By intensified monitoring, I mean that **supplementary** monitoring traps have been placed alongside the previously existing grid of **general** monitoring traps. More precisely, it is assumed that **general** surveillance traps are placed year round in a 400 $\times$ 400 metre grid (DPIPWE, 2011, p. 50). The **supplementary** surveillance system consists of a set of 16 traps in a circular area, centred at the site of the first fly detection.^[It is typical to wait until at least 2 flies have been detected near each other for an outbreak to be declared. To illustrate the method in a simplified setting, I suppose that one fly detection is sufficient.] See @trap_grid.
+As mentioned previously, it is assumed that trap locations have fixed, known locations. In particular, we assume that monitoring is intensified for the first 6 weeks ($t \in \{1, \ldots, 6\}$). By intensified monitoring, I mean that **supplementary** monitoring traps have been placed alongside the previously existing grid of **general** monitoring traps. More precisely, it is assumed that **general** surveillance traps are placed year round in a 400 $\times$ 400 metre grid (DPIPWE, 2011, p. 50). The **supplementary** surveillance system consists of a set of 16 traps in a circular area, centred at the site of the first fly detection.^[It is typical to wait until at least 2 flies have been detected near each other for an outbreak to be declared. To illustrate the method in a simplified setting, I suppose that one fly detection is sufficient.] See @trapgrid.
 
 #### Probability of capture
 

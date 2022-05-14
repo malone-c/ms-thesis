@@ -9,6 +9,8 @@ bibliography: [book.bib, packages.bib]
 # cover-image: path to the social sharing image like images/cover.jpg
 link-citations: yes
 linestretch: 1
+geometry: margin=4cm
+indent: true
 output:
   bookdown::pdf_book:
     toc: FALSE 
@@ -20,6 +22,7 @@ header-includes:
   - \usepackage{algorithm}
 urlcolor: blue
 nocite: '@*'
+classoption: oneside
 csl: elsevier-harvard.csl
 ---
 
