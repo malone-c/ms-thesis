@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.4.17)  15 MAY 2022 18:53
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.4.17)  16 MAY 2022 21:20
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -961,7 +961,7 @@ Package natbib Warning: Citation `todocite' on page 15 undefined on input line
 ] [16] [17] [18] [19] [20]
 
 Package natbib Warning: Citation `todocite' on page 21 undefined on input line 
-241.
+252.
 
 [21] [22]
 Chapter 4.
@@ -970,7 +970,7 @@ Chapter 4.
 ] [24] [25] [26]
 
 Package natbib Warning: Citation `priorinitsize' on page 27 undefined on input 
-line 320.
+line 331.
 
 File: _main_files/figure-latex/priorinitsize-1.pdf Graphic file (type pdf)
 <use _main_files/figure-latex/priorinitsize-1.pdf>
@@ -979,25 +979,25 @@ File: _main_files/figure-latex/trapgrid-1.pdf Graphic file (type pdf)
 <use _main_files/figure-latex/trapgrid-1.pdf>
 
 Package natbib Warning: Citation `trapgrid' on page 31 undefined on input line 
-374.
+385.
 
 [31] [32] [33] [34]
 
 Package natbib Warning: Citation `keith2015' on page 35 undefined on input line
- 401.
+ 412.
 
 [35] [36] [37]
 Chapter 5.
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 484.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 498.
 
 
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 508.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 522.
 
 
 
-Overfull \hbox (40.93636pt too wide) detected at line 509
+Overfull \hbox (40.93636pt too wide) detected at line 523
 [][]
  []
 
@@ -1009,19 +1009,19 @@ Overfull \hbox (40.93636pt too wide) detected at line 509
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 527.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 541.
 [42]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 527.
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 541.
 (./_main.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 527.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 527.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 527.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 541.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 541.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 541.
  ) 
 Here is how much of TeX's memory you used:
- 20433 strings out of 479418
- 359424 string characters out of 5884585
- 838993 words of memory out of 5000000
- 37614 multiletter control sequences out of 15000+600000
+ 20435 strings out of 479418
+ 359444 string characters out of 5884585
+ 839031 words of memory out of 5000000
+ 37616 multiletter control sequences out of 15000+600000
  538877 words of font info for 88 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
  58i,9n,118p,1797b,538s stack positions out of 5000i,500n,10000p,200000b,80000s

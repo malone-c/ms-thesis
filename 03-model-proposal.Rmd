@@ -22,7 +22,7 @@ As mentioned above, a prior distribution must be set for the population size $N_
 $$
 N_t \mid \{N_{t-1}, R_t\} \sim \operatorname{Poisson}(N_{t-1} \exp \{R_t\}),
 $$
-where a continuous prior distribution is defined over the $R_t$ terms, which may have support over the whole real line.^[Alternatively, the logistic growth model, with an additional "carrying capacity" parameter, could be used.] This model has the attractive property that, when we condition on $\{R_t\}_{t=1}^T$ but marginalise out $\{N_t\}_{t=1}^{T-1}$, $N_T$ has mean $\mathbb E(N_1) \exp \left\{ \sum_{t=1}^T R_t \right\}$.^[Note, however that $N_T \mid \{R_t\}_{t=1}^T$ is not Poisson distributed, and has variance strictly larger than its mean.] This prior is attractive because the exponential growth model is popular in biology and ecology. Given this, in many cases, it should be relatively simple to set informative prior hyperparameters for the latent variable $R_t$. We might do this through expert elicitation, or through review of the relevant literature, in which population change may already be expressed in terms of growth rates.^[For example, see @papadopoulos2002.]
+where a continuous prior distribution is defined over the $R_t$ terms, which may have support over the whole real line.^[Alternatively, the logistic growth model, with an additional "carrying capacity" parameter, could be used.] This model has the attractive property that, when we condition on $\{R_t\}_{t=1}^T$ but marginalise out $\{N_t\}_{t=1}^{T-1}$, $N_T$ has mean $\mathbb E(N_1) \exp \left\{ \sum_{t=1}^T R_t \right\}$.^[Note, however that $N_T \mid \{R_t\}_{t=1}^T$ is not Poisson distributed, and has variance strictly larger than its mean.] This is attractive because the exponential growth model is popular in biology and ecology. Given this, in many cases, it should be relatively simple to set informative prior hyperparameters for the latent variable $R_t$. We might do this through expert elicitation, or through review of the relevant literature, in which population change may already be expressed in terms of growth rates.^[For example, see @papadopoulos2002.]
 
 It may be worth noting that we could choose to factor in covariate information for the growth process. For example, for a given pest species, we might understand the growth of populations over time as a function of weather or rainfall. I do not discuss this possibility further in this thesis. 
 
@@ -34,7 +34,7 @@ As mentioned previously, I propose to explicitly model the location of each fly.
 
 Note that, in typical situations, we will not be interested in inferring the posterior distributions of fly locations. As such, this is a nuisance parameter.
 
-I first discuss the option of setting a uniform prior. Setting an uninformative prior is fairly straightforward for this problem. In particular, we might assume that, beyond a certain distance from the outbreak centre (say, 1km) any existing population of Medfly is distinct from the population of interest. Therefore, we might set the prior distribution for the population location to be uniform on the surface of a disc with (e.g.) 1km radius around the outbreak centre. 
+I first discuss the option of setting an uninformative prior. Setting an uninformative prior is fairly straightforward for this problem. In particular, we might assume that, beyond a certain distance from the outbreak centre (say, 1km) any existing population of Medfly is distinct from the population of interest. Therefore, we might set the prior distribution for the population location to be uniform on the surface of a disc with (e.g.) 1km radius around the outbreak centre. 
 
 Despite the fact that an uninformative prior is relatively straightforward to set, it is most likely not advisable in specific applications. Firstly, when an outbreak is suspected, it is typical that information about location is available. On one hand, fruit flies are heavily dependent on the availability of suitable fruit trees for survival and reproduction. Therefore, someone with local area knowledge will be able to determine the most likely locations for an existing population. On the other hand, if an outbreak is known or suspected, then flies must have been detected somewhere. Most likely, the locations of these detections will be known to the analyst. When the fly species has low dispersal distances (as e.g. medfly does) these detection locations are highly informative. Therefore, an informative prior, utilising this information, formally or informally, is recommended.
 
@@ -46,16 +46,27 @@ The benefit of these assumptions is priors can be set on the parameters governin
 
 ### Probability of capture (likelihood)
 
-Recall from above that the number of captures (and therefore the data vector) at time point $t$ is written as $y_t$, for $t \in \{1, \ldots, T\}$. Recall that it is assumed that the trap locations are each fixed and known with certainty. Then, it is assumed that the probability that fly $i$ is caught in trap $k$ at time $t$ is given by $p_{i, k, t} = p(d_{i, k, t})$ where $d$ is the distance between fly $i$ and trap $k$ at time $t$, and $p(\cdot)$ gives us the probability of capture as a function of distance. Then, the probability that a fly is caught at any trap is simply 
+Recall from above that the number of captures (and therefore the data for this model) at time point $t$ is written as $y_t$, for $t \in \{1, \ldots, T\}$. Recall that it is assumed that the trap locations are each fixed and known with certainty. Then, it is assumed that the probability that fly $i$ is caught in trap $k$ at time $t$ is given by $p_{i, k, t} = p(d_{i, k, t})$ where $d$ is the distance between fly $i$ and trap $k$ at time $t$, and $p(\cdot)$ gives us the probability of capture as a function of distance. Then, the probability that fly $i$ is caught at any trap is simply 
 $$
 p_{i, t} := 1 - \prod_{k=1}^K(1 - p(d_{i, k, t})).
 $$
 
-The probability of capture function $p(\cdot)$ is based on prior analysis of release-recapture data, already discussed, and may be deterministic or random. For example, we might regress captures on distance, from release-recapture data, and allow coefficients to vary randomly. Then, the posteriors would form the priors for the present model.
+Going further, the probability that any fly (out of $N_t$ flies) is caught at any trap is
+$$
+p_t := 1 - \prod_{t=1}^{N_t} (1 - p_{i,t}).
+$$
+Therefore, conditional on $\mathbf L_t$ and $N_t$, we can define
 
-An intuitive distribution for $y_t$ is the Poisson-binomial distribution. This is the distribution of successes in independent Bernoulli trials with unequal means. 
+$$
+y_t = \begin{cases} 1 & \text{one or more flies caught at time} ~t \\ 0 & \text{otherwise.} \end{cases}
+$$
+For each time point $t$, $y_t$ has the Bernoulli distribution with mean $p_t$.
 
-Note that this model of captures takes for granted the common assumption that there is no interference between traps (see @todocite). This assumption is essentially that the probability that a fly is captured at a given trap is not affected by the presence of other traps. The justification is that $p(\cdot)$ is typically estimated to decrease quickly as a function of distance. This is because traps are generally ineffective as attractants. Therefore, it is typically the case that $p(d_{i, k, t})$ is very small for all but at most one trap. Therefore, the effect of discounting the possibility of being caught there is negligible.
+The probability of capture function $p(\cdot)$ should be based on prior analysis of release-recapture data, already discussed, and may be deterministic or random. For example, we might regress captures on distance, from release-recapture data, and allow coefficients to vary randomly. Then, the posteriors would form the priors for the present model.
+
+Two things should be noted here. Firstly, $y_t$ is nto the number of captures per se, but rather is binary as defined above. This simplification can be made because we are only interested in the case where no flies are detected. This is because the primary application of the model is to evaluate and derive zero-catch criteria. To extend the model to the case where we observe non-zero captures, we can simply define $y_t$ to be the sum of Bernoulli trials for $i \in \{1, \ldots, N_t\}$, each with mean $p_{i,t}$.
+
+Secondly, this model of captures takes for granted the common assumption that there is no interference between traps (see @todocite). This assumption is essentially that the probability that a fly is captured at a given trap is not affected by the presence of other traps. The justification is that $p(\cdot)$ is typically estimated to decrease quickly as a function of distance. This is because traps are generally ineffective as attractants. Therefore, it is typically the case that $p(d_{i, k, t})$ is very small for all but at most one trap. Therefore, the effect of discounting the possibility of being caught there is negligible.
 
 NOTE: Delete the next paragraph?
 
