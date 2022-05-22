@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.4.17)  16 MAY 2022 21:20
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.4.17)  22 MAY 2022 13:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -367,70 +367,85 @@ Package: ifvtex 2019/10/25 v1.7 ifvtex legacy package. Use iftex instead.
 \Gm@layouthoffset=\dimen158
 \Gm@layoutvoffset=\dimen159
 \Gm@dimlist=\toks22
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/fancyvrb/fancyvrb.sty
+Package: fancyvrb 2020/01/13 v3.5 verbatim text (tvz,hv)
+\FV@CodeLineNo=\count289
+\FV@InFile=\read2
+\FV@TabBox=\box49
+\c@FancyVerbLine=\count290
+\FV@StepNumber=\count291
+\FV@OutFile=\write3
+) (/usr/local/texlive/2020/texmf-dist/tex/latex/framed/framed.sty
+Package: framed 2011/10/22 v 0.96: framed or shaded text with page breaks
+\OuterFrameSep=\skip53
+\fb@frw=\dimen160
+\fb@frh=\dimen161
+\FrameRule=\dimen162
+\FrameSep=\dimen163
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/tools/longtable.sty
 Package: longtable 2020/01/07 v4.13 Multi-page Table package (DPC)
-\LTleft=\skip53
-\LTright=\skip54
-\LTpre=\skip55
-\LTpost=\skip56
-\LTchunksize=\count289
-\LTcapwidth=\dimen160
-\LT@head=\box49
-\LT@firsthead=\box50
-\LT@foot=\box51
-\LT@lastfoot=\box52
-\LT@cols=\count290
-\LT@rows=\count291
-\c@LT@tables=\count292
-\c@LT@chunks=\count293
+\LTleft=\skip54
+\LTright=\skip55
+\LTpre=\skip56
+\LTpost=\skip57
+\LTchunksize=\count292
+\LTcapwidth=\dimen164
+\LT@head=\box50
+\LT@firsthead=\box51
+\LT@foot=\box52
+\LT@lastfoot=\box53
+\LT@cols=\count293
+\LT@rows=\count294
+\c@LT@tables=\count295
+\c@LT@chunks=\count296
 \LT@p@ftn=\toks23
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/booktabs/booktabs.sty
 Package: booktabs 2020/01/12 v1.61803398 Publication quality tables
-\heavyrulewidth=\dimen161
-\lightrulewidth=\dimen162
-\cmidrulewidth=\dimen163
-\belowrulesep=\dimen164
-\belowbottomsep=\dimen165
-\aboverulesep=\dimen166
-\abovetopsep=\dimen167
-\cmidrulesep=\dimen168
-\cmidrulekern=\dimen169
-\defaultaddspace=\dimen170
-\@cmidla=\count294
-\@cmidlb=\count295
-\@aboverulesep=\dimen171
-\@belowrulesep=\dimen172
-\@thisruleclass=\count296
-\@lastruleclass=\count297
-\@thisrulewidth=\dimen173
+\heavyrulewidth=\dimen165
+\lightrulewidth=\dimen166
+\cmidrulewidth=\dimen167
+\belowrulesep=\dimen168
+\belowbottomsep=\dimen169
+\aboverulesep=\dimen170
+\abovetopsep=\dimen171
+\cmidrulesep=\dimen172
+\cmidrulekern=\dimen173
+\defaultaddspace=\dimen174
+\@cmidla=\count297
+\@cmidlb=\count298
+\@aboverulesep=\dimen175
+\@belowrulesep=\dimen176
+\@thisruleclass=\count299
+\@lastruleclass=\count300
+\@thisrulewidth=\dimen177
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/tools/array.sty
 Package: array 2019/08/31 v2.4l Tabular extension package (FMi)
-\col@sep=\dimen174
-\ar@mcellbox=\box53
-\extrarowheight=\dimen175
+\col@sep=\dimen178
+\ar@mcellbox=\box54
+\extrarowheight=\dimen179
 \NC@list=\toks24
-\extratabsurround=\skip57
-\backup@length=\skip58
-\ar@cellbox=\box54
+\extratabsurround=\skip58
+\backup@length=\skip59
+\ar@cellbox=\box55
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/tools/calc.sty
 Package: calc 2017/05/25 v4.3 Infix arithmetic (KKT,FJ)
-\calc@Acount=\count298
-\calc@Bcount=\count299
-\calc@Adimen=\dimen176
-\calc@Bdimen=\dimen177
-\calc@Askip=\skip59
-\calc@Bskip=\skip60
+\calc@Acount=\count301
+\calc@Bcount=\count302
+\calc@Adimen=\dimen180
+\calc@Bdimen=\dimen181
+\calc@Askip=\skip60
+\calc@Bskip=\skip61
 LaTeX Info: Redefining \setlength on input line 80.
 LaTeX Info: Redefining \addtolength on input line 81.
-\calc@Ccount=\count300
-\calc@Cskip=\skip61
+\calc@Ccount=\count303
+\calc@Cskip=\skip62
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/etoolbox/etoolbox.sty
 Package: etoolbox 2019/09/21 v2.5h e-TeX tools for LaTeX (JAW)
-\etb@tempcnta=\count301
+\etb@tempcnta=\count304
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/footnotehyper/footnotehyper.sty
 Package: footnotehyper 2019/11/07 v1.1a hyperref aware footnote.sty (JFB)
-\FNH@notes=\box55
-\FNH@width=\dimen178
+\FNH@notes=\box56
+\FNH@width=\dimen182
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/graphics/graphicx.sty
 Package: graphicx 2019/11/30 v1.2a Enhanced LaTeX Graphics (DPC,SPQR)
 (/usr/local/texlive/2020/texmf-dist/tex/latex/graphics/graphics.sty
@@ -442,118 +457,118 @@ File: graphics.cfg 2016/06/04 v1.11 sample graphics configuration
 )
 Package graphics Info: Driver file: xetex.def on input line 105.
 )
-\Gin@req@height=\dimen179
-\Gin@req@width=\dimen180
+\Gin@req@height=\dimen183
+\Gin@req@width=\dimen184
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/algorithm2e/algorithm2e.sty
 Invalid UTF-8 byte or sequence at line 284 replaced by U+FFFD.
 Invalid UTF-8 byte or sequence at line 299 replaced by U+FFFD.
 Invalid UTF-8 byte or sequence at line 550 replaced by U+FFFD.
 Package: algorithm2e 2017/07/18 v5.2 algorithms environments
-\c@AlgoLine=\count302
+\c@AlgoLine=\count305
 (/usr/local/texlive/2020/texmf-dist/tex/latex/base/ifthen.sty
 Package: ifthen 2014/09/29 v1.1c Standard LaTeX ifthen package (DPC)
 )
-\algocf@hangindent=\skip62
+\algocf@hangindent=\skip63
 (/usr/local/texlive/2020/texmf-dist/tex/latex/ifoddpage/ifoddpage.sty
 Package: ifoddpage 2016/04/23 v1.1 Conditionals for odd/even page detection
-\c@checkoddpage=\count303
+\c@checkoddpage=\count306
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/tools/xspace.sty
 Package: xspace 2014/10/28 v1.13 Space after command names (DPC,MH)
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/relsize/relsize.sty
 Package: relsize 2013/03/29 ver 4.1
 )
-\skiptotal=\skip63
-\skiplinenumber=\skip64
-\skiprule=\skip65
-\skiphlne=\skip66
-\skiptext=\skip67
-\skiplength=\skip68
-\algomargin=\skip69
-\skipalgocfslide=\skip70
-\algowidth=\dimen181
-\inoutsize=\dimen182
-\inoutindent=\dimen183
-\interspacetitleruled=\dimen184
-\interspacealgoruled=\dimen185
-\interspacetitleboxruled=\dimen186
-\algocf@ruledwidth=\skip71
-\algocf@inoutbox=\box56
-\algocf@inputbox=\box57
-\AlCapSkip=\skip72
-\AlCapHSkip=\skip73
-\algoskipindent=\skip74
-\algocf@nlbox=\box58
-\algocf@hangingbox=\box59
-\algocf@untilbox=\box60
-\algocf@skipuntil=\skip75
-\algocf@capbox=\box61
-\algocf@lcaptionbox=\skip76
-\algoheightruledefault=\skip77
-\algoheightrule=\skip78
-\algotitleheightruledefault=\skip79
-\algotitleheightrule=\skip80
-\c@algocfline=\count304
-\c@algocfproc=\count305
-\c@algocf=\count306
-\algocf@algoframe=\box62
-\algocf@algobox=\box63
+\skiptotal=\skip64
+\skiplinenumber=\skip65
+\skiprule=\skip66
+\skiphlne=\skip67
+\skiptext=\skip68
+\skiplength=\skip69
+\algomargin=\skip70
+\skipalgocfslide=\skip71
+\algowidth=\dimen185
+\inoutsize=\dimen186
+\inoutindent=\dimen187
+\interspacetitleruled=\dimen188
+\interspacealgoruled=\dimen189
+\interspacetitleboxruled=\dimen190
+\algocf@ruledwidth=\skip72
+\algocf@inoutbox=\box57
+\algocf@inputbox=\box58
+\AlCapSkip=\skip73
+\AlCapHSkip=\skip74
+\algoskipindent=\skip75
+\algocf@nlbox=\box59
+\algocf@hangingbox=\box60
+\algocf@untilbox=\box61
+\algocf@skipuntil=\skip76
+\algocf@capbox=\box62
+\algocf@lcaptionbox=\skip77
+\algoheightruledefault=\skip78
+\algoheightrule=\skip79
+\algotitleheightruledefault=\skip80
+\algotitleheightrule=\skip81
+\c@algocfline=\count307
+\c@algocfproc=\count308
+\c@algocf=\count309
+\algocf@algoframe=\box63
+\algocf@algobox=\box64
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/algorithms/algorithm.sty
 Invalid UTF-8 byte or sequence at line 11 replaced by U+FFFD.
 Package: algorithm 2009/08/24 v0.1 Document Style `algorithm' - floating enviro
 nment
 (/usr/local/texlive/2020/texmf-dist/tex/latex/float/float.sty
 Package: float 2001/11/08 v1.3d Float enhancements (AL)
-\c@float@type=\count307
+\c@float@type=\count310
 \float@exts=\toks25
-\float@box=\box64
+\float@box=\box65
 \@float@everytoks=\toks26
-\@floatcapt=\box65
+\@floatcapt=\box66
 )
 \@float@every@algorithm=\toks27
-\c@algorithm=\count308
+\c@algorithm=\count311
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/natbib/natbib.sty
 Package: natbib 2010/09/13 8.31b (PWD, AO)
-\bibhang=\skip81
-\bibsep=\skip82
+\bibhang=\skip82
+\bibsep=\skip83
 LaTeX Info: Redefining \cite on input line 694.
-\c@NAT@ctr=\count309
+\c@NAT@ctr=\count312
 ) (./_main.aux)
 \openout1 = `_main.aux'.
 
-LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
-LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 83.
-LaTeX Font Info:    ... okay on input line 83.
+LaTeX Font Info:    Checking defaults for OML/cmm/m/it on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OMS/cmsy/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OT1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for T1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for TS1/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for TU/lmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for OMX/cmex/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for U/cmr/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for PD1/pdf/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
+LaTeX Font Info:    Checking defaults for PU/pdf/m/n on input line 123.
+LaTeX Font Info:    ... okay on input line 123.
 LaTeX Font Info:    Overwriting math alphabet `\mathrm' in version `normal'
-(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 83.
+(Font)                  OT1/lmr/m/n --> TU/lmr/m/n on input line 123.
 LaTeX Font Info:    Overwriting math alphabet `\mathit' in version `normal'
-(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 83.
+(Font)                  OT1/lmr/m/it --> TU/lmr/m/it on input line 123.
 LaTeX Font Info:    Overwriting math alphabet `\mathbf' in version `normal'
-(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 83.
+(Font)                  OT1/lmr/bx/n --> TU/lmr/bx/n on input line 123.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `normal'
-(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 83.
+(Font)                  OT1/lmss/m/n --> TU/lmss/m/n on input line 123.
 LaTeX Font Info:    Overwriting math alphabet `\mathsf' in version `bold'
-(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 83.
+(Font)                  OT1/lmss/bx/n --> TU/lmss/bx/n on input line 123.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `normal'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 83.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/m/n on input line 123.
 LaTeX Font Info:    Overwriting math alphabet `\mathtt' in version `bold'
-(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 83.
+(Font)                  OT1/lmtt/m/n --> TU/lmtt/bx/n on input line 123.
 
 Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
 
@@ -582,7 +597,7 @@ pt=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(0)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 83.
+(Font)              scaled to size 10.0pt on input line 123.
 
 Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
 
@@ -621,17 +636,18 @@ pt=math;language=dflt;"
 (fontspec)             - 'bold small caps'  (b/sc) with NFSS spec.: 
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 10.0pt on input line 83.
+(Font)              scaled to size 10.0pt on input line 123.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `normal' on input line 83.
+(Font)              `operators' in the math version `normal' on input line 123.
+
 LaTeX Font Info:    Overwriting symbol font `operators' in version `normal'
 (Font)                  OT1/lmr/m/n --> TU/latinmodern-math.otf(1)/m/n on input
- line 83.
+ line 123.
 LaTeX Font Info:    Encoding `OT1' has changed to `TU' for symbol font
-(Font)              `operators' in the math version `bold' on input line 83.
+(Font)              `operators' in the math version `bold' on input line 123.
 LaTeX Font Info:    Overwriting symbol font `operators' in version `bold'
 (Font)                  OT1/lmr/bx/n --> TU/latinmodern-math.otf(1)/b/n on inpu
-t line 83.
+t line 123.
 
 Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
 
@@ -718,15 +734,15 @@ t=math;language=dflt;"
 (fontspec)             \fontdimen 21\font =0pt\relax 
 
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `normal' on input line 83.
+(Font)              `symbols' in the math version `normal' on input line 123.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `normal'
 (Font)                  OMS/lmsy/m/n --> TU/latinmodern-math.otf(2)/m/n on inpu
-t line 83.
+t line 123.
 LaTeX Font Info:    Encoding `OMS' has changed to `TU' for symbol font
-(Font)              `symbols' in the math version `bold' on input line 83.
+(Font)              `symbols' in the math version `bold' on input line 123.
 LaTeX Font Info:    Overwriting symbol font `symbols' in version `bold'
 (Font)                  OMS/lmsy/b/n --> TU/latinmodern-math.otf(2)/b/n on inpu
-t line 83.
+t line 123.
 
 Package fontspec Info: latinmodern-math scale = 0.9999964596882403.
 
@@ -795,18 +811,18 @@ pt=math;language=dflt;"
 (fontspec)             =6.0pt\relax \fontdimen 13\font =0pt\relax 
 
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `normal' on input line 8
-3.
+(Font)              `largesymbols' in the math version `normal' on input line 1
+23.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `normal'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/m/n on inpu
-t line 83.
+t line 123.
 LaTeX Font Info:    Encoding `OMX' has changed to `TU' for symbol font
-(Font)              `largesymbols' in the math version `bold' on input line 83.
-
+(Font)              `largesymbols' in the math version `bold' on input line 123
+.
 LaTeX Font Info:    Overwriting symbol font `largesymbols' in version `bold'
 (Font)                  OMX/lmex/m/n --> TU/latinmodern-math.otf(3)/b/n on inpu
-t line 83.
-LaTeX Info: Redefining \microtypecontext on input line 83.
+t line 123.
+LaTeX Info: Redefining \microtypecontext on input line 123.
 Package microtype Info: Character protrusion enabled (level 2).
 Package microtype Info: Using protrusion set `basicmath'.
 Package microtype Info: No adjustment of tracking.
@@ -817,8 +833,8 @@ Package microtype Info: No adjustment of kerning.
 File: mt-LatinModernRoman.cfg 2013/03/13 v1.0 microtype config. file: Latin Mod
 ern Roman (RS)
 )
-\AtBeginShipoutBox=\box66
-Package hyperref Info: Link coloring ON on input line 83.
+\AtBeginShipoutBox=\box67
+Package hyperref Info: Link coloring ON on input line 123.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/hyperref/nameref.sty
 Package: nameref 2019/09/16 v2.46 Cross-referencing by name of section
 (/usr/local/texlive/2020/texmf-dist/tex/latex/refcount/refcount.sty
@@ -828,11 +844,11 @@ Package: refcount 2019/12/15 v3.6 Data extraction from label references (HO)
 ty
 Package: gettitlestring 2019/12/15 v1.6 Cleanup title references (HO)
 )
-\c@section@level=\count310
+\c@section@level=\count313
 )
-LaTeX Info: Redefining \ref on input line 83.
-LaTeX Info: Redefining \pageref on input line 83.
-LaTeX Info: Redefining \nameref on input line 83.
+LaTeX Info: Redefining \ref on input line 123.
+LaTeX Info: Redefining \pageref on input line 123.
+LaTeX Info: Redefining \nameref on input line 123.
 *geometry* driver: auto-detecting
 *geometry* detected driver: xetex
 *geometry* verbose mode - [ preamble ] result:
@@ -868,37 +884,37 @@ LaTeX Info: Redefining \nameref on input line 83.
 * (1in=72.27pt=25.4mm, 1cm=28.453pt)
 
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 12.0pt on input line 85.
+(Font)              scaled to size 12.0pt on input line 125.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 8.0pt on input line 85.
+(Font)              scaled to size 8.0pt on input line 125.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(1)/m/n' will be
-(Font)              scaled to size 6.0pt on input line 85.
-LaTeX Font Info:    Trying to load font information for OML+lmm on input line 8
-5.
+(Font)              scaled to size 6.0pt on input line 125.
+LaTeX Font Info:    Trying to load font information for OML+lmm on input line 1
+25.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/lm/omllmm.fd
 File: omllmm.fd 2009/10/30 v1.6 Font defs for Latin Modern
 )
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 12.0011pt on input line 85.
+(Font)              scaled to size 12.0011pt on input line 125.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 8.00073pt on input line 85.
+(Font)              scaled to size 8.00073pt on input line 125.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(2)/m/n' will be
-(Font)              scaled to size 6.00055pt on input line 85.
+(Font)              scaled to size 6.00055pt on input line 125.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 11.99872pt on input line 85.
+(Font)              scaled to size 11.99872pt on input line 125.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 7.99915pt on input line 85.
+(Font)              scaled to size 7.99915pt on input line 125.
 LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
-(Font)              scaled to size 5.99936pt on input line 85.
-LaTeX Font Info:    Trying to load font information for U+msa on input line 85.
-
+(Font)              scaled to size 5.99936pt on input line 125.
+LaTeX Font Info:    Trying to load font information for U+msa on input line 125
+.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsa.fd
 File: umsa.fd 2013/01/14 v3.01 AMS symbols A
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-msa.cfg
 File: mt-msa.cfg 2006/02/04 v1.1 microtype config. file: AMS symbols (a) (RS)
 )
-LaTeX Font Info:    Trying to load font information for U+msb on input line 85.
-
+LaTeX Font Info:    Trying to load font information for U+msb on input line 125
+.
 (/usr/local/texlive/2020/texmf-dist/tex/latex/amsfonts/umsb.fd
 File: umsb.fd 2013/01/14 v3.01 AMS symbols B
 ) (/usr/local/texlive/2020/texmf-dist/tex/latex/microtype/mt-msb.cfg
@@ -926,8 +942,8 @@ LaTeX Font Info:    Font shape `TU/latinmodern-math.otf(3)/m/n' will be
 [1
 
 ])
-\tf@toc=\write3
-\openout3 = `_main.toc'.
+\tf@toc=\write4
+\openout4 = `_main.toc'.
 
 [2]
 Chapter 1.
@@ -940,90 +956,119 @@ Chapter 2.
 ] [8] [9]
 
 Package natbib Warning: Citation `mcardle' on page 10 undefined on input line 1
-41.
+81.
 
 
-Package natbib Warning: Citation `barnes' on page 10 undefined on input line 14
+Package natbib Warning: Citation `barnes' on page 10 undefined on input line 18
 1.
 
 
-Package natbib Warning: Citation `boakes' on page 10 undefined on input line 14
+Package natbib Warning: Citation `boakes' on page 10 undefined on input line 18
 1.
 
 [10] [11] [12] [13] [14]
 Chapter 3.
 
 Package natbib Warning: Citation `todocite' on page 15 undefined on input line 
-190.
+230.
 
 [15
 
 ] [16] [17] [18] [19] [20]
 
 Package natbib Warning: Citation `todocite' on page 21 undefined on input line 
-252.
+292.
 
 [21] [22]
 Chapter 4.
 [23
 
-] [24] [25] [26]
+]
 
-Package natbib Warning: Citation `priorinitsize' on page 27 undefined on input 
-line 331.
+Package natbib Warning: Citation `meats2007' on page 24 undefined on input line
+ 316.
 
-File: _main_files/figure-latex/priorinitsize-1.pdf Graphic file (type pdf)
-<use _main_files/figure-latex/priorinitsize-1.pdf>
-[27] [28] [29] [30]
+[24] [25]
+
+Package natbib Warning: Citation `trapgrid' on page 26 undefined on input line 
+332.
+
 File: _main_files/figure-latex/trapgrid-1.pdf Graphic file (type pdf)
 <use _main_files/figure-latex/trapgrid-1.pdf>
+[26] [27] [28]
+File: _main_files/figure-latex/priorinitsize-1.pdf Graphic file (type pdf)
+<use _main_files/figure-latex/priorinitsize-1.pdf>
 
-Package natbib Warning: Citation `trapgrid' on page 31 undefined on input line 
-385.
+Package natbib Warning: Citation `ks2019' on page 29 undefined on input line 36
+7.
 
-[31] [32] [33] [34]
+[29]
 
-Package natbib Warning: Citation `keith2015' on page 35 undefined on input line
- 412.
+Package natbib Warning: Citation `ks2019' on page 30 undefined on input line 37
+1.
 
-[35] [36] [37]
+
+Package natbib Warning: Citation `ks2019' on page 30 undefined on input line 37
+3.
+
+File: references/ksplot.png Graphic file (type bmp)
+<references/ksplot.png>
+[30] [31] [32] [33]
+
+Package natbib Warning: Citation `ms2005' on page 34 undefined on input line 41
+5.
+
+[34] [35]
+
+Package natbib Warning: Citation `keith2015' on page 36 undefined on input line
+ 435.
+
+
+Package natbib Warning: Citation `postfig' on page 36 undefined on input line 4
+46.
+
+[36]
+File: results/pfa_criteria_evaluation/prior_vs_post_plot.png Graphic file (type
+ bmp)
+<results/pfa_criteria_evaluation/prior_vs_post_plot.png>
+[37] [38] [39]
 Chapter 5.
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 498.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 575.
 
 
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 522.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 598.
 
 
 
-Overfull \hbox (40.93636pt too wide) detected at line 523
+Overfull \hbox (44.22035pt too wide) detected at line 599
 [][]
  []
 
-[38
+[40
 
-] [39] (./_main.bbl [40] [41
+] [41] (./_main.bbl [42] [43
 
 ])
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 541.
-[42]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 541.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 621.
+[44]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 621.
 (./_main.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 541.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 541.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 541.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 621.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 621.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 621.
  ) 
 Here is how much of TeX's memory you used:
- 20435 strings out of 479418
- 359444 string characters out of 5884585
- 839031 words of memory out of 5000000
- 37616 multiletter control sequences out of 15000+600000
- 538877 words of font info for 88 fonts, out of 8000000 for 9000
+ 20947 strings out of 479418
+ 367600 string characters out of 5884585
+ 850648 words of memory out of 5000000
+ 38109 multiletter control sequences out of 15000+600000
+ 538885 words of font info for 89 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 58i,9n,118p,1797b,538s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 58i,9n,118p,1797b,539s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on _main.pdf (43 pages).
+Output written on _main.pdf (45 pages).

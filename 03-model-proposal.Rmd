@@ -1,4 +1,4 @@
-# General framework proposal
+# General framework proposal {#ch3}
 
 ## Introduction
 
@@ -72,6 +72,7 @@ NOTE: Delete the next paragraph?
 
 If the researcher has cause to believe that interference may be non-negligible, a simple correction can be applied. Without loss of generality, suppose we are interested in a single fly in a single trapping period. Let $q_k$ be the probability that that fly is captured at trap $k$, calculated using the distance function above. Let $q_0$ be the probability that the fly is not captured at all. The set $\{q_k\}_{k=0}^K$ are probabilities of exhaustive and mutually exclusive events. Therefore, we can redefine the probabilities of trap-specific capture (or no capture) as $q'_k = q_k / \sum_{i=0}^K q_i$.
 
+Finally, the reader should note that it is assumed that this is homogenous across time. I.e., the population size $N_t$ and locations of flies $\mathbf L_t$ tell us everything we can know about whether a fly is captured at time $t$.^[As such, it is assumed implicitly that temperature has no effect on fly behaviour. This is a strong assumption, against which there is some evidence (see @bali2021).] 
+
 ## Conclusion
 
-TODO: Write conclusion of this chapter

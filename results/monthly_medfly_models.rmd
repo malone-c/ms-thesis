@@ -68,10 +68,35 @@ draw_N = function(n_periods, growth_params, type='all') {
   growth_rate = rnorm(1, growth_params$mu, growth_params$sd)
   
   # Draw number of flies at t_1
-  lambda = rexp(1, 1/20)
-  N[1] = rpois(1, lambda) 
+  N[1] = rgeom(1, 1/20)
   
   # Draw the no. of flies at t_2, t_3, ...
+  for (t in 2:n_periods) {
+    N[t] = rpois(1, N[t-1] * exp(growth_rate))
+  }
+  
+  if (type == 'all') {
+    return(list(N=N, R=growth_rate))
+  } else {
+    return(N[n_periods])
+  }
+}
+
+# Function to simulate Medfly population dynamics with weather
+# Inputs
+#   n_periods (int): number of weeks
+#   growth_params (list(mu=numeric(n_periods), sd=numeric(n_periods))): 
+#     weekly growth mean and sd
+draw_N_w = function(n_periods, growth_params, type='all') {
+  N = growth_rates = numeric(n_periods)
+  
+  # Draw growth rates
+  growth_rate = rnorm(1, growth_params$mu, growth_params$sd)
+  
+  # Draw number of flies at t=1
+  N[1] = rgeom(1, 1/20) 
+  
+  # Draw the no. of flies at t=2, t=3, ...
   for (t in 2:n_periods) {
     N[t] = rpois(1, N[t-1] * exp(growth_rate))
   }
@@ -244,6 +269,23 @@ ggplot(data.frame(x=grid[,1], y=grid[,2], z)) +
   ylab('Y coordinate (metres)') +
   scale_x_continuous(breaks = (-4:4)*200) +
   scale_y_continuous(breaks = (-4:4)*200) 
+
+```
+
+
+### Extension
+
+We want temperature dependent rates of increase
+
+We use Kean and Stringer.
+
+```{r}
+a = 0.000386
+b = 0.0279
+c = 0.374
+
+# Suppose residual variance is 0.1.
+
 
 ```
 

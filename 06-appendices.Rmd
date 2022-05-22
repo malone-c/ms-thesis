@@ -2,9 +2,9 @@
 
 TODO: Add appendix on location prior
 
-## Appendix 1: Proof of ABC procedure
+## Appendix 1: Proof of sampling procedure
 
-Here, I give a proof that the simple ABC rejection algorithm yields independent draws from the posterior distribution. Recall that the algorithm works by drawing samples of $\theta$ from the prior distribution with density $\pi (\theta)$. Then, for each draw of $\theta$, we draw a data vector $y_{\text {sim}}$ from the likelihood $l(\theta \mid y_{\text{sim}})$. Finally, we keep the sample if we observe that $y_{\text{sim}} = y_{\text{obs}}$ (where $y_{\text{obs}}$ is the data vector we actually observed) and reject it otherwise. Then, the draws that we keep have distribution $f_{\text{ABC}}(\theta) = \pi(\theta) \cdot l(\theta \mid y_{\text{obs}})$, since our draws from the prior and likelihood are independent.^[Credit is due to [this StackExchange post](https://stats.stackexchange.com/questions/380076/proof-of-approximate-exact-bayesian-computation.).]
+Here, I give a proof that the simple ABC rejection algorithm yields independent draws from the posterior distribution. Recall that the algorithm works by drawing samples of $\theta$ from the prior distribution with density $\pi (\theta)$. Then, for each draw of $\theta$, we draw a data vector $y_{\text {sim}}$ from the likelihood $l(\theta \mid y_{\text{sim}})$. Finally, we keep the sample if we observe that $y_{\text{sim}} = y_{\text{obs}}$ (where $y_{\text{obs}}$ is identical to the data vector we actually observed) and reject it otherwise. Then, the draws that we keep have distribution $f_{\text{ABC}}(\theta) = \pi(\theta) \cdot l(\theta \mid y_{\text{obs}})$, since our draws from the prior and likelihood are independent.^[Credit is due to [this StackExchange post](https://stats.stackexchange.com/questions/380076/proof-of-approximate-exact-bayesian-computation.).]
 
 ## Appendix 2: Full model statement
 
@@ -12,25 +12,24 @@ $$
 \renewcommand{\baselinestretch}{1}\normalsize
 \begin{aligned}
 &\textbf{Population size} \\
-&\text{Initial no. of flies:} && N_1 \mid \lambda \sim \mathrm{Pois}(\lambda) \text{, where} \\
-&&& \lambda \sim \mathrm{Exponential}(0.05) \\
-& \text{Number of flies:}~ && N_t \mid N_{t-1}  \sim \mathrm{Poisson}\{ N_{t-1} \exp(R) \} \text{, where} \\ & &&R \sim \mathrm{Normal}(0, 12.5^2), & t \in \{2, \ldots, T \} \\
+&\text{Initial no. of flies:} && N_1  \sim \mathrm{Geometric}(1/20) \\
+& \text{Number of flies:}~ && N_t \mid N_{t-1}  \sim \mathrm{Poisson}\{ N_{t-1} \exp(R_t) \} \text{, where} \\ & && R_t \sim \mathrm{Normal}(\mu_t, 0.7), & t \in \{2, \ldots, T \} \\
 \\
 &\textbf{Fly locations} \\
-& \text{Population location:} ~ && L \sim \mathrm{Normal_2}(\mathbf 0_2, 160^2 I_2) \\
-& \text{Fly locations:}~ && L_{i,t}^\text{fly} \mid L \sim L + \mathrm{Normal}_2(\mathbf 0_2, 30^2 I_2) & i \in \{1, \ldots, N_t\}, \\
+& \text{Population location:} ~ && L_c \sim \mathrm{Normal_2}(\mathbf 0_2, 160^2 I_2) \\
+& \text{Fly locations:}~ && L_{i,t} \mid L_c \sim \mathrm{Normal}_2(L_c, 12.5^2 I_2) & i \in \{1, \ldots, N_t\}, \\
   &&&& t \in \{1, \ldots, T\}\\
 \\
 &\textbf{Detection model} \\
 & \text{Number of traps:}~ && K \in \mathbb N_+ \\
 & \text{Trap locations:}~ && L_k^\text{trap} \in \mathbb R & k \in \{1, \ldots, K\} \\
-& \text{Dist. btw. fly } i \text{ and trap } k \text{ at time } t \text{:} && \delta_{i,k,t} := \lVert L_k^\text{trap} - L_{i,t}^\text{fly} \rVert & i \in \{1, \ldots, N_t\}, \\
+& \text{Dist. btw. fly } i \text{ and trap } k \text{ at time } t \text{:} && \delta_{i,k,t} := \lVert L_k^\text{trap} - L_{i,t} \rVert & i \in \{1, \ldots, N_t\}, \\
   &&&& k \in \{1, \ldots, K\}, \\
   &&&& t \in \{1, \ldots, T\}\\
 & \text{Individ. cap. prob.:} && p_{i, t} = 1 - \prod_{k=1}^K (1 - p(\delta_{i,k,t})), & i \in \{1, \ldots, N_t\}, \\
-  &&&& t \in \{1, \ldots, T\}\\
-&  && \mathbf p_t := [p_{i,t}]_{i=1}^{N_t}  & t \in \{1, \ldots, T\} \\
-&\text{No. of captures:}~ && y_t \mid \theta \sim \text{Poisson-binomial}(N_t, \mathbf p_t), & t \in \{1, \ldots, T\} \\
+  &&&& t \in \{1, \ldots, T\} \\
+& \text{Aggregate cap. prob.:} && p_t = 1 - \prod_{t=1}^{N_t} (1 - p_{i,t}) & t \in \{1, \ldots, T\} \\
+&\text{Detection:}~ && y_t \mid \{ \mathbf L_t, N_t \} \sim \operatorname{Bernoulli}(p_t), & t \in \{1, \ldots, T\} \\
   &&& \mathbf y := [y_t]_{t=1}^T
 \end{aligned}
 \renewcommand{\baselinestretch}{1}\normalsize
@@ -38,13 +37,16 @@ $$
 
 ## Appendix 3: Population location prior
 
-To update on detection location when the first fly is detected at a trap (say trap k) we can use a trick. The trick is to model the probability of the first detection being at trap k as the probability that a fly is detected at k in one period conditional on exactly one fly total being detected in that period. The benefit of this model is that it does not depend on how many weeks it took to get the first detection (which would require information about how long flies have been around before the first detection). See appendix for more details.
+A trick is used to derive a prior for the case presented in chapter 4. The trick is to model the probability of the first detection being at trap k as the probability that a fly is detected at k in one period conditional on exactly one fly total being detected in that period. The benefit of this model is that it does not depend on how many weeks it took to get the first detection (which would require information about how long flies have been around before the first detection). 
 
-A mathematical trick can be used to derive a prior in some cases. Suppose we have $K$ traps indexed by $k \in \{1, \ldots, L\}$. Suppose also that we have a prior distribution over the population size $N$, given by $N \sim \mathrm{Poisson} (\lambda)$, with $\lambda \sim \mathrm{Exponential(1/20)}$. Here we assume no change in population size over time. Now, we suppose that each trap $k$ is "competing" to catch the first trap each week. We suppose that the trap at the centre of the grid was the first to catch a fly, and we want to use this information. Define the random variable
+Suppose we have $K$ traps indexed by $k \in \{1, \ldots, L\}$. Suppose also that we have a prior distribution over the population size $N$, given by $N \sim \mathrm{Poisson} (\lambda)$, with $\lambda \sim \mathrm{Exponential(1/20)}$. (This is the prior distribution for $N_1$ in chapter 4. Here we assume no change in population size over time. Now, we suppose that each trap $k$ is "competing" to catch the first trap each week. Suppose that the centre of the population is distributed uniformly over a 1600 m^2 trapping grid. Define the random variable
+
 $$
 C_k = \begin{cases}1 & \text{a fly is caught in trap } k \text{ before any other trap} \\ 0 & \text{otherwise}. \end{cases}
 $$
 
 Under these assumptions, $L \mid C_k = 1$ is the distribution of $L$, given that a fly was caught in trap $k$ before any other trap.
 
-Whether or not we can analytically derive the posterior density depends on the probability of capture function $p(x)$. In the case we consider here, the function cannot be integrated, and so I resort to sampling. Under the above assumptions, the posterior resembles the convolution of a normal and a uniform distribution (see figure). See appendix for more details.
+Whether or not we can analytically derive the posterior density depends on the probability of capture function $p(x)$. In the case we consider here, the function cannot be integrated, and so I resort to sampling. Under the above assumptions, the posterior resembles a bivariate normal distribution with mean $\mathbf 0_2$ and variance $160^2 I_2$.
+
+### Proof that 2d normal RVs are gamma

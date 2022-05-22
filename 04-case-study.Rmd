@@ -15,107 +15,29 @@ theme_set(theme_bw())
 
 ## Introduction
 
-TODO: Rewrite this intro in light of the model proposal chapter
-
-In the previous chapter, I proposed to address a gap in the literature by providing an elaborate model for inferring the eradication of an incipient invasive population of Tephritid fruit flies. In this chapter, I present an illustrative model of medfly surveillance after an hypothetical invasion. I use a simplified model of Medfly population dynamics. However, for various species of Tephritid fruit fly (medfly included) detailed models exist. A benefit of the proposed method is that it can easily incorporate almost any model of medfly dynamics.^[Note, though, that the sampling method I use may not be appropriate in all cases. When the model predicts that the population size "explodes", then the rejection rate for the sampling algorithm may become very high, causing the algorithm to be highly inefficient.]
-
-TODO:
-
-* Note that this analysis is primarily illustrative. Performing a more specific analysis requires access to confidential data.
-* Note that the method can be used for a real scenario - we only need to change the priors, data and locations of the traps.
-* Note that I use a simplified model of Medfly dynamics for illustrative purposes - but the method can easily incorporate more complex ABS models, and cite those models.
-
-TODO: Write one paragraph outlining this chapter
+In the previous chapter, I proposed a model for evaluating and proposing zero-catch criteria in specific situations, for various locations, seasons, and species of fruit fly. In this chapter, I illustrate the method by applying the model to an hypothetical outbreak. Mediterranean fruit fly is chosen for its economic significance, and Adelaide is chosen because of the availability of research on trapping sensitivity performed there. The analysis is primarily illustrative. As before, modelling is performed with a view to evaluating existing zero-catch criteria, and toward developing new criteria.
 
 ## Medfly (Ceratitis capitata)
 
-### Medfly are economically important
+Mediterranean fruit fly (*Ceratitis Capitata*) or *medfly* are a particularly salient species of tephritid fruit fly. Medfly has high invasive potential, as it can adapt to a relatively large range of climates and environments, and is known to have the capability to infest the fruits of over 300 species of plants (@sciarretta2018). Recently, an incursion of medfly in Adelaide, South Australia, prompted a large scale eradication effort. This comprised in part of hiring 350 special-purpose staff that set over 13,000 additional traps, and collected over 350 tonnes of fruit. The scale of the response to this outbreak indicates the perceived economic significance of this species. 
 
-Mediterranean fruit fly (*Ceratitis Capitata*) or *medfly* are a particularly salient species of tephritid fruit fly. Medflies have high invasive potential, as it can adapt to a relatively large range of climates and environments, and is known to have the capability to infest the fruits of over 300 species of plants (Ibid.). Recently, an incursion of medfly in Adelaide, South Australia, prompted a large scale eradication effort. This comprised in part of hiring 350 special-purpose staff that set over 13,000 additional traps, and collected over 350 tonnes of fruit. The scale of the response to this outbreak indicates the perceived economic significance of this fruit fly species. 
-
-### Medfly are cryptic
-
-Medfly are very hard to detect at low levels. Monitoring for medfly is typically performed with the aid of lured traps (namely so-called Lynfield or Jackson traps). These traps are relatively ineffective for detecting medfly. For example, one study from the Adelaide metro area trapping grid found that only 0.02% of flies were recaptured from a release of 38.8 million flies. Further, medfly are known to have low dispersals across space. This means that low-lying populatons of flies may go undetected across generations. <https://onlinelibrary-wiley-com.virtual.anu.edu.au/doi/pdfdirect/10.1111/j.1570-7458.2006.00415.x>
+Medfly are very hard to detect at low levels. As with other fruit fly species, monitoring is typically performed with the aid of traps fitted with chemical attractants. These traps are relatively ineffective. For example, one study from the Adelaide metro area trapping grid found that only 0.02% of flies were recaptured from a release of 38.8 million sterilised flies. If this is an accurate reflection of trap sensitivity, then it is possible that very large populations will be undetectable for significant periods of time. Further, medfly are known to disperse only small distances (@meats2007). This means that, if they are in a location that is not heavily monitored, they may evade detection for long periods. 
 
 ## Data
 
-In a Bayesian model, various sources of data can be used either to perform inference on parameters (i.e. infer marginal posterior distributions) or to inform prior distributions. For the present model, I propose to to perform inference on simulated data from a hypothetical scenario. However, real data is used to inform the structure of the prior distribution and the likelihood.
-
 ### Zero-sighting surveillance data
 
-As mentioned above, I do not use real data to estimate parameters. Instead, I model a hypothetical situation. The situation is as follows: We assume that at least one fly has been detected; eradication measures have since begun and then ceased; and we now proceed with intensified monitoring, while whatever population that may exist is free to grow relatively unhindered. The goal of the analysis is to infer the probability of eradication for the incipient population, given that no flies detected at any point in this period. Therefore, our "data" is a vector of zeroes, with one for each vector.
+As mentioned above, I do not use real data to estimate parameters. Instead, I model a hypothetical situation. The situation is intended to simulate the conditions described in codes of practice for use of zero-catch criteria (see @supptraps). The general situation is as follows: We assume that at least one fly has been detected; eradication measures have since begun and then ceased; and we now proceed with intensified monitoring, while whatever population that may exist is free to grow relatively unhindered. The goal of the analysis is to infer the probability of eradication for the incipient population, given that no flies are detected at any point in this period. 
 
-Thus, the data we wish to learn from is hypothetical, or simulated. The idea is to simulate a relatively realistic scenario. We observe the outcomes of a surveillance process. The surveillance process is generated by weekly checks of traps that are deployed uniformly in a given area (more about the trapping arrangement below). It is assumed that no specimens are detected at any point in the survey period. In other words, the sum of all detected counts in the period is zero.
+It is preferable to specify a location, so that real weather data can be used to inform the model's hyperparameters (see \@ref(popn-size)). Therefore, it is assumed that the outbreak takes place in Adelaide. Adelaide is a key location for fruit fly outbreaks. Further, for medfly, evidence from trap sensitivtiy studies is available from experiments performed in Adelaide, but no other Australian city.
 
-### Release recapture studies
+The zero-catch criteria is 12 weeks, or 28 days and one generation, whichever is longer (@meats2005). In a typical Australian summer, a Medfly generation takes 28-34 days (@dpirdwa). Therefore, the period I look at is over 12 weeks.^[See also @PIRSA, who state that the suspension period is 12 weeks in an Adelaide summer.] I.e., in the terminology of \@ref(ch3), we set $T = 12$. To evaluate this criteria, we want to find the probability of eradication after $T=12$ weeks, i.e. $\Pr(N_{12} = 0 \mid \mathbf y = \mathbf 0_{12})$.
 
-In the previous chapter, I briefly discussed release-recapture experiments. These are experiments involving the release of large numbers of flies into networks of standard traps. These studies give us a useful source of information about the probability of capturing a fly given distance between a fly and a trap. 
+It is assumed that general surveillance traps are spaced in a $400 \times 400$ metre grid, year round. We assume that a fly is caught at the centre of the grid (without loss of generality). Then, 16 *supplementary* traps are placed within a 200 metre of the location of the first detection (see figure \@ref(fig:trapgrid)). These traps are checked weekly for 6 weeks ($t \in \{1, \ldots, 6\}$) before being removed. Following this, we continue to monitor with only the original general surveillance traps. It is assumed that no fly is caught at any point in this period. Pest free area status is reinstated after 12 weeks. After this, we continue to observe no fruit flies indefinitely.
 
-In cases where Bayesian models have been used, data has not been available on detection rates. For example, @caley2014 and @keith2013 set uninformative priors on the detection rates, and attempt to learn the detection rates for data. However, because of their global economic importance, tephritid fruit flies are relatively well studied. In particular, a number of fruit fly species have been studied with release recapture experiments. Release recapture experiments involve the release of a large number of (often sterilised) fruit flies. These studies help us to learn both the dispersal patterns and tendencies of various species of fly, but also the effectiveness of various trap types and layouts.
+As mentioned previously, it is assumed that trap locations have fixed, known locations. In particular, we assume that monitoring is intensified for the first 6 weeks ($t \in \{1, \ldots, 6\}$). By intensified monitoring, I mean that **supplementary** monitoring traps have been placed alongside the previously existing grid of **general** monitoring traps. More precisely, it is assumed that **general** surveillance traps are placed year round in a 400 $\times$ 400 metre grid (DPIPWE, 2011, p. 50). The **supplementary** surveillance system consists of a set of 16 traps in a circular area, centred at the site of the first fly detection.^[It is typical to wait until at least 2 flies have been detected near each other for an outbreak to be declared. To illustrate the method in a simplified setting, I suppose that one fly detection is sufficient.] See @trapgrid.
 
-## Model
-
-Now that I have discussed background and the data available, I turn to a detailed discussion of the model for this case. This discussion builds on the previous chapter, where the general, basic model was outlined. Here, I focus on the specific prior distributions and likelihood that are used. 
-
-For exposition, I break the model into the following three components: (1) The size of the population (number of individuals); (2) the locations of individuals and traps; and (3) number of individuals caught in traps, conditional on (1) and (2).
-
-The likelihood of a given number of captures is a function of latent variables, namely the number and locations of flies. Under the prior distribution, it is assumed that data at any given timestep are generated as follows. Firstly, nature draws a number of flies (i.e. a population size) which may or may not be based on the number of flies at the previous time step. Next, nature draws a location for each of the flies. Finally, nature draws a number of detections.
-
-### Population size
-
-In this case, $N_1$ is the first week after the most recent fly detection. I have chosen to give $N_1$ the prior distribution $N_1 \mid \lambda \sim \mathrm{Poisson}(\lambda)$, where $\lambda \sim \mathrm{Exponential}(0.05)$. This distribution for $N_1$ is chosen as it is a discrete distribution with right skew, and a relatively large amount of mass $f_{N_1}(x)$ at $x = 0$, corresponding to the situation where flies are already eradicated (see @priorinitsize).
-
-```{r priorinitsize, echo=F, fig.cap = 'Prior distribution of initial population size'}
-g = 1/20
-init_pmf = function(n, g) g / (1+g)^(n+1)
-
-x = 0:100
-
-df = data.frame(x = x, y = init_pmf(x, g))
-
-ggplot(df) +
-  geom_bar(stat = 'identity', aes(x, y)) +
-  xlab(bquote(italic(n))) +
-  ylab(bquote('Pr('*italic(N)[1] == italic(n)*')'))
-
-# Prior probability that they're already eradicated
-```
-
-As for the population sizes at later time points, I assume that growth is exponential at an uncertain rate. In particular, it is assumed that, for $t \in \{2, \ldots, T\}$,  $N_t \mid N_{t-1}, R_t \sim \mathrm{Poisson}(N_{t-1} e^{R_t})$. Here, we can give any continuous distribution for $R_t$. I have chosen the prior $R_t \stackrel{\text{iid}} \sim \mathrm N(0, 0.2)$. The symmetry of this prior means that we are indifferent about whether the population is growing or declining. 
-
-The growth rate prior has been chosen to place the vast majority of density below their estimated growth rate under optimal conditions. Medfly have been estimated to grow at 8% per day, in optimal lab conditions (@papadopoulos2002). Under an exponential growth model this is 56% per week. This can be taken as an upper bound on the growth rate. In the wild, flies may fail to establish due to food scarcity, predation, and/or unsustainably low population density.
-
-In practical, applied cases, it will be desirable to attempt to estimate $R_t$ from data. In particular, it is known that fruit fly population growth rates are highly dependent on temperature. Therefore, if possible, fly population growth rates should be estimated conditional on weather. Choosing an empirically realistic distribution for $R_t$ is likely to improve the efficiency of inference from the survey record. 
-
-### Spatial location
-
-As mentioned in the previous chapter, the model is spatial, insofar as likelihood of detection depends on distances between traps and individual flies.
-
-TODO: Explain that the centre of the grid is the site of the last detection.
-
-#### Population location
-
-The centre of of the population is assumed to be located at the two dimensional vector $L_c$. I have set the prior on $L_c$ to be 
-$$
-L_c \sim \mathrm {Normal}_2 (\mathbf 0_2, 160^2 I_2),
-$$
-where $\mathrm{Normal}_2$ is the bivariate normal distribution, $\mathbb 0_2$ is the two-dimensional zero vector and $I_2$ is the $2 \times 2$ identity matrix. This prior reflects a prior belief that the centre of the population is highly likely to be found somewhere on a disc with. E.g., we believe that there is a 95% chance that the centre of the population is within $1.96 \cdot 160 \approx 320$ metres of the centre of the grid.^[For details about how this prior was arrived at, see appendix.] Recall that this makes sense because we believe that the flies are within the distribution.
-
-#### Individual fly dispersals
-
-Let $L_{i, t}$ denote the location of fly $i$ at time $t$, as in the previous chapter. I assign this quantity the prior distribution
-$$
-L_{i, t} \mid L_c \sim \mathrm {Normal}_2 (L_c, 12.5^2 I_2)
-$$
-where the notation is defined as in the previous section above. The variance of this distribution is chosen on the basis of prior analysis of dispersal data (see appendix).
-
-Note: Do I need to prove the claims in the next paragraph?
-
-The normal distribution is chosen for a few reasons. Firstly, it is conceptually simple and intuitive to parameterise. Secondly, the location has a simple marginal distribution, thanks to the fact that a normal random variable with a normal mean is itself normal. Thirdly, the distance between a normal random variable and its mean has a known distribution. In particular, for any fly $i$, the squared distance between $L_{i,t}$ and $L_c$, conditional on $L_c$, has the gamma distribution with parameters $\alpha = 1$, and $\beta = 12.5^2 / 2$. Similarly, the distance between $L_{i, t}$ and the origin is the same but with $\beta = (12.5^2 + 160^2) / 2$. Knowing this allows us to easily compare and calibrate the distribution against experimental results. This, in turn, makes elicitation of priors simpler and more intuitive. (It allows us to visualise, for example, the distribution of distances to the origin and to the population centre.)
-
-It may be worth noting that, in real cases, the assumed prior distribution on dispersals may not be reasonable. For example, dispersals may have non-zero mean (due to strength and direction) or non-spherical covariance matrix (i.e. non-equal variances and/or non-zero covariances).^[This is argued by @baker1986.] Further, it may not be reasonable to assume that the fly population cannot move across time. Ideally, the importance of these assumptions should be checked based on the case at hand (e.g. properties of the situation or species in question). Extending the model in various ways to meet these problems is beyond the scope of this work, but warrants further investigation.
-
-### Trap locations
+It is assumed that the outbreak starts on November 1, 2020. The year 2020 is chosen rather than 2021, so that weather data is available for at least 1 year from the start of the monitoring period. (The time of writing is May, 2022.) Data on historical daily temperature averages (the mean for each day) were obtained from the Bureau of Metereology.
 
 ```{r trapgrid, echo=F, fig.cap = 'Illustration of the hypothetical trapping grid. Grey circle represents 200m radius disc surrounding the site of the most most recently detected medfly specimen.'}
 
@@ -144,19 +66,85 @@ ggplot(traps_df) +
   scale_y_continuous(breaks = (-4:4)*200) 
 ```
 
-As mentioned previously, it is assumed that trap locations have fixed, known locations. In particular, we assume that monitoring is intensified for the first 6 weeks ($t \in \{1, \ldots, 6\}$). By intensified monitoring, I mean that **supplementary** monitoring traps have been placed alongside the previously existing grid of **general** monitoring traps. More precisely, it is assumed that **general** surveillance traps are placed year round in a 400 $\times$ 400 metre grid (DPIPWE, 2011, p. 50). The **supplementary** surveillance system consists of a set of 16 traps in a circular area, centred at the site of the first fly detection.^[It is typical to wait until at least 2 flies have been detected near each other for an outbreak to be declared. To illustrate the method in a simplified setting, I suppose that one fly detection is sufficient.] See @trapgrid.
+## Model
 
-#### Probability of capture
+I now propose a model for the case discussed above. This discussion builds on \@ref(ch3), where I outlined the model in broad generality. There, I discussed the model while leaving some key situation-specific hyperparameters and distributions unspecified. For example, the prior distribution on the initial population size $N_1$, and the relationship between probability of capture and distance between fly and trap $p(d)$ were unspecified. Here, hyperparamters and distributions are proposed and justified.
 
-I assume that the probability of capture for any given fly in any given trap is 
+As in the previous chapter, the model is broken into priors and likelihood in the following way. Firstly, (1) The size of the population (number of individuals); (2) the locations of individuals and traps; and (3) number of individuals caught in traps, conditional on (1) and (2). To structure discussion, I discuss these elements in turn, beginning with prior distributions.
+
+Here, we are modelling the risk of an adverse event (namely an undetected pest invasion). In such cases, we might consider examining a worst case scenario. In this case, this could be done by specifying priors such that we assign high density to cases where (a) the growth rate is very close to zero, so that the fly population is capable of persisting at below-detectable levels indefinitely, or (b) flies are located far away from surveillance traps. Given these considerations, it should be trivial to identify worst-case scenarios where we can almost never be certain that flies are eradicated, given any length of time. However, such results are likely unreasonable, and do not accurately reflect our prior state of information. Nonetheless, I attempt to err on the side of pessimism about the while making the prior distribution as realistic as possible.
+
+## Prior distributions
+
+### Population size $N_t$ {#popn-size}
+
+In this case, $N_1$ is the first week after the most recent fly detection. I have chosen to set $N_1 \sim \operatorname{Geometric}(1/20)$. This is chosen as it is a discrete distribution with right skew, and a relatively large amount of mass in the region of $x = 0$, corresponding to the situation where flies are already eradicated (see figure \@ref(fig:priorinitsize)).^[The geometric distribution is also a natural choice for this latent variable; I do not explore this further here.] The mean of the geometric distribution is chosen arbitrarily. The primary goal is to have a small population on average, with non-zero risk of a population size greater than 50. However, it is not clear, without prior domain knowledge, whether this distribution is empirically reasonable. Population counts do not exist for past outbreaks. This issue is discussed further in section \@ref(discussion).
+
+```{r priorinitsize, echo=F, fig.cap = 'Prior distribution of initial population size $N_1$.'}
+g = 1/20
+init_pmf = function(n, g) g / (1+g)^(n+1)
+
+x = 0:150
+
+df = data.frame(x = x, y = dgeom(x, 1/20))
+
+ggplot(df) +
+  geom_bar(stat = 'identity', aes(x, y), na.rm=T) +
+  xlab(bquote(italic(n))) +
+  ylab(bquote('Pr('*italic(N)[1] == italic(n)*')')) +
+  coord_cartesian(xlim=c(0, 100)) +
+  theme_bw()
+
+# Prior probability that they're already eradicated
+```
+
+As for $N_t$, for $t \in \{2, \ldots, T\}$, I assume the Poisson branching process with exponential growth, discussed in \@ref(ch3). To recap, it is assumed that, for $t \in \{2, \ldots, T\}$,  $N_t \mid \{ N_{t-1}, R_t \} \sim \mathrm{Poisson}(N_{t-1} e^{R_t})$. 
+
+It is assumed, primarily for convenience, that $R_t \sim \mathrm N(\mu_t, \sigma^2_t)$. Choices for the hyperparameters $\{\mu_t\}_{t=2}^T$ are informed by the results of @ks2019. The authors transform observed captures $C_t$ as $\ln (C_t / C_{t-1})$, and fit a simple model to the resulting values from field data on Medfly captures.^[Notably, temporal autocorrelation is ignored.] In particular, they estimate the mean *daily* growth rate, conditional on mean daily temperature, for each day $t$, to be
 $$
-p(x) = \begin{cases}ax^{-b}, & d>1 \\ a & 0 \geq d \geq 1\end{cases}
+\mathrm E(R_t \mid \mathrm{Temp}_t) = \alpha \mathrm{Temp}_t^2 + \beta \mathrm{Temp}_t + \gamma,
 $$
-where $a = 0.4702111$, $b = 1.37$, and $x$ is the distance between the fly and the trap at the start of the period. Thresholding is introduced because (a) the function does not yield valid probabilities for small enough $x$. In general, the use of a negative exponential function is not ideal here. This function is used for convenience as it is provided by the authors of the study, and data is not publicly accessible. In the context of a more detailed analysis, it may be beneficial to approximate this function with a more "well behaved" function. This is not within the scope of this thesis.
+where $\alpha = -0.000386$, $\beta = 0.0279$, and $\gamma = -0.374$. To get the daily mean growth rates, observed daily temperatures are plugged into this formula. Then, weekly mean growth rates $\mu_t$, are derived by summing over daily growth rates within each week. The dataset used by @ks2019 is small, consisting of only 24 observations. Ideally, we would quantify uncertainty about these estimates. However, this is difficult, as the authors do not provide data, or an analysis of the variance of residuals for their model. I do not explore this further here, though it should be considered in real applications.
 
-TODO: mention that the probability of capture is adjusted, because the study gives us the lifetime probability of capture.
+The choice for $\sigma^2_t$ is necessarily more arbitrary than the choice for $\mu_t$. As mentioned above, @ks2019 do not provide an analysis fo the variance of residuals for their model. Therefore, it is difficult to meaningfully quantify prior beliefs about the variance of the growth rate. Increasing the variance increases the prior probability that populations die out, due to runs of "bad luck". Therefore, smaller variances are more pessimistic. With this in mind, I have chosen to set the standard deviation for daily growth to $\sigma_t = \sigma = 0.1$. In my view, this is roughly consistent with the plot provided by the authors (see figure \@ref(fig:ksplot)). However, as this choice is arbitrary, it should be treated with skepticism.
 
-The results of release recapture studies are highly variable, and gaining access to data may be difficult for older studies. In this case, it may be desirable to incorporate uncertainty about the probability function. This could be done, for example, by assigning prior distributions to the coefficients $a$ and $b$. I do not explore this any further here, as this model exposition is intended for the purposes of illustration only.
+```{r ksplot, out.width='75%', fig.align = 'center', fig.cap = 'Relationship between population increase $\\ln (C_t / C_{t-1})$ and mean daily temperature. Taken from @ks2019. The solid line is fit to field data (black points); the dashed line is fit to lab data (white points).'}
+knitr::include_graphics('references/ksplot.png')
+```
+
+### Spatial location
+
+As mentioned in the previous chapter, the model is spatial. This is because the likelihood of detection depends on distances between traps and individual flies. As in the previous chapter, prior distributions must be set for the location of the population centre, and for dispersals of individual flies from that centre.
+
+#### Population location
+
+The centre of of the population is assumed to be located at the two dimensional vector $L_c$. I have set the prior on $L_c$ to be 
+$$
+L_c \sim \mathrm {Normal}_2 (\mathbf 0_2, 160^2 I_2),
+$$
+where $\mathrm{Normal}_2$ is the bivariate normal distribution, $\mathbf 0_2$ is the two-dimensional zero vector and $I_2$ is the $2 \times 2$ identity matrix. This prior reflects a prior belief that the centre of the population is highly likely to be close to the centre of the grid, where a fly was detected most recently (we suppose). E.g., we believe that there is a 95% chance that the centre of the population is within $1.96 \cdot 160 \approx 320$ metres of the centre of the grid.^[For details about how this prior was arrived at, see appendix.] This makes sense, as the setting of supplementary traps close to the centre, as is standard, belies a prior belief that other flies are likely to be located in the vicinity of the first capture.
+
+#### Individual fly dispersals
+
+Let $L_{i, t}$ denote the location of fly $i$ at time $t$, as in the previous chapter. I assign this quantity the prior distribution $$L_{i, t} \mid L_c \sim \mathrm {Normal}_2 (L_c, 12.5^2 I_2),$$ where the notation is defined as in the previous section above. The variance is chosen so that ~95% of flies are within 30 metres of the population centre. Here, 30 metres is chosen arbitrarily. It reflects a belief that flies typically do not disperse very far. This is a pessimistic ("worst case") assumption. When flies are spread further from their population centre, it is more likely that at least one is close to a trap. As such, large populations of flies are less likely to go undetected.
+
+The normal distribution is chosen for a few reasons. Firstly, it is conceptually simple and intuitive to parameterise. This helps with expert elicitation. Secondly, the location has a simple marginal distribution, thanks to the fact that a normal random variable with a normal mean is itself normal.^[This is just the standard conjugacy of the multivariate normal mean for the multivariate normal likelihood, when the covariance matrix is fixed.] Thirdly, the distance between a normal random variable and its mean has a known distribution. In particular, if $X \sim \mathrm{Normal}_2(\pmb \mu, \sigma^2 I_2)$, then $\lVert X - \pmb \mu \rVert^2 \sim \Gamma(1, \sigma^2/2)$, where $\Gamma(a, b)$ is the gamma distribution with shape $a$ and scale $b$. In this case, or any fly $i$ we have $\lVert L_{i,t} - L_c \rVert \mid L_c \sim \Gamma(1, 12.5^2/2)$. Similarly, the *marginal* squared distance between fly $i$ and the origin is $\lVert L_{i, t} \rVert^2 \sim \Gamma(1, (12.5^2 + 160^2) / 2)$. Knowing this allows us to easily compare and calibrate the distribution against experimental results. This, in turn, makes elicitation of priors simpler and more intuitive. (It allows us to visualise, for example, the distribution of distances to the origin and to the population centre.)
+
+There is evidence suggesting that Medfly dispersal distance is in fact distributed as a power law (see, e.g., @meats2005 and @plant1991). In particular, the distributions estimated by these authors have far heavier tails than the distribution proposed above. As mentioned above, the normal prior implies that squared dispersal distances are gamma random variables, the square roots of which are Nakagami distributed. The Nakagami distribution, parameterised as above, has a far thinner right tail than a power law. As such, the present priors may heavily underestimate our best guess about the dispersal distances of individual flies. In further work, we might investigate whether this has a large effect on the results through sensitivity analysis (see section \@ref(discussion)).
+
+It may also be worth noting that, in real cases, the assumptios of zero mean and spherical covariance matrix ($\sigma^2 I_2$) may not be reasonable. Dispersals may have non-zero mean (due to wind direction) and the distance and/or direction of individual dispersals may be correlated.^[These claims are argued for Medfly by @baker1986.] Further, it may not be reasonable to assume, as I have done here, that the fly population cannot move across time. Ideally, the importance of these assumptions should be checked based on the case at hand (e.g. properties of the situation or species in question). Extending the model in various ways to meet these problems is beyond the scope of this work, but warrants further investigation.
+
+## Likelihood
+
+The likelihood is the distribution of $y_t \mid \{N_t, \mathbf L_t\}$. Here, it is 
+
+As mentioned previously, results of trap sensitivity studies are used to inform the likelihood of capture. In particular, I use the results of @ms2005. These authors estimate that the probability of capture for any given fly in any given trap is given by the power law
+$$
+p(d) = \begin{cases}ad^{-b}, & d>1 \\ a & 0 \geq d \geq 1.\end{cases}
+$$
+Here, $a = 0.4702111 / 2$, $b = 1.37$, and $d$ is the distance between the fly and the trap at the start of the period. Thresholding is introduced because (a) the function does not yield valid probabilities for small enough $d$. This function is used for convenience as it is provided by the authors of the study, and data is not publicly accessible. In the context of a more detailed analysis, it may be beneficial to consider uncertainty in the probability of capture by specifying hyperprior distributions for $a$ and $b$. I do not explore this further here, as the model is intended to be illustrative only.
+
+An adjustment is made to $p(x)$. In $p(x)$ we have the probability of capture over the lifetime of the individual. It is assumed that the lifetime is roughly 4 weeks.
 
 ## Sampling procedure
 
@@ -166,9 +154,9 @@ So far, we have talked about situations when sampling is required for inference.
 
 ### Approximate Bayesian Computation
 
-A simple rejection algorithm is used to draw samples from the posterior distribution (see chapter 2). Instead of matching on a statistic, such as the sum of the observations, the rejection rule was set so that data were only kept in cases where the simulated data vector was an exact match with the actual data (the hypothetical zero-catch record).
+A rejection algorithm is used to draw samples from the posterior distribution (see chapter 2). Instead of matching on a statistic, such as the sum of the observations, the rejection rule was set so that data were only kept in cases where the simulated data vector was an exact match with the actual data (the hypothetical zero-catch record).
 
-Here, I have used ABC for intuitiveness, ease of implementation, and the fact that it is relatively efficient for this problem. However, other methods exist that may be worth exploring, for analogous problems where the rejection rate of ABC is higher. There are at least two known methods for sampling from the posterior when the dimension of the parameter space is uncertain. These are the reversible jump MCMC sample (@green1995) and the generalised Gibbs sampler (@keith2015). These may be worth exploring for problems where the rejection rate is high for EBC.
+Here, I have used ABC for intuitiveness, ease of implementation, and the fact that it is relatively efficient for this problem. However, other methods exist that may be worth exploring, for analogous problems where the rejection rate of ABC is higher. There are at least two known methods for sampling from the posterior when the dimension of the parameter space is uncertain. These are the reversible jump MCMC sample (@green1995) and the generalised Gibbs sampler (@keith2015). These may be worth exploring for problems where the rejection rate is high for ABC.
 
 Interestingly, the standard justifications for and against ABC do not apply to the case under consideration. Firstly, the standard justification for ABC is that it allows for inference when the likelihood function is "intractable" - i.e., unknown, uncomputable or otherwise difficult to work with. However, for the current model, the likelihood is known, and relatively simple to write out.
 
@@ -178,15 +166,47 @@ $10{,}000$ samples were taken. The acceptance rate for sampling was 0.68. This h
 
 ## Results
 
-* The fly free period is 12 weeks or 28 days and one generation, whichever is longer (@meats2005). In summer, a Medfly generation takes 28-34 days (@dpirdwa). Therefore, the period I look at is over 12 weeks. However, this may be different based on the period that the manager is interested in.
+Results are shown in @postfig. The blue and red lines show the prior and posterior probability of eradication for each (weekly) time point after the monitoring period begins on November 1. Under the model, the posterior probability of extinction after $T=12$ weeks is approximately 0.443.^[Unfortunately, it is not straightforward to visualise the prior or posterior density of this quantity.] The first week for which the posterior probability of eradication is greater than 95% is after 35 weeks, much later than the PFA date.
 
-The posterior probability of extinction after 12 weeks is approximately 0.684.^[Unfortunately, it is not straightforward to visualise the prior or posterior density of this quantity.]
+```{r postfig, echo=F, out.width='100%', fig.align = 'center', fig.cap = 'Prior vs. posterior probability of eradication over 36 weeks.'}
+knitr::include_graphics('results/pfa_criteria_evaluation/prior_vs_post_plot.png')
+```
 
-## Discussion
+## Discussion {#discussion}
 
 Here I discuss limitations and objections.
 
+### Reasons to distrust this model
+
+1. There may be many cases where flies are not eradicated, but the population size is unsustainably small.
+2. No uncertainty about the probability of capture.
+3. Growth rates are not weather dependent.
+4. Dispersal data is used twice.
+5. The location prior and likelihood use data from different sources.
+6. Our model predicts that medfly is unlikely to survive uncontrolled in Adelaide. This contradicts a status quo view (@PIRSA, the chapter on eradication).
+
+### Model validation
+
+#### Model validation is hard for this case
+
+Cite Gelman et al on model validation. The best way to check models is to compare with other sources of data. However, we never observe the full number of flies in an outbreak. We could augment the model and use it on release-recapture data, to try and predict the number of captures.
+
+Sensitivity analysis should be performed on the following
+
+The most arbitrary choices are on
+
+* variance of growth rate $R_t$,
+* initial population size $N_1$,
+* variance of dispersals,
+
+* Check the assumption of no interference.
+* Check the sensitivity to the $N_1$ prior.
+* Check the sensitivity to the variance of the growth rate.
+* Estimate growth rate based on capture
+* The likelihood and the population centre prior are each based on different estimates of trap sensitivity.
+
 ### Limitations
+
 
 * We do not get a posterior distribution over the probability of eradication. 
 

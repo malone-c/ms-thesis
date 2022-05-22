@@ -38,6 +38,46 @@
   pdfcreator={LaTeX via pandoc}}
 \urlstyle{same} % disable monospaced font for URLs
 \usepackage[margin=4cm]{geometry}
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
 \usepackage{longtable,booktabs,array}
 \usepackage{calc} % for calculating minipage widths
 % Correct order of tables after \paragraph or \subparagraph
@@ -78,7 +118,7 @@
 
 \title{Bayesian inference of eradication of incipient Tephritid fruit fly populations, with application to Mediterranean fruit fly}
 \author{Chris Malone}
-\date{2022-05-16}
+\date{2022-05-22}
 
 \begin{document}
 \maketitle
@@ -145,23 +185,23 @@ In contrast, a class of elaborate models for inferring species extinction have r
 \hypertarget{red-fire-ants}{%
 \subsection{Red fire ants}\label{red-fire-ants}}
 
-The first instance of an elaborate Bayesian model for inferring pest eradication is given by \citet{keith2013}. The authors use an agent-based Bayesian model to infer the distribution of fire ant nests in Brisbane. They obtained data on the locations and month of discovery for \(n = 7{,}068\) nests. They also observed whether data were passively or actively discovered (e.g.~by members of the public or through a targeted search).
+The first instance of a Bayesian model for inferring pest eradication is given by \citet{keith2013}. The authors use an agent-based Bayesian model to infer the distribution of fire ant nests in Brisbane. They obtained data on the locations and month of discovery for \(n = 7{,}068\) nests. They also observed whether data were passively or actively discovered (e.g.~by members of the public or through a targeted search).
 
-The model explicitly models the location of each agent (ant nest). Typically, when a Bayesian model is agent based, this means that there is an unknown number of parameters in the model. The upshot of this is that typical Markov chain Monte Carlo (MCMC) methods, such as Metropolis-Hastings sampling, fail. This is because they do not allow the dimension of the parameter vector to vary between draws. To get around this problem, a generalised Gibbs sampling algorithm is used. This gets around the problem by adding a step to the Gibbs sampler in which the Markov chain moves between coordinate spaces.
+The model explicitly models the location of each agent (ant nest). Typically, when a Bayesian model is agent based, this means that there is an unknown number of parameters in the model. The upshot of this is that typical Markov chain Monte Carlo (MCMC) methods, such as standard Metropolis-Hastings sampling, fail. This is because they do not allow the dimension of the parameter vector to vary between draws. As discussed in chapter 4, this is a general problem faced by agent based Bayesian models. To get around this problem, the authors use a technique they call generalised Gibbs sampling. This gets around the problem by adding a step to the Gibbs sampler in which the Markov chain moves between coordinate spaces.
 
 \hypertarget{red-foxes}{%
 \subsection{Red foxes}\label{red-foxes}}
 
-The second instance of an elaborate Bayesian model for inferring eradication is given by \citet{caley2015}. Caley and co-authors develop a Bayesian model of fox sightings in Tasmania. Their goal is to infer the posterior probability that foxes had been eradicated, given a record of fox carcass sightings. They obtained data on fox carcass sightings from two sources, namely hunter kills and road kills. These separate ``observation processes'' were modelled separately, so that posterior detection rates were allowed to differ between the sighting types. Detection rates were assumed to be constant across time and location for each type of sighting. Notably, uninformative priors were set for detection rates (i.e.~the probability of detecting a fox was set to be uniform on \([0, 1]\)). This was because the fox sighting mechanism has not been studied empirically (indeed, it is not clear how it could be studied at all). Data consisted of a single sighting count for each location (with Tasmania divided geographically into grid cells) and each year between 2001 and 2013. Data were all zeroes with the exception of exactly four unit observations (sightings of exactly one fox).
+The second instance of a Bayesian model for inferring eradication is given by \citet{caley2015}. Caley and co-authors develop a Bayesian model of fox sightings in Tasmania. Their goal is to infer the posterior probability that foxes had been eradicated, given a record of fox carcass sightings. They obtained data on fox carcass sightings from two sources, namely hunter kills and road kills. These separate ``observation processes'' were modelled separately, so that posterior detection rates were allowed to differ between the sighting types. Detection rates were assumed to be constant across time and location for each type of sighting. Notably, uninformative priors were set for detection rates (i.e.~the probability of detecting a fox was set to be uniform on \([0, 1]\)). This was because the fox sighting mechanism has not been studied empirically (indeed, it is not clear how it could be studied at all). Data consisted of a single sighting count for each location (with Tasmania divided geographically into grid cells) and each year between 2001 and 2013. Data were all zeroes with the exception of exactly four unit observations (sightings of exactly one fox).
 
 The authors use a form of approximate Bayesian computation (ABC) to sample from the posterior. ABC works by first drawing samples of the parameter vector \(\theta\) from the prior distribution \(\pi(\theta)\), then second, drawing simulated data \(y_{\text{sim}}\) from the likelihood, then keeping the proposed \(\theta\) if and only if \(y_{\text{sim}}\) is an approximate match with the observed data. The authors use the sum of the observations over the observation period as the matching statistic. They kept samples only if the \(y\) simultations were an exact match with the data.
 
 \hypertarget{gaps}{%
 \section{Gaps}\label{gaps}}
 
-Above, I have discussed the two elaborate computational models in the literature for inferring eradication of an incipient biological invasion. The current work seeks to address two gaps in the literature.
+Above, I have discussed the two models in the literature for inferring eradication of an incipient biological invasion. The current work seeks to address two gaps in the literature.
 
-Firstly, elaborate Bayesian models have not been explored for inferring eradication of Tephritid fruit flies. Fruit flies pose an interesting case study, because the regulator has fine grained information about the detection system. In particular, the surveillance system is relatively simply. Traps are placed at fixed, known locations, and checked periodically, at regular time intervals. Further, prior research investigating the efficacy (i.e.~sensitivity) of these traps exists (see chapter 3). If used carefully, this information can be leveraged through the model's priors to learn from the zero-sighting record efficiently. Since the authors discussed above used noninformative priors for key parameters, leveraging such information represents the first attempt to use prior literature to set informative priors for such a model.
+Firstly, Bayesian models have not been explored for inferring eradication of Tephritid fruit flies. Fruit flies pose an interesting case study, because the regulator has fine grained information about the detection system. In particular, the surveillance system is relatively simply. Traps are placed at fixed, known locations, and checked periodically, at regular time intervals. Further, prior research investigating the efficacy (i.e.~sensitivity) of these traps exists (see chapter 3). If used carefully, this information can be leveraged through the model's priors to learn from the zero-sighting record efficiently. Since the authors discussed above used noninformative priors for key parameters, leveraging such information represents the first attempt to use prior literature to set informative priors for such a model.
 
 \hypertarget{fruit-fly-literature-gaps}{%
 \subsection{Fruit fly literature gaps}\label{fruit-fly-literature-gaps}}
@@ -173,8 +213,8 @@ The present work builds on the work of \citet{lance1994}. In that work, the auth
 \hypertarget{conclusion}{%
 \section{Conclusion}\label{conclusion}}
 
-\hypertarget{general-framework-proposal}{%
-\chapter{General framework proposal}\label{general-framework-proposal}}
+\hypertarget{ch3}{%
+\chapter{General framework proposal}\label{ch3}}
 
 \hypertarget{introduction-2}{%
 \section{Introduction}\label{introduction-2}}
@@ -255,10 +295,10 @@ NOTE: Delete the next paragraph?
 
 If the researcher has cause to believe that interference may be non-negligible, a simple correction can be applied. Without loss of generality, suppose we are interested in a single fly in a single trapping period. Let \(q_k\) be the probability that that fly is captured at trap \(k\), calculated using the distance function above. Let \(q_0\) be the probability that the fly is not captured at all. The set \(\{q_k\}_{k=0}^K\) are probabilities of exhaustive and mutually exclusive events. Therefore, we can redefine the probabilities of trap-specific capture (or no capture) as \(q'_k = q_k / \sum_{i=0}^K q_i\).
 
+Finally, the reader should note that it is assumed that this is homogenous across time. I.e., the population size \(N_t\) and locations of flies \(\mathbf L_t\) tell us everything we can know about whether a fly is captured at time \(t\).\footnote{As such, it is assumed implicitly that temperature has no effect on fly behaviour. This is a strong assumption, against which there is some evidence (see \citet{bali2021}).}
+
 \hypertarget{conclusion-1}{%
 \section{Conclusion}\label{conclusion-1}}
-
-TODO: Write conclusion of this chapter
 
 \hypertarget{case-study-mediterranean-fruit-fly-c.-capitata}{%
 \chapter{\texorpdfstring{Case study: Mediterranean fruit fly (\emph{C. Capitata})}{Case study: Mediterranean fruit fly (C. Capitata)}}\label{case-study-mediterranean-fruit-fly-c.-capitata}}
@@ -266,88 +306,86 @@ TODO: Write conclusion of this chapter
 \hypertarget{introduction-3}{%
 \section{Introduction}\label{introduction-3}}
 
-TODO: Rewrite this intro in light of the model proposal chapter
-
-In the previous chapter, I proposed to address a gap in the literature by providing an elaborate model for inferring the eradication of an incipient invasive population of Tephritid fruit flies. In this chapter, I present an illustrative model of medfly surveillance after an hypothetical invasion. I use a simplified model of Medfly population dynamics. However, for various species of Tephritid fruit fly (medfly included) detailed models exist. A benefit of the proposed method is that it can easily incorporate almost any model of medfly dynamics.\footnote{Note, though, that the sampling method I use may not be appropriate in all cases. When the model predicts that the population size ``explodes'', then the rejection rate for the sampling algorithm may become very high, causing the algorithm to be highly inefficient.}
-
-TODO:
-
-\begin{itemize}
-\tightlist
-\item
-  Note that this analysis is primarily illustrative. Performing a more specific analysis requires access to confidential data.
-\item
-  Note that the method can be used for a real scenario - we only need to change the priors, data and locations of the traps.
-\item
-  Note that I use a simplified model of Medfly dynamics for illustrative purposes - but the method can easily incorporate more complex ABS models, and cite those models.
-\end{itemize}
-
-TODO: Write one paragraph outlining this chapter
+In the previous chapter, I proposed a model for evaluating and proposing zero-catch criteria in specific situations, for various locations, seasons, and species of fruit fly. In this chapter, I illustrate the method by applying the model to an hypothetical outbreak. Mediterranean fruit fly is chosen for its economic significance, and Adelaide is chosen because of the availability of research on trapping sensitivity performed there. The analysis is primarily illustrative. As before, modelling is performed with a view to evaluating existing zero-catch criteria, and toward developing new criteria.
 
 \hypertarget{medfly-ceratitis-capitata}{%
 \section{Medfly (Ceratitis capitata)}\label{medfly-ceratitis-capitata}}
 
-\hypertarget{medfly-are-economically-important}{%
-\subsection{Medfly are economically important}\label{medfly-are-economically-important}}
+Mediterranean fruit fly (\emph{Ceratitis Capitata}) or \emph{medfly} are a particularly salient species of tephritid fruit fly. Medfly has high invasive potential, as it can adapt to a relatively large range of climates and environments, and is known to have the capability to infest the fruits of over 300 species of plants (\citet{sciarretta2018}). Recently, an incursion of medfly in Adelaide, South Australia, prompted a large scale eradication effort. This comprised in part of hiring 350 special-purpose staff that set over 13,000 additional traps, and collected over 350 tonnes of fruit. The scale of the response to this outbreak indicates the perceived economic significance of this species.
 
-Mediterranean fruit fly (\emph{Ceratitis Capitata}) or \emph{medfly} are a particularly salient species of tephritid fruit fly. Medflies have high invasive potential, as it can adapt to a relatively large range of climates and environments, and is known to have the capability to infest the fruits of over 300 species of plants (Ibid.). Recently, an incursion of medfly in Adelaide, South Australia, prompted a large scale eradication effort. This comprised in part of hiring 350 special-purpose staff that set over 13,000 additional traps, and collected over 350 tonnes of fruit. The scale of the response to this outbreak indicates the perceived economic significance of this fruit fly species.
-
-\hypertarget{medfly-are-cryptic}{%
-\subsection{Medfly are cryptic}\label{medfly-are-cryptic}}
-
-Medfly are very hard to detect at low levels. Monitoring for medfly is typically performed with the aid of lured traps (namely so-called Lynfield or Jackson traps). These traps are relatively ineffective for detecting medfly. For example, one study from the Adelaide metro area trapping grid found that only 0.02\% of flies were recaptured from a release of 38.8 million flies. Further, medfly are known to have low dispersals across space. This means that low-lying populatons of flies may go undetected across generations. \url{https://onlinelibrary-wiley-com.virtual.anu.edu.au/doi/pdfdirect/10.1111/j.1570-7458.2006.00415.x}
+Medfly are very hard to detect at low levels. As with other fruit fly species, monitoring is typically performed with the aid of traps fitted with chemical attractants. These traps are relatively ineffective. For example, one study from the Adelaide metro area trapping grid found that only 0.02\% of flies were recaptured from a release of 38.8 million sterilised flies. If this is an accurate reflection of trap sensitivity, then it is possible that very large populations will be undetectable for significant periods of time. Further, medfly are known to disperse only small distances (\citet{meats2007}). This means that, if they are in a location that is not heavily monitored, they may evade detection for long periods.
 
 \hypertarget{data}{%
 \section{Data}\label{data}}
 
-In a Bayesian model, various sources of data can be used either to perform inference on parameters (i.e.~infer marginal posterior distributions) or to inform prior distributions. For the present model, I propose to to perform inference on simulated data from a hypothetical scenario. However, real data is used to inform the structure of the prior distribution and the likelihood.
-
 \hypertarget{zero-sighting-surveillance-data}{%
 \subsection{Zero-sighting surveillance data}\label{zero-sighting-surveillance-data}}
 
-As mentioned above, I do not use real data to estimate parameters. Instead, I model a hypothetical situation. The situation is as follows: We assume that at least one fly has been detected; eradication measures have since begun and then ceased; and we now proceed with intensified monitoring, while whatever population that may exist is free to grow relatively unhindered. The goal of the analysis is to infer the probability of eradication for the incipient population, given that no flies detected at any point in this period. Therefore, our ``data'' is a vector of zeroes, with one for each vector.
+As mentioned above, I do not use real data to estimate parameters. Instead, I model a hypothetical situation. The situation is intended to simulate the conditions described in codes of practice for use of zero-catch criteria (see \citet{supptraps}). The general situation is as follows: We assume that at least one fly has been detected; eradication measures have since begun and then ceased; and we now proceed with intensified monitoring, while whatever population that may exist is free to grow relatively unhindered. The goal of the analysis is to infer the probability of eradication for the incipient population, given that no flies are detected at any point in this period.
 
-Thus, the data we wish to learn from is hypothetical, or simulated. The idea is to simulate a relatively realistic scenario. We observe the outcomes of a surveillance process. The surveillance process is generated by weekly checks of traps that are deployed uniformly in a given area (more about the trapping arrangement below). It is assumed that no specimens are detected at any point in the survey period. In other words, the sum of all detected counts in the period is zero.
+It is preferable to specify a location, so that real weather data can be used to inform the model's hyperparameters (see \ref{popn-size}). Therefore, it is assumed that the outbreak takes place in Adelaide. Adelaide is a key location for fruit fly outbreaks. Further, for medfly, evidence from trap sensitivtiy studies is available from experiments performed in Adelaide, but no other Australian city.
 
-\hypertarget{release-recapture-studies}{%
-\subsection{Release recapture studies}\label{release-recapture-studies}}
+The zero-catch criteria is 12 weeks, or 28 days and one generation, whichever is longer (\citet{meats2005}). In a typical Australian summer, a Medfly generation takes 28-34 days (\citet{dpirdwa}). Therefore, the period I look at is over 12 weeks.\footnote{See also \citet{PIRSA}, who state that the suspension period is 12 weeks in an Adelaide summer.} I.e., in the terminology of \ref{ch3}, we set \(T = 12\). To evaluate this criteria, we want to find the probability of eradication after \(T=12\) weeks, i.e.~\(\Pr(N_{12} = 0 \mid \mathbf y = \mathbf 0_{12})\).
 
-In the previous chapter, I briefly discussed release-recapture experiments. These are experiments involving the release of large numbers of flies into networks of standard traps. These studies give us a useful source of information about the probability of capturing a fly given distance between a fly and a trap.
+It is assumed that general surveillance traps are spaced in a \(400 \times 400\) metre grid, year round. We assume that a fly is caught at the centre of the grid (without loss of generality). Then, 16 \emph{supplementary} traps are placed within a 200 metre of the location of the first detection (see figure \ref{fig:trapgrid}). These traps are checked weekly for 6 weeks (\(t \in \{1, \ldots, 6\}\)) before being removed. Following this, we continue to monitor with only the original general surveillance traps. It is assumed that no fly is caught at any point in this period. Pest free area status is reinstated after 12 weeks. After this, we continue to observe no fruit flies indefinitely.
 
-In cases where Bayesian models have been used, data has not been available on detection rates. For example, \citet{caley2014} and \citet{keith2013} set uninformative priors on the detection rates, and attempt to learn the detection rates for data. However, because of their global economic importance, tephritid fruit flies are relatively well studied. In particular, a number of fruit fly species have been studied with release recapture experiments. Release recapture experiments involve the release of a large number of (often sterilised) fruit flies. These studies help us to learn both the dispersal patterns and tendencies of various species of fly, but also the effectiveness of various trap types and layouts.
+As mentioned previously, it is assumed that trap locations have fixed, known locations. In particular, we assume that monitoring is intensified for the first 6 weeks (\(t \in \{1, \ldots, 6\}\)). By intensified monitoring, I mean that \textbf{supplementary} monitoring traps have been placed alongside the previously existing grid of \textbf{general} monitoring traps. More precisely, it is assumed that \textbf{general} surveillance traps are placed year round in a 400 \(\times\) 400 metre grid (DPIPWE, 2011, p.~50). The \textbf{supplementary} surveillance system consists of a set of 16 traps in a circular area, centred at the site of the first fly detection.\footnote{It is typical to wait until at least 2 flies have been detected near each other for an outbreak to be declared. To illustrate the method in a simplified setting, I suppose that one fly detection is sufficient.} See \citet{trapgrid}.
+
+It is assumed that the outbreak starts on November 1, 2020. The year 2020 is chosen rather than 2021, so that weather data is available for at least 1 year from the start of the monitoring period. (The time of writing is May, 2022.) Data on historical daily temperature averages (the mean for each day) were obtained from the Bureau of Metereology.
+
+\begin{figure}
+\centering
+\includegraphics{_main_files/figure-latex/trapgrid-1.pdf}
+\caption{\label{fig:trapgrid}Illustration of the hypothetical trapping grid. Grey circle represents 200m radius disc surrounding the site of the most most recently detected medfly specimen.}
+\end{figure}
 
 \hypertarget{model}{%
 \section{Model}\label{model}}
 
-Now that I have discussed background and the data available, I turn to a detailed discussion of the model for this case. This discussion builds on the previous chapter, where the general, basic model was outlined. Here, I focus on the specific prior distributions and likelihood that are used.
+I now propose a model for the case discussed above. This discussion builds on \ref{ch3}, where I outlined the model in broad generality. There, I discussed the model while leaving some key situation-specific hyperparameters and distributions unspecified. For example, the prior distribution on the initial population size \(N_1\), and the relationship between probability of capture and distance between fly and trap \(p(d)\) were unspecified. Here, hyperparamters and distributions are proposed and justified.
 
-For exposition, I break the model into the following three components: (1) The size of the population (number of individuals); (2) the locations of individuals and traps; and (3) number of individuals caught in traps, conditional on (1) and (2).
+As in the previous chapter, the model is broken into priors and likelihood in the following way. Firstly, (1) The size of the population (number of individuals); (2) the locations of individuals and traps; and (3) number of individuals caught in traps, conditional on (1) and (2). To structure discussion, I discuss these elements in turn, beginning with prior distributions.
 
-The likelihood of a given number of captures is a function of latent variables, namely the number and locations of flies. Under the prior distribution, it is assumed that data at any given timestep are generated as follows. Firstly, nature draws a number of flies (i.e.~a population size) which may or may not be based on the number of flies at the previous time step. Next, nature draws a location for each of the flies. Finally, nature draws a number of detections.
+Here, we are modelling the risk of an adverse event (namely an undetected pest invasion). In such cases, we might consider examining a worst case scenario. In this case, this could be done by specifying priors such that we assign high density to cases where (a) the growth rate is very close to zero, so that the fly population is capable of persisting at below-detectable levels indefinitely, or (b) flies are located far away from surveillance traps. Given these considerations, it should be trivial to identify worst-case scenarios where we can almost never be certain that flies are eradicated, given any length of time. However, such results are likely unreasonable, and do not accurately reflect our prior state of information. Nonetheless, I attempt to err on the side of pessimism about the while making the prior distribution as realistic as possible.
 
-\hypertarget{population-size-1}{%
-\subsection{Population size}\label{population-size-1}}
+\hypertarget{prior-distributions}{%
+\section{Prior distributions}\label{prior-distributions}}
 
-In this case, \(N_1\) is the first week after the most recent fly detection. I have chosen to give \(N_1\) the prior distribution \(N_1 \mid \lambda \sim \mathrm{Poisson}(\lambda)\), where \(\lambda \sim \mathrm{Exponential}(0.05)\). This distribution for \(N_1\) is chosen as it is a discrete distribution with right skew, and a relatively large amount of mass \(f_{N_1}(x)\) at \(x = 0\), corresponding to the situation where flies are already eradicated (see \citet{priorinitsize}).
+\hypertarget{popn-size}{%
+\subsection{\texorpdfstring{Population size \(N_t\)}{Population size N\_t}}\label{popn-size}}
+
+In this case, \(N_1\) is the first week after the most recent fly detection. I have chosen to set \(N_1 \sim \operatorname{Geometric}(1/20)\). This is chosen as it is a discrete distribution with right skew, and a relatively large amount of mass in the region of \(x = 0\), corresponding to the situation where flies are already eradicated (see figure \ref{fig:priorinitsize}).\footnote{The geometric distribution is also a natural choice for this latent variable; I do not explore this further here.} The mean of the geometric distribution is chosen arbitrarily. The primary goal is to have a small population on average, with non-zero risk of a population size greater than 50. However, it is not clear, without prior domain knowledge, whether this distribution is empirically reasonable. Population counts do not exist for past outbreaks. This issue is discussed further in section \ref{discussion}.
 
 \begin{figure}
 \centering
 \includegraphics{_main_files/figure-latex/priorinitsize-1.pdf}
-\caption{\label{fig:priorinitsize}Prior distribution of initial population size}
+\caption{\label{fig:priorinitsize}Prior distribution of initial population size \(N_1\).}
 \end{figure}
 
-As for the population sizes at later time points, I assume that growth is exponential at an uncertain rate. In particular, it is assumed that, for \(t \in \{2, \ldots, T\}\), \(N_t \mid N_{t-1}, R_t \sim \mathrm{Poisson}(N_{t-1} e^{R_t})\). Here, we can give any continuous distribution for \(R_t\). I have chosen the prior \(R_t \stackrel{\text{iid}} \sim \mathrm N(0, 0.2)\). The symmetry of this prior means that we are indifferent about whether the population is growing or declining.
+As for \(N_t\), for \(t \in \{2, \ldots, T\}\), I assume the Poisson branching process with exponential growth, discussed in \ref{ch3}. To recap, it is assumed that, for \(t \in \{2, \ldots, T\}\), \(N_t \mid \{ N_{t-1}, R_t \} \sim \mathrm{Poisson}(N_{t-1} e^{R_t})\).
 
-The growth rate prior has been chosen to place the vast majority of density below their estimated growth rate under optimal conditions. Medfly have been estimated to grow at 8\% per day, in optimal lab conditions (\citet{papadopoulos2002}). Under an exponential growth model this is 56\% per week. This can be taken as an upper bound on the growth rate. In the wild, flies may fail to establish due to food scarcity, predation, and/or unsustainably low population density.
+It is assumed, primarily for convenience, that \(R_t \sim \mathrm N(\mu_t, \sigma^2_t)\). Choices for the hyperparameters \(\{\mu_t\}_{t=2}^T\) are informed by the results of \citet{ks2019}. The authors transform observed captures \(C_t\) as \(\ln (C_t / C_{t-1})\), and fit a simple model to the resulting values from field data on Medfly captures.\footnote{Notably, temporal autocorrelation is ignored.} In particular, they estimate the mean \emph{daily} growth rate, conditional on mean daily temperature, for each day \(t\), to be
+\[
+\mathrm E(R_t \mid \mathrm{Temp}_t) = \alpha \mathrm{Temp}_t^2 + \beta \mathrm{Temp}_t + \gamma,
+\]
+where \(\alpha = -0.000386\), \(\beta = 0.0279\), and \(\gamma = -0.374\). To get the daily mean growth rates, observed daily temperatures are plugged into this formula. Then, weekly mean growth rates \(\mu_t\), are derived by summing over daily growth rates within each week. The dataset used by \citet{ks2019} is small, consisting of only 24 observations. Ideally, we would quantify uncertainty about these estimates. However, this is difficult, as the authors do not provide data, or an analysis of the variance of residuals for their model. I do not explore this further here, though it should be considered in real applications.
 
-In practical, applied cases, it will be desirable to attempt to estimate \(R_t\) from data. In particular, it is known that fruit fly population growth rates are highly dependent on temperature. Therefore, if possible, fly population growth rates should be estimated conditional on weather. Choosing an empirically realistic distribution for \(R_t\) is likely to improve the efficiency of inference from the survey record.
+The choice for \(\sigma^2_t\) is necessarily more arbitrary than the choice for \(\mu_t\). As mentioned above, \citet{ks2019} do not provide an analysis fo the variance of residuals for their model. Therefore, it is difficult to meaningfully quantify prior beliefs about the variance of the growth rate. Increasing the variance increases the prior probability that populations die out, due to runs of ``bad luck''. Therefore, smaller variances are more pessimistic. With this in mind, I have chosen to set the standard deviation for daily growth to \(\sigma_t = \sigma = 0.1\). In my view, this is roughly consistent with the plot provided by the authors (see figure \ref{fig:ksplot}). However, as this choice is arbitrary, it should be treated with skepticism.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{knitr}\SpecialCharTok{::}\FunctionTok{include\_graphics}\NormalTok{(}\StringTok{\textquotesingle{}references/ksplot.png\textquotesingle{}}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{figure}
+\includegraphics[width=0.75\linewidth]{references/ksplot} \caption{Relationship between population increase $\ln (C_t / C_{t-1})$ and mean daily temperature. Taken from @ks2019. The solid line is fit to field data (black points); the dashed line is fit to lab data (white points).}\label{fig:ksplot}
+\end{figure}
 
 \hypertarget{spatial-location}{%
 \subsection{Spatial location}\label{spatial-location}}
 
-As mentioned in the previous chapter, the model is spatial, insofar as likelihood of detection depends on distances between traps and individual flies.
-
-TODO: Explain that the centre of the grid is the site of the last detection.
+As mentioned in the previous chapter, the model is spatial. This is because the likelihood of detection depends on distances between traps and individual flies. As in the previous chapter, prior distributions must be set for the location of the population centre, and for dispersals of individual flies from that centre.
 
 \hypertarget{population-location}{%
 \subsubsection{Population location}\label{population-location}}
@@ -356,46 +394,31 @@ The centre of of the population is assumed to be located at the two dimensional 
 \[
 L_c \sim \mathrm {Normal}_2 (\mathbf 0_2, 160^2 I_2),
 \]
-where \(\mathrm{Normal}_2\) is the bivariate normal distribution, \(\mathbb 0_2\) is the two-dimensional zero vector and \(I_2\) is the \(2 \times 2\) identity matrix. This prior reflects a prior belief that the centre of the population is highly likely to be found somewhere on a disc with. E.g., we believe that there is a 95\% chance that the centre of the population is within \(1.96 \cdot 160 \approx 320\) metres of the centre of the grid.\footnote{For details about how this prior was arrived at, see appendix.} Recall that this makes sense because we believe that the flies are within the distribution.
+where \(\mathrm{Normal}_2\) is the bivariate normal distribution, \(\mathbf 0_2\) is the two-dimensional zero vector and \(I_2\) is the \(2 \times 2\) identity matrix. This prior reflects a prior belief that the centre of the population is highly likely to be close to the centre of the grid, where a fly was detected most recently (we suppose). E.g., we believe that there is a 95\% chance that the centre of the population is within \(1.96 \cdot 160 \approx 320\) metres of the centre of the grid.\footnote{For details about how this prior was arrived at, see appendix.} This makes sense, as the setting of supplementary traps close to the centre, as is standard, belies a prior belief that other flies are likely to be located in the vicinity of the first capture.
 
 \hypertarget{individual-fly-dispersals}{%
 \subsubsection{Individual fly dispersals}\label{individual-fly-dispersals}}
 
-Let \(L_{i, t}\) denote the location of fly \(i\) at time \(t\), as in the previous chapter. I assign this quantity the prior distribution
+Let \(L_{i, t}\) denote the location of fly \(i\) at time \(t\), as in the previous chapter. I assign this quantity the prior distribution \[L_{i, t} \mid L_c \sim \mathrm {Normal}_2 (L_c, 12.5^2 I_2),\] where the notation is defined as in the previous section above. The variance is chosen so that \textasciitilde95\% of flies are within 30 metres of the population centre. Here, 30 metres is chosen arbitrarily. It reflects a belief that flies typically do not disperse very far. This is a pessimistic (``worst case'') assumption. When flies are spread further from their population centre, it is more likely that at least one is close to a trap. As such, large populations of flies are less likely to go undetected.
+
+The normal distribution is chosen for a few reasons. Firstly, it is conceptually simple and intuitive to parameterise. This helps with expert elicitation. Secondly, the location has a simple marginal distribution, thanks to the fact that a normal random variable with a normal mean is itself normal.\footnote{This is just the standard conjugacy of the multivariate normal mean for the multivariate normal likelihood, when the covariance matrix is fixed.} Thirdly, the distance between a normal random variable and its mean has a known distribution. In particular, if \(X \sim \mathrm{Normal}_2(\pmb \mu, \sigma^2 I_2)\), then \(\lVert X - \pmb \mu \rVert^2 \sim \Gamma(1, \sigma^2/2)\), where \(\Gamma(a, b)\) is the gamma distribution with shape \(a\) and scale \(b\). In this case, or any fly \(i\) we have \(\lVert L_{i,t} - L_c \rVert \mid L_c \sim \Gamma(1, 12.5^2/2)\). Similarly, the \emph{marginal} squared distance between fly \(i\) and the origin is \(\lVert L_{i, t} \rVert^2 \sim \Gamma(1, (12.5^2 + 160^2) / 2)\). Knowing this allows us to easily compare and calibrate the distribution against experimental results. This, in turn, makes elicitation of priors simpler and more intuitive. (It allows us to visualise, for example, the distribution of distances to the origin and to the population centre.)
+
+There is evidence suggesting that Medfly dispersal distance is in fact distributed as a power law (see, e.g., \citet{meats2005} and \citet{plant1991}). In particular, the distributions estimated by these authors have far heavier tails than the distribution proposed above. As mentioned above, the normal prior implies that squared dispersal distances are gamma random variables, the square roots of which are Nakagami distributed. The Nakagami distribution, parameterised as above, has a far thinner right tail than a power law. As such, the present priors may heavily underestimate our best guess about the dispersal distances of individual flies. In further work, we might investigate whether this has a large effect on the results through sensitivity analysis (see section \ref{discussion}).
+
+It may also be worth noting that, in real cases, the assumptios of zero mean and spherical covariance matrix (\(\sigma^2 I_2\)) may not be reasonable. Dispersals may have non-zero mean (due to wind direction) and the distance and/or direction of individual dispersals may be correlated.\footnote{These claims are argued for Medfly by \citet{baker1986}.} Further, it may not be reasonable to assume, as I have done here, that the fly population cannot move across time. Ideally, the importance of these assumptions should be checked based on the case at hand (e.g.~properties of the situation or species in question). Extending the model in various ways to meet these problems is beyond the scope of this work, but warrants further investigation.
+
+\hypertarget{likelihood}{%
+\section{Likelihood}\label{likelihood}}
+
+The likelihood is the distribution of \(y_t \mid \{N_t, \mathbf L_t\}\). Here, it is
+
+As mentioned previously, results of trap sensitivity studies are used to inform the likelihood of capture. In particular, I use the results of \citet{ms2005}. These authors estimate that the probability of capture for any given fly in any given trap is given by the power law
 \[
-L_{i, t} \mid L_c \sim \mathrm {Normal}_2 (L_c, 12.5^2 I_2)
+p(d) = \begin{cases}ad^{-b}, & d>1 \\ a & 0 \geq d \geq 1.\end{cases}
 \]
-where the notation is defined as in the previous section above. The variance of this distribution is chosen on the basis of prior analysis of dispersal data (see appendix).
+Here, \(a = 0.4702111 / 2\), \(b = 1.37\), and \(d\) is the distance between the fly and the trap at the start of the period. Thresholding is introduced because (a) the function does not yield valid probabilities for small enough \(d\). This function is used for convenience as it is provided by the authors of the study, and data is not publicly accessible. In the context of a more detailed analysis, it may be beneficial to consider uncertainty in the probability of capture by specifying hyperprior distributions for \(a\) and \(b\). I do not explore this further here, as the model is intended to be illustrative only.
 
-Note: Do I need to prove the claims in the next paragraph?
-
-The normal distribution is chosen for a few reasons. Firstly, it is conceptually simple and intuitive to parameterise. Secondly, the location has a simple marginal distribution, thanks to the fact that a normal random variable with a normal mean is itself normal. Thirdly, the distance between a normal random variable and its mean has a known distribution. In particular, for any fly \(i\), the squared distance between \(L_{i,t}\) and \(L_c\), conditional on \(L_c\), has the gamma distribution with parameters \(\alpha = 1\), and \(\beta = 12.5^2 / 2\). Similarly, the distance between \(L_{i, t}\) and the origin is the same but with \(\beta = (12.5^2 + 160^2) / 2\). Knowing this allows us to easily compare and calibrate the distribution against experimental results. This, in turn, makes elicitation of priors simpler and more intuitive. (It allows us to visualise, for example, the distribution of distances to the origin and to the population centre.)
-
-It may be worth noting that, in real cases, the assumed prior distribution on dispersals may not be reasonable. For example, dispersals may have non-zero mean (due to strength and direction) or non-spherical covariance matrix (i.e.~non-equal variances and/or non-zero covariances).\footnote{This is argued by \citet{baker1986}.} Further, it may not be reasonable to assume that the fly population cannot move across time. Ideally, the importance of these assumptions should be checked based on the case at hand (e.g.~properties of the situation or species in question). Extending the model in various ways to meet these problems is beyond the scope of this work, but warrants further investigation.
-
-\hypertarget{trap-locations}{%
-\subsection{Trap locations}\label{trap-locations}}
-
-\begin{figure}
-\centering
-\includegraphics{_main_files/figure-latex/trapgrid-1.pdf}
-\caption{\label{fig:trapgrid}Illustration of the hypothetical trapping grid. Grey circle represents 200m radius disc surrounding the site of the most most recently detected medfly specimen.}
-\end{figure}
-
-As mentioned previously, it is assumed that trap locations have fixed, known locations. In particular, we assume that monitoring is intensified for the first 6 weeks (\(t \in \{1, \ldots, 6\}\)). By intensified monitoring, I mean that \textbf{supplementary} monitoring traps have been placed alongside the previously existing grid of \textbf{general} monitoring traps. More precisely, it is assumed that \textbf{general} surveillance traps are placed year round in a 400 \(\times\) 400 metre grid (DPIPWE, 2011, p.~50). The \textbf{supplementary} surveillance system consists of a set of 16 traps in a circular area, centred at the site of the first fly detection.\footnote{It is typical to wait until at least 2 flies have been detected near each other for an outbreak to be declared. To illustrate the method in a simplified setting, I suppose that one fly detection is sufficient.} See \citet{trapgrid}.
-
-\hypertarget{probability-of-capture}{%
-\subsubsection{Probability of capture}\label{probability-of-capture}}
-
-I assume that the probability of capture for any given fly in any given trap is
-\[
-p(x) = \begin{cases}ax^{-b}, & d>1 \\ a & 0 \geq d \geq 1\end{cases}
-\]
-where \(a = 0.4702111\), \(b = 1.37\), and \(x\) is the distance between the fly and the trap at the start of the period. Thresholding is introduced because (a) the function does not yield valid probabilities for small enough \(x\). In general, the use of a negative exponential function is not ideal here. This function is used for convenience as it is provided by the authors of the study, and data is not publicly accessible. In the context of a more detailed analysis, it may be beneficial to approximate this function with a more ``well behaved'' function. This is not within the scope of this thesis.
-
-TODO: mention that the probability of capture is adjusted, because the study gives us the lifetime probability of capture.
-
-The results of release recapture studies are highly variable, and gaining access to data may be difficult for older studies. In this case, it may be desirable to incorporate uncertainty about the probability function. This could be done, for example, by assigning prior distributions to the coefficients \(a\) and \(b\). I do not explore this any further here, as this model exposition is intended for the purposes of illustration only.
+An adjustment is made to \(p(x)\). In \(p(x)\) we have the probability of capture over the lifetime of the individual. It is assumed that the lifetime is roughly 4 weeks.
 
 \hypertarget{sampling-procedure}{%
 \section{Sampling procedure}\label{sampling-procedure}}
@@ -407,9 +430,9 @@ So far, we have talked about situations when sampling is required for inference.
 \hypertarget{approximate-bayesian-computation}{%
 \subsection{Approximate Bayesian Computation}\label{approximate-bayesian-computation}}
 
-A simple rejection algorithm is used to draw samples from the posterior distribution (see chapter 2). Instead of matching on a statistic, such as the sum of the observations, the rejection rule was set so that data were only kept in cases where the simulated data vector was an exact match with the actual data (the hypothetical zero-catch record).
+A rejection algorithm is used to draw samples from the posterior distribution (see chapter 2). Instead of matching on a statistic, such as the sum of the observations, the rejection rule was set so that data were only kept in cases where the simulated data vector was an exact match with the actual data (the hypothetical zero-catch record).
 
-Here, I have used ABC for intuitiveness, ease of implementation, and the fact that it is relatively efficient for this problem. However, other methods exist that may be worth exploring, for analogous problems where the rejection rate of ABC is higher. There are at least two known methods for sampling from the posterior when the dimension of the parameter space is uncertain. These are the reversible jump MCMC sample (\citet{green1995}) and the generalised Gibbs sampler (\citet{keith2015}). These may be worth exploring for problems where the rejection rate is high for EBC.
+Here, I have used ABC for intuitiveness, ease of implementation, and the fact that it is relatively efficient for this problem. However, other methods exist that may be worth exploring, for analogous problems where the rejection rate of ABC is higher. There are at least two known methods for sampling from the posterior when the dimension of the parameter space is uncertain. These are the reversible jump MCMC sample (\citet{green1995}) and the generalised Gibbs sampler (\citet{keith2015}). These may be worth exploring for problems where the rejection rate is high for ABC.
 
 Interestingly, the standard justifications for and against ABC do not apply to the case under consideration. Firstly, the standard justification for ABC is that it allows for inference when the likelihood function is ``intractable'' - i.e., unknown, uncomputable or otherwise difficult to work with. However, for the current model, the likelihood is known, and relatively simple to write out.
 
@@ -420,18 +443,72 @@ On the other hand, the standard drawback for ABC is that it ensures that we can 
 \hypertarget{results}{%
 \section{Results}\label{results}}
 
-\begin{itemize}
-\tightlist
-\item
-  The fly free period is 12 weeks or 28 days and one generation, whichever is longer (\citet{meats2005}). In summer, a Medfly generation takes 28-34 days (\citet{dpirdwa}). Therefore, the period I look at is over 12 weeks. However, this may be different based on the period that the manager is interested in.
-\end{itemize}
+Results are shown in \citet{postfig}. The blue and red lines show the prior and posterior probability of eradication for each (weekly) time point after the monitoring period begins on November 1. Under the model, the posterior probability of extinction after \(T=12\) weeks is approximately 0.443.\footnote{Unfortunately, it is not straightforward to visualise the prior or posterior density of this quantity.} The first week for which the posterior probability of eradication is greater than 95\% is after 35 weeks, much later than the PFA date.
 
-The posterior probability of extinction after 12 weeks is approximately 0.684.\footnote{Unfortunately, it is not straightforward to visualise the prior or posterior density of this quantity.}
+\begin{figure}
+
+{\centering \includegraphics[width=1\linewidth]{results/pfa_criteria_evaluation/prior_vs_post_plot} 
+
+}
+
+\caption{Prior vs. posterior probability of eradication over 36 weeks.}\label{fig:postfig}
+\end{figure}
 
 \hypertarget{discussion}{%
 \section{Discussion}\label{discussion}}
 
 Here I discuss limitations and objections.
+
+\hypertarget{reasons-to-distrust-this-model}{%
+\subsection{Reasons to distrust this model}\label{reasons-to-distrust-this-model}}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  There may be many cases where flies are not eradicated, but the population size is unsustainably small.
+\item
+  No uncertainty about the probability of capture.
+\item
+  Growth rates are not weather dependent.
+\item
+  Dispersal data is used twice.
+\item
+  The location prior and likelihood use data from different sources.
+\item
+  Our model predicts that medfly is unlikely to survive uncontrolled in Adelaide. This contradicts a status quo view (\citet{PIRSA}, the chapter on eradication).
+\end{enumerate}
+
+\hypertarget{model-validation}{%
+\subsection{Model validation}\label{model-validation}}
+
+\hypertarget{model-validation-is-hard-for-this-case}{%
+\subsubsection{Model validation is hard for this case}\label{model-validation-is-hard-for-this-case}}
+
+Cite Gelman et al on model validation. The best way to check models is to compare with other sources of data. However, we never observe the full number of flies in an outbreak. We could augment the model and use it on release-recapture data, to try and predict the number of captures.
+
+Sensitivity analysis should be performed on the following
+
+The most arbitrary choices are on
+
+\begin{itemize}
+\item
+  variance of growth rate \(R_t\),
+\item
+  initial population size \(N_1\),
+\item
+  variance of dispersals,
+\item
+  Check the assumption of no interference.
+\item
+  Check the sensitivity to the \(N_1\) prior.
+\item
+  Check the sensitivity to the variance of the growth rate.
+\item
+  Estimate growth rate based on capture
+\item
+  The likelihood and the population centre prior are each based on different estimates of trap sensitivity.
+\end{itemize}
 
 \hypertarget{limitations}{%
 \subsection{Limitations}\label{limitations}}
@@ -486,10 +563,10 @@ TODO: Section on objections to/limitations of the model
 
 TODO: Add appendix on location prior
 
-\hypertarget{appendix-1-proof-of-abc-procedure}{%
-\section{Appendix 1: Proof of ABC procedure}\label{appendix-1-proof-of-abc-procedure}}
+\hypertarget{appendix-1-proof-of-sampling-procedure}{%
+\section{Appendix 1: Proof of sampling procedure}\label{appendix-1-proof-of-sampling-procedure}}
 
-Here, I give a proof that the simple ABC rejection algorithm yields independent draws from the posterior distribution. Recall that the algorithm works by drawing samples of \(\theta\) from the prior distribution with density \(\pi (\theta)\). Then, for each draw of \(\theta\), we draw a data vector \(y_{\text {sim}}\) from the likelihood \(l(\theta \mid y_{\text{sim}})\). Finally, we keep the sample if we observe that \(y_{\text{sim}} = y_{\text{obs}}\) (where \(y_{\text{obs}}\) is the data vector we actually observed) and reject it otherwise. Then, the draws that we keep have distribution \(f_{\text{ABC}}(\theta) = \pi(\theta) \cdot l(\theta \mid y_{\text{obs}})\), since our draws from the prior and likelihood are independent.\footnote{Credit is due to \href{https://stats.stackexchange.com/questions/380076/proof-of-approximate-exact-bayesian-computation.}{this StackExchange post}.}
+Here, I give a proof that the simple ABC rejection algorithm yields independent draws from the posterior distribution. Recall that the algorithm works by drawing samples of \(\theta\) from the prior distribution with density \(\pi (\theta)\). Then, for each draw of \(\theta\), we draw a data vector \(y_{\text {sim}}\) from the likelihood \(l(\theta \mid y_{\text{sim}})\). Finally, we keep the sample if we observe that \(y_{\text{sim}} = y_{\text{obs}}\) (where \(y_{\text{obs}}\) is identical to the data vector we actually observed) and reject it otherwise. Then, the draws that we keep have distribution \(f_{\text{ABC}}(\theta) = \pi(\theta) \cdot l(\theta \mid y_{\text{obs}})\), since our draws from the prior and likelihood are independent.\footnote{Credit is due to \href{https://stats.stackexchange.com/questions/380076/proof-of-approximate-exact-bayesian-computation.}{this StackExchange post}.}
 
 \hypertarget{appendix-2-full-model-statement}{%
 \section{Appendix 2: Full model statement}\label{appendix-2-full-model-statement}}
@@ -498,25 +575,24 @@ Here, I give a proof that the simple ABC rejection algorithm yields independent 
 \renewcommand{\baselinestretch}{1}\normalsize
 \begin{aligned}
 &\textbf{Population size} \\
-&\text{Initial no. of flies:} && N_1 \mid \lambda \sim \mathrm{Pois}(\lambda) \text{, where} \\
-&&& \lambda \sim \mathrm{Exponential}(0.05) \\
-& \text{Number of flies:}~ && N_t \mid N_{t-1}  \sim \mathrm{Poisson}\{ N_{t-1} \exp(R) \} \text{, where} \\ & &&R \sim \mathrm{Normal}(0, 12.5^2), & t \in \{2, \ldots, T \} \\
+&\text{Initial no. of flies:} && N_1  \sim \mathrm{Geometric}(1/20) \\
+& \text{Number of flies:}~ && N_t \mid N_{t-1}  \sim \mathrm{Poisson}\{ N_{t-1} \exp(R_t) \} \text{, where} \\ & && R_t \sim \mathrm{Normal}(\mu_t, 0.7), & t \in \{2, \ldots, T \} \\
 \\
 &\textbf{Fly locations} \\
-& \text{Population location:} ~ && L \sim \mathrm{Normal_2}(\mathbf 0_2, 160^2 I_2) \\
-& \text{Fly locations:}~ && L_{i,t}^\text{fly} \mid L \sim L + \mathrm{Normal}_2(\mathbf 0_2, 30^2 I_2) & i \in \{1, \ldots, N_t\}, \\
+& \text{Population location:} ~ && L_c \sim \mathrm{Normal_2}(\mathbf 0_2, 160^2 I_2) \\
+& \text{Fly locations:}~ && L_{i,t} \mid L_c \sim \mathrm{Normal}_2(L_c, 12.5^2 I_2) & i \in \{1, \ldots, N_t\}, \\
   &&&& t \in \{1, \ldots, T\}\\
 \\
 &\textbf{Detection model} \\
 & \text{Number of traps:}~ && K \in \mathbb N_+ \\
 & \text{Trap locations:}~ && L_k^\text{trap} \in \mathbb R & k \in \{1, \ldots, K\} \\
-& \text{Dist. btw. fly } i \text{ and trap } k \text{ at time } t \text{:} && \delta_{i,k,t} := \lVert L_k^\text{trap} - L_{i,t}^\text{fly} \rVert & i \in \{1, \ldots, N_t\}, \\
+& \text{Dist. btw. fly } i \text{ and trap } k \text{ at time } t \text{:} && \delta_{i,k,t} := \lVert L_k^\text{trap} - L_{i,t} \rVert & i \in \{1, \ldots, N_t\}, \\
   &&&& k \in \{1, \ldots, K\}, \\
   &&&& t \in \{1, \ldots, T\}\\
 & \text{Individ. cap. prob.:} && p_{i, t} = 1 - \prod_{k=1}^K (1 - p(\delta_{i,k,t})), & i \in \{1, \ldots, N_t\}, \\
-  &&&& t \in \{1, \ldots, T\}\\
-&  && \mathbf p_t := [p_{i,t}]_{i=1}^{N_t}  & t \in \{1, \ldots, T\} \\
-&\text{No. of captures:}~ && y_t \mid \theta \sim \text{Poisson-binomial}(N_t, \mathbf p_t), & t \in \{1, \ldots, T\} \\
+  &&&& t \in \{1, \ldots, T\} \\
+& \text{Aggregate cap. prob.:} && p_t = 1 - \prod_{t=1}^{N_t} (1 - p_{i,t}) & t \in \{1, \ldots, T\} \\
+&\text{Detection:}~ && y_t \mid \{ \mathbf L_t, N_t \} \sim \operatorname{Bernoulli}(p_t), & t \in \{1, \ldots, T\} \\
   &&& \mathbf y := [y_t]_{t=1}^T
 \end{aligned}
 \renewcommand{\baselinestretch}{1}\normalsize
@@ -525,16 +601,20 @@ Here, I give a proof that the simple ABC rejection algorithm yields independent 
 \hypertarget{appendix-3-population-location-prior}{%
 \section{Appendix 3: Population location prior}\label{appendix-3-population-location-prior}}
 
-To update on detection location when the first fly is detected at a trap (say trap k) we can use a trick. The trick is to model the probability of the first detection being at trap k as the probability that a fly is detected at k in one period conditional on exactly one fly total being detected in that period. The benefit of this model is that it does not depend on how many weeks it took to get the first detection (which would require information about how long flies have been around before the first detection). See appendix for more details.
+A trick is used to derive a prior for the case presented in chapter 4. The trick is to model the probability of the first detection being at trap k as the probability that a fly is detected at k in one period conditional on exactly one fly total being detected in that period. The benefit of this model is that it does not depend on how many weeks it took to get the first detection (which would require information about how long flies have been around before the first detection).
 
-A mathematical trick can be used to derive a prior in some cases. Suppose we have \(K\) traps indexed by \(k \in \{1, \ldots, L\}\). Suppose also that we have a prior distribution over the population size \(N\), given by \(N \sim \mathrm{Poisson} (\lambda)\), with \(\lambda \sim \mathrm{Exponential(1/20)}\). Here we assume no change in population size over time. Now, we suppose that each trap \(k\) is ``competing'' to catch the first trap each week. We suppose that the trap at the centre of the grid was the first to catch a fly, and we want to use this information. Define the random variable
+Suppose we have \(K\) traps indexed by \(k \in \{1, \ldots, L\}\). Suppose also that we have a prior distribution over the population size \(N\), given by \(N \sim \mathrm{Poisson} (\lambda)\), with \(\lambda \sim \mathrm{Exponential(1/20)}\). (This is the prior distribution for \(N_1\) in chapter 4. Here we assume no change in population size over time. Now, we suppose that each trap \(k\) is ``competing'' to catch the first trap each week. Suppose that the centre of the population is distributed uniformly over a 1600 m\^{}2 trapping grid. Define the random variable
+
 \[
 C_k = \begin{cases}1 & \text{a fly is caught in trap } k \text{ before any other trap} \\ 0 & \text{otherwise}. \end{cases}
 \]
 
 Under these assumptions, \(L \mid C_k = 1\) is the distribution of \(L\), given that a fly was caught in trap \(k\) before any other trap.
 
-Whether or not we can analytically derive the posterior density depends on the probability of capture function \(p(x)\). In the case we consider here, the function cannot be integrated, and so I resort to sampling. Under the above assumptions, the posterior resembles the convolution of a normal and a uniform distribution (see figure). See appendix for more details.
+Whether or not we can analytically derive the posterior density depends on the probability of capture function \(p(x)\). In the case we consider here, the function cannot be integrated, and so I resort to sampling. Under the above assumptions, the posterior resembles a bivariate normal distribution with mean \(\mathbf 0_2\) and variance \(160^2 I_2\).
+
+\hypertarget{proof-that-2d-normal-rvs-are-gamma}{%
+\subsection{Proof that 2d normal RVs are gamma}\label{proof-that-2d-normal-rvs-are-gamma}}
 
   \bibliography{book.bib,packages.bib}
 

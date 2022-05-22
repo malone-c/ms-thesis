@@ -103,3 +103,9 @@ Suppose an outbreak of an invasive pest has occurred. Monitoring for the pest mu
 
 A necessary prerequisite for minimising the probability of failing to detect an existing invasion is to understand what can be inferred about the state of the population from what has been observed in surveillance. In particular, it is desirable to understand the likelihood that extinction has occurred, given that the species has not been detected over a certain period of time.
 
+
+# Old growth rates
+
+I have chosen the prior $R_t \stackrel{\text{iid}} \sim \mathrm N(0, 0.2)$. The symmetry of this prior means that we are indifferent about whether the population is growing or declining. The variance has been chosen to place the vast majority of density below their estimated growth rate under optimal conditions. Medfly have been estimated to grow at 8% per day, in optimal lab conditions (@papadopoulos2002). Under an exponential growth model this is 56% per week. This can be taken as an upper bound on the growth rate. In the wild, flies may fail to establish due to food scarcity, predation, and/or unsustainably low population density.
+
+Note that I do not allow the hyperparameters of $R_t$ to vary as a function of time. This is unrealistic, as it is widely recognised that fruit fly growth rates are highly dependent on weather. In practical, applied cases, it will be desirable to attempt to estimate $R_t$ from data. Therefore, if possible, fly population growth rates should be estimated conditional on weather. Choosing an empirically realistic distribution for $R_t$ is likely to improve the efficiency of inference from the survey record. 
