@@ -1,4 +1,4 @@
-This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.4.17)  22 MAY 2022 13:21
+This is XeTeX, Version 3.14159265-2.6-0.999992 (TeX Live 2020) (preloaded format=xelatex 2020.4.17)  22 MAY 2022 18:21
 entering extended mode
  restricted \write18 enabled.
  %&-line parsing enabled.
@@ -1015,60 +1015,55 @@ File: references/ksplot.png Graphic file (type bmp)
 <references/ksplot.png>
 [30] [31] [32] [33]
 
-Package natbib Warning: Citation `ms2005' on page 34 undefined on input line 41
-5.
+Package natbib Warning: Citation `ms2005' on page 34 undefined on input line 42
+0.
 
-[34] [35]
-
-Package natbib Warning: Citation `keith2015' on page 36 undefined on input line
- 435.
-
-
-Package natbib Warning: Citation `postfig' on page 36 undefined on input line 4
-46.
-
-[36]
+[34] [35] [36]
 File: results/pfa_criteria_evaluation/prior_vs_post_plot.png Graphic file (type
  bmp)
 <results/pfa_criteria_evaluation/prior_vs_post_plot.png>
-[37] [38] [39]
+
+Package natbib Warning: Citation `ks2019' on page 37 undefined on input line 49
+3.
+
+[37] [38] [39] [40]
 Chapter 5.
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 575.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 529.
 
 
 
-LaTeX Font Warning: Command \normalsize invalid in math mode on input line 598.
+LaTeX Font Warning: Command \normalsize invalid in math mode on input line 552.
 
 
 
-Overfull \hbox (44.22035pt too wide) detected at line 599
+Overfull \hbox (44.22035pt too wide) detected at line 553
 [][]
  []
 
-[40
+[41
 
-] [41] (./_main.bbl [42] [43
+] [42] (./_main.bbl [43] [44
 
-])
+] [45])
 
 Package natbib Warning: There were undefined citations.
 
-Package atveryend Info: Empty hook `BeforeClearDocument' on input line 621.
-[44]
-Package atveryend Info: Empty hook `AfterLastShipout' on input line 621.
+Package atveryend Info: Empty hook `BeforeClearDocument' on input line 607.
+[46]
+Package atveryend Info: Empty hook `AfterLastShipout' on input line 607.
 (./_main.aux)
-Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 621.
-Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 621.
-Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 621.
+Package atveryend Info: Empty hook `AtVeryEndDocument' on input line 607.
+Package atveryend Info: Empty hook `AtEndAfterFileList' on input line 607.
+Package atveryend Info: Empty hook `AtVeryVeryEnd' on input line 607.
  ) 
 Here is how much of TeX's memory you used:
- 20947 strings out of 479418
- 367600 string characters out of 5884585
- 850648 words of memory out of 5000000
- 38109 multiletter control sequences out of 15000+600000
+ 20955 strings out of 479418
+ 367846 string characters out of 5884585
+ 847884 words of memory out of 5000000
+ 38117 multiletter control sequences out of 15000+600000
  538885 words of font info for 89 fonts, out of 8000000 for 9000
  1348 hyphenation exceptions out of 8191
- 58i,9n,118p,1797b,539s stack positions out of 5000i,500n,10000p,200000b,80000s
+ 58i,10n,118p,1797b,541s stack positions out of 5000i,500n,10000p,200000b,80000s
 
-Output written on _main.pdf (45 pages).
+Output written on _main.pdf (47 pages).

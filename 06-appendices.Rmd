@@ -1,19 +1,13 @@
 # Appendices
 
-TODO: Add appendix on location prior
-
-## Appendix 1: Proof of sampling procedure
-
-Here, I give a proof that the simple ABC rejection algorithm yields independent draws from the posterior distribution. Recall that the algorithm works by drawing samples of $\theta$ from the prior distribution with density $\pi (\theta)$. Then, for each draw of $\theta$, we draw a data vector $y_{\text {sim}}$ from the likelihood $l(\theta \mid y_{\text{sim}})$. Finally, we keep the sample if we observe that $y_{\text{sim}} = y_{\text{obs}}$ (where $y_{\text{obs}}$ is identical to the data vector we actually observed) and reject it otherwise. Then, the draws that we keep have distribution $f_{\text{ABC}}(\theta) = \pi(\theta) \cdot l(\theta \mid y_{\text{obs}})$, since our draws from the prior and likelihood are independent.^[Credit is due to [this StackExchange post](https://stats.stackexchange.com/questions/380076/proof-of-approximate-exact-bayesian-computation.).]
-
-## Appendix 2: Full model statement
+## Appendix 1: Full model statement
 
 $$
 \renewcommand{\baselinestretch}{1}\normalsize
 \begin{aligned}
 &\textbf{Population size} \\
 &\text{Initial no. of flies:} && N_1  \sim \mathrm{Geometric}(1/20) \\
-& \text{Number of flies:}~ && N_t \mid N_{t-1}  \sim \mathrm{Poisson}\{ N_{t-1} \exp(R_t) \} \text{, where} \\ & && R_t \sim \mathrm{Normal}(\mu_t, 0.7), & t \in \{2, \ldots, T \} \\
+& \text{Number of flies:}~ && N_t \mid N_{t-1}  \sim \mathrm{Poisson}\{ N_{t-1} \exp(R_t) \} \text{, where} \\ & && R_t \sim \mathrm{Normal}(\mu_t, 0.07^2), & t \in \{2, \ldots, T \} \\
 \\
 &\textbf{Fly locations} \\
 & \text{Population location:} ~ && L_c \sim \mathrm{Normal_2}(\mathbf 0_2, 160^2 I_2) \\
@@ -28,14 +22,14 @@ $$
   &&&& t \in \{1, \ldots, T\}\\
 & \text{Individ. cap. prob.:} && p_{i, t} = 1 - \prod_{k=1}^K (1 - p(\delta_{i,k,t})), & i \in \{1, \ldots, N_t\}, \\
   &&&& t \in \{1, \ldots, T\} \\
-& \text{Aggregate cap. prob.:} && p_t = 1 - \prod_{t=1}^{N_t} (1 - p_{i,t}) & t \in \{1, \ldots, T\} \\
+& \text{Aggregate cap. prob.:} && p_t = 1 - \prod_{i=1}^{N_t} (1 - p_{i,t}) & t \in \{1, \ldots, T\} \\
 &\text{Detection:}~ && y_t \mid \{ \mathbf L_t, N_t \} \sim \operatorname{Bernoulli}(p_t), & t \in \{1, \ldots, T\} \\
   &&& \mathbf y := [y_t]_{t=1}^T
 \end{aligned}
 \renewcommand{\baselinestretch}{1}\normalsize
 $$
 
-## Appendix 3: Population location prior
+## Appendix 2: Population location prior
 
 A trick is used to derive a prior for the case presented in chapter 4. The trick is to model the probability of the first detection being at trap k as the probability that a fly is detected at k in one period conditional on exactly one fly total being detected in that period. The benefit of this model is that it does not depend on how many weeks it took to get the first detection (which would require information about how long flies have been around before the first detection). 
 
@@ -47,6 +41,37 @@ $$
 
 Under these assumptions, $L \mid C_k = 1$ is the distribution of $L$, given that a fly was caught in trap $k$ before any other trap.
 
-Whether or not we can analytically derive the posterior density depends on the probability of capture function $p(x)$. In the case we consider here, the function cannot be integrated, and so I resort to sampling. Under the above assumptions, the posterior resembles a bivariate normal distribution with mean $\mathbf 0_2$ and variance $160^2 I_2$.
+Sampling was used to infer the posterior distribution. Under the above assumptions, the posterior resembles a bivariate normal distribution with mean $\mathbf 0_2$ and variance $160^2 I_2$.
 
-### Proof that 2d normal RVs are gamma
+## Appendix 3: Distance between a bivariate normal random variable and its mean is gamma distributed
+
+Here I prove a claim made in chapter 4. This is the claim that $X \sim \mathrm {Normal}_2 (\pmb \mu, \sigma^2 I_2) \implies \lVert X - \pmb \mu \rVert^2 \sim \Gamma(1, \sigma^2/2)$, where $\Gamma(a, b)$ is the gamma distribution with shape $a$ and scale $b$. 
+
+Let $X \sim \mathrm {Normal}_2 (\pmb \mu, \sigma^2 I_2)$ so that $X_i \sim \mathrm{Normal}(\mu_i, \sigma^2)$, $i \in \{1, 2\}$. Also, let $Z_i \sim \mathrm{Normal}(0, 1), ~ i \in \{1, 2\}$. Then, 
+
+$$
+\begin{aligned}
+  Y &= \lVert X - \pmb \mu \rVert^2  \\
+    &= (X_1 - \mu_1)^2 + (X_2 - \mu_2)^2 \\
+    &= \sigma^2 (Z_1^2 + Z_2^2). \\
+\end{aligned}
+$$
+Therefore, $Y \sim \sigma^2 \chi^2(2)$, by the well known theorem that the sum of $n$ independent standard normal random variables is distributed as $\chi^2(n)$. This distribution is equivalent to $\Gamma(1, 1/2)$, where $\Gamma$ is defined as above. By the scaling property of the gamma distribution, we have $Y \sim \Gamma(1, \sigma^2 / 2)$. 
+
+## Appendix 4: Probability of capture time adjustment
+
+In chapter 4, I explain that we use estimates of the probability of capture over the lifetime of an individual fly. If these were used without correction for weekly capture probabilities, we would overestimate the probability of capturing any given fly. Here, I explain a correction used to adjust the probabilities of capture, when we are interested in the probability of capture over only one week.
+
+Suppose there is just one fly. Let $q$ be the probability that the fly is captured over its lifetime (4 weeks). Assume that each week, the fly is captured with daily capture probability $p$. We have 
+$$
+\begin{aligned}
+  q &= \Pr(\text{fly caught in lifetime}) \\
+    &= \Pr(\text{fly caught on week 1, 2, 3, or 4}) \\
+    &= 1 - \Pr(\text{fly not caught on week 1, 2, 3, or 4}) \\
+    &= 1 - (1 - p)^{4} \\
+    \implies p &= 1 - (1-q)^{1/4}.
+\end{aligned}
+$$
+Therefore, the probability that the fly is caught in any given week is $1 - (1 - q)^{1/4}$, where $q$ is the lifetime probability of capture. 
+
+In chapter 4, it is assumed that Medfly lifetimes are four weeks long. Note, however, that we could substitute any proportion for $1/4$. Further, one could define the proportion as a random variable with a prior distribution, if we wish to model uncertainty about fly lifetime lengths.
