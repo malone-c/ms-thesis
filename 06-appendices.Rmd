@@ -1,49 +1,19 @@
 # Appendices
 
-## Appendix 1: Full model statement
+## Appendix 1: Population location prior
 
-$$
-\renewcommand{\baselinestretch}{1}\normalsize
-\begin{aligned}
-&\textbf{Population size} \\
-&\text{Initial no. of flies:} && N_1  \sim \mathrm{Geometric}(1/20) \\
-& \text{Number of flies:}~ && N_t \mid N_{t-1}  \sim \mathrm{Poisson}\{ N_{t-1} \exp(R_t) \} \text{, where} \\ & && R_t \sim \mathrm{Normal}(\mu_t, 0.07^2), & t \in \{2, \ldots, T \} \\
-\\
-&\textbf{Fly locations} \\
-& \text{Population location:} ~ && L_c \sim \mathrm{Normal_2}(\mathbf 0_2, 160^2 I_2) \\
-& \text{Fly locations:}~ && L_{i,t} \mid L_c \sim \mathrm{Normal}_2(L_c, 12.5^2 I_2) & i \in \{1, \ldots, N_t\}, \\
-  &&&& t \in \{1, \ldots, T\}\\
-\\
-&\textbf{Detection model} \\
-& \text{Number of traps:}~ && K \in \mathbb N_+ \\
-& \text{Trap locations:}~ && L_k^\text{trap} \in \mathbb R & k \in \{1, \ldots, K\} \\
-& \text{Dist. btw. fly } i \text{ and trap } k \text{ at time } t \text{:} && \delta_{i,k,t} := \lVert L_k^\text{trap} - L_{i,t} \rVert & i \in \{1, \ldots, N_t\}, \\
-  &&&& k \in \{1, \ldots, K\}, \\
-  &&&& t \in \{1, \ldots, T\}\\
-& \text{Individ. cap. prob.:} && p_{i, t} = 1 - \prod_{k=1}^K (1 - p(\delta_{i,k,t})), & i \in \{1, \ldots, N_t\}, \\
-  &&&& t \in \{1, \ldots, T\} \\
-& \text{Aggregate cap. prob.:} && p_t = 1 - \prod_{i=1}^{N_t} (1 - p_{i,t}) & t \in \{1, \ldots, T\} \\
-&\text{Detection:}~ && y_t \mid \{ \mathbf L_t, N_t \} \sim \operatorname{Bernoulli}(p_t), & t \in \{1, \ldots, T\} \\
-  &&& \mathbf y := [y_t]_{t=1}^T
-\end{aligned}
-\renewcommand{\baselinestretch}{1}\normalsize
-$$
+A trick is used to derive a prior for the case presented in chapter 4. The idea here is that we want to use the information in the fact that a fly was detected at the centre of the trap. The trick is to model the probability of the first detection being at trap $k$ as the probability that a fly is detected at $k$ in a given period conditional on exactly one fly total being detected in that period. A benefit of this model is that it does not depend on how many weeks it took to get the first detection (which would require information about how long flies have been around before the first detection). 
 
-## Appendix 2: Population location prior
-
-A trick is used to derive a prior for the case presented in chapter 4. The trick is to model the probability of the first detection being at trap k as the probability that a fly is detected at k in one period conditional on exactly one fly total being detected in that period. The benefit of this model is that it does not depend on how many weeks it took to get the first detection (which would require information about how long flies have been around before the first detection). 
-
-Suppose we have $K$ traps indexed by $k \in \{1, \ldots, L\}$. Suppose also that we have a prior distribution over the population size $N$, given by $N \sim \mathrm{Poisson} (\lambda)$, with $\lambda \sim \mathrm{Exponential(1/20)}$. (This is the prior distribution for $N_1$ in chapter 4. Here we assume no change in population size over time. Now, we suppose that each trap $k$ is "competing" to catch the first trap each week. Suppose that the centre of the population is distributed uniformly over a 1600 m^2 trapping grid. Define the random variable
-
+Suppose we have $K$ traps indexed by $k \in \{1, \ldots, L\}$. Suppose also that we have a prior distribution over the population size $N$, given by $N \sim \mathrm{Geometric} (0.05)$, as in chapter 4. (Here we assume no change in population size over time.) Now, we suppose that each trap $k$ is "competing" to catch the first fly each week. Suppose, for simplicity, that all flies are located at a single random point $L$. Under the prior distribution, we assume that $L$ is distributed uniformly over a $3.2 \times 3.2 ~ \mathrm{km}^2$ trapping grid, with traps spaced evenly at 400 m intervals. Finally, define the random variable
 $$
 C_k = \begin{cases}1 & \text{a fly is caught in trap } k \text{ before any other trap} \\ 0 & \text{otherwise}. \end{cases}
 $$
 
-Under these assumptions, $L \mid C_k = 1$ is the distribution of $L$, given that a fly was caught in trap $k$ before any other trap.
+Note that, in chapter 4, letting $\delta$ denote the centre trap, we observe $C_\delta=1$, and $C_k = 0, ~ \forall k \neq \delta$. Under these assumptions, the posterior $L \mid C_k = 1$ is the distribution of $L$, given that a fly was caught in trap $k$ before any other trap. The idea of this method is to infer this posterior distribution, and set it to be our prior distribution for the population location in the main model.
 
-Sampling was used to infer the posterior distribution. Under the above assumptions, the posterior resembles a bivariate normal distribution with mean $\mathbf 0_2$ and variance $160^2 I_2$.
+For the example in chapter 4, Gibbs sampling was used to infer the posterior distribution. Under the above assumptions, the distribution of the posterior $L \mid C_\delta = 1$ resembles a bivariate normal distribution with mean $\mathbf 0_2$ and variance $160^2 I_2$.
 
-## Appendix 3: Distance between a bivariate normal random variable and its mean is gamma distributed
+## Appendix 2: Distance between a bivariate normal random variable and its mean is gamma distributed
 
 Here I prove a claim made in chapter 4. This is the claim that $X \sim \mathrm {Normal}_2 (\pmb \mu, \sigma^2 I_2) \implies \lVert X - \pmb \mu \rVert^2 \sim \Gamma(1, \sigma^2/2)$, where $\Gamma(a, b)$ is the gamma distribution with shape $a$ and scale $b$. 
 
@@ -58,7 +28,7 @@ $$
 $$
 Therefore, $Y \sim \sigma^2 \chi^2(2)$, by the well known theorem that the sum of $n$ independent standard normal random variables is distributed as $\chi^2(n)$. This distribution is equivalent to $\Gamma(1, 1/2)$, where $\Gamma$ is defined as above. By the scaling property of the gamma distribution, we have $Y \sim \Gamma(1, \sigma^2 / 2)$. 
 
-## Appendix 4: Probability of capture time adjustment
+## Appendix 3: Probability of capture time adjustment
 
 In chapter 4, I explain that we use estimates of the probability of capture over the lifetime of an individual fly. If these were used without correction for weekly capture probabilities, we would overestimate the probability of capturing any given fly. Here, I explain a correction used to adjust the probabilities of capture, when we are interested in the probability of capture over only one week.
 
