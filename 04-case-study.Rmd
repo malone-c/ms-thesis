@@ -66,9 +66,7 @@ As in the previous chapter, the model is broken into prior distributions and lik
 
 Here, we are modelling the risk of an adverse event (namely an undetected pest invasion). In such cases, we might consider examining a worst-case scenario. In this case, this could be done by specifying prior distributions such that we assign high density to cases where (a) the growth rate is very close to zero, so that the fly population is capable of persisting at below-detectable levels indefinitely, or (b) flies are located far away from surveillance traps. Given these considerations, it should be trivial to identify worst-case scenarios where we can almost never be certain that flies are eradicated, given any length of time. However, such results are likely unreasonable, and do not accurately reflect our prior state of information. Nonetheless, I attempt to err on the side of pessimism about the ease at which fly populations can be detected, while nonetheless making the prior distribution as realistic as possible, given constraints on what is known about them.
 
-### Prior distributions
-
-#### Population size $N_t$ {#popn-size}
+### Prior distribution on fly population size {#popn-size}
 
 In this case, $N_1$ is the first week after the most recent fly detection. I have chosen to set $N_1 \sim \operatorname{Geometric}(1/20)$. This is chosen as it is a discrete distribution with right skew, and a relatively large amount of mass in the region of $x = 0$, corresponding to the situation where flies are already eradicated (see figure \@ref(fig:priorinitsize)).^[The geometric distribution is also a natural choice for this latent variable; I do not explore this further here.] The mean of the geometric distribution is chosen arbitrarily. The primary goal is to have a small population on average, with non-zero risk of a population size greater than 50. However, it is not clear, without prior domain knowledge, whether this distribution is empirically reasonable. Population counts do not exist for past outbreaks. This issue is discussed further in section \@ref(discussion).
 
@@ -106,11 +104,11 @@ The choice for $\sigma^2_t$ is necessarily more arbitrary than the choice for $\
 knitr::include_graphics('references/ksplot.png')
 ```
 
-#### Spatial location
+### Prior distribution on fly spatial locations
 
 As mentioned in the previous chapter, the model is spatial. This is because the likelihood of detection depends on distances between traps and individual flies. As in the previous chapter, prior distributions must be set for the location of the population centre, and for dispersals of individual flies from that centre.
 
-##### Population location
+#### Population location {-}
 
 The centre of the population is assumed to be located at the two-dimensional vector $L_c$. I have set the prior on $L_c$ to be 
 $$
@@ -118,7 +116,7 @@ L_c \sim \mathrm {Normal}_2 (\mathbf 0_2, 160^2 I_2),
 $$
 where $\mathrm{Normal}_2$ is the bivariate normal distribution, $\mathbf 0_2$ is the two-dimensional zero vector and $I_2$ is the $2 \times 2$ identity matrix. This prior reflects a prior belief that the centre of the population is highly likely to be close to the centre of the grid, where a fly was detected most recently (we suppose). E.g., we believe that there is a 95% chance that the centre of the population is within $1.96 \cdot 160 \approx 320$ metres of the centre of the grid.^[For details about how this prior was arrived at, see appendix.] This makes sense, as the setting of supplementary traps close to the centre, as is standard, belies a prior belief that other flies are likely to be located in the vicinity of the first capture.
 
-##### Individual fly dispersals
+#### Individual fly locations {-}
 
 Let $L_{i, t}$ denote the location of fly $i$ at time $t$, as in the previous chapter. I assign this quantity the prior distribution $$L_{i, t} \mid L_c \sim \mathrm {Normal}_2 (L_c, 12.5^2 I_2),$$ where the notation is defined as in the previous section above. The variance is chosen so that ~95% of flies are within 30 metres of the population centre. Here, 30 metres is chosen arbitrarily. It reflects a belief that flies typically do not disperse very far. This is a pessimistic ("worst-case") assumption. When flies are spread further from their population centre, it is more likely that at least one is close to a trap. As such, large populations of flies are less likely to go undetected.
 
