@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Bayesian inference of eradication of incipient Tephritid fruit fly populations, with application to Mediterranean fruit fly</title>
+  <meta name="description" content="Bayesian inference of eradication of incipient Tephritid fruit fly populations, with application to Mediterranean fruit fly" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Bayesian inference of eradication of incipient Tephritid fruit fly populations, with application to Mediterranean fruit fly" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Bayesian inference of eradication of incipient Tephritid fruit fly populations, with application to Mediterranean fruit fly" />
+  
+  
+  
+
+<meta name="author" content="Chris Malone" />
+
+
+<meta name="date" content="2022-05-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+
+<link rel="next" href="lit-review.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#control-and-monitoring-of-tephritid-fruit-flies"><i class="fa fa-check"></i><b>1.1</b> Control and monitoring of Tephritid fruit flies</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#outline-of-this-work"><i class="fa fa-check"></i><b>1.2</b> Outline of this work</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="lit-review.html"><a href="lit-review.html"><i class="fa fa-check"></i><b>2</b> Literature review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="lit-review.html"><a href="lit-review.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="lit-review.html"><a href="lit-review.html#zero-catch-criteria"><i class="fa fa-check"></i><b>2.2</b> Zero-catch criteria</a></li>
+<li class="chapter" data-level="2.3" data-path="lit-review.html"><a href="lit-review.html#bayesian-models-for-inferring-the-presence-or-absence-of-a-pest-population"><i class="fa fa-check"></i><b>2.3</b> Bayesian models for inferring the presence or absence of a pest population</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="lit-review.html"><a href="lit-review.html#red-fire-ants"><i class="fa fa-check"></i><b>2.3.1</b> Red fire ants</a></li>
+<li class="chapter" data-level="2.3.2" data-path="lit-review.html"><a href="lit-review.html#red-foxes"><i class="fa fa-check"></i><b>2.3.2</b> Red foxes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="lit-review.html"><a href="lit-review.html#gaps"><i class="fa fa-check"></i><b>2.4</b> Gaps</a></li>
+<li class="chapter" data-level="2.5" data-path="lit-review.html"><a href="lit-review.html#conclusion"><i class="fa fa-check"></i><b>2.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ch3.html"><a href="ch3.html"><i class="fa fa-check"></i><b>3</b> General framework proposal</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ch3.html"><a href="ch3.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="ch3.html"><a href="ch3.html#why-make-the-model-spatially-explicit"><i class="fa fa-check"></i><b>3.2</b> Why make the model spatially explicit?</a></li>
+<li class="chapter" data-level="3.3" data-path="ch3.html"><a href="ch3.html#structure-of-the-model"><i class="fa fa-check"></i><b>3.3</b> Structure of the model</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="ch3.html"><a href="ch3.html#population-size"><i class="fa fa-check"></i><b>3.3.1</b> Population size</a></li>
+<li class="chapter" data-level="3.3.2" data-path="ch3.html"><a href="ch3.html#fly-locations"><i class="fa fa-check"></i><b>3.3.2</b> Fly locations</a></li>
+<li class="chapter" data-level="3.3.3" data-path="ch3.html"><a href="ch3.html#probability-of-capture-likelihood"><i class="fa fa-check"></i><b>3.3.3</b> Probability of capture (likelihood)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="ch3.html"><a href="ch3.html#posterior-inference"><i class="fa fa-check"></i><b>3.4</b> Posterior inference</a></li>
+<li class="chapter" data-level="3.5" data-path="ch3.html"><a href="ch3.html#conclusion-1"><i class="fa fa-check"></i><b>3.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html"><i class="fa fa-check"></i><b>4</b> Case study: Mediterranean fruit fly</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#medfly-ceratitis-capitata"><i class="fa fa-check"></i><b>4.2</b> Medfly (Ceratitis capitata)</a></li>
+<li class="chapter" data-level="4.3" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#data"><i class="fa fa-check"></i><b>4.3</b> Data</a></li>
+<li class="chapter" data-level="4.4" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#model"><i class="fa fa-check"></i><b>4.4</b> Model</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#popn-size"><i class="fa fa-check"></i><b>4.4.1</b> Prior distribution on fly population size</a></li>
+<li class="chapter" data-level="4.4.2" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#prior-distribution-on-fly-spatial-locations"><i class="fa fa-check"></i><b>4.4.2</b> Prior distribution on fly spatial locations</a></li>
+<li class="chapter" data-level="4.4.3" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#likelihood"><i class="fa fa-check"></i><b>4.4.3</b> Likelihood</a></li>
+<li class="chapter" data-level="4.4.4" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#full-statement-of-the-model"><i class="fa fa-check"></i><b>4.4.4</b> Full statement of the model</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#sampling"><i class="fa fa-check"></i><b>4.5</b> Sampling</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#sketch-of-the-algorithm"><i class="fa fa-check"></i><b>4.5.1</b> Sketch of the algorithm</a></li>
+<li class="chapter" data-level="4.5.2" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#sampling-results"><i class="fa fa-check"></i><b>4.5.2</b> Sampling results</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#results"><i class="fa fa-check"></i><b>4.6</b> Results</a></li>
+<li class="chapter" data-level="4.7" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#discussion"><i class="fa fa-check"></i><b>4.7</b> Discussion</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#pessimism-about-trap-sensitivity"><i class="fa fa-check"></i><b>4.7.1</b> Pessimism about trap sensitivity</a></li>
+<li class="chapter" data-level="4.7.2" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#pessimism-about-growth-rates"><i class="fa fa-check"></i><b>4.7.2</b> Pessimism about growth rates</a></li>
+<li class="chapter" data-level="4.7.3" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#neglect-of-alternative-sources-of-information"><i class="fa fa-check"></i><b>4.7.3</b> Neglect of alternative sources of information</a></li>
+<li class="chapter" data-level="4.7.4" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#arbitrariness-of-prior-distributions"><i class="fa fa-check"></i><b>4.7.4</b> Arbitrariness of prior distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#conclusion-2"><i class="fa fa-check"></i><b>4.8</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="conclusion-3.html"><a href="conclusion-3.html"><i class="fa fa-check"></i><b>5</b> Conclusion</a></li>
+<li class="chapter" data-level="6" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i><b>6</b> Appendices</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="appendices.html"><a href="appendices.html#appendix-1-population-location-prior"><i class="fa fa-check"></i><b>6.1</b> Appendix 1: Population location prior</a></li>
+<li class="chapter" data-level="6.2" data-path="appendices.html"><a href="appendices.html#appendix-2-distance-between-a-bivariate-normal-random-variable-and-its-mean-is-gamma-distributed"><i class="fa fa-check"></i><b>6.2</b> Appendix 2: Distance between a bivariate normal random variable and its mean is gamma distributed</a></li>
+<li class="chapter" data-level="6.3" data-path="appendices.html"><a href="appendices.html#appendix-3-probability-of-capture-time-adjustment"><i class="fa fa-check"></i><b>6.3</b> Appendix 3: Probability of capture time adjustment</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian inference of eradication of incipient Tephritid fruit fly populations, with application to Mediterranean fruit fly</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="header">
+<h1 class="title">Bayesian inference of eradication of incipient Tephritid fruit fly populations, with application to Mediterranean fruit fly</h1>
+<p class="author"><em>Chris Malone</em></p>
+<p class="date"><em>2022-05-27</em></p>
+</div>
+<div id="introduction" class="section level1" number="1">
+<h1><span class="header-section-number">Chapter 1</span> Introduction</h1>
+<div id="control-and-monitoring-of-tephritid-fruit-flies" class="section level2" number="1.1">
+<h2><span class="header-section-number">1.1</span> Control and monitoring of Tephritid fruit flies</h2>
+<p>Biological (pest) invasions are incursions of incipient populations of plants or animals that are non-native to a given region.<a href="#fn1" class="footnote-ref" id="fnref1"><sup>1</sup></a> Such invasions can have high economic significance when the invading species is considered a <em>pest</em> (i.e., harmful to human concerns). Amid the ongoing globalisation of trade, the salience of biological invasions is increasing around the world. Invasions pose severe economic and environmental risks. On the economic side, they may threaten “wholesale loss of agricultural, forestry, and fishery resources” (<span class="citation"><a href="#ref-mack2000" role="doc-biblioref">Mack et al.</a> (<a href="#ref-mack2000" role="doc-biblioref">2000</a>)</span>). On the environmental side, they may threaten to disrupt native ecological processes – e.g. by threatening the extinction of endangered natives, and creating globally homogenous, “cosmopolitan” ecological systems (Ibid.).</p>
+<p>Tephritid fruit flies (<em>Diptera Tephritidae</em>) are a genus of insects of particularly high economic significance. Species in this genus have the potential to destroy a wide variety of horticultural produce in large amounts. Females lay eggs in plant tissue (often fruits) which is then destroyed in the process of their development. Economic costs of successful fruit fly invasions in Australia have been estimated to be as high as hundreds of millions of dollars (<span class="citation"><a href="#ref-suckling2016" role="doc-biblioref">Suckling et al.</a> (<a href="#ref-suckling2016" role="doc-biblioref">2016</a>)</span>, <span class="citation"><a href="#ref-hancock2000" role="doc-biblioref">Hancock et al.</a> (<a href="#ref-hancock2000" role="doc-biblioref">2000</a>)</span>). Potential costs of Tephritid fruit fly incursions include crop losses; labour and materials associated with eradication and suppression; and knock-on effects to agricultural produce as a consequence of pesticide usage (<span class="citation"><a href="#ref-suckling2016" role="doc-biblioref">Suckling et al.</a> (<a href="#ref-suckling2016" role="doc-biblioref">2016</a>)</span>).</p>
+<p>Some locations in Australia and the USA are internationally recognised exclusion zones for some species of fruit fly. In some of these places <em>spot infestations</em> of the relevant fly species can be common (<span class="citation"><a href="#ref-meats2005" role="doc-biblioref">Meats and Clift</a> (<a href="#ref-meats2005" role="doc-biblioref">2005</a>)</span>). Spot infestations are small invasions, usually met with efforts to eradicate. Eradication methods include spraying of pesticides and release of sterile insects that disrupt the flies’ breeding cycle. Currently, it is widespread practice that inference of absence for such invasions is informal. In particular, pest absence is declared according to rules of thumb (Ibid.). These rules are in the form of <strong>zero-catch criteria</strong>. The idea is that, if zero flies are detected for some pre-specified length of time (the zero-catch criterion) we may infer with confidence, and therefore declare, that they have been eradicated from the region (see chapter 2).</p>
+<p>There are issues with the zero-catch criteria currently used. Firstly, they are only minimally sensitive to variability between situations. For example, outbreaks in two locations with the same temperatures will have the same zero-catch criteria, even though they may differ in other significant ways. Secondly, they do not explicitly or transparently take into account the low sensitivity of fruit fly traps, which has been the subject of some study (see chapter 2). Thirdly, they are based on a simplified model of fruit fly biology which does not account for variation in development times (both within and between fly populations).</p>
+<p>The primary goal of the present work is to develop a rigorous statistical framework for inferring pest absence after a suspected outbreak. The hope is that such a framework can be useful (a) to evaluate existing zero-catch criteria, and (b) to develop improved criteria. A secondary goal of the framework is to provide situation-specific estimates of the probability of eradication. These may be useful to the regulator, who wishes to weigh the cost of eradication probabilistically against the cost of a successful biological invasion.</p>
+<p>The method I propose involves spatially explicit, agent-based modelling of the relevant fruit fly population. This proposal is inspired by similar recent works using Bayesian models to infer the probability of pest absence from real data (see chapter 2).</p>
+</div>
+<div id="outline-of-this-work" class="section level2" number="1.2">
+<h2><span class="header-section-number">1.2</span> Outline of this work</h2>
+<p>I begin this work in chapter 2 by reviewing relevant literature. In particular, I discuss two bodies of literature. The first is on the existing literature on quantitative analysis of zero-catch criteria for tephritid fruit flies. I explain zero-catch criteria in greater detail, and then discuss some ways in which they have been analysed and evaluated in academic literature. The second is on existing Bayesian models for inferring the probability of pest absence. Two example cases from the literature are discussed as inspiration for the model developed in the present work. As far as I know, these are the only such models for this problem (inferring extirpation of a pest population) presented to date. In chapter 3, I develop, and justify, a framework for modelling tephritid fruit fly invasions. Model details are discussed at an abstract level. The focus of this chapter is to present a skeleton of the method. I.e., the basic structure of the model, and core quantities of interest, are discussed. But the model is not fully specified or fit to data. Finally, in chapter 4, I apply the methodology to the specific case of Mediterranean fruit fly, a tephritid species of particularly high economic significance in the USA and Australia. A joint prior distribution is defined over the parameters of the model, and inference is performed to evaluate and derive zero-catch criteria for a hypothetical case.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-hancock2000" class="csl-entry">
+Hancock, D., Osborne, R., Broughton, S., Gleeson, P., 2000. Eradication of bactrocera papayae (diptera: Tephritidae) by male annihilation and protein baiting in queensland, australia.
+</div>
+<div id="ref-mack2000" class="csl-entry">
+Mack, R.N., Simberloff, D., Mark Lonsdale, W., Evans, H., Clout, M., Bazzaz, F.A., 2000. Biotic invasions: Causes, epidemiology, global consequences, and control. Ecological applications 10, 689–710.
+</div>
+<div id="ref-meats2005" class="csl-entry">
+Meats, A., Clift, A., 2005. Zero catch criteria for declaring eradication of tephritid fruit flies: The probabilities. Australian Journal of Experimental Agriculture 45, 1335–1340.
+</div>
+<div id="ref-suckling2016" class="csl-entry">
+Suckling, D.M., Kean, J.M., Stringer, L.D., Cáceres-Barrios, C., Hendrichs, J., Reyes-Flores, J., Dominiak, B.C., 2016. Eradication of tephritid fruit fly pest populations: Outcomes and prospects. Pest management science 72, 456–465.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="1">
+<li id="fn1"><p>Note that, for this work, the term <em>population</em> will be used to mean a group of animals living together in a group. This is to be distinguished from the statistical use of the term.<a href="introduction.html#fnref1" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+
+<a href="lit-review.html" class="navigation navigation-next navigation-unique" aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/01-intro.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>

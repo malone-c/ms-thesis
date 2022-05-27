@@ -253,5 +253,5 @@ In principle, it should be possible to learn the distributions of the growth rat
 
 ## Conclusion
 
-In this chapter, I explored a simulated scenario involving an outbreak of a particularly salient species of tephritid fruit fly, the Medfly. This served as a "toy" case to illustrate use of the model. However, the model is relatively plausible as a depiction of the scenario in question, which is relatively generic in nature. As such, the results may have significant impact on policy. In particular, I found that the posterior probability of eradication is low at the zero-catch criteria date. This gives us reason to doubt that the zero-catch criteria are sufficiently long to ensure a high degree of certainty about eradication.
+In this chapter, I explored a simulated scenario involving an outbreak of a particularly salient species of tephritid fruit fly, the Medfly. This served as a "toy" case to illustrate use of the model. However, the model is relatively plausible as a depiction of the scenario in question, which is relatively generic in nature. As such, the results may have significant consequences for policy. In particular, I found that the posterior probability of eradication is low at the zero-catch criteria date. This gives us reason to doubt that the zero-catch criteria are sufficiently long to ensure a high degree of certainty about eradication.
 

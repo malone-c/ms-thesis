@@ -1,0 +1,517 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+<head>
+
+  <meta charset="utf-8" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  <title>Chapter 4 Case study: Mediterranean fruit fly | Bayesian inference of eradication of incipient Tephritid fruit fly populations, with application to Mediterranean fruit fly</title>
+  <meta name="description" content="Chapter 4 Case study: Mediterranean fruit fly | Bayesian inference of eradication of incipient Tephritid fruit fly populations, with application to Mediterranean fruit fly" />
+  <meta name="generator" content="bookdown 0.24 and GitBook 2.6.7" />
+
+  <meta property="og:title" content="Chapter 4 Case study: Mediterranean fruit fly | Bayesian inference of eradication of incipient Tephritid fruit fly populations, with application to Mediterranean fruit fly" />
+  <meta property="og:type" content="book" />
+  
+  
+  
+  <meta name="github-repo" content="rstudio/bookdown-demo" />
+
+  <meta name="twitter:card" content="summary" />
+  <meta name="twitter:title" content="Chapter 4 Case study: Mediterranean fruit fly | Bayesian inference of eradication of incipient Tephritid fruit fly populations, with application to Mediterranean fruit fly" />
+  
+  
+  
+
+<meta name="author" content="Chris Malone" />
+
+
+<meta name="date" content="2022-05-27" />
+
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes" />
+  <meta name="apple-mobile-web-app-status-bar-style" content="black" />
+  
+  
+<link rel="prev" href="ch3.html"/>
+<link rel="next" href="conclusion-3.html"/>
+<script src="libs/header-attrs-2.11/header-attrs.js"></script>
+<script src="libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/fuse.js@6.4.6/dist/fuse.min.js"></script>
+<link href="libs/gitbook-2.6.7/css/style.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-table.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-bookdown.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-highlight.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-search.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-fontsettings.css" rel="stylesheet" />
+<link href="libs/gitbook-2.6.7/css/plugin-clipboard.css" rel="stylesheet" />
+
+
+
+
+
+
+
+
+<link href="libs/anchor-sections-1.0.1/anchor-sections.css" rel="stylesheet" />
+<script src="libs/anchor-sections-1.0.1/anchor-sections.js"></script>
+
+
+
+<style type="text/css">
+/* Used with Pandoc 2.11+ new --citeproc when CSL is used */
+div.csl-bib-body { }
+div.csl-entry {
+  clear: both;
+}
+.hanging div.csl-entry {
+  margin-left:2em;
+  text-indent:-2em;
+}
+div.csl-left-margin {
+  min-width:2em;
+  float:left;
+}
+div.csl-right-inline {
+  margin-left:2em;
+  padding-left:1em;
+}
+div.csl-indent {
+  margin-left: 2em;
+}
+</style>
+
+<link rel="stylesheet" href="style.css" type="text/css" />
+</head>
+
+<body>
+
+
+
+  <div class="book without-animation with-summary font-size-2 font-family-1" data-basepath=".">
+
+    <div class="book-summary">
+      <nav role="navigation">
+
+<ul class="summary">
+<li><a href="./">A Minimal Book Example</a></li>
+
+<li class="divider"></li>
+<li class="chapter" data-level="1" data-path="introduction.html"><a href="introduction.html"><i class="fa fa-check"></i><b>1</b> Introduction</a>
+<ul>
+<li class="chapter" data-level="1.1" data-path="introduction.html"><a href="introduction.html#control-and-monitoring-of-tephritid-fruit-flies"><i class="fa fa-check"></i><b>1.1</b> Control and monitoring of Tephritid fruit flies</a></li>
+<li class="chapter" data-level="1.2" data-path="introduction.html"><a href="introduction.html#outline-of-this-work"><i class="fa fa-check"></i><b>1.2</b> Outline of this work</a></li>
+</ul></li>
+<li class="chapter" data-level="2" data-path="lit-review.html"><a href="lit-review.html"><i class="fa fa-check"></i><b>2</b> Literature review</a>
+<ul>
+<li class="chapter" data-level="2.1" data-path="lit-review.html"><a href="lit-review.html#introduction-1"><i class="fa fa-check"></i><b>2.1</b> Introduction</a></li>
+<li class="chapter" data-level="2.2" data-path="lit-review.html"><a href="lit-review.html#zero-catch-criteria"><i class="fa fa-check"></i><b>2.2</b> Zero-catch criteria</a></li>
+<li class="chapter" data-level="2.3" data-path="lit-review.html"><a href="lit-review.html#bayesian-models-for-inferring-the-presence-or-absence-of-a-pest-population"><i class="fa fa-check"></i><b>2.3</b> Bayesian models for inferring the presence or absence of a pest population</a>
+<ul>
+<li class="chapter" data-level="2.3.1" data-path="lit-review.html"><a href="lit-review.html#red-fire-ants"><i class="fa fa-check"></i><b>2.3.1</b> Red fire ants</a></li>
+<li class="chapter" data-level="2.3.2" data-path="lit-review.html"><a href="lit-review.html#red-foxes"><i class="fa fa-check"></i><b>2.3.2</b> Red foxes</a></li>
+</ul></li>
+<li class="chapter" data-level="2.4" data-path="lit-review.html"><a href="lit-review.html#gaps"><i class="fa fa-check"></i><b>2.4</b> Gaps</a></li>
+<li class="chapter" data-level="2.5" data-path="lit-review.html"><a href="lit-review.html#conclusion"><i class="fa fa-check"></i><b>2.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="3" data-path="ch3.html"><a href="ch3.html"><i class="fa fa-check"></i><b>3</b> General framework proposal</a>
+<ul>
+<li class="chapter" data-level="3.1" data-path="ch3.html"><a href="ch3.html#introduction-2"><i class="fa fa-check"></i><b>3.1</b> Introduction</a></li>
+<li class="chapter" data-level="3.2" data-path="ch3.html"><a href="ch3.html#why-make-the-model-spatially-explicit"><i class="fa fa-check"></i><b>3.2</b> Why make the model spatially explicit?</a></li>
+<li class="chapter" data-level="3.3" data-path="ch3.html"><a href="ch3.html#structure-of-the-model"><i class="fa fa-check"></i><b>3.3</b> Structure of the model</a>
+<ul>
+<li class="chapter" data-level="3.3.1" data-path="ch3.html"><a href="ch3.html#population-size"><i class="fa fa-check"></i><b>3.3.1</b> Population size</a></li>
+<li class="chapter" data-level="3.3.2" data-path="ch3.html"><a href="ch3.html#fly-locations"><i class="fa fa-check"></i><b>3.3.2</b> Fly locations</a></li>
+<li class="chapter" data-level="3.3.3" data-path="ch3.html"><a href="ch3.html#probability-of-capture-likelihood"><i class="fa fa-check"></i><b>3.3.3</b> Probability of capture (likelihood)</a></li>
+</ul></li>
+<li class="chapter" data-level="3.4" data-path="ch3.html"><a href="ch3.html#posterior-inference"><i class="fa fa-check"></i><b>3.4</b> Posterior inference</a></li>
+<li class="chapter" data-level="3.5" data-path="ch3.html"><a href="ch3.html#conclusion-1"><i class="fa fa-check"></i><b>3.5</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="4" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html"><i class="fa fa-check"></i><b>4</b> Case study: Mediterranean fruit fly</a>
+<ul>
+<li class="chapter" data-level="4.1" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#introduction-3"><i class="fa fa-check"></i><b>4.1</b> Introduction</a></li>
+<li class="chapter" data-level="4.2" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#medfly-ceratitis-capitata"><i class="fa fa-check"></i><b>4.2</b> Medfly (Ceratitis capitata)</a></li>
+<li class="chapter" data-level="4.3" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#data"><i class="fa fa-check"></i><b>4.3</b> Data</a></li>
+<li class="chapter" data-level="4.4" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#model"><i class="fa fa-check"></i><b>4.4</b> Model</a>
+<ul>
+<li class="chapter" data-level="4.4.1" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#popn-size"><i class="fa fa-check"></i><b>4.4.1</b> Prior distribution on fly population size</a></li>
+<li class="chapter" data-level="4.4.2" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#prior-distribution-on-fly-spatial-locations"><i class="fa fa-check"></i><b>4.4.2</b> Prior distribution on fly spatial locations</a></li>
+<li class="chapter" data-level="4.4.3" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#likelihood"><i class="fa fa-check"></i><b>4.4.3</b> Likelihood</a></li>
+<li class="chapter" data-level="4.4.4" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#full-statement-of-the-model"><i class="fa fa-check"></i><b>4.4.4</b> Full statement of the model</a></li>
+</ul></li>
+<li class="chapter" data-level="4.5" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#sampling"><i class="fa fa-check"></i><b>4.5</b> Sampling</a>
+<ul>
+<li class="chapter" data-level="4.5.1" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#sketch-of-the-algorithm"><i class="fa fa-check"></i><b>4.5.1</b> Sketch of the algorithm</a></li>
+<li class="chapter" data-level="4.5.2" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#sampling-results"><i class="fa fa-check"></i><b>4.5.2</b> Sampling results</a></li>
+</ul></li>
+<li class="chapter" data-level="4.6" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#results"><i class="fa fa-check"></i><b>4.6</b> Results</a></li>
+<li class="chapter" data-level="4.7" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#discussion"><i class="fa fa-check"></i><b>4.7</b> Discussion</a>
+<ul>
+<li class="chapter" data-level="4.7.1" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#pessimism-about-trap-sensitivity"><i class="fa fa-check"></i><b>4.7.1</b> Pessimism about trap sensitivity</a></li>
+<li class="chapter" data-level="4.7.2" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#pessimism-about-growth-rates"><i class="fa fa-check"></i><b>4.7.2</b> Pessimism about growth rates</a></li>
+<li class="chapter" data-level="4.7.3" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#neglect-of-alternative-sources-of-information"><i class="fa fa-check"></i><b>4.7.3</b> Neglect of alternative sources of information</a></li>
+<li class="chapter" data-level="4.7.4" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#arbitrariness-of-prior-distributions"><i class="fa fa-check"></i><b>4.7.4</b> Arbitrariness of prior distributions</a></li>
+</ul></li>
+<li class="chapter" data-level="4.8" data-path="case-study-mediterranean-fruit-fly.html"><a href="case-study-mediterranean-fruit-fly.html#conclusion-2"><i class="fa fa-check"></i><b>4.8</b> Conclusion</a></li>
+</ul></li>
+<li class="chapter" data-level="5" data-path="conclusion-3.html"><a href="conclusion-3.html"><i class="fa fa-check"></i><b>5</b> Conclusion</a></li>
+<li class="chapter" data-level="6" data-path="appendices.html"><a href="appendices.html"><i class="fa fa-check"></i><b>6</b> Appendices</a>
+<ul>
+<li class="chapter" data-level="6.1" data-path="appendices.html"><a href="appendices.html#appendix-1-population-location-prior"><i class="fa fa-check"></i><b>6.1</b> Appendix 1: Population location prior</a></li>
+<li class="chapter" data-level="6.2" data-path="appendices.html"><a href="appendices.html#appendix-2-distance-between-a-bivariate-normal-random-variable-and-its-mean-is-gamma-distributed"><i class="fa fa-check"></i><b>6.2</b> Appendix 2: Distance between a bivariate normal random variable and its mean is gamma distributed</a></li>
+<li class="chapter" data-level="6.3" data-path="appendices.html"><a href="appendices.html#appendix-3-probability-of-capture-time-adjustment"><i class="fa fa-check"></i><b>6.3</b> Appendix 3: Probability of capture time adjustment</a></li>
+</ul></li>
+<li class="chapter" data-level="" data-path="references.html"><a href="references.html"><i class="fa fa-check"></i>References</a></li>
+<li class="divider"></li>
+<li><a href="https://github.com/rstudio/bookdown" target="blank">Published with bookdown</a></li>
+
+</ul>
+
+      </nav>
+    </div>
+
+    <div class="book-body">
+      <div class="body-inner">
+        <div class="book-header" role="navigation">
+          <h1>
+            <i class="fa fa-circle-o-notch fa-spin"></i><a href="./">Bayesian inference of eradication of incipient Tephritid fruit fly populations, with application to Mediterranean fruit fly</a>
+          </h1>
+        </div>
+
+        <div class="page-wrapper" tabindex="-1" role="main">
+          <div class="page-inner">
+
+            <section class="normal" id="section-">
+<div id="case-study-mediterranean-fruit-fly" class="section level1" number="4">
+<h1><span class="header-section-number">Chapter 4</span> Case study: Mediterranean fruit fly</h1>
+<div id="introduction-3" class="section level2" number="4.1">
+<h2><span class="header-section-number">4.1</span> Introduction</h2>
+<p>In the previous chapter, I proposed a model for evaluating and proposing zero-catch criteria in specific situations, for various locations, seasons, and species of fruit fly. In this chapter, I illustrate the method by applying the model to a hypothetical outbreak. Mediterranean fruit fly is chosen for its economic significance, and Adelaide is chosen because of the availability of research on trapping sensitivity performed there. The analysis is primarily illustrative. As before, modelling is performed with a view to evaluating existing zero-catch criteria, and toward developing new criteria. The headline result of the model is that, under the model, using the existing zero-catch criteria leads to a high risk of declaring eradication “too early,” i.e. while the presence or absence of flies is still highly uncertain.</p>
+</div>
+<div id="medfly-ceratitis-capitata" class="section level2" number="4.2">
+<h2><span class="header-section-number">4.2</span> Medfly (Ceratitis capitata)</h2>
+<p>Mediterranean fruit fly (<em>Ceratitis Capitata</em>) or <em>Medfly</em> are a particularly salient species of tephritid fruit fly. Medfly has high invasive potential, as it can adapt to a relatively large range of climates and environments, and is known to have the capability to infest the fruits of over 300 species of plants (<span class="citation"><a href="#ref-sciarretta2018" role="doc-biblioref">Sciarretta et al.</a> (<a href="#ref-sciarretta2018" role="doc-biblioref">2018</a>)</span>). Recently, an incursion of Medfly in Adelaide, South Australia, prompted a large scale eradication effort. This comprised in part of hiring 350 special-purpose staff that set over 13,000 additional traps and collected over 350 tonnes of fruit. The scale of the response to this outbreak indicates the perceived economic significance of this species.</p>
+<p>Medfly are very hard to detect at low levels. As with other fruit fly species, monitoring is typically performed with the aid of traps fitted with chemical attractants. These traps are relatively ineffective. For example, one study from the Adelaide metro area trapping grid found that only 0.02% of flies were recaptured from a release of 38.8 million sterilised flies. If this is an accurate reflection of trap sensitivity, then very large populations may be undetectable for significant periods of time. Further, Medfly are known to disperse only small distances (<span class="citation"><a href="#ref-ms2007" role="doc-biblioref">Meats and Smallridge</a> (<a href="#ref-ms2007" role="doc-biblioref">2007</a>)</span>). This means that, if they are in a location that is not heavily monitored, they may evade detection for long periods.</p>
+</div>
+<div id="data" class="section level2" number="4.3">
+<h2><span class="header-section-number">4.3</span> Data</h2>
+<p>As mentioned above, I do not use real data to estimate parameters. Instead, I model a hypothetical situation. The situation is intended to simulate the conditions described in codes of practice for use of zero-catch criteria (see <span class="citation"><a href="#ref-supptraps" role="doc-biblioref">DPIPWE</a> (<a href="#ref-supptraps" role="doc-biblioref">2011</a>)</span>). The general situation is as follows: We assume that at least one fly has been detected; eradication measures have since begun and then ceased; and we now proceed with intensified monitoring, while whatever population that may exist is free to grow relatively unhindered. The goal of the analysis is to infer the probability of eradication for the incipient population, given that no flies are detected at any point in this period.</p>
+<p>It is preferable to specify a location, so that real weather data can be used to inform the model’s hyperparameters (see section <a href="case-study-mediterranean-fruit-fly.html#popn-size">4.4.1</a>). Therefore, it is assumed that the outbreak takes place in Adelaide. Adelaide is a key location for fruit fly outbreaks. Further, for Medfly, evidence from trap sensitivity studies is available from experiments performed in Adelaide, but no other Australian city.</p>
+<p>The zero-catch criterion is 12 weeks, or 28 days and one generation, whichever is longer (<span class="citation"><a href="#ref-meats2005" role="doc-biblioref">Meats and Clift</a> (<a href="#ref-meats2005" role="doc-biblioref">2005</a>)</span>). In a typical Australian summer, a Medfly generation takes 28-34 days (<span class="citation"><a href="#ref-dpirdwa" role="doc-biblioref">DPIRDWA</a> (<a href="#ref-dpirdwa" role="doc-biblioref">n.d.</a>)</span>). Therefore, the period I look at is over 12 weeks.<a href="#fn8" class="footnote-ref" id="fnref8"><sup>8</sup></a> I.e., in the terminology of chapter 3, we set <span class="math inline">\(T = 12\)</span>. To evaluate this criteria, we want to find the probability of eradication after <span class="math inline">\(T=12\)</span> weeks, i.e. <span class="math inline">\(\Pr(N_{12} = 0 \mid \mathbf y = \mathbf 0_{12})\)</span>.</p>
+<p>It is assumed that general surveillance traps are spaced in a <span class="math inline">\(400 \times 400\)</span> metre grid, year-round. We assume that a fly is caught at the centre of the grid (without loss of generality). Then, 16 <em>supplementary</em> traps are placed within a 200-metre radius of the location of the first detection (see figure <a href="case-study-mediterranean-fruit-fly.html#fig:trapgrid">4.1</a>). These traps are checked weekly for 6 weeks (<span class="math inline">\(t \in \{1, \ldots, 6\}\)</span>) before being removed. Following this, we continue to monitor with only the original general surveillance traps. It is assumed that no fly is caught at any point in this period. Pest free area status is reinstated after 12 weeks. After this, we continue to observe no fruit flies indefinitely.</p>
+<p>As mentioned previously, it is assumed that trap locations have fixed, known locations. In particular, we assume that monitoring is intensified for the first 6 weeks (<span class="math inline">\(t \in \{1, \ldots, 6\}\)</span>). By intensified monitoring, I mean that <strong>supplementary</strong> monitoring traps have been placed alongside the previously existing grid of <strong>general</strong> monitoring traps. More precisely, it is assumed that <strong>general</strong> surveillance traps are placed year-round in a 400 <span class="math inline">\(\times\)</span> 400 metre grid (DPIPWE, 2011, p. 50). The <strong>supplementary</strong> surveillance system consists of a set of 16 traps in a circular area, centred at the site of the first fly detection.<a href="#fn9" class="footnote-ref" id="fnref9"><sup>9</sup></a> See figure <a href="case-study-mediterranean-fruit-fly.html#fig:trapgrid">4.1</a>.</p>
+<p>It is assumed that the outbreak starts on November 1, 2020. The year 2020 is chosen rather than 2021, so that weather data is available for at least 1 year from the start of the monitoring period. (The time of writing is May 2022.) Data on historical daily temperature averages (the mean for each day) were obtained from the Bureau of Meteorology.</p>
+<div class="figure"><span style="display:block;" id="fig:trapgrid"></span>
+<img src="_main_files/figure-html/trapgrid-1.png" alt="Illustration of the hypothetical trapping grid. Grey circle represents 200m radius disc surrounding the site of the most recently detected Medfly specimen." width="672" />
+<p class="caption">
+Figure 4.1: Illustration of the hypothetical trapping grid. Grey circle represents 200m radius disc surrounding the site of the most recently detected Medfly specimen.
+</p>
+</div>
+</div>
+<div id="model" class="section level2" number="4.4">
+<h2><span class="header-section-number">4.4</span> Model</h2>
+<p>I now propose a model for the case discussed above. This discussion builds on chapter 3, where I outlined the model in broad generality. There, I discussed the model while leaving some key situation-specific hyperparameters and distributions unspecified. For example, the prior distribution on the initial population size <span class="math inline">\(N_1\)</span>, and the relationship between probability of capture given distance between fly and trap <span class="math inline">\(p(c \mid d)\)</span> were unspecified.<a href="#fn10" class="footnote-ref" id="fnref10"><sup>10</sup></a> Here, these gaps are filled. Hyperparameters and distributions are proposed and justified.</p>
+<p>As in the previous chapter, the model is broken into prior distributions and likelihood in the following way. Firstly, (1) The size of the population (number of individuals); (2) the locations of individuals and traps; and (3) the number of individuals caught in traps, conditional on (1) and (2). To structure the discussion, I discuss these elements in turn, beginning with prior distributions.</p>
+<p>Here, we are modelling the risk of an adverse event (namely an undetected pest invasion). In such cases, we might consider examining a worst-case scenario. In this case, this could be done by specifying prior distributions such that we assign high density to cases where (a) the growth rate is very close to zero, so that the fly population is capable of persisting at below-detectable levels indefinitely, or (b) flies are located far away from surveillance traps. Given these considerations, it should be trivial to identify worst-case scenarios where we can almost never be certain that flies are eradicated, given any length of time. However, such results are likely unreasonable, and do not accurately reflect our prior state of information. Nonetheless, I attempt to err on the side of pessimism about the ease at which fly populations can be detected, while nonetheless making the prior distribution as realistic as possible, given constraints on what is known about them.</p>
+<div id="popn-size" class="section level3" number="4.4.1">
+<h3><span class="header-section-number">4.4.1</span> Prior distribution on fly population size</h3>
+<p>In this case, <span class="math inline">\(N_1\)</span> is the first week after the most recent fly detection. I have chosen to set <span class="math inline">\(N_1 \sim \operatorname{Geometric}(1/20)\)</span>. This is chosen as it is a discrete distribution with right skew, and a relatively large amount of mass in the region of <span class="math inline">\(x = 0\)</span>, corresponding to the situation where flies are already eradicated (see figure <a href="case-study-mediterranean-fruit-fly.html#fig:priorinitsize">4.2</a>).<a href="#fn11" class="footnote-ref" id="fnref11"><sup>11</sup></a> The mean of the geometric distribution is chosen arbitrarily. The primary goal is to have a small population on average, with non-zero risk of a population size greater than 50. However, it is not clear, without prior domain knowledge, whether this distribution is empirically reasonable. Population counts do not exist for past outbreaks. This issue is discussed further in section <a href="case-study-mediterranean-fruit-fly.html#discussion">4.7</a>.</p>
+<div class="figure"><span style="display:block;" id="fig:priorinitsize"></span>
+<img src="_main_files/figure-html/priorinitsize-1.png" alt="Prior distribution of initial population size $N_1$." width="672" />
+<p class="caption">
+Figure 4.2: Prior distribution of initial population size <span class="math inline">\(N_1\)</span>.
+</p>
+</div>
+<p>As for <span class="math inline">\(N_t\)</span>, for <span class="math inline">\(t \in \{2, \ldots, T\}\)</span>, I assume the Poisson branching process with exponential growth, discussed in chapter 3. To recap, it is assumed that, for <span class="math inline">\(t \in \{2, \ldots, T\}\)</span>, <span class="math inline">\(N_t \mid \{ N_{t-1}, R_t \} \sim \mathrm{Poisson}(N_{t-1} e^{R_t})\)</span>.</p>
+<p>It is assumed, primarily for convenience, that <span class="math inline">\(R_t \sim \mathrm N(\mu_t, \sigma^2_t)\)</span>. Choices for the hyperparameters <span class="math inline">\(\{\mu_t\}_{t=2}^T\)</span> are informed by the results of <span class="citation"><a href="#ref-ks2019" role="doc-biblioref">Kean and Stringer</a> (<a href="#ref-ks2019" role="doc-biblioref">2019</a>)</span>. The authors transform observed captures <span class="math inline">\(C_t\)</span> as <span class="math inline">\(\ln (C_t / C_{t-1})\)</span>, and fit a simple model to the resulting values from field data on Medfly captures.<a href="#fn12" class="footnote-ref" id="fnref12"><sup>12</sup></a> In particular, they estimate the mean <em>daily</em> growth rate, conditional on mean daily temperature, for each day <span class="math inline">\(t\)</span>, to be
+<span class="math display">\[
+\mathrm E(R_t \mid \mathrm{Temp}_t) = \alpha \mathrm{Temp}_t^2 + \beta \mathrm{Temp}_t + \gamma,
+\]</span>
+where <span class="math inline">\(\alpha = -0.000386\)</span>, <span class="math inline">\(\beta = 0.0279\)</span>, and <span class="math inline">\(\gamma = -0.374\)</span>. To get the daily mean growth rates, observed daily temperatures are plugged into this formula. Then, weekly mean growth rates <span class="math inline">\(\mu_t\)</span>, are derived by summing over daily growth rates within each week. The dataset used by <span class="citation"><a href="#ref-ks2019" role="doc-biblioref">Kean and Stringer</a> (<a href="#ref-ks2019" role="doc-biblioref">2019</a>)</span> is small, consisting of only 24 observations. Ideally, we would quantify uncertainty about these estimates. However, this is difficult, as the authors do not provide data or an analysis of the variance of residuals for their model. I do not explore this further here, though it should be considered in real applications.</p>
+<p>The choice for <span class="math inline">\(\sigma^2_t\)</span> is necessarily more arbitrary than the choice for <span class="math inline">\(\mu_t\)</span>. As mentioned above, <span class="citation"><a href="#ref-ks2019" role="doc-biblioref">Kean and Stringer</a> (<a href="#ref-ks2019" role="doc-biblioref">2019</a>)</span> do not provide an analysis of the variance of residuals for their model. Therefore, it is difficult to meaningfully quantify prior beliefs about the variance of the growth rate. Increasing the variance increases the prior probability that populations die out, due to runs of “bad luck.” Therefore, smaller variances are more pessimistic. With this in mind, I have chosen to set the standard deviation for daily growth to <span class="math inline">\(\sigma_t = \sigma = 0.1\)</span>. In my view, this is roughly consistent with the plot provided by the authors (see figure <a href="case-study-mediterranean-fruit-fly.html#fig:ksplot">4.3</a>). However, as this choice is arbitrary, it should be treated with scepticism.</p>
+
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:ksplot"></span>
+<img src="references/ksplot.png" alt="Relationship between population increase \(\ln (C_t / C_{t-1})\) and mean daily temperature. Taken from Kean and Stringer (2019). The solid line is fit to field data (black points); the dashed line is fit to lab data (white points)." width="75%" />
+<p class="caption">
+Figure 4.3: Relationship between population increase <span class="math inline">\(\ln (C_t / C_{t-1})\)</span> and mean daily temperature. Taken from <span class="citation"><a href="#ref-ks2019" role="doc-biblioref">Kean and Stringer</a> (<a href="#ref-ks2019" role="doc-biblioref">2019</a>)</span>. The solid line is fit to field data (black points); the dashed line is fit to lab data (white points).
+</p>
+</div>
+</div>
+<div id="prior-distribution-on-fly-spatial-locations" class="section level3" number="4.4.2">
+<h3><span class="header-section-number">4.4.2</span> Prior distribution on fly spatial locations</h3>
+<p>As mentioned in the previous chapter, the model is spatial. This is because the likelihood of detection depends on distances between traps and individual flies. As in the previous chapter, prior distributions must be set for the location of the population centre, and for dispersals of individual flies from that centre.</p>
+<div id="population-location" class="section level4 unnumbered">
+<h4>Population location</h4>
+<p>The centre of the population is assumed to be located at the two-dimensional vector <span class="math inline">\(L_c\)</span>. I have set the prior on <span class="math inline">\(L_c\)</span> to be
+<span class="math display">\[
+L_c \sim \mathrm {Normal}_2 (\mathbf 0_2, 160^2 I_2),
+\]</span>
+where <span class="math inline">\(\mathrm{Normal}_2\)</span> is the bivariate normal distribution, <span class="math inline">\(\mathbf 0_2\)</span> is the two-dimensional zero vector and <span class="math inline">\(I_2\)</span> is the <span class="math inline">\(2 \times 2\)</span> identity matrix. This prior reflects a prior belief that the centre of the population is highly likely to be close to the centre of the grid, where a fly was detected most recently (we suppose). E.g., we believe that there is a 95% chance that the centre of the population is within <span class="math inline">\(1.96 \cdot 160 \approx 320\)</span> metres of the centre of the grid.<a href="#fn13" class="footnote-ref" id="fnref13"><sup>13</sup></a> This makes sense, as the setting of supplementary traps close to the centre, as is standard, belies a prior belief that other flies are likely to be located in the vicinity of the first capture.</p>
+</div>
+<div id="individual-fly-locations" class="section level4 unnumbered">
+<h4>Individual fly locations</h4>
+<p>Let <span class="math inline">\(L_{i, t}\)</span> denote the location of fly <span class="math inline">\(i\)</span> at time <span class="math inline">\(t\)</span>, as in the previous chapter. I assign this quantity the prior distribution <span class="math display">\[L_{i, t} \mid L_c \sim \mathrm {Normal}_2 (L_c, 12.5^2 I_2),\]</span> where the notation is defined as in the previous section above. The variance is chosen so that ~95% of flies are within 30 metres of the population centre. Here, 30 metres is chosen arbitrarily. It reflects a belief that flies typically do not disperse very far. This is a pessimistic (“worst-case”) assumption. When flies are spread further from their population centre, it is more likely that at least one is close to a trap. As such, large populations of flies are less likely to go undetected.</p>
+<p>The normal distribution is chosen for a few reasons. Firstly, it is conceptually simple and intuitive to parameterise. This helps with expert elicitation. Secondly, the location has a simple marginal distribution, thanks to the fact that a normally distributed random variable with a normally distributed mean is itself normal.<a href="#fn14" class="footnote-ref" id="fnref14"><sup>14</sup></a> Thirdly, the distance between a normal random variable and its mean has a known distribution. In particular, if <span class="math inline">\(X \sim \mathrm{Normal}_2(\pmb \mu, \sigma^2 I_2)\)</span>, then <span class="math inline">\(\lVert X - \pmb \mu \rVert^2 \sim \Gamma(1, \sigma^2/2)\)</span>, where <span class="math inline">\(\Gamma(a, b)\)</span> is the gamma distribution with shape <span class="math inline">\(a\)</span> and scale <span class="math inline">\(b\)</span>. In this case, or any fly <span class="math inline">\(i\)</span> we have <span class="math inline">\(\lVert L_{i,t} - L_c \rVert \mid L_c \sim \Gamma(1, 12.5^2/2)\)</span>. Similarly, the <em>marginal</em> squared distance between fly <span class="math inline">\(i\)</span> and the origin is <span class="math inline">\(\lVert L_{i, t} \rVert^2 \sim \Gamma(1, (12.5^2 + 160^2) / 2)\)</span>. Knowing this allows us to easily compare and calibrate the distribution against experimental results. This, in turn, makes elicitation of prior distributions simpler and more intuitive. (It allows us to visualise, for example, the distribution of distances to the origin, as well as to the population centre.)</p>
+<p>There is evidence suggesting that Medfly dispersal distance is in fact distributed as a power law (see, e.g., <span class="citation"><a href="#ref-meats2005" role="doc-biblioref">Meats and Clift</a> (<a href="#ref-meats2005" role="doc-biblioref">2005</a>)</span> and <span class="citation"><a href="#ref-plant1991" role="doc-biblioref">Plant and Cunningham</a> (<a href="#ref-plant1991" role="doc-biblioref">1991</a>)</span>). In particular, the distributions estimated by these authors have far heavier tails than the distribution proposed above. As mentioned above, the normal prior implies that squared dispersal distances are gamma random variables, the square roots of which are Nakagami distributed. The Nakagami distribution, parameterised as above, has a far thinner right tail than a power law. As such, the present prior distributions may heavily underestimate our best guess about the dispersal distances of individual flies. In further work, we might investigate whether this has a large effect on the results through sensitivity analysis (see section <a href="case-study-mediterranean-fruit-fly.html#discussion">4.7</a>).</p>
+<p>It may also be worth noting that, in real cases, the assumption of zero mean and spherical covariance matrix (<span class="math inline">\(\sigma^2 I_2\)</span>) may not be reasonable. Dispersals may have non-zero mean (due to wind direction) and the distance and/or direction of individual dispersals may be correlated.<a href="#fn15" class="footnote-ref" id="fnref15"><sup>15</sup></a> Further, it may not be reasonable to assume, as I have done here, that the fly population cannot move across time. Ideally, the importance of these assumptions should be checked based on the case at hand (e.g. properties of the situation or species in question). Extending the model in various ways to meet these problems is beyond the scope of this work, but warrants further investigation.</p>
+</div>
+</div>
+<div id="likelihood" class="section level3" number="4.4.3">
+<h3><span class="header-section-number">4.4.3</span> Likelihood</h3>
+<p>The likelihood is the distribution of <span class="math inline">\(y_t \mid \{N_t, \mathbf L_t\}\)</span>. This is specified as in the previous chapter. All that we need to specify here is the probability of capture as a function of distance. This function tells us how probable it is that fly <span class="math inline">\(i\)</span> is captured in trap <span class="math inline">\(k\)</span> at time <span class="math inline">\(t\)</span> conditional on <span class="math inline">\(\lVert L_{i, t} - L_k \rVert\)</span>, where, <span class="math inline">\(L_{i, t}\)</span> is the location of fly <span class="math inline">\(i\)</span> at time <span class="math inline">\(t\)</span>, and <span class="math inline">\(L_k\)</span> is the location of trap <span class="math inline">\(k\)</span>. Because the trap locations are fixed and known, the <span class="math inline">\(N_t \times K\)</span> pair-wise distances between flies and traps are known, conditional on <span class="math inline">\(\{N_t, \mathbf L_t\}\)</span>.</p>
+<p>Here, the likelihood is structured as in chapter 3. The only part of the model unspecified there is the probability of capture given distance between fly and trap. I write this as <span class="math inline">\(p(c \mid d)\)</span>, where <span class="math inline">\(c\)</span> is the event that a fly is captured, and <span class="math inline">\(d\)</span> is the distance between fly and trap. Since the trap locations are fixed and known (we assume), then, conditional on the locations of flies, <span class="math inline">\(p(c \mid d)\)</span> tells the probability that the fly is captured in any trap <span class="math inline">\(k\)</span> as a function of distance <span class="math inline">\(d = \lVert L_{i} - L_k \rVert\)</span>, where <span class="math inline">\(L_i\)</span> is the location of the fly, and <span class="math inline">\(L_k\)</span> is the location of the trap.</p>
+<p>As mentioned previously, results of trap sensitivity studies are used to inform the likelihood of capture. In particular, I use the results of <span class="citation"><a href="#ref-meats2005" role="doc-biblioref">Meats and Clift</a> (<a href="#ref-meats2005" role="doc-biblioref">2005</a>)</span>. These authors estimate that the probability of capture for any given fly in any given trap is given by the power law
+<span class="math display">\[
+p(c \mid d) = \begin{cases}ad^{-b}, &amp; d&gt;1 \\ a &amp; 0 \geq d \geq 1.\end{cases}
+\]</span>
+Here, <span class="math inline">\(a = 0.2351055\)</span>, <span class="math inline">\(b = 1.37\)</span>, and <span class="math inline">\(d\)</span> is the distance between the fly and the trap at the start of the period.<a href="#fn16" class="footnote-ref" id="fnref16"><sup>16</sup></a> Thresholding is introduced because (a) the function does not yield valid probabilities for small enough <span class="math inline">\(d\)</span>. This function is used for convenience as it is provided by the authors of the study, and data is not publicly accessible. In the context of a more detailed analysis, it may be beneficial to consider uncertainty in the probability of capture by specifying hyperprior distributions for <span class="math inline">\(a\)</span> and <span class="math inline">\(b\)</span>. I do not explore this further here, as the model is intended to be illustrative only.</p>
+<p>Finally, an adjustment is made to <span class="math inline">\(p(c \mid d)\)</span>, before the formulae from the previous chapter are used. In <span class="math inline">\(p(c \mid d)\)</span> we have the probability of capture over the lifetime of the individual. However, for any given week, we wish to know the probability of reporting capturing a fly over that week. It is assumed that the lifetime is roughly 4 weeks. The correction is reported in detail in the appendix.</p>
+</div>
+<div id="full-statement-of-the-model" class="section level3" number="4.4.4">
+<h3><span class="header-section-number">4.4.4</span> Full statement of the model</h3>
+<p>The model is summarised in the following table.</p>
+<p><span class="math display">\[
+\renewcommand{\baselinestretch}{1}\normalsize
+\begin{aligned}
+&amp;\textbf{Population size prior} \\
+&amp;\text{Initial no. of flies:} &amp;&amp; N_1  \sim \mathrm{Geometric}(1/20) \\
+&amp; \text{Number of flies:}~ &amp;&amp; N_t \mid N_{t-1}  \sim \mathrm{Poisson}\{ N_{t-1} \exp(R_t) \} \text{, where} \\ &amp; &amp;&amp; R_t \sim \mathrm{Normal}(\mu_t, 0.07^2), &amp; t \in \{2, \ldots, T \} \\
+\\
+&amp;\textbf{Location prior} \\
+&amp; \text{Population location:} ~ &amp;&amp; L_c \sim \mathrm{Normal_2}(\mathbf 0_2, 160^2 I_2) \\
+&amp; \text{Fly locations:}~ &amp;&amp; L_{i,t} \mid L_c \sim \mathrm{Normal}_2(L_c, 12.5^2 I_2) &amp; i \in \{1, \ldots, N_t\}, \\
+  &amp;&amp;&amp;&amp; t \in \{1, \ldots, T\}\\
+\\
+&amp;\textbf{Likelihood} \\
+&amp; \text{Number of traps:}~ &amp;&amp; K \in \mathbb N_+ \\
+&amp; \text{Trap locations:}~ &amp;&amp; L_k^\text{trap} \in \mathbb R &amp; k \in \{1, \ldots, K\} \\
+&amp; \text{Dist. btw. fly } i \text{ and trap } k \text{ at time } t \text{:} &amp;&amp; \delta_{i,k,t} := \lVert L_k^\text{trap} - L_{i,t} \rVert &amp; i \in \{1, \ldots, N_t\}, \\
+  &amp;&amp;&amp;&amp; k \in \{1, \ldots, K\}, \\
+  &amp;&amp;&amp;&amp; t \in \{1, \ldots, T\}\\
+&amp; \text{Prob. fly } i \text{ captured in trap }k \text{ at } t: &amp;&amp; p(c \mid \delta_{i,k,t}) = \begin{cases}0.235 \cdot \delta_{i,k,t}^{-1.37}, &amp; \delta_{i,k,t} &gt; 1 \\ 0.235 &amp; \delta_{i,k,t} \in [0,1],\end{cases} &amp; i \in \{1, \ldots, N_t\}, \\
+  &amp;&amp;&amp;&amp; k \in \{1, \ldots, K\}, \\
+  &amp;&amp;&amp;&amp; t \in \{1, \ldots, T\}\\
+&amp; \text{Individ. cap. prob.:} &amp;&amp; p_{i, t} = 1 - \prod_{k=1}^K (1 - p(c \mid \delta_{i,k,t})), &amp; i \in \{1, \ldots, N_t\}, \\
+  &amp;&amp;&amp;&amp; t \in \{1, \ldots, T\} \\
+&amp; \text{Aggregate cap. prob.:} &amp;&amp; p_t = 1 - \prod_{i=1}^{N_t} (1 - p_{i,t}) &amp; t \in \{1, \ldots, T\} \\
+&amp;\text{Detection:}~ &amp;&amp; y_t \mid \{ \mathbf L_t, N_t \} \sim \operatorname{Bernoulli}(p_t), &amp; t \in \{1, \ldots, T\} \\
+  &amp;&amp;&amp; \mathbf y := [y_t]_{t=1}^T \\ \\
+&amp;\textbf{Posterior distribution of interest} \\
+&amp;\text{Population size given no detection:} &amp;&amp; N_t \mid \mathbf y = \mathbf 0_t &amp; t \in \{1, \ldots, T\}
+\end{aligned}
+\renewcommand{\baselinestretch}{1}\normalsize
+\]</span></p>
+</div>
+</div>
+<div id="sampling" class="section level2" number="4.5">
+<h2><span class="header-section-number">4.5</span> Sampling</h2>
+<p>Inference is performed by sampling from the posterior distribution. Recall that the goal of the model is to (a) evaluate, and (b) propose, zero-catch criteria for Medfly. These are minimum lengths of time over which no flies are detected, before which we can infer and declare eradication. With respect to (a), the key quantity of interest is <span class="math inline">\(\Pr(N_t = 0 \mid \mathbf y = \mathbf 0_t)\)</span>, where <span class="math inline">\(t\)</span> is the existing zero-catch criteria. In plain English, this is the probability that flies are eradicated, given that they haven’t been detected after <span class="math inline">\(t\)</span> weeks of monitoring. With respect to (b), the key quantity of interest is the smallest <span class="math inline">\(t\)</span> such that <span class="math inline">\(\Pr(N_t = 0 \mid \mathbf y = \mathbf 0_t) &gt; 1 - \alpha\)</span>, where <span class="math inline">\(\alpha \in [0, 1]\)</span> represents the decision-maker’s degree of risk tolerance.</p>
+<p>As such, we need a sampling algorithm that can give us draws of <span class="math inline">\(N_t \mid \mathbf y = \mathbf 0_t\)</span>, for any cutoff <span class="math inline">\(t\)</span>. Note that this is distinct from the distribution of <span class="math inline">\(N_t \mid \mathbf y = \mathbf 0_T\)</span>, where <span class="math inline">\(t&lt;T\)</span>. At time <span class="math inline">\(t\)</span>, we do not know that we will not get another detection up to time <span class="math inline">\(T\)</span>. Rather, we only know that we have not detected any flies yet <strong>up to now</strong> (i.e. time <span class="math inline">\(t\)</span>). Therefore, conditioning on the event <span class="math inline">\(\mathbf y = \mathbf 0_T\)</span> means that we condition on information not yet available to us. Note, however, that the event where <span class="math inline">\(\mathbf y = \mathbf 0 _T\)</span> is a <strong>subset</strong> of the event where <span class="math inline">\(\mathbf y = \mathbf 0_t\)</span>. Observing no detections to time <span class="math inline">\(T\)</span> logically implies that we did not observe any detections to time <span class="math inline">\(t\)</span> (assuming <span class="math inline">\(t &lt; T\)</span>). But the converse is false.</p>
+<p>There is a key difficulty with sampling with such methods for this case. This model is <em>agent-based</em>, insofar as the individual properties of a random number of individuals (agents) are explicitly represented. In this case, at any time <span class="math inline">\(t\)</span>, there is a location <span class="math inline">\(L_{i,t}\)</span> for each of <span class="math inline">\(N_t\)</span> flies. Since <span class="math inline">\(N_t\)</span> is itself unknown, this means that the number of parameters (namely the number of <span class="math inline">\(L_{i, t}\)</span> terms) is unknown.<a href="#fn17" class="footnote-ref" id="fnref17"><sup>17</sup></a> As mentioned in chapter 2, this introduces a difficulty, as standard Markov chain Monte Carlo techniques, such as basic Metropolis-Hastings, fail when this is the case.</p>
+<p>To get around this problem, I have used a simple extension of the basic ABC rejection sampler (see chapter 2). This sampler gives exact, independent, pseudorandom draws from the distribution of <span class="math inline">\(N_t \mid \mathbf y = \mathbf 0_t\)</span>, for any <span class="math inline">\(t \in \mathbb N_+\)</span>. This sampler is intuitive, simple to implement, and relatively efficient for this problem (for the case discussed here, roughly 25% of samples are <em>not</em> rejected). However, other methods exist that may be worth exploring, for analogous problems where the rejection rate of ABC is higher.<a href="#fn18" class="footnote-ref" id="fnref18"><sup>18</sup></a></p>
+<div id="sketch-of-the-algorithm" class="section level3" number="4.5.1">
+<h3><span class="header-section-number">4.5.1</span> Sketch of the algorithm</h3>
+<p>Here I present an algorithm for drawing <em>at least</em> <span class="math inline">\(S\)</span> independent samples from the distribution of <span class="math inline">\(N_t \mid \mathbf y = \mathbf 0_t\)</span>, for all <span class="math inline">\(t\)</span> up to some arbitrary cutoff <span class="math inline">\(T\)</span>. Note that this quantity is distinct from <span class="math inline">\(N_t \mid \mathbf y = \mathbf 0_T\)</span>. At time <span class="math inline">\(t\)</span>, we do not know that we will not get another detection up to time <span class="math inline">\(T\)</span>. We only know that we have not detected any flies yet <strong>up to now</strong> (i.e. time <span class="math inline">\(t\)</span>).</p>
+<ul>
+<li>Set a number of time periods (i.e. weeks) <span class="math inline">\(T\)</span> that is arbitrarily large, so that it covers all time points of interest.</li>
+<li>For each sample <span class="math inline">\(j\)</span>:
+<ul>
+<li>Draw the number of flies and their locations for all time points from their prior distributions.</li>
+<li>Draw an indicator variable determining whether a fly is captured for each time point <span class="math inline">\(\mathbf y = \{y_t\}_{t=1}^T\)</span>.</li>
+<li>Store the first (smallest) <span class="math inline">\(t\)</span> such that <span class="math inline">\(y_t = 1\)</span>. Call this quantity <span class="math inline">\(\tau_j\)</span>. If <span class="math inline">\(\mathbf y = \mathbf 0_T\)</span>, set <span class="math inline">\(\tau_j = \infty\)</span>.</li>
+</ul></li>
+<li>Stop when the number of samples with <span class="math inline">\(\tau_j = \infty\)</span> is <span class="math inline">\(S\)</span>.</li>
+</ul>
+<p>For any number of weeks <span class="math inline">\(t\)</span>, we then extract the subset of draws such that <span class="math inline">\(\tau_j &gt; t\)</span>. This subset is a set of independent posterior draws from <span class="math inline">\(N_t \mid \mathbf y = \mathbf 0_t\)</span>. Depending on how often we observe <span class="math inline">\(\tau_j = \infty\)</span>, we may end up with a much larger number of samples than <span class="math inline">\(S\)</span>. But we end up with exactly <span class="math inline">\(S\)</span> samples such that <span class="math inline">\(\tau_j &gt; \infty\)</span>, and therefore <span class="math inline">\(S\)</span> draws of <span class="math inline">\(N_T \mid \{y_t\}_{t=1}^T = \mathbf 0_T\)</span>, where <span class="math inline">\(T\)</span> is the final time point we consider.</p>
+<p>Why does this algorithm work? It may help to consider the simple ABC rejection sampler for <span class="math inline">\(N_T \mid \mathbf y = \mathbf 0_T\)</span>, for some <span class="math inline">\(T \in \mathbb N_+\)</span>. This algorithm works by (1) drawing <span class="math inline">\(\Theta = \{N_i, \mathbf L_t\}_{t=1}^T\)</span> from the joint prior distribution; then (2) drawing a vector <span class="math inline">\(\mathbf y = [y_t]_{t=1}^T\)</span> conditional on <span class="math inline">\(\Theta\)</span>; then (3) rejecting the sample if <span class="math inline">\(\mathbf y \neq \mathbf 0_T\)</span>, and keeping it if <span class="math inline">\(\mathbf y = \mathbf 0_T\)</span>. Here, we are getting independent draws from <span class="math inline">\(p(\Theta \mid \mathbf y = \mathbf 0_T)\)</span> by taking draws from <span class="math inline">\(p(\Theta, \mathbf y)\)</span>, and extracting the subset of draws for which <span class="math inline">\(\mathbf y = \mathbf 0_T\)</span>.</p>
+<p>Now note that <span class="math inline">\(y = \mathbf 0_t\)</span> if and only if the first detection of a fly occurs after time <span class="math inline">\(t\)</span>. In other words, these are the same event. Denote <span class="math inline">\(\tau\)</span> as the time of the first detection. Then, the event that the first detection is after <span class="math inline">\(t\)</span> is <span class="math inline">\(\{\tau &gt; t\}\)</span>. It follows trivially that
+<span class="math display">\[
+\Pr(N_t = n \mid \mathbf y = \mathbf 0_t) = \Pr(N_t = n \mid \mathbf \tau &gt; t).
+\]</span>
+The algorithm proposed above gives us draws from <span class="math inline">\(N_t \mid \tau &gt; T\)</span>, for any <span class="math inline">\(t \in \mathbf N_+\)</span>. By extension, it gives us draws from the posterior <span class="math inline">\(\mathbf N_t \mid \mathbf y = \mathbf 0_t\)</span>.</p>
+</div>
+<div id="sampling-results" class="section level3" number="4.5.2">
+<h3><span class="header-section-number">4.5.2</span> Sampling results</h3>
+<p>Here, the number of time points chosen was <span class="math inline">\(T=36\)</span> weeks. This was chosen to include the first week such that the posterior probability of eradication was greater than 0.95 (namely <span class="math inline">\(t = 35\)</span>). This was discovered through trial and error. At least <span class="math inline">\(10{,}000\)</span> samples were taken for each $t {1, , 36}, with exactly <span class="math inline">\(10{,}000\)</span> samples for the case where <span class="math inline">\(t = 36\)</span>. The acceptance rate for sampling was approximately 0.25. This is a relatively high level of acceptance, most likely due to the low likelihood of captures, across most of the high prior density region of the model space.</p>
+</div>
+</div>
+<div id="results" class="section level2" number="4.6">
+<h2><span class="header-section-number">4.6</span> Results</h2>
+<p>Results are shown in <a href="case-study-mediterranean-fruit-fly.html#fig:postfig">4.4</a>. this is a plot describing how the probability of eradication changes over time, starting from November 1, the beginning of the monitoring period. The blue line shows the <strong>prior</strong> probability of eradication by date. This line is strictly increasing, because eradication is an absorbing state for the population. I.e., once the population is eradicated, it can never come back.<a href="#fn19" class="footnote-ref" id="fnref19"><sup>19</sup></a> This follows from the assumption of multiplicative growth. The blue line moves up quickly at the beginning, presumably because populations die out more often when they are still small. It moves up again at the end (i.e. to the right of the plot) because the mean growth rate becomes negative in autumn and winter (see figure <a href="case-study-mediterranean-fruit-fly.html#fig:ksplot">4.3</a>). The red line shows the <strong>posterior</strong> probability of eradication by date. At each week <span class="math inline">\(t\)</span>, the red line shows the probability that the population is eradicated, conditional on no detections up to time <span class="math inline">\(t\)</span> (i.e., <span class="math inline">\(\Pr(N_t = 0 \mid \mathbf y = \mathbf 0_t)\)</span>). As we continually fail to detect any flies, our confidence that the flies are eradicated increases, and the red line diverges upward and away from the blue line.</p>
+<p>Under the model, the posterior probability of extinction after <span class="math inline">\(T=12\)</span> weeks is approximately 0.443.<a href="#fn20" class="footnote-ref" id="fnref20"><sup>20</sup></a> The first week for which the posterior probability of eradication is greater than 95% is after 35 weeks, much later than the PFA date.</p>
+<div class="figure" style="text-align: center"><span style="display:block;" id="fig:postfig"></span>
+<img src="results/pfa_criteria_evaluation/prior_vs_post_plot.png" alt="Prior vs. posterior probability of eradication over 36 weeks." width="100%" />
+<p class="caption">
+Figure 4.4: Prior vs. posterior probability of eradication over 36 weeks.
+</p>
+</div>
+<p>This model is far more cautious than the zero-catch criteria rule of thumb. On one hand, the model recommends that, if the regulator wants the posterior probability of eradication at the time of PFA status reinstatement to be greater than 95%, they should wait 35 weeks. This is almost three times longer than the existing “rule of thumb” recommendation of 12 weeks. On the other hand, under this model, the posterior probability that flies are eradicated after 12 weeks is less than half.</p>
+<p>The results of this model, to the extent that they can be trusted, are highly significant. Suppose we were to infer eradication too early, when a sustainable population still exists. Then, there is a significant chance that the fly population still exists, and will become established. Such a population may stay at undetectable levels for a long period of time, while it spreads and establishes.</p>
+</div>
+<div id="discussion" class="section level2" number="4.7">
+<h2><span class="header-section-number">4.7</span> Discussion</h2>
+<p>The results above are striking. It is concerning that the model’s predictions are so far out of step with the status quo. However, there are varied and significant reasons to doubt the veracity of the results. In this section, I discuss some of these reasons. In particular, I discuss four potential flaws of the model. These are (1) pessimism about trap sensitivity; (2) pessimism about the growth rates of fly populations; (3) neglect of alternative sources of information about pest presence/absence; and (4) arbitrariness of the prior distributions for important parameters. In the course of the discussion, I propose model validation techniques that could subject the model to scrutiny, thereby helping us to understand the significance of these potential flaws. However, due to constraints of time and scope, I do not perform model validation checks here.</p>
+<p>Model validation is difficult for this problem. One of the most useful forms of validation for Bayesian models is the comparison of predictions with unseen data. However, in this case, the parameter of interest is population size. This is never observable in real outbreaks, as it is not possible to obtain censuses of flies. As such, for the most part, available model validation techniques are restricted to analysis of the sensitivity of results to the specification of the model’s prior distributions and likelihood.</p>
+<div id="pessimism-about-trap-sensitivity" class="section level3" number="4.7.1">
+<h3><span class="header-section-number">4.7.1</span> Pessimism about trap sensitivity</h3>
+<p>The first potential flaw is pessimism about trap sensitivity. There is a significant body of release-recapture literature for Medfly (see <span class="citation"><a href="#ref-andress2013" role="doc-biblioref">Andress et al.</a> (<a href="#ref-andress2013" role="doc-biblioref">2013</a>)</span> for a thorough review). This literature spans across continents, between the USA, Australia, and Europe. However, for this case study, I have referenced only <span class="citation"><a href="#ref-ms2007" role="doc-biblioref">Meats and Smallridge</a> (<a href="#ref-ms2007" role="doc-biblioref">2007</a>)</span>. This is because it is the only study for Medfly that has been performed in Australia. However, and importantly, the estimated sensitivity of traps seems to be generally much lower than we typically see in other studies. It is not clear whether this is due to (a) some feature of the methodology or materials used, such as low quality sterilised flies; or (b) the efficacy of traps used in Australia. Insofar as the answer is (a) rather than (b), the model may heavily underestimate the sensitivity of traps. When traps are insensitive, the probability of capture decreases. As such, the amount of information carried by a failure to capture (detect) flies also decreases. This will cause the posterior probability of eradication to be lower than it would otherwise. Without further studies, we may wish to perform a meta-analysis across studies to derive a more plausible prior distribution of capture probabilities.</p>
+</div>
+<div id="pessimism-about-growth-rates" class="section level3" number="4.7.2">
+<h3><span class="header-section-number">4.7.2</span> Pessimism about growth rates</h3>
+<p>We may also view our model of Medfly growth as excessively pessimistic. Recall that our model of growth is based on modelling results from <span class="citation"><a href="#ref-ks2019" role="doc-biblioref">Kean and Stringer</a> (<a href="#ref-ks2019" role="doc-biblioref">2019</a>)</span>. As figure <a href="case-study-mediterranean-fruit-fly.html#fig:ksplot">4.3</a> shows, the growth rate is estimated to be fairly close to zero at typical temperatures. This means that, under the prior distribution, Medfly populations tend to grow or decay relatively slowly. As a consequence, the model implicitly gives a high prior probability to cases where a Medfly population is small but stable (undetectable). When the population is small but stable, it is far more likely that it will persist undetected for many generations. Fortunately, the growth rate is its own “module” in this model, and as such can be subjected to independent scrutiny. In real cases, significant attention should be paid to the plausibility of the growth model. In particular, for the case of Medfly, we might consider the use of black-box simulation models of Medfly population processes, such as the MED-FOES model of <span class="citation"><a href="#ref-manoukis2014" role="doc-biblioref">Manoukis and Hoffman</a> (<a href="#ref-manoukis2014" role="doc-biblioref">2014</a>)</span>. Fortunately, the sampling algorithm used above is sufficiently general so that exact posterior inference can be performed for almost any model of growth.</p>
+</div>
+<div id="neglect-of-alternative-sources-of-information" class="section level3" number="4.7.3">
+<h3><span class="header-section-number">4.7.3</span> Neglect of alternative sources of information</h3>
+<p>An important latent assumption of the model under discussion is that there exists only one mechanism for detecting flies. Here, we have assumed that the only way that flies can be detected is by the use of “set and forget” monitoring traps. However, when fruit fly outbreaks occur, coordinated efforts are made to inspect fruit for fly larvae (<span class="citation"><a href="#ref-pirsa" role="doc-biblioref">PIRSA</a> (<a href="#ref-pirsa" role="doc-biblioref">2017</a>)</span>). Further, members of the public are educated in fruit fly detection (Ibid.). As such, there are several pathways through which an incipient population of flies may be discovered. Presumably, the zero-catch criteria are designed assuming that no flies are detected through <em>any</em> pathway. The fact that flies have not been detected by larval searches or other means should help to confirm the hypothesis that flies have been eradicated. As such, neglecting this information may lead to an excessively cautious posterior probability of eradication.</p>
+<p>How might we test whether this causes a serious issue? Information about differences in detection rates between trapping systems and other pathways is not publicly available. To check the effect of incorporating negative larval searches into the model, we might perform sensitivity analysis. In particular, we might incorporate a Bernoulli random variable at each time <span class="math inline">\(t\)</span>, indicating whether a fly has been detected by larval search. Then we might compare posterior probabilities of eradication, under a range of plausible sensitivities, and the assumption that flies are not detected by larval search (or otherwise).</p>
+</div>
+<div id="arbitrariness-of-prior-distributions" class="section level3" number="4.7.4">
+<h3><span class="header-section-number">4.7.4</span> Arbitrariness of prior distributions</h3>
+<p>The final potential flaw of the model is that some key hyperparameters are specified arbitrarily. In particular, there is arbitrariness in (a) the variance of growth rate <span class="math inline">\(R_t\)</span>; (b) the distribution of dispersals; (c) the distribution of the initial population size <span class="math inline">\(N_1\)</span>. In the case of growth rates, low variance can cause stability in the population. This can mean that fly populations can stay stable at undetectable levels for long periods of time. In the case of distributions, a low mean dispersal distance means that flies are less likely to spread out from the population centre. Therefore, it is less likely that at least one fly is close to a trap. Finally, in the case of the initial population size, large populations will grow more quickly in additive terms. As such, they are more likely to be detected. If the initial population size is unreasonably small under the prior, the posterior will be excessively cautious.</p>
+<p>In principle, it should be possible to learn the distributions of the growth rates and dispersals from data. This would be advisable for serious approaches to this problem in practice. On the other hand, it is unlikely that the distribution of the population size <span class="math inline">\(N_1\)</span> can be calibrated empirically. Sensitivity analysis might be performed by checking the results under a range of plausible prior distributions on <span class="math inline">\(N_1\)</span>. This would determine whether the model is sensitive to changes in our prior beliefs about the size of the initial population. I do not perform such an analysis here, as the present model is primarily illustrative, and this is beyond the scope of the work.</p>
+</div>
+</div>
+<div id="conclusion-2" class="section level2" number="4.8">
+<h2><span class="header-section-number">4.8</span> Conclusion</h2>
+<p>In this chapter, I explored a simulated scenario involving an outbreak of a particularly salient species of tephritid fruit fly, the Medfly. This served as a “toy” case to illustrate use of the model. However, the model is relatively plausible as a depiction of the scenario in question, which is relatively generic in nature. As such, the results may have significant impact on policy. In particular, I found that the posterior probability of eradication is low at the zero-catch criteria date. This gives us reason to doubt that the zero-catch criteria are sufficiently long to ensure a high degree of certainty about eradication.</p>
+
+</div>
+</div>
+<h3>References</h3>
+<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="ref-andress2013" class="csl-entry">
+Andress, E., Walters, I., Toro, M. del, Shelly, T., 2013. Release-recapture of sterile male mediterranean fruit flies (diptera: Tephritidae) in southern california.
+</div>
+<div id="ref-baker1986" class="csl-entry">
+Baker, P., Chan, A., Zavala, M.J., 1986. Dispersal and orientation of sterile ceratitis capitata and anastrepha ludens (tephritidae) in chiapas, mexico. Journal of applied ecology 27–38.
+</div>
+<div id="ref-supptraps" class="csl-entry">
+DPIPWE, 2011. Review of import requirements for fruit fly host produce from mainland australia. Department of Primary Industries, Parks, Water,; Environment, Tasmania.
+</div>
+<div id="ref-dpirdwa" class="csl-entry">
+DPIRDWA, n.d. Mediterranean fruit fly life cycle and biology. Department of Primary Industries; Regional Development, Western Australia.
+</div>
+<div id="ref-green1995" class="csl-entry">
+Green, P.J., 1995. Reversible jump markov chain monte carlo computation and bayesian model determination. Biometrika 82, 711–732.
+</div>
+<div id="ref-ks2019" class="csl-entry">
+Kean, J.M., Stringer, L.D., 2019. Optimising the seasonal deployment of surveillance traps for detection of incipient pest invasions. Crop Protection 123, 36–44.
+</div>
+<div id="ref-keith2004" class="csl-entry">
+Keith, J.M., Kroese, D.P., Bryant, D., 2004. A generalized markov sampler. Methodology and Computing in Applied Probability 6, 29–53.
+</div>
+<div id="ref-manoukis2014" class="csl-entry">
+Manoukis, N.C., Hoffman, K., 2014. An agent-based simulation of extirpation of ceratitis capitata applied to invasions in california. Journal of pest science 87, 39–51.
+</div>
+<div id="ref-meats2005" class="csl-entry">
+Meats, A., Clift, A., 2005. Zero catch criteria for declaring eradication of tephritid fruit flies: The probabilities. Australian Journal of Experimental Agriculture 45, 1335–1340.
+</div>
+<div id="ref-ms2007" class="csl-entry">
+Meats, A., Smallridge, C., 2007. Short-and long-range dispersal of medfly, ceratitis capitata (dipt., Tephritidae), and its invasive potential. Journal of Applied Entomology 131, 518–523.
+</div>
+<div id="ref-pirsa" class="csl-entry">
+PIRSA, 2017. Fifty years of fruit fly eradication in south australia: 1947–1997. Department of Primary Industries; Regions, South Australia.
+</div>
+<div id="ref-plant1991" class="csl-entry">
+Plant, R.E., Cunningham, R.T., 1991. Analyses of the dispersal of sterile mediterranean fruit flies (diptera: Tephritidae) released from a point source. Environmental Entomology 20, 1493–1503.
+</div>
+<div id="ref-richardson1997bayesian" class="csl-entry">
+Richardson, S., Green, P.J., 1997. On bayesian analysis of mixtures with an unknown number of components (with discussion). Journal of the Royal Statistical Society: series B (statistical methodology) 59, 731–792.
+</div>
+<div id="ref-sciarretta2018" class="csl-entry">
+Sciarretta, A., Tabilio, M.R., Lampazzi, E., Ceccaroli, C., Colacci, M., Trematerra, P., 2018. Analysis of the mediterranean fruit fly [ceratitis capitata (wiedemann)] spatio-temporal distribution in relation to sex and female mating status for precision IPM. PloS one 13, e0195097.
+</div>
+</div>
+<div class="footnotes">
+<hr />
+<ol start="8">
+<li id="fn8"><p>See also <span class="citation"><a href="#ref-pirsa" role="doc-biblioref">PIRSA</a> (<a href="#ref-pirsa" role="doc-biblioref">2017</a>)</span>, who state that the suspension period is 12 weeks in an Adelaide summer.<a href="case-study-mediterranean-fruit-fly.html#fnref8" class="footnote-back">↩︎</a></p></li>
+<li id="fn9"><p>It is typical to wait until at least 2 flies have been detected near each other for an outbreak to be declared. To illustrate the method in a simplified setting, I suppose that one fly detection is sufficient.<a href="case-study-mediterranean-fruit-fly.html#fnref9" class="footnote-back">↩︎</a></p></li>
+<li id="fn10"><p>In that chapter, distance was denoted as <span class="math inline">\(d_{i,t,k}\)</span>, to stress that distance was measured between a given fly <span class="math inline">\(i\)</span> and a given trap <span class="math inline">\(k\)</span> in a given week <span class="math inline">\(t\)</span>. Here, I denote distance <span class="math inline">\(d\)</span>, under the assumption that distance is still understood to be between a fly and a trap.<a href="case-study-mediterranean-fruit-fly.html#fnref10" class="footnote-back">↩︎</a></p></li>
+<li id="fn11"><p>The geometric distribution is also a natural choice for this latent variable; I do not explore this further here.<a href="case-study-mediterranean-fruit-fly.html#fnref11" class="footnote-back">↩︎</a></p></li>
+<li id="fn12"><p>Notably, temporal autocorrelation is ignored.<a href="case-study-mediterranean-fruit-fly.html#fnref12" class="footnote-back">↩︎</a></p></li>
+<li id="fn13"><p>For details about how this prior was arrived at, see appendix.<a href="case-study-mediterranean-fruit-fly.html#fnref13" class="footnote-back">↩︎</a></p></li>
+<li id="fn14"><p>This is just the standard conjugacy of the multivariate normal mean for the multivariate normal likelihood when the covariance matrix is fixed.<a href="case-study-mediterranean-fruit-fly.html#fnref14" class="footnote-back">↩︎</a></p></li>
+<li id="fn15"><p>These claims are argued for Medfly by <span class="citation"><a href="#ref-baker1986" role="doc-biblioref">Baker et al.</a> (<a href="#ref-baker1986" role="doc-biblioref">1986</a>)</span>.<a href="case-study-mediterranean-fruit-fly.html#fnref15" class="footnote-back">↩︎</a></p></li>
+<li id="fn16"><p>Note that these are transformed from the values reported by the authors. The function is (a) transformed from percentage to proportion scale, (b) halved, as the traps only capture <em>male</em> flies, which consist of approximately half of the population, and (c) converted from kilometre to metre scale.<a href="case-study-mediterranean-fruit-fly.html#fnref16" class="footnote-back">↩︎</a></p></li>
+<li id="fn17"><p>This is a situation in which “the number of things you do not know is one of the things you do not know” (<span class="citation"><a href="#ref-richardson1997bayesian" role="doc-biblioref">Richardson and Green</a> (<a href="#ref-richardson1997bayesian" role="doc-biblioref">1997</a>)</span>).<a href="case-study-mediterranean-fruit-fly.html#fnref17" class="footnote-back">↩︎</a></p></li>
+<li id="fn18"><p>The best known “trans-dimensional” Markov sampler is the reversible jump MCMC of <span class="citation"><a href="#ref-green1995" role="doc-biblioref">Green</a> (<a href="#ref-green1995" role="doc-biblioref">1995</a>)</span>, generalised by <span class="citation"><a href="#ref-keith2004" role="doc-biblioref">Keith et al.</a> (<a href="#ref-keith2004" role="doc-biblioref">2004</a>)</span>.<a href="case-study-mediterranean-fruit-fly.html#fnref18" class="footnote-back">↩︎</a></p></li>
+<li id="fn19"><p>Note, however, that this does not mean that populations are getting smaller on average. The populations that survive <a href="case-study-mediterranean-fruit-fly.html#fnref19" class="footnote-back">↩︎</a></p></li>
+<li id="fn20"><p>Unfortunately, it is not straightforward to visualise the prior or posterior density of this quantity.<a href="case-study-mediterranean-fruit-fly.html#fnref20" class="footnote-back">↩︎</a></p></li>
+</ol>
+</div>
+            </section>
+
+          </div>
+        </div>
+      </div>
+<a href="ch3.html" class="navigation navigation-prev " aria-label="Previous page"><i class="fa fa-angle-left"></i></a>
+<a href="conclusion-3.html" class="navigation navigation-next " aria-label="Next page"><i class="fa fa-angle-right"></i></a>
+    </div>
+  </div>
+<script src="libs/gitbook-2.6.7/js/app.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/clipboard.min.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-search.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-sharing.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-fontsettings.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-bookdown.js"></script>
+<script src="libs/gitbook-2.6.7/js/jquery.highlight.js"></script>
+<script src="libs/gitbook-2.6.7/js/plugin-clipboard.js"></script>
+<script>
+gitbook.require(["gitbook"], function(gitbook) {
+gitbook.start({
+"sharing": {
+"github": false,
+"facebook": true,
+"twitter": true,
+"linkedin": false,
+"weibo": false,
+"instapaper": false,
+"vk": false,
+"whatsapp": false,
+"all": ["facebook", "twitter", "linkedin", "weibo", "instapaper"]
+},
+"fontsettings": {
+"theme": "white",
+"family": "sans",
+"size": 2
+},
+"edit": {
+"link": "https://github.com/USERNAME/REPO/edit/BRANCH/04-case-study.Rmd",
+"text": "Edit"
+},
+"history": {
+"link": null,
+"text": null
+},
+"view": {
+"link": null,
+"text": null
+},
+"download": ["_main.pdf", "_main.epub"],
+"search": {
+"engine": "fuse",
+"options": null
+},
+"toc": {
+"collapse": "subsection"
+}
+});
+});
+</script>
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    var src = "true";
+    if (src === "" || src === "true") src = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML";
+    if (location.protocol !== "file:")
+      if (/^https?:/.test(src))
+        src = src.replace(/^https?:/, '');
+    script.src = src;
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+</body>
+
+</html>
